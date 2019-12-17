@@ -1,0 +1,8 @@
+ERROR 2019-12-14 15:27:46,751 views 106 'User' object has no attribute 'update'
+ERROR 2019-12-14 15:35:11,144 views 111 (1406, "Data too long for column 'password' at row 1")
+ERROR 2019-12-14 15:37:22,777 views 111 (1406, "Data too long for column 'password' at row 1")
+ERROR 2019-12-14 15:38:51,847 views 111 (1406, "Data too long for column 'password' at row 1")
+ERROR 2019-12-14 15:38:58,400 views 111 (1406, "Data too long for column 'password' at row 1")
+ERROR 2019-12-14 15:40:03,615 views 111 (1406, "Data too long for column 'password' at row 1")
+ERROR 2019-12-14 15:40:37,924 views 133 'UserAddress' object has no attribute 'update'
+ERROR 2019-12-14 15:42:59,299 views 138 'UserAddress' object has no attribute 'update'

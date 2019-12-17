@@ -1,0 +1,1100 @@
+INFO 2019-12-13 13:46:32,208 basehttp 124 "GET /index/ HTTP/1.1" 200 18
+INFO 2019-12-13 13:46:32,961 basehttp 124 "GET /index/ HTTP/1.1" 200 18
+INFO 2019-12-13 14:11:08,974 basehttp 124 "GET /user/index HTTP/1.1" 301 0
+INFO 2019-12-13 14:11:08,983 basehttp 124 "GET /user/index/ HTTP/1.1" 200 2
+ERROR 2019-12-13 17:04:45,037 exception 135 Internal Server Error: /management/user/login
+Traceback (most recent call last):
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "F:\Env\django_env\lib\site-packages\django\utils\deprecation.py", line 138, in __call__
+    response = self.process_request(request)
+  File "F:\Env\django_env\lib\site-packages\django\middleware\common.py", line 63, in process_request
+    path = self.get_full_path_with_slash(request)
+  File "F:\Env\django_env\lib\site-packages\django\middleware\common.py", line 101, in get_full_path_with_slash
+    'url': request.get_host() + new_path,
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to 127.0.0.1:5000/management/user/login/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+ERROR 2019-12-13 17:04:45,165 basehttp 124 "POST /management/user/login HTTP/1.1" 500 68373
+WARNING 2019-12-13 17:04:56,945 csrf 160 Forbidden (CSRF cookie not set.): /management/user/login/
+WARNING 2019-12-13 17:04:56,971 basehttp 124 "POST /management/user/login/ HTTP/1.1" 403 2829
+ERROR 2019-12-13 17:05:28,045 exception 135 Internal Server Error: /management/user/login/
+Traceback (most recent call last):
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+TypeError: as_view() takes 1 positional argument but 2 were given
+ERROR 2019-12-13 17:05:28,155 basehttp 124 "POST /management/user/login/ HTTP/1.1" 500 65004
+ERROR 2019-12-13 17:06:02,308 exception 135 Internal Server Error: /management/user/login/
+Traceback (most recent call last):
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\views\generic\base.py", line 68, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\views\generic\base.py", line 88, in dispatch
+    return handler(request, *args, **kwargs)
+TypeError: post() takes 1 positional argument but 2 were given
+ERROR 2019-12-13 17:06:02,413 basehttp 124 "POST /management/user/login/ HTTP/1.1" 500 73925
+INFO 2019-12-13 17:06:36,101 basehttp 124 "POST /management/user/login/ HTTP/1.1" 200 46
+INFO 2019-12-13 17:08:09,464 basehttp 124 "POST /management/user/login/ HTTP/1.1" 200 46
+INFO 2019-12-13 17:08:40,209 basehttp 124 "POST /management/user/login/ HTTP/1.1" 200 46
+INFO 2019-12-13 17:09:42,712 basehttp 124 "POST /management/user/login/ HTTP/1.1" 200 46
+INFO 2019-12-13 17:10:33,608 basehttp 124 "POST /management/user/login/ HTTP/1.1" 200 32
+INFO 2019-12-13 17:11:22,329 basehttp 124 "POST /management/user/login/ HTTP/1.1" 200 32
+INFO 2019-12-13 17:12:38,253 basehttp 124 "POST /management/user/login/ HTTP/1.1" 200 40
+INFO 2019-12-13 17:13:07,654 basehttp 124 "POST /management/user/login/ HTTP/1.1" 200 40
+INFO 2019-12-13 21:06:59,202 basehttp 124 "GET /management/users HTTP/1.1" 301 0
+ERROR 2019-12-13 21:06:59,209 exception 135 Internal Server Error: /management/users/
+Traceback (most recent call last):
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\python_virtual\django_env\lib\site-packages\django\views\generic\base.py", line 68, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "D:\python_virtual\django_env\lib\site-packages\django\views\generic\base.py", line 88, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\zyt\Desktop\weigan_shopping\management\user\views.py", line 48, in get
+    filters.append(User.eamil == email)
+AttributeError: type object 'User' has no attribute 'eamil'
+ERROR 2019-12-13 21:06:59,687 basehttp 124 "GET /management/users/ HTTP/1.1" 500 82166
+WARNING 2019-12-13 21:07:00,090 base 152 Not Found: /favicon.ico
+WARNING 2019-12-13 21:07:00,091 basehttp 124 "GET /favicon.ico HTTP/1.1" 404 2315
+INFO 2019-12-13 21:07:17,873 basehttp 124 "GET /management/users/ HTTP/1.1" 200 32
+INFO 2019-12-13 21:17:30,640 basehttp 124 "GET /online/login HTTP/1.1" 301 0
+INFO 2019-12-13 21:17:30,925 basehttp 124 "GET /online/login/ HTTP/1.1" 200 6754
+WARNING 2019-12-13 21:17:30,974 base 152 Not Found: /online/static/src/assets/images/icon.png
+WARNING 2019-12-13 21:17:30,984 base 152 Not Found: /online/static/src/assets/javascript/common/base.js
+WARNING 2019-12-13 21:17:30,979 base 152 Not Found: /online/static/src/assets/javascript/libs/jquery-1.9.1.js
+WARNING 2019-12-13 21:17:30,988 base 152 Not Found: /online/static/src/assets/images/banner.png
+WARNING 2019-12-13 21:17:30,989 basehttp 124 "GET /online/static/src/assets/images/icon.png HTTP/1.1" 404 2564
+WARNING 2019-12-13 21:17:30,990 basehttp 124 "GET /online/static/src/assets/javascript/libs/jquery-1.9.1.js HTTP/1.1" 404 2612
+WARNING 2019-12-13 21:17:30,990 basehttp 124 "GET /online/static/src/assets/javascript/common/base.js HTTP/1.1" 404 2594
+WARNING 2019-12-13 21:17:30,995 base 152 Not Found: /online/static/src/assets/javascript/common/header.js
+WARNING 2019-12-13 21:17:30,995 basehttp 124 "GET /online/static/src/assets/images/banner.png HTTP/1.1" 404 2570
+WARNING 2019-12-13 21:17:31,000 base 152 Not Found: /online/static/src/assets/javascript/common/common.js
+INFO 2019-12-13 21:17:31,000 basehttp 124 "GET /static/src/assets/css/page/index.css HTTP/1.1" 200 10387
+WARNING 2019-12-13 21:17:31,005 base 152 Not Found: /online/static/src/assets/javascript/page/index.js
+WARNING 2019-12-13 21:17:31,006 basehttp 124 "GET /online/static/src/assets/javascript/common/header.js HTTP/1.1" 404 2600
+WARNING 2019-12-13 21:17:31,010 base 152 Not Found: /online/static/src/assets/images/thing.png
+WARNING 2019-12-13 21:17:31,013 base 152 Not Found: /online/static/src/assets/javascript/common/base.js
+WARNING 2019-12-13 21:17:31,014 basehttp 124 "GET /online/static/src/assets/javascript/page/index.js HTTP/1.1" 404 2591
+WARNING 2019-12-13 21:17:31,014 basehttp 124 "GET /online/static/src/assets/javascript/common/common.js HTTP/1.1" 404 2600
+WARNING 2019-12-13 21:17:31,016 basehttp 124 "GET /online/static/src/assets/images/thing.png HTTP/1.1" 404 2567
+WARNING 2019-12-13 21:17:31,016 basehttp 124 "GET /online/static/src/assets/javascript/common/base.js HTTP/1.1" 404 2594
+WARNING 2019-12-13 21:17:31,088 base 152 Not Found: /online/static/src/assets/javascript/common/header.js
+WARNING 2019-12-13 21:17:31,089 basehttp 124 "GET /online/static/src/assets/javascript/common/header.js HTTP/1.1" 404 2600
+WARNING 2019-12-13 21:17:31,097 base 152 Not Found: /online/static/src/assets/javascript/common/common.js
+WARNING 2019-12-13 21:17:31,100 basehttp 124 "GET /online/static/src/assets/javascript/common/common.js HTTP/1.1" 404 2600
+WARNING 2019-12-13 21:17:31,107 base 152 Not Found: /online/static/src/assets/javascript/page/index.js
+WARNING 2019-12-13 21:17:31,107 basehttp 124 "GET /online/static/src/assets/javascript/page/index.js HTTP/1.1" 404 2591
+INFO 2019-12-13 21:17:40,966 basehttp 124 "GET /online/login/ HTTP/1.1" 200 6754
+WARNING 2019-12-13 21:17:40,995 base 152 Not Found: /online/static/src/assets/images/icon.png
+WARNING 2019-12-13 21:17:40,995 basehttp 124 "GET /online/static/src/assets/images/icon.png HTTP/1.1" 404 2564
+WARNING 2019-12-13 21:17:41,008 base 152 Not Found: /online/static/src/assets/javascript/libs/jquery-1.9.1.js
+WARNING 2019-12-13 21:17:41,013 base 152 Not Found: /online/static/src/assets/javascript/common/base.js
+WARNING 2019-12-13 21:17:41,021 base 152 Not Found: /online/static/src/assets/images/banner.png
+WARNING 2019-12-13 21:17:41,021 basehttp 124 "GET /online/static/src/assets/javascript/libs/jquery-1.9.1.js HTTP/1.1" 404 2612
+WARNING 2019-12-13 21:17:41,029 base 152 Not Found: /online/static/src/assets/javascript/common/header.js
+WARNING 2019-12-13 21:17:41,031 basehttp 124 "GET /online/static/src/assets/javascript/common/base.js HTTP/1.1" 404 2594
+WARNING 2019-12-13 21:17:41,037 base 152 Not Found: /online/static/src/assets/javascript/common/common.js
+WARNING 2019-12-13 21:17:41,037 basehttp 124 "GET /online/static/src/assets/images/banner.png HTTP/1.1" 404 2570
+WARNING 2019-12-13 21:17:41,041 base 152 Not Found: /online/static/src/assets/javascript/page/index.js
+WARNING 2019-12-13 21:17:41,043 basehttp 124 "GET /online/static/src/assets/javascript/common/header.js HTTP/1.1" 404 2600
+WARNING 2019-12-13 21:17:41,051 base 152 Not Found: /online/static/src/assets/images/thing.png
+WARNING 2019-12-13 21:17:41,051 basehttp 124 "GET /online/static/src/assets/javascript/common/common.js HTTP/1.1" 404 2600
+WARNING 2019-12-13 21:17:41,053 basehttp 124 "GET /online/static/src/assets/javascript/page/index.js HTTP/1.1" 404 2591
+WARNING 2019-12-13 21:17:41,057 basehttp 124 "GET /online/static/src/assets/images/thing.png HTTP/1.1" 404 2567
+INFO 2019-12-13 21:23:39,425 basehttp 124 "GET /online/login/ HTTP/1.1" 200 6729
+INFO 2019-12-13 21:23:39,488 basehttp 124 "GET /static/src/assets/images/icon.png HTTP/1.1" 200 7011
+INFO 2019-12-13 21:23:39,501 basehttp 124 "GET /static/src/assets/javascript/common/header.js HTTP/1.1" 200 1054
+INFO 2019-12-13 21:23:39,505 basehttp 124 "GET /static/src/assets/javascript/libs/jquery-1.9.1.js HTTP/1.1" 200 128159
+WARNING 2019-12-13 21:23:39,523 base 152 Not Found: /online/static/src/assets/images/thing.png
+WARNING 2019-12-13 21:23:39,530 basehttp 124 "GET /online/static/src/assets/images/thing.png HTTP/1.1" 404 2567
+INFO 2019-12-13 21:23:39,533 basehttp 124 "GET /static/src/assets/javascript/common/base.js HTTP/1.1" 200 764
+INFO 2019-12-13 21:23:39,542 basehttp 124 "GET /static/src/assets/images/thing.png HTTP/1.1" 200 148959
+INFO 2019-12-13 21:23:39,561 basehttp 124 "GET /static/src/assets/images/banner.png HTTP/1.1" 200 2295905
+INFO 2019-12-13 21:23:39,659 basehttp 124 "GET /static/src/assets/javascript/common/common.js HTTP/1.1" 200 192
+WARNING 2019-12-13 21:23:39,660 basehttp 124 "GET /static/src/assets/javascript/page/index.j HTTP/1.1" 404 1715
+INFO 2019-12-13 21:23:51,270 basehttp 124 "GET /online/login/ HTTP/1.1" 200 6729
+WARNING 2019-12-13 21:23:51,298 base 152 Not Found: /online/static/src/assets/images/thing.png
+WARNING 2019-12-13 21:23:51,305 basehttp 124 "GET /online/static/src/assets/images/thing.png HTTP/1.1" 404 2567
+WARNING 2019-12-13 21:23:51,306 basehttp 124 "GET /static/src/assets/javascript/page/index.j HTTP/1.1" 404 1715
+INFO 2019-12-13 21:24:26,600 basehttp 124 "GET /online/login/ HTTP/1.1" 200 6728
+INFO 2019-12-13 21:24:26,641 basehttp 124 "GET /static/src/assets/javascript/page/index.js HTTP/1.1" 200 401
+INFO 2019-12-13 21:24:30,380 basehttp 124 "GET /online/login/ HTTP/1.1" 200 6728
+INFO 2019-12-13 21:24:30,406 basehttp 124 "GET /static/src/assets/css/page/index.css HTTP/1.1" 200 10387
+INFO 2019-12-13 21:24:30,415 basehttp 124 "GET /static/src/assets/images/icon.png HTTP/1.1" 200 7011
+INFO 2019-12-13 21:24:30,421 basehttp 124 "GET /static/src/assets/javascript/common/base.js HTTP/1.1" 200 764
+INFO 2019-12-13 21:24:30,422 basehttp 124 "GET /static/src/assets/javascript/common/header.js HTTP/1.1" 200 1054
+INFO 2019-12-13 21:24:30,425 basehttp 124 "GET /static/src/assets/javascript/common/common.js HTTP/1.1" 200 192
+INFO 2019-12-13 21:24:30,430 basehttp 124 "GET /static/src/assets/javascript/page/index.js HTTP/1.1" 200 401
+INFO 2019-12-13 21:24:30,434 basehttp 124 "GET /static/src/assets/javascript/libs/jquery-1.9.1.js HTTP/1.1" 200 128159
+INFO 2019-12-13 21:24:30,440 basehttp 124 "GET /static/src/assets/images/thing.png HTTP/1.1" 200 148959
+INFO 2019-12-13 21:24:30,460 basehttp 124 "GET /static/src/assets/images/banner.png HTTP/1.1" 200 2295905
+WARNING 2019-12-13 21:24:30,512 base 152 Not Found: /favicon.ico
+WARNING 2019-12-13 21:24:30,514 basehttp 124 "GET /favicon.ico HTTP/1.1" 404 2423
+INFO 2019-12-13 21:24:59,615 basehttp 124 "GET /online/login/ HTTP/1.1" 200 6728
+INFO 2019-12-13 21:24:59,644 basehttp 124 "GET /static/src/assets/css/page/index.css HTTP/1.1" 200 10387
+INFO 2019-12-13 21:24:59,651 basehttp 124 "GET /static/src/assets/images/icon.png HTTP/1.1" 200 7011
+INFO 2019-12-13 21:24:59,664 basehttp 124 "GET /static/src/assets/javascript/common/header.js HTTP/1.1" 200 1054
+INFO 2019-12-13 21:24:59,665 basehttp 124 "GET /static/src/assets/javascript/common/base.js HTTP/1.1" 200 764
+INFO 2019-12-13 21:24:59,669 basehttp 124 "GET /static/src/assets/javascript/page/index.js HTTP/1.1" 200 401
+INFO 2019-12-13 21:24:59,677 basehttp 124 "GET /static/src/assets/javascript/libs/jquery-1.9.1.js HTTP/1.1" 200 128159
+INFO 2019-12-13 21:24:59,670 basehttp 124 "GET /static/src/assets/javascript/common/common.js HTTP/1.1" 200 192
+INFO 2019-12-13 21:24:59,681 basehttp 124 "GET /static/src/assets/images/thing.png HTTP/1.1" 200 148959
+INFO 2019-12-13 21:24:59,706 basehttp 124 "GET /static/src/assets/images/banner.png HTTP/1.1" 200 2295905
+WARNING 2019-12-13 21:24:59,760 base 152 Not Found: /favicon.ico
+WARNING 2019-12-13 21:24:59,761 basehttp 124 "GET /favicon.ico HTTP/1.1" 404 2423
+ERROR 2019-12-13 22:15:32,440 exception 135 Internal Server Error: /online/login/
+Traceback (most recent call last):
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\zyt\Desktop\weigan_shopping\online\login\views.py", line 12, in login
+    category[category.id] = {"name":category.name,"sub_cats":[]}
+TypeError: 'Category' object does not support item assignment
+ERROR 2019-12-13 22:15:32,554 basehttp 124 "GET /online/login/ HTTP/1.1" 500 72902
+ERROR 2019-12-13 22:16:33,698 exception 135 Internal Server Error: /online/login/
+Traceback (most recent call last):
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\zyt\Desktop\weigan_shopping\online\login\views.py", line 12, in login
+    category[category.id] = {"name":category.name,"sub_cats":[]}
+TypeError: 'Category' object does not support item assignment
+ERROR 2019-12-13 22:16:33,807 basehttp 124 "GET /online/login/ HTTP/1.1" 500 72872
+ERROR 2019-12-13 22:17:32,659 exception 135 Internal Server Error: /online/login/
+Traceback (most recent call last):
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\zyt\Desktop\weigan_shopping\online\login\views.py", line 12, in login
+    category[cate.id] = {"name":category.name,"sub_cats":[]}
+AttributeError: 'dict' object has no attribute 'name'
+ERROR 2019-12-13 22:17:32,752 basehttp 124 "GET /online/login/ HTTP/1.1" 500 73008
+INFO 2019-12-13 22:17:58,920 basehttp 124 "GET /online/login/ HTTP/1.1" 200 6723
+INFO 2019-12-13 22:18:22,684 basehttp 124 "GET /online/login/ HTTP/1.1" 200 6723
+INFO 2019-12-13 22:20:47,394 basehttp 124 "GET /online/login/ HTTP/1.1" 200 6723
+INFO 2019-12-13 22:27:52,392 basehttp 124 "GET /online/login/ HTTP/1.1" 200 4372
+INFO 2019-12-13 22:27:58,380 basehttp 124 "GET /online/login/ HTTP/1.1" 200 4372
+INFO 2019-12-13 22:27:58,405 basehttp 124 "GET /static/src/assets/css/page/index.css HTTP/1.1" 200 10387
+INFO 2019-12-13 22:27:58,411 basehttp 124 "GET /static/src/assets/images/icon.png HTTP/1.1" 200 7011
+INFO 2019-12-13 22:27:58,412 basehttp 124 "GET /static/src/assets/javascript/common/base.js HTTP/1.1" 200 764
+INFO 2019-12-13 22:27:58,413 basehttp 124 "GET /static/src/assets/javascript/common/header.js HTTP/1.1" 200 1054
+INFO 2019-12-13 22:27:58,415 basehttp 124 "GET /static/src/assets/javascript/common/common.js HTTP/1.1" 200 192
+INFO 2019-12-13 22:27:58,415 basehttp 124 "GET /static/src/assets/javascript/libs/jquery-1.9.1.js HTTP/1.1" 200 128159
+INFO 2019-12-13 22:27:58,424 basehttp 124 "GET /static/src/assets/images/thing.png HTTP/1.1" 200 148959
+INFO 2019-12-13 22:27:58,434 basehttp 124 "GET /static/src/assets/javascript/page/index.js HTTP/1.1" 200 401
+INFO 2019-12-13 22:27:58,463 basehttp 124 "GET /static/src/assets/images/banner.png HTTP/1.1" 200 2295905
+WARNING 2019-12-13 22:27:58,486 base 152 Not Found: /favicon.ico
+WARNING 2019-12-13 22:27:58,487 basehttp 124 "GET /favicon.ico HTTP/1.1" 404 2423
+INFO 2019-12-13 22:30:09,126 basehttp 124 "GET /online/login/ HTTP/1.1" 200 4372
+INFO 2019-12-13 22:30:09,159 basehttp 124 "GET /static/src/assets/css/page/index.css HTTP/1.1" 200 10387
+INFO 2019-12-13 22:30:09,164 basehttp 124 "GET /static/src/assets/javascript/common/base.js HTTP/1.1" 200 764
+INFO 2019-12-13 22:30:09,164 basehttp 124 "GET /static/src/assets/javascript/common/header.js HTTP/1.1" 200 1054
+INFO 2019-12-13 22:30:09,167 basehttp 124 "GET /static/src/assets/images/icon.png HTTP/1.1" 200 7011
+INFO 2019-12-13 22:30:09,169 basehttp 124 "GET /static/src/assets/javascript/libs/jquery-1.9.1.js HTTP/1.1" 200 128159
+INFO 2019-12-13 22:30:09,169 basehttp 124 "GET /static/src/assets/javascript/common/common.js HTTP/1.1" 200 192
+INFO 2019-12-13 22:30:09,171 basehttp 124 "GET /static/src/assets/javascript/page/index.js HTTP/1.1" 200 401
+INFO 2019-12-13 22:30:09,180 basehttp 124 "GET /static/src/assets/images/thing.png HTTP/1.1" 200 148959
+INFO 2019-12-13 22:30:09,202 basehttp 124 "GET /static/src/assets/images/banner.png HTTP/1.1" 200 2295905
+WARNING 2019-12-13 22:30:09,229 base 152 Not Found: /favicon.ico
+WARNING 2019-12-13 22:30:09,230 basehttp 124 "GET /favicon.ico HTTP/1.1" 404 2423
+INFO 2019-12-13 22:30:09,886 basehttp 124 "GET /online/login/ HTTP/1.1" 200 4372
+INFO 2019-12-13 22:30:09,917 basehttp 124 "GET /static/src/assets/css/page/index.css HTTP/1.1" 200 10387
+INFO 2019-12-13 22:30:09,919 basehttp 124 "GET /static/src/assets/images/icon.png HTTP/1.1" 200 7011
+INFO 2019-12-13 22:30:09,925 basehttp 124 "GET /static/src/assets/javascript/common/base.js HTTP/1.1" 200 764
+INFO 2019-12-13 22:30:09,926 basehttp 124 "GET /static/src/assets/javascript/common/header.js HTTP/1.1" 200 1054
+INFO 2019-12-13 22:30:09,927 basehttp 124 "GET /static/src/assets/javascript/common/common.js HTTP/1.1" 200 192
+INFO 2019-12-13 22:30:09,931 basehttp 124 "GET /static/src/assets/javascript/page/index.js HTTP/1.1" 200 401
+INFO 2019-12-13 22:30:09,937 basehttp 124 "GET /static/src/assets/javascript/libs/jquery-1.9.1.js HTTP/1.1" 200 128159
+INFO 2019-12-13 22:30:09,942 basehttp 124 "GET /static/src/assets/images/thing.png HTTP/1.1" 200 148959
+INFO 2019-12-13 22:30:09,967 basehttp 124 "GET /static/src/assets/images/banner.png HTTP/1.1" 200 2295905
+WARNING 2019-12-13 22:30:09,986 base 152 Not Found: /favicon.ico
+WARNING 2019-12-13 22:30:09,986 basehttp 124 "GET /favicon.ico HTTP/1.1" 404 2423
+INFO 2019-12-13 22:30:10,537 basehttp 124 "GET /online/login/ HTTP/1.1" 200 4372
+INFO 2019-12-13 22:30:10,559 basehttp 124 "GET /static/src/assets/css/page/index.css HTTP/1.1" 200 10387
+INFO 2019-12-13 22:30:10,565 basehttp 124 "GET /static/src/assets/images/icon.png HTTP/1.1" 200 7011
+INFO 2019-12-13 22:30:10,569 basehttp 124 "GET /static/src/assets/javascript/common/base.js HTTP/1.1" 200 764
+INFO 2019-12-13 22:30:10,569 basehttp 124 "GET /static/src/assets/javascript/common/header.js HTTP/1.1" 200 1054
+INFO 2019-12-13 22:30:10,576 basehttp 124 "GET /static/src/assets/javascript/common/common.js HTTP/1.1" 200 192
+INFO 2019-12-13 22:30:10,583 basehttp 124 "GET /static/src/assets/javascript/page/index.js HTTP/1.1" 200 401
+INFO 2019-12-13 22:30:10,584 basehttp 124 "GET /static/src/assets/javascript/libs/jquery-1.9.1.js HTTP/1.1" 200 128159
+INFO 2019-12-13 22:30:10,587 basehttp 124 "GET /static/src/assets/images/thing.png HTTP/1.1" 200 148959
+INFO 2019-12-13 22:30:10,609 basehttp 124 "GET /static/src/assets/images/banner.png HTTP/1.1" 200 2295905
+WARNING 2019-12-13 22:30:10,636 base 152 Not Found: /favicon.ico
+WARNING 2019-12-13 22:30:10,637 basehttp 124 "GET /favicon.ico HTTP/1.1" 404 2423
+INFO 2019-12-13 22:30:11,068 basehttp 124 "GET /online/login/ HTTP/1.1" 200 4372
+INFO 2019-12-13 22:30:11,090 basehttp 124 "GET /static/src/assets/images/icon.png HTTP/1.1" 200 7011
+INFO 2019-12-13 22:30:11,092 basehttp 124 "GET /static/src/assets/css/page/index.css HTTP/1.1" 200 10387
+INFO 2019-12-13 22:30:11,098 basehttp 124 "GET /static/src/assets/javascript/common/base.js HTTP/1.1" 200 764
+INFO 2019-12-13 22:30:11,099 basehttp 124 "GET /static/src/assets/javascript/common/header.js HTTP/1.1" 200 1054
+INFO 2019-12-13 22:30:11,104 basehttp 124 "GET /static/src/assets/javascript/page/index.js HTTP/1.1" 200 401
+INFO 2019-12-13 22:30:11,105 basehttp 124 "GET /static/src/assets/javascript/common/common.js HTTP/1.1" 200 192
+INFO 2019-12-13 22:30:11,105 basehttp 124 "GET /static/src/assets/javascript/libs/jquery-1.9.1.js HTTP/1.1" 200 128159
+INFO 2019-12-13 22:30:11,111 basehttp 124 "GET /static/src/assets/images/thing.png HTTP/1.1" 200 148959
+INFO 2019-12-13 22:30:11,135 basehttp 124 "GET /static/src/assets/images/banner.png HTTP/1.1" 200 2295905
+WARNING 2019-12-13 22:30:11,157 base 152 Not Found: /favicon.ico
+WARNING 2019-12-13 22:30:11,158 basehttp 124 "GET /favicon.ico HTTP/1.1" 404 2423
+INFO 2019-12-13 22:33:45,641 basehttp 124 "GET /online/login/ HTTP/1.1" 200 4718
+INFO 2019-12-13 22:33:45,668 basehttp 124 "GET /static/src/assets/css/page/index.css HTTP/1.1" 200 10387
+INFO 2019-12-13 22:33:45,688 basehttp 124 "GET /static/src/assets/images/icon.png HTTP/1.1" 200 7011
+INFO 2019-12-13 22:33:45,689 basehttp 124 "GET /static/src/assets/javascript/common/base.js HTTP/1.1" 200 764
+INFO 2019-12-13 22:33:45,690 basehttp 124 "GET /static/src/assets/javascript/common/header.js HTTP/1.1" 200 1054
+INFO 2019-12-13 22:33:45,693 basehttp 124 "GET /static/src/assets/javascript/common/common.js HTTP/1.1" 200 192
+INFO 2019-12-13 22:33:45,695 basehttp 124 "GET /static/src/assets/javascript/libs/jquery-1.9.1.js HTTP/1.1" 200 128159
+INFO 2019-12-13 22:33:45,727 basehttp 124 "GET /static/src/assets/images/thing.png HTTP/1.1" 200 148959
+INFO 2019-12-13 22:33:45,727 basehttp 124 "GET /static/src/assets/javascript/page/index.js HTTP/1.1" 200 401
+INFO 2019-12-13 22:33:45,741 basehttp 124 "GET /static/src/assets/images/banner.png HTTP/1.1" 200 2295905
+WARNING 2019-12-13 22:33:45,802 base 152 Not Found: /favicon.ico
+WARNING 2019-12-13 22:33:45,803 basehttp 124 "GET /favicon.ico HTTP/1.1" 404 2423
+INFO 2019-12-13 22:34:41,314 basehttp 124 "GET /online/login/ HTTP/1.1" 200 4491
+INFO 2019-12-13 22:34:41,341 basehttp 124 "GET /static/src/assets/css/page/index.css HTTP/1.1" 200 10387
+INFO 2019-12-13 22:34:41,352 basehttp 124 "GET /static/src/assets/images/icon.png HTTP/1.1" 200 7011
+INFO 2019-12-13 22:34:41,352 basehttp 124 "GET /static/src/assets/javascript/common/base.js HTTP/1.1" 200 764
+INFO 2019-12-13 22:34:41,357 basehttp 124 "GET /static/src/assets/javascript/common/header.js HTTP/1.1" 200 1054
+INFO 2019-12-13 22:34:41,358 basehttp 124 "GET /static/src/assets/javascript/common/common.js HTTP/1.1" 200 192
+INFO 2019-12-13 22:34:41,359 basehttp 124 "GET /static/src/assets/javascript/libs/jquery-1.9.1.js HTTP/1.1" 200 128159
+INFO 2019-12-13 22:34:41,382 basehttp 124 "GET /static/src/assets/javascript/page/index.js HTTP/1.1" 200 401
+INFO 2019-12-13 22:34:41,383 basehttp 124 "GET /static/src/assets/images/thing.png HTTP/1.1" 200 148959
+INFO 2019-12-13 22:34:41,409 basehttp 124 "GET /static/src/assets/images/banner.png HTTP/1.1" 200 2295905
+WARNING 2019-12-13 22:34:41,469 base 152 Not Found: /favicon.ico
+WARNING 2019-12-13 22:34:41,470 basehttp 124 "GET /favicon.ico HTTP/1.1" 404 2423
+INFO 2019-12-13 22:34:45,548 basehttp 124 "GET /online/login/ HTTP/1.1" 200 4491
+INFO 2019-12-13 22:34:45,577 basehttp 124 "GET /static/src/assets/css/page/index.css HTTP/1.1" 200 10387
+INFO 2019-12-13 22:34:45,580 basehttp 124 "GET /static/src/assets/images/icon.png HTTP/1.1" 200 7011
+INFO 2019-12-13 22:34:45,588 basehttp 124 "GET /static/src/assets/javascript/common/header.js HTTP/1.1" 200 1054
+INFO 2019-12-13 22:34:45,591 basehttp 124 "GET /static/src/assets/javascript/common/base.js HTTP/1.1" 200 764
+INFO 2019-12-13 22:34:45,592 basehttp 124 "GET /static/src/assets/javascript/libs/jquery-1.9.1.js HTTP/1.1" 200 128159
+INFO 2019-12-13 22:34:45,593 basehttp 124 "GET /static/src/assets/javascript/common/common.js HTTP/1.1" 200 192
+INFO 2019-12-13 22:34:45,596 basehttp 124 "GET /static/src/assets/javascript/page/index.js HTTP/1.1" 200 401
+INFO 2019-12-13 22:34:45,615 basehttp 124 "GET /static/src/assets/images/thing.png HTTP/1.1" 200 148959
+INFO 2019-12-13 22:34:45,634 basehttp 124 "GET /static/src/assets/images/banner.png HTTP/1.1" 200 2295905
+WARNING 2019-12-13 22:34:45,681 base 152 Not Found: /favicon.ico
+WARNING 2019-12-13 22:34:45,681 basehttp 124 "GET /favicon.ico HTTP/1.1" 404 2423
+INFO 2019-12-13 22:35:56,011 basehttp 124 "GET /online/login/ HTTP/1.1" 200 4491
+INFO 2019-12-13 22:35:56,043 basehttp 124 "GET /static/src/assets/css/page/index.css HTTP/1.1" 200 10387
+INFO 2019-12-13 22:35:56,056 basehttp 124 "GET /static/src/assets/images/icon.png HTTP/1.1" 200 7011
+INFO 2019-12-13 22:35:56,062 basehttp 124 "GET /static/src/assets/javascript/common/base.js HTTP/1.1" 200 764
+INFO 2019-12-13 22:35:56,067 basehttp 124 "GET /static/src/assets/javascript/libs/jquery-1.9.1.js HTTP/1.1" 200 128159
+INFO 2019-12-13 22:35:56,069 basehttp 124 "GET /static/src/assets/javascript/common/header.js HTTP/1.1" 200 1054
+INFO 2019-12-13 22:35:56,070 basehttp 124 "GET /static/src/assets/javascript/common/common.js HTTP/1.1" 200 192
+INFO 2019-12-13 22:35:56,089 basehttp 124 "GET /static/src/assets/javascript/page/index.js HTTP/1.1" 200 401
+INFO 2019-12-13 22:35:56,094 basehttp 124 "GET /static/src/assets/images/thing.png HTTP/1.1" 200 148959
+INFO 2019-12-13 22:35:56,119 basehttp 124 "GET /static/src/assets/images/banner.png HTTP/1.1" 200 2295905
+WARNING 2019-12-13 22:35:56,167 base 152 Not Found: /favicon.ico
+WARNING 2019-12-13 22:35:56,168 basehttp 124 "GET /favicon.ico HTTP/1.1" 404 2423
+INFO 2019-12-13 22:35:59,400 basehttp 124 "GET /online/login/ HTTP/1.1" 200 4491
+INFO 2019-12-13 22:35:59,432 basehttp 124 "GET /static/src/assets/images/icon.png HTTP/1.1" 200 7011
+INFO 2019-12-13 22:35:59,433 basehttp 124 "GET /static/src/assets/css/page/index.css HTTP/1.1" 200 10387
+INFO 2019-12-13 22:35:59,435 basehttp 124 "GET /static/src/assets/javascript/common/base.js HTTP/1.1" 200 764
+INFO 2019-12-13 22:35:59,439 basehttp 124 "GET /static/src/assets/javascript/common/header.js HTTP/1.1" 200 1054
+INFO 2019-12-13 22:35:59,443 basehttp 124 "GET /static/src/assets/javascript/libs/jquery-1.9.1.js HTTP/1.1" 200 128159
+INFO 2019-12-13 22:35:59,445 basehttp 124 "GET /static/src/assets/javascript/common/common.js HTTP/1.1" 200 192
+INFO 2019-12-13 22:35:59,448 basehttp 124 "GET /static/src/assets/javascript/page/index.js HTTP/1.1" 200 401
+INFO 2019-12-13 22:35:59,462 basehttp 124 "GET /static/src/assets/images/thing.png HTTP/1.1" 200 148959
+INFO 2019-12-13 22:35:59,494 basehttp 124 "GET /static/src/assets/images/banner.png HTTP/1.1" 200 2295905
+WARNING 2019-12-13 22:35:59,537 base 152 Not Found: /favicon.ico
+WARNING 2019-12-13 22:35:59,538 basehttp 124 "GET /favicon.ico HTTP/1.1" 404 2423
+ERROR 2019-12-13 22:38:05,231 exception 135 Internal Server Error: /online/login/
+Traceback (most recent call last):
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\zyt\Desktop\weigan_shopping\online\login\views.py", line 15, in login
+    category[sub_cate.super_category.id]["sub_cats"].append({"id":sub_cate.id,"name":sub_cate.name})
+IndexError: list index out of range
+ERROR 2019-12-13 22:38:05,328 basehttp 124 "GET /online/login/ HTTP/1.1" 500 73148
+WARNING 2019-12-13 22:38:05,434 base 152 Not Found: /favicon.ico
+WARNING 2019-12-13 22:38:05,435 basehttp 124 "GET /favicon.ico HTTP/1.1" 404 2423
+INFO 2019-12-13 22:44:28,079 basehttp 124 "GET /online/login/ HTTP/1.1" 200 4505
+INFO 2019-12-13 22:44:28,133 basehttp 124 "GET /static/src/assets/css/page/index.css HTTP/1.1" 200 10387
+INFO 2019-12-13 22:44:28,134 basehttp 124 "GET /static/src/assets/javascript/common/base.js HTTP/1.1" 200 764
+INFO 2019-12-13 22:44:28,134 basehttp 124 "GET /static/src/assets/javascript/common/header.js HTTP/1.1" 200 1054
+INFO 2019-12-13 22:44:28,137 basehttp 124 "GET /static/src/assets/javascript/libs/jquery-1.9.1.js HTTP/1.1" 200 128159
+INFO 2019-12-13 22:44:28,151 basehttp 124 "GET /static/src/assets/javascript/common/common.js HTTP/1.1" 200 192
+INFO 2019-12-13 22:44:28,155 basehttp 124 "GET /static/src/assets/javascript/page/index.js HTTP/1.1" 200 401
+INFO 2019-12-13 22:44:28,156 basehttp 124 "GET /static/src/assets/images/icon.png HTTP/1.1" 200 7011
+INFO 2019-12-13 22:44:28,304 basehttp 124 "GET /static/src/assets/images/thing.png HTTP/1.1" 200 148959
+INFO 2019-12-13 22:44:28,343 basehttp 124 "GET /static/src/assets/images/banner.png HTTP/1.1" 200 2295905
+WARNING 2019-12-13 22:44:28,366 base 152 Not Found: /favicon.ico
+WARNING 2019-12-13 22:44:28,367 basehttp 124 "GET /favicon.ico HTTP/1.1" 404 2423
+INFO 2019-12-13 22:45:16,520 basehttp 124 "GET /online/login/ HTTP/1.1" 200 4372
+INFO 2019-12-13 22:45:16,551 basehttp 124 "GET /static/src/assets/css/page/index.css HTTP/1.1" 200 10387
+INFO 2019-12-13 22:45:16,554 basehttp 124 "GET /static/src/assets/javascript/common/base.js HTTP/1.1" 200 764
+INFO 2019-12-13 22:45:16,555 basehttp 124 "GET /static/src/assets/images/icon.png HTTP/1.1" 200 7011
+INFO 2019-12-13 22:45:16,555 basehttp 124 "GET /static/src/assets/javascript/common/header.js HTTP/1.1" 200 1054
+INFO 2019-12-13 22:45:16,556 basehttp 124 "GET /static/src/assets/javascript/common/common.js HTTP/1.1" 200 192
+INFO 2019-12-13 22:45:16,559 basehttp 124 "GET /static/src/assets/javascript/libs/jquery-1.9.1.js HTTP/1.1" 200 128159
+INFO 2019-12-13 22:45:16,571 basehttp 124 "GET /static/src/assets/javascript/page/index.js HTTP/1.1" 200 401
+INFO 2019-12-13 22:45:16,573 basehttp 124 "GET /static/src/assets/images/thing.png HTTP/1.1" 200 148959
+INFO 2019-12-13 22:45:16,761 basehttp 124 "GET /static/src/assets/images/banner.png HTTP/1.1" 200 2295905
+WARNING 2019-12-13 22:45:16,776 base 152 Not Found: /favicon.ico
+WARNING 2019-12-13 22:45:16,779 basehttp 124 "GET /favicon.ico HTTP/1.1" 404 2423
+INFO 2019-12-13 22:45:17,961 basehttp 124 "GET /online/login/ HTTP/1.1" 200 4372
+INFO 2019-12-13 22:45:17,983 basehttp 124 "GET /static/src/assets/css/page/index.css HTTP/1.1" 200 10387
+INFO 2019-12-13 22:45:17,989 basehttp 124 "GET /static/src/assets/images/icon.png HTTP/1.1" 200 7011
+INFO 2019-12-13 22:45:17,993 basehttp 124 "GET /static/src/assets/javascript/common/base.js HTTP/1.1" 200 764
+INFO 2019-12-13 22:45:17,998 basehttp 124 "GET /static/src/assets/javascript/libs/jquery-1.9.1.js HTTP/1.1" 200 128159
+INFO 2019-12-13 22:45:17,998 basehttp 124 "GET /static/src/assets/javascript/common/header.js HTTP/1.1" 200 1054
+INFO 2019-12-13 22:45:17,998 basehttp 124 "GET /static/src/assets/javascript/page/index.js HTTP/1.1" 200 401
+INFO 2019-12-13 22:45:18,000 basehttp 124 "GET /static/src/assets/javascript/common/common.js HTTP/1.1" 200 192
+INFO 2019-12-13 22:45:18,009 basehttp 124 "GET /static/src/assets/images/thing.png HTTP/1.1" 200 148959
+INFO 2019-12-13 22:45:18,037 basehttp 124 "GET /static/src/assets/images/banner.png HTTP/1.1" 200 2295905
+WARNING 2019-12-13 22:45:18,055 base 152 Not Found: /favicon.ico
+WARNING 2019-12-13 22:45:18,055 basehttp 124 "GET /favicon.ico HTTP/1.1" 404 2423
+INFO 2019-12-13 22:46:07,276 basehttp 124 "GET /online/login/ HTTP/1.1" 200 4372
+INFO 2019-12-13 22:46:07,303 basehttp 124 "GET /static/src/assets/css/page/index.css HTTP/1.1" 200 10387
+INFO 2019-12-13 22:46:07,311 basehttp 124 "GET /static/src/assets/javascript/common/base.js HTTP/1.1" 200 764
+INFO 2019-12-13 22:46:07,312 basehttp 124 "GET /static/src/assets/javascript/common/header.js HTTP/1.1" 200 1054
+INFO 2019-12-13 22:46:07,312 basehttp 124 "GET /static/src/assets/images/icon.png HTTP/1.1" 200 7011
+INFO 2019-12-13 22:46:07,313 basehttp 124 "GET /static/src/assets/javascript/common/common.js HTTP/1.1" 200 192
+INFO 2019-12-13 22:46:07,316 basehttp 124 "GET /static/src/assets/javascript/libs/jquery-1.9.1.js HTTP/1.1" 200 128159
+INFO 2019-12-13 22:46:07,328 basehttp 124 "GET /static/src/assets/images/thing.png HTTP/1.1" 200 148959
+INFO 2019-12-13 22:46:07,329 basehttp 124 "GET /static/src/assets/javascript/page/index.js HTTP/1.1" 200 401
+INFO 2019-12-13 22:46:07,356 basehttp 124 "GET /static/src/assets/images/banner.png HTTP/1.1" 200 2295905
+WARNING 2019-12-13 22:46:07,382 base 152 Not Found: /favicon.ico
+WARNING 2019-12-13 22:46:07,383 basehttp 124 "GET /favicon.ico HTTP/1.1" 404 2423
+INFO 2019-12-13 22:46:08,076 basehttp 124 "GET /online/login/ HTTP/1.1" 200 4372
+INFO 2019-12-13 22:46:08,100 basehttp 124 "GET /static/src/assets/css/page/index.css HTTP/1.1" 200 10387
+INFO 2019-12-13 22:46:08,102 basehttp 124 "GET /static/src/assets/images/icon.png HTTP/1.1" 200 7011
+INFO 2019-12-13 22:46:08,105 basehttp 124 "GET /static/src/assets/javascript/common/base.js HTTP/1.1" 200 764
+INFO 2019-12-13 22:46:08,108 basehttp 124 "GET /static/src/assets/javascript/common/header.js HTTP/1.1" 200 1054
+INFO 2019-12-13 22:46:08,110 basehttp 124 "GET /static/src/assets/javascript/page/index.js HTTP/1.1" 200 401
+INFO 2019-12-13 22:46:08,112 basehttp 124 "GET /static/src/assets/javascript/libs/jquery-1.9.1.js HTTP/1.1" 200 128159
+INFO 2019-12-13 22:46:08,112 basehttp 124 "GET /static/src/assets/javascript/common/common.js HTTP/1.1" 200 192
+INFO 2019-12-13 22:46:08,121 basehttp 124 "GET /static/src/assets/images/thing.png HTTP/1.1" 200 148959
+INFO 2019-12-13 22:46:08,146 basehttp 124 "GET /static/src/assets/images/banner.png HTTP/1.1" 200 2295905
+WARNING 2019-12-13 22:46:08,173 base 152 Not Found: /favicon.ico
+WARNING 2019-12-13 22:46:08,173 basehttp 124 "GET /favicon.ico HTTP/1.1" 404 2423
+INFO 2019-12-13 22:46:23,228 basehttp 124 "GET /online/login/ HTTP/1.1" 200 4754
+INFO 2019-12-13 22:46:23,252 basehttp 124 "GET /static/src/assets/css/page/index.css HTTP/1.1" 200 10387
+INFO 2019-12-13 22:46:23,259 basehttp 124 "GET /static/src/assets/images/icon.png HTTP/1.1" 200 7011
+INFO 2019-12-13 22:46:23,262 basehttp 124 "GET /static/src/assets/javascript/common/base.js HTTP/1.1" 200 764
+INFO 2019-12-13 22:46:23,263 basehttp 124 "GET /static/src/assets/javascript/common/header.js HTTP/1.1" 200 1054
+INFO 2019-12-13 22:46:23,264 basehttp 124 "GET /static/src/assets/javascript/common/common.js HTTP/1.1" 200 192
+INFO 2019-12-13 22:46:23,267 basehttp 124 "GET /static/src/assets/javascript/libs/jquery-1.9.1.js HTTP/1.1" 200 128159
+INFO 2019-12-13 22:46:23,278 basehttp 124 "GET /static/src/assets/javascript/page/index.js HTTP/1.1" 200 401
+INFO 2019-12-13 22:46:23,279 basehttp 124 "GET /static/src/assets/images/thing.png HTTP/1.1" 200 148959
+INFO 2019-12-13 22:46:23,484 basehttp 124 "GET /static/src/assets/images/banner.png HTTP/1.1" 200 2295905
+WARNING 2019-12-13 22:46:23,500 base 152 Not Found: /favicon.ico
+WARNING 2019-12-13 22:46:23,501 basehttp 124 "GET /favicon.ico HTTP/1.1" 404 2423
+INFO 2019-12-13 22:46:40,060 basehttp 124 "GET /online/login/ HTTP/1.1" 200 4994
+INFO 2019-12-13 22:46:40,084 basehttp 124 "GET /static/src/assets/css/page/index.css HTTP/1.1" 200 10387
+INFO 2019-12-13 22:46:40,099 basehttp 124 "GET /static/src/assets/images/icon.png HTTP/1.1" 200 7011
+INFO 2019-12-13 22:46:40,103 basehttp 124 "GET /static/src/assets/javascript/common/header.js HTTP/1.1" 200 1054
+INFO 2019-12-13 22:46:40,104 basehttp 124 "GET /static/src/assets/javascript/common/base.js HTTP/1.1" 200 764
+INFO 2019-12-13 22:46:40,107 basehttp 124 "GET /static/src/assets/javascript/libs/jquery-1.9.1.js HTTP/1.1" 200 128159
+INFO 2019-12-13 22:46:40,107 basehttp 124 "GET /static/src/assets/javascript/common/common.js HTTP/1.1" 200 192
+INFO 2019-12-13 22:46:40,110 basehttp 124 "GET /static/src/assets/javascript/page/index.js HTTP/1.1" 200 401
+INFO 2019-12-13 22:46:40,121 basehttp 124 "GET /static/src/assets/images/thing.png HTTP/1.1" 200 148959
+INFO 2019-12-13 22:46:40,141 basehttp 124 "GET /static/src/assets/images/banner.png HTTP/1.1" 200 2295905
+WARNING 2019-12-13 22:46:40,169 base 152 Not Found: /favicon.ico
+WARNING 2019-12-13 22:46:40,170 basehttp 124 "GET /favicon.ico HTTP/1.1" 404 2423
+INFO 2019-12-13 22:47:39,186 basehttp 124 "GET /online/login/ HTTP/1.1" 200 5502
+INFO 2019-12-13 22:47:39,224 basehttp 124 "GET /static/src/assets/css/page/index.css HTTP/1.1" 200 10387
+INFO 2019-12-13 22:47:39,229 basehttp 124 "GET /static/src/assets/javascript/common/base.js HTTP/1.1" 200 764
+INFO 2019-12-13 22:47:39,232 basehttp 124 "GET /static/src/assets/images/icon.png HTTP/1.1" 200 7011
+INFO 2019-12-13 22:47:39,235 basehttp 124 "GET /static/src/assets/javascript/common/header.js HTTP/1.1" 200 1054
+INFO 2019-12-13 22:47:39,236 basehttp 124 "GET /static/src/assets/javascript/common/common.js HTTP/1.1" 200 192
+INFO 2019-12-13 22:47:39,237 basehttp 124 "GET /static/src/assets/javascript/libs/jquery-1.9.1.js HTTP/1.1" 200 128159
+INFO 2019-12-13 22:47:39,262 basehttp 124 "GET /static/src/assets/javascript/page/index.js HTTP/1.1" 200 401
+INFO 2019-12-13 22:47:39,267 basehttp 124 "GET /static/src/assets/images/thing.png HTTP/1.1" 200 148959
+INFO 2019-12-13 22:47:39,291 basehttp 124 "GET /static/src/assets/images/banner.png HTTP/1.1" 200 2295905
+WARNING 2019-12-13 22:47:39,350 base 152 Not Found: /favicon.ico
+WARNING 2019-12-13 22:47:39,351 basehttp 124 "GET /favicon.ico HTTP/1.1" 404 2423
+INFO 2019-12-13 22:48:36,559 basehttp 124 "GET /online/login/ HTTP/1.1" 200 5490
+INFO 2019-12-13 22:48:36,584 basehttp 124 "GET /static/src/assets/css/page/index.css HTTP/1.1" 200 10387
+INFO 2019-12-13 22:48:36,594 basehttp 124 "GET /static/src/assets/images/icon.png HTTP/1.1" 200 7011
+INFO 2019-12-13 22:48:36,598 basehttp 124 "GET /static/src/assets/javascript/common/base.js HTTP/1.1" 200 764
+INFO 2019-12-13 22:48:36,601 basehttp 124 "GET /static/src/assets/javascript/libs/jquery-1.9.1.js HTTP/1.1" 200 128159
+INFO 2019-12-13 22:48:36,605 basehttp 124 "GET /static/src/assets/javascript/common/header.js HTTP/1.1" 200 1054
+INFO 2019-12-13 22:48:36,607 basehttp 124 "GET /static/src/assets/javascript/common/common.js HTTP/1.1" 200 192
+INFO 2019-12-13 22:48:36,625 basehttp 124 "GET /static/src/assets/javascript/page/index.js HTTP/1.1" 200 401
+INFO 2019-12-13 22:48:36,627 basehttp 124 "GET /static/src/assets/images/thing.png HTTP/1.1" 200 148959
+INFO 2019-12-13 22:48:36,806 basehttp 124 "GET /static/src/assets/images/banner.png HTTP/1.1" 200 2295905
+WARNING 2019-12-13 22:48:36,826 base 152 Not Found: /favicon.ico
+WARNING 2019-12-13 22:48:36,828 basehttp 124 "GET /favicon.ico HTTP/1.1" 404 2423
+WARNING 2019-12-14 09:03:09,244 base 152 Not Found: /index/
+WARNING 2019-12-14 09:03:09,246 basehttp 124 "GET /index/ HTTP/1.1" 404 2408
+WARNING 2019-12-14 09:03:09,424 base 152 Not Found: /favicon.ico
+WARNING 2019-12-14 09:03:09,425 basehttp 124 "GET /favicon.ico HTTP/1.1" 404 2423
+WARNING 2019-12-14 09:03:12,630 base 152 Not Found: /
+WARNING 2019-12-14 09:03:12,631 basehttp 124 "GET / HTTP/1.1" 404 2372
+WARNING 2019-12-14 09:03:56,733 base 152 Not Found: /
+WARNING 2019-12-14 09:03:56,735 basehttp 124 "GET / HTTP/1.1" 404 2479
+WARNING 2019-12-14 09:04:05,514 base 152 Not Found: /online
+WARNING 2019-12-14 09:04:05,515 basehttp 124 "GET /online HTTP/1.1" 404 2515
+INFO 2019-12-14 09:05:00,339 basehttp 124 "GET /online HTTP/1.1" 301 0
+ERROR 2019-12-14 09:05:00,579 exception 135 Internal Server Error: /online/
+Traceback (most recent call last):
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Administrator\Desktop\weigan_shopping\online\goods\views.py", line 8, in index
+    cates = Category.objects.filter(super_category__isnull = True)
+NameError: name 'Category' is not defined
+ERROR 2019-12-14 09:05:00,756 basehttp 124 "GET /online/ HTTP/1.1" 500 69150
+INFO 2019-12-14 09:05:55,497 basehttp 124 "GET /online/ HTTP/1.1" 200 4372
+INFO 2019-12-14 09:05:55,550 basehttp 124 "GET /static/src/assets/css/page/index.css HTTP/1.1" 200 10387
+INFO 2019-12-14 09:05:55,550 basehttp 124 "GET /static/src/assets/images/icon.png HTTP/1.1" 200 7011
+INFO 2019-12-14 09:05:55,558 basehttp 124 "GET /static/src/assets/javascript/common/base.js HTTP/1.1" 200 764
+INFO 2019-12-14 09:05:55,558 basehttp 124 "GET /static/src/assets/javascript/common/header.js HTTP/1.1" 200 1054
+INFO 2019-12-14 09:05:55,559 basehttp 124 "GET /static/src/assets/javascript/libs/jquery-1.9.1.js HTTP/1.1" 200 128159
+INFO 2019-12-14 09:05:55,587 basehttp 124 "GET /static/src/assets/javascript/common/common.js HTTP/1.1" 200 192
+INFO 2019-12-14 09:05:55,587 basehttp 124 "GET /static/src/assets/javascript/page/index.js HTTP/1.1" 200 401
+INFO 2019-12-14 09:05:55,604 basehttp 124 "GET /static/src/assets/images/thing.png HTTP/1.1" 200 148959
+INFO 2019-12-14 09:05:55,630 basehttp 124 "GET /static/src/assets/images/banner.png HTTP/1.1" 200 2295905
+WARNING 2019-12-14 09:06:26,981 base 152 Not Found: /online/index
+WARNING 2019-12-14 09:06:26,984 basehttp 124 "GET /online/index HTTP/1.1" 404 2475
+INFO 2019-12-14 09:06:30,374 basehttp 124 "GET /online/ HTTP/1.1" 200 4372
+ERROR 2019-12-14 14:25:35,705 exception 135 Internal Server Error: /online/user/
+Traceback (most recent call last):
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\python_virtual\django_env\lib\site-packages\django\views\generic\base.py", line 68, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "D:\python_virtual\django_env\lib\site-packages\django\views\generic\base.py", line 88, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\zyt\Desktop\weigan_shopping\online\login\views.py", line 45, in get
+    user = User.objects.get(user_id)
+  File "D:\python_virtual\django_env\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "D:\python_virtual\django_env\lib\site-packages\django\db\models\query.py", line 370, in get
+    clone = self.filter(*args, **kwargs)
+  File "D:\python_virtual\django_env\lib\site-packages\django\db\models\query.py", line 781, in filter
+    return self._filter_or_exclude(False, *args, **kwargs)
+  File "D:\python_virtual\django_env\lib\site-packages\django\db\models\query.py", line 799, in _filter_or_exclude
+    clone.query.add_q(Q(*args, **kwargs))
+  File "D:\python_virtual\django_env\lib\site-packages\django\db\models\sql\query.py", line 1260, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "D:\python_virtual\django_env\lib\site-packages\django\db\models\sql\query.py", line 1286, in _add_q
+    allow_joins=allow_joins, split_subq=split_subq,
+  File "D:\python_virtual\django_env\lib\site-packages\django\db\models\sql\query.py", line 1161, in build_filter
+    arg, value = filter_expr
+TypeError: 'int' object is not iterable
+ERROR 2019-12-14 14:25:36,160 basehttp 124 "GET /online/user/ HTTP/1.1" 500 112285
+ERROR 2019-12-14 14:27:38,549 exception 135 Internal Server Error: /online/user/
+Traceback (most recent call last):
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\python_virtual\django_env\lib\site-packages\django\views\generic\base.py", line 68, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "D:\python_virtual\django_env\lib\site-packages\django\views\generic\base.py", line 88, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\zyt\Desktop\weigan_shopping\online\login\views.py", line 45, in get
+    user = User.objects.get(user_id)
+  File "D:\python_virtual\django_env\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "D:\python_virtual\django_env\lib\site-packages\django\db\models\query.py", line 370, in get
+    clone = self.filter(*args, **kwargs)
+  File "D:\python_virtual\django_env\lib\site-packages\django\db\models\query.py", line 781, in filter
+    return self._filter_or_exclude(False, *args, **kwargs)
+  File "D:\python_virtual\django_env\lib\site-packages\django\db\models\query.py", line 799, in _filter_or_exclude
+    clone.query.add_q(Q(*args, **kwargs))
+  File "D:\python_virtual\django_env\lib\site-packages\django\db\models\sql\query.py", line 1260, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "D:\python_virtual\django_env\lib\site-packages\django\db\models\sql\query.py", line 1286, in _add_q
+    allow_joins=allow_joins, split_subq=split_subq,
+  File "D:\python_virtual\django_env\lib\site-packages\django\db\models\sql\query.py", line 1161, in build_filter
+    arg, value = filter_expr
+TypeError: 'int' object is not iterable
+ERROR 2019-12-14 14:27:38,770 basehttp 124 "GET /online/user/ HTTP/1.1" 500 113993
+ERROR 2019-12-14 14:28:06,678 exception 135 Internal Server Error: /online/user/
+Traceback (most recent call last):
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\python_virtual\django_env\lib\site-packages\django\views\generic\base.py", line 68, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "D:\python_virtual\django_env\lib\site-packages\django\views\generic\base.py", line 88, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\zyt\Desktop\weigan_shopping\online\login\views.py", line 50, in get
+    context = {"email":user.eami,"phone":user.phone,"password":user.password,
+AttributeError: 'User' object has no attribute 'eami'
+ERROR 2019-12-14 14:28:06,837 basehttp 124 "GET /online/user/ HTTP/1.1" 500 83849
+ERROR 2019-12-14 14:28:26,757 exception 135 Internal Server Error: /online/user/
+Traceback (most recent call last):
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\python_virtual\django_env\lib\site-packages\django\views\generic\base.py", line 68, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "D:\python_virtual\django_env\lib\site-packages\django\views\generic\base.py", line 88, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\zyt\Desktop\weigan_shopping\online\login\views.py", line 52, in get
+    "road":useraddress.road,"district":useraddress.district,
+AttributeError: 'RelatedManager' object has no attribute 'road'
+ERROR 2019-12-14 14:28:26,935 basehttp 124 "GET /online/user/ HTTP/1.1" 500 83748
+ERROR 2019-12-14 14:34:59,259 exception 135 Internal Server Error: /online/user/
+Traceback (most recent call last):
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\python_virtual\django_env\lib\site-packages\django\views\generic\base.py", line 68, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "D:\python_virtual\django_env\lib\site-packages\django\views\generic\base.py", line 88, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\zyt\Desktop\weigan_shopping\online\login\views.py", line 49, in get
+    useraddress = user.address[0]
+TypeError: 'RelatedManager' object does not support indexing
+ERROR 2019-12-14 14:34:59,424 basehttp 124 "GET /online/user/ HTTP/1.1" 500 83448
+INFO 2019-12-14 14:35:20,365 basehttp 124 "GET /online/user/ HTTP/1.1" 200 273
+ERROR 2019-12-14 14:35:58,111 exception 135 Internal Server Error: /online/user/
+Traceback (most recent call last):
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\python_virtual\django_env\lib\site-packages\django\views\generic\base.py", line 68, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "D:\python_virtual\django_env\lib\site-packages\django\views\generic\base.py", line 88, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\zyt\Desktop\weigan_shopping\online\login\views.py", line 49, in get
+    useraddress = user.address.all()[0].values()
+AttributeError: 'UserAddress' object has no attribute 'values'
+ERROR 2019-12-14 14:35:58,197 basehttp 124 "GET /online/user/ HTTP/1.1" 500 81348
+ERROR 2019-12-14 14:35:59,690 exception 135 Internal Server Error: /online/user/
+Traceback (most recent call last):
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\python_virtual\django_env\lib\site-packages\django\views\generic\base.py", line 68, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "D:\python_virtual\django_env\lib\site-packages\django\views\generic\base.py", line 88, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\zyt\Desktop\weigan_shopping\online\login\views.py", line 49, in get
+    useraddress = user.address.all()[0].values()
+AttributeError: 'UserAddress' object has no attribute 'values'
+ERROR 2019-12-14 14:35:59,727 basehttp 124 "GET /online/user/ HTTP/1.1" 500 81348
+ERROR 2019-12-14 14:36:18,813 exception 135 Internal Server Error: /online/user/
+Traceback (most recent call last):
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\python_virtual\django_env\lib\site-packages\django\views\generic\base.py", line 68, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "D:\python_virtual\django_env\lib\site-packages\django\views\generic\base.py", line 88, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\zyt\Desktop\weigan_shopping\online\login\views.py", line 53, in get
+    "road":useraddress.road,"district":useraddress.district,
+AttributeError: 'QuerySet' object has no attribute 'road'
+ERROR 2019-12-14 14:36:18,903 basehttp 124 "GET /online/user/ HTTP/1.1" 500 81710
+ERROR 2019-12-14 14:36:20,569 exception 135 Internal Server Error: /online/user/
+Traceback (most recent call last):
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\python_virtual\django_env\lib\site-packages\django\views\generic\base.py", line 68, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "D:\python_virtual\django_env\lib\site-packages\django\views\generic\base.py", line 88, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\zyt\Desktop\weigan_shopping\online\login\views.py", line 53, in get
+    "road":useraddress.road,"district":useraddress.district,
+AttributeError: 'QuerySet' object has no attribute 'road'
+ERROR 2019-12-14 14:36:20,604 basehttp 124 "GET /online/user/ HTTP/1.1" 500 81710
+ERROR 2019-12-14 14:38:37,878 exception 135 Internal Server Error: /online/user/
+Traceback (most recent call last):
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\python_virtual\django_env\lib\site-packages\django\views\generic\base.py", line 68, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "D:\python_virtual\django_env\lib\site-packages\django\views\generic\base.py", line 88, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\zyt\Desktop\weigan_shopping\online\login\views.py", line 53, in get
+    "road":useraddress.road,"district":useraddress.district,
+AttributeError: 'list' object has no attribute 'road'
+ERROR 2019-12-14 14:38:37,968 basehttp 124 "GET /online/user/ HTTP/1.1" 500 81699
+INFO 2019-12-14 14:42:08,935 basehttp 124 "GET /online/user/ HTTP/1.1" 200 303
+INFO 2019-12-14 14:42:48,980 basehttp 124 "GET /online/user/ HTTP/1.1" 200 293
+INFO 2019-12-14 14:58:52,565 basehttp 124 "GET /online/user/ HTTP/1.1" 200 44
+INFO 2019-12-14 14:59:20,020 basehttp 124 "GET /online/user/ HTTP/1.1" 200 293
+ERROR 2019-12-14 15:18:03,193 exception 135 Internal Server Error: /online/user/
+Traceback (most recent call last):
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\python_virtual\django_env\lib\site-packages\django\views\generic\base.py", line 68, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "D:\python_virtual\django_env\lib\site-packages\django\views\generic\base.py", line 88, in dispatch
+    return handler(request, *args, **kwargs)
+  File "D:\python_virtual\django_env\lib\site-packages\django\utils\decorators.py", line 67, in _wrapper
+    return bound_func(*args, **kwargs)
+  File "C:\Users\zyt\Desktop\weigan_shopping\utils\decorator.py", line 21, in wrapper
+    return func(request,user, *args, **kwargs)
+  File "D:\python_virtual\django_env\lib\site-packages\django\utils\decorators.py", line 63, in bound_func
+    return func.__get__(self, type(self))(*args2, **kwargs2)
+  File "C:\Users\zyt\Desktop\weigan_shopping\online\login\views.py", line 49, in get
+    return JsonResponse(context)
+  File "D:\python_virtual\django_env\lib\site-packages\django\http\response.py", line 524, in __init__
+    'In order to allow non-dict objects to be serialized set the '
+TypeError: In order to allow non-dict objects to be serialized set the safe parameter to False.
+ERROR 2019-12-14 15:18:03,301 basehttp 124 "GET /online/user/ HTTP/1.1" 500 99763
+INFO 2019-12-14 15:19:19,571 basehttp 124 "GET /online/user/ HTTP/1.1" 200 4
+INFO 2019-12-14 15:19:22,195 basehttp 124 "GET /online/user/ HTTP/1.1" 200 4
+INFO 2019-12-14 15:21:10,101 basehttp 124 "GET /online/user/ HTTP/1.1" 200 4
+INFO 2019-12-14 15:21:42,258 basehttp 124 "GET /online/user/ HTTP/1.1" 200 4
+INFO 2019-12-14 15:22:33,101 basehttp 124 "GET /online/user/ HTTP/1.1" 200 242
+INFO 2019-12-14 15:26:22,472 basehttp 124 "PUT /online/user/ HTTP/1.1" 200 52
+INFO 2019-12-14 15:27:13,816 basehttp 124 "PUT /online/user/ HTTP/1.1" 200 52
+INFO 2019-12-14 15:27:46,752 basehttp 124 "PUT /online/user/ HTTP/1.1" 200 40
+INFO 2019-12-14 15:35:11,145 basehttp 124 "PUT /online/user/ HTTP/1.1" 200 40
+INFO 2019-12-14 15:37:22,777 basehttp 124 "PUT /online/user/ HTTP/1.1" 200 40
+INFO 2019-12-14 15:38:51,847 basehttp 124 "PUT /online/user/ HTTP/1.1" 200 40
+INFO 2019-12-14 15:38:58,401 basehttp 124 "PUT /online/user/ HTTP/1.1" 200 40
+INFO 2019-12-14 15:40:03,615 basehttp 124 "PUT /online/user/ HTTP/1.1" 200 40
+INFO 2019-12-14 15:40:37,926 basehttp 124 "PUT /online/user/ HTTP/1.1" 200 40
+INFO 2019-12-14 15:42:59,300 basehttp 124 "PUT /online/user/ HTTP/1.1" 200 40
+INFO 2019-12-14 15:43:11,047 basehttp 124 "PUT /online/user/ HTTP/1.1" 200 42
+INFO 2019-12-14 15:49:52,876 basehttp 124 "GET /online/user/ HTTP/1.1" 200 298
+WARNING 2019-12-14 16:18:37,092 base 152 Not Found: /online/goods/1/detail/
+WARNING 2019-12-14 16:18:37,094 basehttp 124 "GET /online/goods/1/detail/ HTTP/1.1" 404 3704
+ERROR 2019-12-14 16:19:16,233 exception 135 Internal Server Error: /online/goods/1/detail/
+Traceback (most recent call last):
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\python_virtual\django_env\lib\site-packages\django\views\generic\base.py", line 68, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "D:\python_virtual\django_env\lib\site-packages\django\views\generic\base.py", line 88, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\zyt\Desktop\weigan_shopping\online\goods\views.py", line 117, in get
+    context = single_goods.values("name_en","image","price","sale","detail_en","description_en")
+AttributeError: 'Goods' object has no attribute 'values'
+ERROR 2019-12-14 16:19:16,320 basehttp 124 "GET /online/goods/1/detail/ HTTP/1.1" 500 81236
+ERROR 2019-12-14 16:21:20,686 exception 135 Internal Server Error: /online/goods/1/detail/
+Traceback (most recent call last):
+  File "D:\python_virtual\django_env\lib\site-packages\django\db\models\sql\query.py", line 1655, in add_fields
+    name.split(LOOKUP_SEP), opts, alias, allow_many=allow_m2m)
+  File "D:\python_virtual\django_env\lib\site-packages\django\db\models\sql\query.py", line 1427, in setup_joins
+    names, opts, allow_many, fail_on_missing=True)
+  File "D:\python_virtual\django_env\lib\site-packages\django\db\models\sql\query.py", line 1362, in names_to_path
+    "Choices are: %s" % (name, ", ".join(available)))
+django.core.exceptions.FieldError: Cannot resolve keyword 'detail_en' into field. Choices are: added_time, cart_goods, category, category_id, description_ch, description_en, detail_ch, detail_zh, id, image, is_hot, name_ch, name_en, on_sale, order_goods, price, sale, stock
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\python_virtual\django_env\lib\site-packages\django\views\generic\base.py", line 68, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "D:\python_virtual\django_env\lib\site-packages\django\views\generic\base.py", line 88, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\zyt\Desktop\weigan_shopping\online\goods\views.py", line 116, in get
+    context = single_goods.values("name_en","image","price","sale","detail_en","description_en")
+  File "D:\python_virtual\django_env\lib\site-packages\django\db\models\query.py", line 694, in values
+    clone = self._values(*fields, **expressions)
+  File "D:\python_virtual\django_env\lib\site-packages\django\db\models\query.py", line 689, in _values
+    clone.query.set_values(fields)
+  File "D:\python_virtual\django_env\lib\site-packages\django\db\models\sql\query.py", line 1906, in set_values
+    self.add_fields(field_names, True)
+  File "D:\python_virtual\django_env\lib\site-packages\django\db\models\sql\query.py", line 1669, in add_fields
+    "Choices are: %s" % (name, ", ".join(names)))
+django.core.exceptions.FieldError: Cannot resolve keyword 'detail_en' into field. Choices are: added_time, cart_goods, category, category_id, description_ch, description_en, detail_ch, detail_zh, id, image, is_hot, name_ch, name_en, on_sale, order_goods, price, sale, stock
+ERROR 2019-12-14 16:21:20,813 basehttp 124 "GET /online/goods/1/detail/ HTTP/1.1" 500 120280
+ERROR 2019-12-14 16:21:21,131 exception 135 Internal Server Error: /online/goods/1/detail/
+Traceback (most recent call last):
+  File "D:\python_virtual\django_env\lib\site-packages\django\db\models\sql\query.py", line 1655, in add_fields
+    name.split(LOOKUP_SEP), opts, alias, allow_many=allow_m2m)
+  File "D:\python_virtual\django_env\lib\site-packages\django\db\models\sql\query.py", line 1427, in setup_joins
+    names, opts, allow_many, fail_on_missing=True)
+  File "D:\python_virtual\django_env\lib\site-packages\django\db\models\sql\query.py", line 1362, in names_to_path
+    "Choices are: %s" % (name, ", ".join(available)))
+django.core.exceptions.FieldError: Cannot resolve keyword 'detail_en' into field. Choices are: added_time, cart_goods, category, category_id, description_ch, description_en, detail_ch, detail_zh, id, image, is_hot, name_ch, name_en, on_sale, order_goods, price, sale, stock
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\python_virtual\django_env\lib\site-packages\django\views\generic\base.py", line 68, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "D:\python_virtual\django_env\lib\site-packages\django\views\generic\base.py", line 88, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\zyt\Desktop\weigan_shopping\online\goods\views.py", line 116, in get
+    context = single_goods.values("name_en","image","price","sale","detail_en","description_en")
+  File "D:\python_virtual\django_env\lib\site-packages\django\db\models\query.py", line 694, in values
+    clone = self._values(*fields, **expressions)
+  File "D:\python_virtual\django_env\lib\site-packages\django\db\models\query.py", line 689, in _values
+    clone.query.set_values(fields)
+  File "D:\python_virtual\django_env\lib\site-packages\django\db\models\sql\query.py", line 1906, in set_values
+    self.add_fields(field_names, True)
+  File "D:\python_virtual\django_env\lib\site-packages\django\db\models\sql\query.py", line 1669, in add_fields
+    "Choices are: %s" % (name, ", ".join(names)))
+django.core.exceptions.FieldError: Cannot resolve keyword 'detail_en' into field. Choices are: added_time, cart_goods, category, category_id, description_ch, description_en, detail_ch, detail_zh, id, image, is_hot, name_ch, name_en, on_sale, order_goods, price, sale, stock
+ERROR 2019-12-14 16:21:21,215 basehttp 124 "GET /online/goods/1/detail/ HTTP/1.1" 500 120280
+ERROR 2019-12-14 16:22:05,155 exception 135 Internal Server Error: /online/goods/1/detail/
+Traceback (most recent call last):
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\python_virtual\django_env\lib\site-packages\django\views\generic\base.py", line 68, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "D:\python_virtual\django_env\lib\site-packages\django\views\generic\base.py", line 88, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\zyt\Desktop\weigan_shopping\online\goods\views.py", line 117, in get
+    return JsonResponse(context)
+  File "D:\python_virtual\django_env\lib\site-packages\django\http\response.py", line 524, in __init__
+    'In order to allow non-dict objects to be serialized set the '
+TypeError: In order to allow non-dict objects to be serialized set the safe parameter to False.
+ERROR 2019-12-14 16:22:05,272 basehttp 124 "GET /online/goods/1/detail/ HTTP/1.1" 500 86607
+ERROR 2019-12-14 16:22:21,137 exception 135 Internal Server Error: /online/goods/1/detail/
+Traceback (most recent call last):
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\python_virtual\django_env\lib\site-packages\django\views\generic\base.py", line 68, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "D:\python_virtual\django_env\lib\site-packages\django\views\generic\base.py", line 88, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\zyt\Desktop\weigan_shopping\online\goods\views.py", line 117, in get
+    return JsonResponse(context,safe=False)
+  File "D:\python_virtual\django_env\lib\site-packages\django\http\response.py", line 530, in __init__
+    data = json.dumps(data, cls=encoder, **json_dumps_params)
+  File "d:\program files (x86)\python\Lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "d:\program files (x86)\python\Lib\json\encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "d:\program files (x86)\python\Lib\json\encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\serializers\json.py", line 121, in default
+    return super(DjangoJSONEncoder, self).default(o)
+  File "d:\program files (x86)\python\Lib\json\encoder.py", line 180, in default
+    o.__class__.__name__)
+TypeError: Object of type 'QuerySet' is not JSON serializable
+ERROR 2019-12-14 16:22:21,375 basehttp 124 "GET /online/goods/1/detail/ HTTP/1.1" 500 107847
+INFO 2019-12-14 16:22:43,108 basehttp 124 "GET /online/goods/1/detail/ HTTP/1.1" 200 130
+INFO 2019-12-14 16:23:20,904 basehttp 124 "GET /online/goods/1/detail/ HTTP/1.1" 200 130
+ERROR 2019-12-14 16:25:45,511 exception 135 Internal Server Error: /online/goods/1/detail/
+Traceback (most recent call last):
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\python_virtual\django_env\lib\site-packages\django\views\generic\base.py", line 68, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "D:\python_virtual\django_env\lib\site-packages\django\views\generic\base.py", line 88, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\zyt\Desktop\weigan_shopping\online\goods\views.py", line 118, in get
+    context = {"name":single_goods.name_en,
+AttributeError: 'QuerySet' object has no attribute 'name_en'
+ERROR 2019-12-14 16:25:45,644 basehttp 124 "GET /online/goods/1/detail/ HTTP/1.1" 500 82111
+ERROR 2019-12-14 16:25:58,406 exception 135 Internal Server Error: /online/goods/1/detail/
+Traceback (most recent call last):
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\python_virtual\django_env\lib\site-packages\django\views\generic\base.py", line 68, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "D:\python_virtual\django_env\lib\site-packages\django\views\generic\base.py", line 88, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\zyt\Desktop\weigan_shopping\online\goods\views.py", line 117, in get
+    context = single_goods.values("name_en","image","price","sale","detail_en","description_en")
+AttributeError: 'Goods' object has no attribute 'values'
+ERROR 2019-12-14 16:25:58,542 basehttp 124 "GET /online/goods/1/detail/ HTTP/1.1" 500 81829
+INFO 2019-12-14 16:26:11,223 basehttp 124 "GET /online/goods/1/detail/ HTTP/1.1" 200 126
+INFO 2019-12-14 16:27:55,396 basehttp 124 "GET /online/goods/1/detail/ HTTP/1.1" 200 150
+INFO 2019-12-14 16:29:07,036 basehttp 124 "GET /online/goods/1/detail/ HTTP/1.1" 200 149
+INFO 2019-12-14 16:29:39,989 basehttp 124 "GET /media/1.jpg HTTP/1.1" 200 11259
+WARNING 2019-12-14 16:29:40,050 base 152 Not Found: /favicon.ico
+WARNING 2019-12-14 16:29:40,051 basehttp 124 "GET /favicon.ico HTTP/1.1" 404 2531
+INFO 2019-12-14 16:29:46,617 basehttp 124 "GET /online/goods/1/detail/ HTTP/1.1" 200 147
+WARNING 2019-12-14 20:39:37,307 base 152 Not Found: /online/carts/
+WARNING 2019-12-14 20:39:37,308 basehttp 124 "GET /online/carts/ HTTP/1.1" 404 3784
+ERROR 2019-12-14 20:40:13,969 exception 135 Internal Server Error: /online/carts/
+Traceback (most recent call last):
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\python_virtual\django_env\lib\site-packages\django\views\generic\base.py", line 68, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "D:\python_virtual\django_env\lib\site-packages\django\views\generic\base.py", line 88, in dispatch
+    return handler(request, *args, **kwargs)
+  File "D:\python_virtual\django_env\lib\site-packages\django\utils\decorators.py", line 67, in _wrapper
+    return bound_func(*args, **kwargs)
+  File "C:\Users\zyt\Desktop\weigan_shopping\utils\decorator.py", line 21, in wrapper
+    return func(request,user, *args, **kwargs)
+  File "D:\python_virtual\django_env\lib\site-packages\django\utils\decorators.py", line 63, in bound_func
+    return func.__get__(self, type(self))(*args2, **kwargs2)
+  File "C:\Users\zyt\Desktop\weigan_shopping\online\cart\views.py", line 27, in get
+    return JsonResponse(context)
+  File "D:\python_virtual\django_env\lib\site-packages\django\http\response.py", line 524, in __init__
+    'In order to allow non-dict objects to be serialized set the '
+TypeError: In order to allow non-dict objects to be serialized set the safe parameter to False.
+ERROR 2019-12-14 20:40:14,098 basehttp 124 "GET /online/carts/ HTTP/1.1" 500 100255
+INFO 2019-12-14 20:40:33,777 basehttp 124 "GET /online/carts/ HTTP/1.1" 200 159
+ERROR 2019-12-14 20:43:42,843 exception 135 Internal Server Error: /online/carts/
+Traceback (most recent call last):
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\python_virtual\django_env\lib\site-packages\django\views\generic\base.py", line 68, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "D:\python_virtual\django_env\lib\site-packages\django\views\generic\base.py", line 88, in dispatch
+    return handler(request, *args, **kwargs)
+  File "D:\python_virtual\django_env\lib\site-packages\django\utils\decorators.py", line 67, in _wrapper
+    return bound_func(*args, **kwargs)
+  File "C:\Users\zyt\Desktop\weigan_shopping\utils\decorator.py", line 21, in wrapper
+    return func(request,user, *args, **kwargs)
+  File "D:\python_virtual\django_env\lib\site-packages\django\utils\decorators.py", line 63, in bound_func
+    return func.__get__(self, type(self))(*args2, **kwargs2)
+  File "C:\Users\zyt\Desktop\weigan_shopping\online\cart\views.py", line 29, in get
+    sum += cart.goods.price * cart.quantity
+TypeError: unsupported operand type(s) for +=: 'int' and 'str'
+ERROR 2019-12-14 20:43:42,942 basehttp 124 "GET /online/carts/ HTTP/1.1" 500 95158
+INFO 2019-12-14 20:44:43,239 basehttp 124 "GET /online/carts/ HTTP/1.1" 200 185
+INFO 2019-12-14 21:02:20,642 basehttp 124 "GET /online/carts/ HTTP/1.1" 200 247
+ERROR 2019-12-14 21:05:30,159 exception 135 Internal Server Error: /online/cart/1/
+Traceback (most recent call last):
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\python_virtual\django_env\lib\site-packages\django\views\generic\base.py", line 68, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "D:\python_virtual\django_env\lib\site-packages\django\views\generic\base.py", line 88, in dispatch
+    return handler(request, *args, **kwargs)
+  File "D:\python_virtual\django_env\lib\site-packages\django\utils\decorators.py", line 67, in _wrapper
+    return bound_func(*args, **kwargs)
+  File "C:\Users\zyt\Desktop\weigan_shopping\utils\decorator.py", line 21, in wrapper
+    return func(request,user,*args, **kwargs)
+  File "D:\python_virtual\django_env\lib\site-packages\django\utils\decorators.py", line 63, in bound_func
+    return func.__get__(self, type(self))(*args2, **kwargs2)
+  File "C:\Users\zyt\Desktop\weigan_shopping\online\cart\views.py", line 70, in put
+    data = json.loads(request.body.decode())
+  File "d:\program files (x86)\python\Lib\json\__init__.py", line 354, in loads
+    return _default_decoder.decode(s)
+  File "d:\program files (x86)\python\Lib\json\decoder.py", line 339, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "d:\program files (x86)\python\Lib\json\decoder.py", line 355, in raw_decode
+    obj, end = self.scan_once(s, idx)
+json.decoder.JSONDecodeError: Expecting property name enclosed in double quotes: line 4 column 1 (char 21)
+ERROR 2019-12-14 21:05:30,385 basehttp 124 "PUT /online/cart/1/ HTTP/1.1" 500 107279
+ERROR 2019-12-14 21:06:19,879 exception 135 Internal Server Error: /online/cart/1/
+Traceback (most recent call last):
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\python_virtual\django_env\lib\site-packages\django\views\generic\base.py", line 68, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "D:\python_virtual\django_env\lib\site-packages\django\views\generic\base.py", line 88, in dispatch
+    return handler(request, *args, **kwargs)
+  File "D:\python_virtual\django_env\lib\site-packages\django\utils\decorators.py", line 67, in _wrapper
+    return bound_func(*args, **kwargs)
+  File "C:\Users\zyt\Desktop\weigan_shopping\utils\decorator.py", line 21, in wrapper
+    return func(request,user,*args, **kwargs)
+  File "D:\python_virtual\django_env\lib\site-packages\django\utils\decorators.py", line 63, in bound_func
+    return func.__get__(self, type(self))(*args2, **kwargs2)
+  File "C:\Users\zyt\Desktop\weigan_shopping\online\cart\views.py", line 70, in put
+    data = json.loads(request.body.decode())
+  File "d:\program files (x86)\python\Lib\json\__init__.py", line 354, in loads
+    return _default_decoder.decode(s)
+  File "d:\program files (x86)\python\Lib\json\decoder.py", line 339, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "d:\program files (x86)\python\Lib\json\decoder.py", line 355, in raw_decode
+    obj, end = self.scan_once(s, idx)
+json.decoder.JSONDecodeError: Expecting property name enclosed in double quotes: line 3 column 1 (char 20)
+ERROR 2019-12-14 21:06:19,931 basehttp 124 "PUT /online/cart/1/ HTTP/1.1" 500 107273
+ERROR 2019-12-14 21:06:33,713 exception 135 Internal Server Error: /online/cart/1/
+Traceback (most recent call last):
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\python_virtual\django_env\lib\site-packages\django\views\generic\base.py", line 68, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "D:\python_virtual\django_env\lib\site-packages\django\views\generic\base.py", line 88, in dispatch
+    return handler(request, *args, **kwargs)
+  File "D:\python_virtual\django_env\lib\site-packages\django\utils\decorators.py", line 67, in _wrapper
+    return bound_func(*args, **kwargs)
+  File "C:\Users\zyt\Desktop\weigan_shopping\utils\decorator.py", line 21, in wrapper
+    return func(request,user,*args, **kwargs)
+  File "D:\python_virtual\django_env\lib\site-packages\django\utils\decorators.py", line 63, in bound_func
+    return func.__get__(self, type(self))(*args2, **kwargs2)
+  File "C:\Users\zyt\Desktop\weigan_shopping\online\cart\views.py", line 70, in put
+    data = json.loads(request.body.decode())
+  File "d:\program files (x86)\python\Lib\json\__init__.py", line 354, in loads
+    return _default_decoder.decode(s)
+  File "d:\program files (x86)\python\Lib\json\decoder.py", line 339, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "d:\program files (x86)\python\Lib\json\decoder.py", line 355, in raw_decode
+    obj, end = self.scan_once(s, idx)
+json.decoder.JSONDecodeError: Expecting property name enclosed in double quotes: line 3 column 1 (char 22)
+ERROR 2019-12-14 21:06:33,767 basehttp 124 "PUT /online/cart/1/ HTTP/1.1" 500 107309
+ERROR 2019-12-14 21:07:34,680 exception 135 Internal Server Error: /online/cart/1/
+Traceback (most recent call last):
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\python_virtual\django_env\lib\site-packages\django\views\generic\base.py", line 68, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "D:\python_virtual\django_env\lib\site-packages\django\views\generic\base.py", line 88, in dispatch
+    return handler(request, *args, **kwargs)
+  File "D:\python_virtual\django_env\lib\site-packages\django\utils\decorators.py", line 67, in _wrapper
+    return bound_func(*args, **kwargs)
+  File "C:\Users\zyt\Desktop\weigan_shopping\utils\decorator.py", line 21, in wrapper
+    return func(request,user,*args, **kwargs)
+  File "D:\python_virtual\django_env\lib\site-packages\django\utils\decorators.py", line 63, in bound_func
+    return func.__get__(self, type(self))(*args2, **kwargs2)
+  File "C:\Users\zyt\Desktop\weigan_shopping\online\cart\views.py", line 70, in put
+    data = json.loads(request.body.decode())
+  File "d:\program files (x86)\python\Lib\json\__init__.py", line 354, in loads
+    return _default_decoder.decode(s)
+  File "d:\program files (x86)\python\Lib\json\decoder.py", line 339, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "d:\program files (x86)\python\Lib\json\decoder.py", line 355, in raw_decode
+    obj, end = self.scan_once(s, idx)
+json.decoder.JSONDecodeError: Expecting property name enclosed in double quotes: line 3 column 1 (char 22)
+ERROR 2019-12-14 21:07:34,883 basehttp 124 "PUT /online/cart/1/ HTTP/1.1" 500 109495
+INFO 2019-12-14 21:07:41,013 basehttp 124 "PUT /online/cart/1/ HTTP/1.1" 200 44
+INFO 2019-12-14 21:08:23,698 basehttp 124 "PUT /online/cart/1/ HTTP/1.1" 200 44
+INFO 2019-12-14 21:09:16,997 basehttp 124 "PUT /online/cart/1/ HTTP/1.1" 200 44
+INFO 2019-12-14 21:09:56,698 basehttp 124 "PUT /online/cart/1/ HTTP/1.1" 200 44
+INFO 2019-12-14 21:11:43,012 basehttp 124 "PUT /online/cart/1/ HTTP/1.1" 200 44
+INFO 2019-12-14 21:12:08,797 basehttp 124 "PUT /online/cart/1/ HTTP/1.1" 200 44
+INFO 2019-12-14 21:12:30,014 basehttp 124 "PUT /online/cart/1/ HTTP/1.1" 200 44
+INFO 2019-12-14 21:12:30,715 basehttp 124 "PUT /online/cart/1/ HTTP/1.1" 200 44
+INFO 2019-12-14 21:14:18,645 basehttp 124 "PUT /online/cart/1/ HTTP/1.1" 200 44
+INFO 2019-12-14 21:14:50,839 basehttp 124 "PUT /online/cart/2/ HTTP/1.1" 200 44
+ERROR 2019-12-14 22:20:41,697 exception 135 Internal Server Error: /online/order/settlement/
+Traceback (most recent call last):
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\python_virtual\django_env\lib\site-packages\django\views\generic\base.py", line 68, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "D:\python_virtual\django_env\lib\site-packages\django\views\generic\base.py", line 88, in dispatch
+    return handler(request, *args, **kwargs)
+  File "D:\python_virtual\django_env\lib\site-packages\django\utils\decorators.py", line 67, in _wrapper
+    return bound_func(*args, **kwargs)
+  File "C:\Users\zyt\Desktop\weigan_shopping\utils\decorator.py", line 21, in wrapper
+    return func(request,user,*args, **kwargs)
+  File "D:\python_virtual\django_env\lib\site-packages\django\utils\decorators.py", line 63, in bound_func
+    return func.__get__(self, type(self))(*args2, **kwargs2)
+  File "C:\Users\zyt\Desktop\weigan_shopping\online\order\views.py", line 30, in post
+    if user.address[0]:
+TypeError: 'RelatedManager' object does not support indexing
+ERROR 2019-12-14 22:20:41,800 basehttp 124 "POST /online/order/settlement/ HTTP/1.1" 500 96313
+ERROR 2019-12-14 22:21:05,011 exception 135 Internal Server Error: /online/order/settlement/
+Traceback (most recent call last):
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\python_virtual\django_env\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\python_virtual\django_env\lib\site-packages\django\views\generic\base.py", line 68, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "D:\python_virtual\django_env\lib\site-packages\django\views\generic\base.py", line 88, in dispatch
+    return handler(request, *args, **kwargs)
+  File "D:\python_virtual\django_env\lib\site-packages\django\utils\decorators.py", line 67, in _wrapper
+    return bound_func(*args, **kwargs)
+  File "C:\Users\zyt\Desktop\weigan_shopping\utils\decorator.py", line 21, in wrapper
+    return func(request,user,*args, **kwargs)
+  File "D:\python_virtual\django_env\lib\site-packages\django\utils\decorators.py", line 63, in bound_func
+    return func.__get__(self, type(self))(*args2, **kwargs2)
+  File "C:\Users\zyt\Desktop\weigan_shopping\online\order\views.py", line 32, in post
+    address = {"name":address.name,"road":address.road,"district":address.district,"city":address.city,"province":address.province,"postcode":address.postcode,"phone_number":address.phone}
+AttributeError: 'RelatedManager' object has no attribute 'road'
+ERROR 2019-12-14 22:21:05,112 basehttp 124 "POST /online/order/settlement/ HTTP/1.1" 500 96771
+INFO 2019-12-14 22:22:31,929 basehttp 124 "POST /online/order/settlement/ HTTP/1.1" 200 468
