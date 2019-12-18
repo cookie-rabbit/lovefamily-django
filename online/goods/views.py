@@ -14,14 +14,6 @@ from weigan_shopping import settings
 from online.constants import PER_PAGE_GOODS_COUNT
 
 
-def make(request):
-    a = '123456'
-    b = make_password(a,hasher='unsalted_md5')
-    print(b)
-    return HttpResponse("ok")
-
-
-
 def index(request):
     category = []
     try:
@@ -99,8 +91,8 @@ class GoodsCategoryView(View):
 
     def get(self,request,category_id):
         current = request.GET.get("current", 0)
-        # if current == 0:
-        #     return redirect("")
+        if current == 0:
+            return redirect(reverse("category_template",args=category_id))
         count = PER_PAGE_GOODS_COUNT
         try:
             current = int(current)
