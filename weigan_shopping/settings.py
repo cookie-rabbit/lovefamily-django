@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'online.order.apps.OrderConfig',
     'online.cart.apps.CartConfig',
     'online.card.apps.CardConfig',
-    'online.login.apps.LoginConfig'
+    'online.account.apps.AccountConfig'
 ]
 
 MIDDLEWARE = [
@@ -74,7 +74,7 @@ CORS_ALLOW_HEADERS = (
     'authorization',
     'content-type',
     'dnt',
-    'origin',
+    'Origin',
     'user-agent',
     'x-csrftoken',
     'x-requested-with',
@@ -220,9 +220,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
 
-LANGUAGE_CODE = 'zh-hans'
+LANGUAGE_CODE = 'en'
 
-TIME_ZONE = 'Asia/Shanghai'
+TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
@@ -248,3 +248,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'common_static')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 URL_PREFIX = "http://" + env.API_HOST + ":" + env.API_PORT
+
+PASSWORD_HASHERS = [
+    'django.contrib.auth.hashers.UnsaltedMD5PasswordHasher'
+]

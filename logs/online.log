@@ -6,3 +6,46 @@ ERROR 2019-12-14 15:38:58,400 views 111 (1406, "Data too long for column 'passwo
 ERROR 2019-12-14 15:40:03,615 views 111 (1406, "Data too long for column 'password' at row 1")
 ERROR 2019-12-14 15:40:37,924 views 133 'UserAddress' object has no attribute 'update'
 ERROR 2019-12-14 15:42:59,299 views 138 'UserAddress' object has no attribute 'update'
+ERROR 2019-12-17 14:37:09,455 views 96 'RelatedManager' object has no attribute 'delete'
+ERROR 2019-12-17 14:55:41,521 views 133 (1062, "Duplicate entry '123456789' for key 'phone'")
+ERROR 2019-12-17 14:56:10,821 views 133 (1062, "Duplicate entry '123456789' for key 'phone'")
+ERROR 2019-12-17 14:56:28,267 views 133 (1062, "Duplicate entry '123456789' for key 'phone'")
+ERROR 2019-12-17 14:56:36,454 views 133 (1062, "Duplicate entry '123456789' for key 'phone'")
+ERROR 2019-12-17 14:57:09,474 views 133 (1062, "Duplicate entry '123456789' for key 'phone'")
+ERROR 2019-12-17 14:57:37,458 views 133 (1062, "Duplicate entry '123456789' for key 'phone'")
+ERROR 2019-12-17 14:58:00,684 views 149 'phone' is an invalid keyword argument for this function
+ERROR 2019-12-17 14:58:12,759 views 149 'phone' is an invalid keyword argument for this function
+ERROR 2019-12-17 14:59:29,749 views 133 (1062, "Duplicate entry '18710753859' for key 'phone'")
+ERROR 2019-12-17 15:01:24,340 views 149 'phone' is an invalid keyword argument for this function
+ERROR 2019-12-17 15:02:23,734 views 133 (1062, "Duplicate entry '1871075859' for key 'phone'")
+ERROR 2019-12-17 15:16:50,786 views 60 list index out of range
+ERROR 2019-12-17 15:17:30,296 views 60 list index out of range
+ERROR 2019-12-17 18:04:56,122 views 67 must be str, not int
+ERROR 2019-12-17 18:09:04,299 views 67 must be str, not int
+ERROR 2019-12-17 18:10:32,820 views 67 must be str, not int
+ERROR 2019-12-17 18:10:59,134 views 67 must be str, not int
+ERROR 2019-12-17 18:10:59,276 views 67 must be str, not int
+ERROR 2019-12-17 18:11:04,774 views 67 must be str, not int
+ERROR 2019-12-17 18:11:10,788 views 67 must be str, not int
+ERROR 2019-12-17 18:11:40,121 views 67 must be str, not int
+ERROR 2019-12-17 18:12:10,290 views 67 must be str, not int
+ERROR 2019-12-17 18:12:18,221 views 67 must be str, not int
+ERROR 2019-12-17 18:14:10,280 views 67 must be str, not int
+ERROR 2019-12-17 18:16:12,959 views 67 must be str, not int
+ERROR 2019-12-17 18:16:29,198 views 67 must be str, not int
+ERROR 2019-12-17 18:16:43,323 views 67 must be str, not int
+ERROR 2019-12-17 18:17:51,544 views 67 must be str, not int
+ERROR 2019-12-17 18:20:48,540 views 67 must be str, not int
+ERROR 2019-12-17 18:22:34,448 views 67 must be str, not int
+ERROR 2019-12-17 18:22:41,455 views 67 must be str, not int
+ERROR 2019-12-17 18:22:41,462 views 67 must be str, not int
+ERROR 2019-12-17 18:22:41,464 views 67 must be str, not int
+ERROR 2019-12-17 18:22:41,471 views 67 must be str, not int
+ERROR 2019-12-17 18:22:41,473 views 67 must be str, not int
+ERROR 2019-12-17 18:22:41,480 views 67 must be str, not int
+ERROR 2019-12-17 18:22:41,486 views 67 must be str, not int
+ERROR 2019-12-17 18:22:46,131 views 67 must be str, not int
+ERROR 2019-12-17 18:24:28,607 views 67 must be str, not int
+ERROR 2019-12-17 18:24:36,387 views 67 must be str, not int
+ERROR 2019-12-17 18:25:17,537 views 67 must be str, not int
+ERROR 2019-12-17 18:25:38,616 views 67 must be str, not int

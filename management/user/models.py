@@ -35,7 +35,7 @@ class UserAddress(models.Model):
     city = models.CharField(max_length=20,null=True)
     district = models.CharField(max_length=20,null=True)
     road = models.CharField(max_length=20,null=True)
-    phone = models.CharField(max_length=20,null=True)
+    phone_number = models.CharField(max_length=20,null=True)
     postcode = models.CharField(max_length=20,null=True)
     user = models.ForeignKey('User',on_delete=models.CASCADE,related_name='address')
 

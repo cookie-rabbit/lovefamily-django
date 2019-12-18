@@ -1,0 +1,15 @@
+{% for single_goods in goods %}
+    <a href="/goods/{{ single_goods.id }}/" class="goods">
+        <img src={{ single_goods.image }} alt="">
+        <div class="infor">
+            <p class="name">
+                <span class="realName">{{ single_goods.is_hot }}{{ single_goods.name }}{% if '{ single_goods.is_new }}' %}<i class="new"></i>{% endif %}{% if '{ single_goods.is_hot }}' == True %}<i class="hot"></i>{% endif %}</span>
+                <span class="toCart">Add to cart</span>
+            </p>
+            <p class="price">
+                <span class="unit">$</span>{{ single_goods.price }}
+                <span class="toBuy">Buy Now</span>
+            </p>
+        </div>
+    </a>
+{% endfor %}

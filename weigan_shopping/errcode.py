@@ -26,3 +26,7 @@
     "errcode":"107",
     "errmsg":'please login first'
 }
+{
+    "errcode":"108",
+    "errmsg":"illegal request"
+}

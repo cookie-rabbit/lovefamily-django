@@ -1,0 +1,147 @@
+@import "../common/base.less";
+
+.payOrderContainer {
+	width: 1200px;
+	margin: 0 auto;
+
+	.cartContent {
+		h3 {
+			height: 18px;
+			font-size: 16px;
+			font-family: HelveticaNeue;
+			color: rgba(0, 0, 0, 1);
+			line-height: 18px;
+			font-weight: normal;
+			margin-bottom: 18px;
+		}
+
+		padding-left: 30px;
+
+		p {
+			padding: 10px 0;
+
+			span {
+				display: inline-block;
+				width: 128px;
+				height: 18px;
+				font-size: 16px;
+				font-family: HelveticaNeue;
+				color: rgba(0, 0, 0, 1);
+				line-height: 18px;
+				margin-right: 24px;
+			}
+
+			input {
+				width: 200px;
+				height: 30px;
+				background: rgba(255, 255, 255, 1);
+				border-radius: 5px;
+				border: 1px solid rgba(151, 151, 151, 1);
+				padding: 0 10px;
+				display: inline-block;
+			}
+
+			
+		}
+
+		.data {
+			.day,
+			.year {
+				display: inline-block;
+				position: relative;
+				width: auto;
+
+				.changeCount {
+					height: 30px;
+					position: absolute;
+					left: 32px;
+
+					.add,
+					.sub {
+						display: block;
+						height: 15px;
+						width: 16px;
+						border-left: 1px solid rgba(151, 151, 151, 1);
+					}
+
+					.add {
+						background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAGCAYAAAAVMmT4AAAAd0lEQVQoU23PsQnCABAF0BcLFwgiWDhEGlM6iROIaGdpmVLBCbJIWhGcQhAkuECKEIQEDs2Vd+/fcYn/ynDAGY84Tn7sHHsUOPaB92AinuKEK15YYNv3mm8g4h3uuIVrOVa4RLzGEuXIDxs8UQ2bZ/igHcETpKg7z5MSBwthEQoAAAAASUVORK5CYII=") 2px 5px no-repeat;
+						background-size: 70%;
+						border-bottom: 1px solid rgba(151, 151, 151, 1);
+					}
+
+					.sub {
+						background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAGCAYAAAAVMmT4AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABcSURBVChTY4ACUSBmgjAxAEgcJA9XoAPEMRAmBgCJa4MYMMX7gVgQiC3APAQA8QWA+ACYhwTYgLgNiKXAPAgN4oPEsQJxIG4HYn4oDeLjBcZAvBiIjcA8OGBgAABCIgbxW3AL8gAAAABJRU5ErkJggg==") 2px 5px no-repeat;
+						background-size: 70%;
+
+						border-top: 1px solid rgba(151, 151, 151, 1);
+					}
+				}
+
+				.count {
+					width: 38px;
+					height: 30px;
+					background: rgba(255, 255, 255, 1);
+					border-radius: 5px;
+					border: 1px solid rgba(151, 151, 151, 1);
+					text-align: center;
+					padding: 0px;
+					text-align: left;
+					padding-left: 10px;
+				}
+			}
+
+			.year {
+				.count {
+					width: 58px;
+				}
+				.changeCount{
+					left: 54px!important;
+				}
+			}
+
+		}
+		.checkToAdd{
+			height:18px;
+			font-size:16px;
+			font-family:HelveticaNeue;
+			color:rgba(0,0,0,1);
+			line-height:18px;
+			margin-top: 24px;
+			display: inline-block;
+			
+			.check{
+				display: inline-block;
+				width:12px;
+				height:12px;
+				border:1px solid rgba(151,151,151,1);
+				margin-right: 12px;
+				margin-left: 10px;
+			}
+			.checked{
+				background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAGCAYAAAARx7TFAAAAh0lEQVQYV32OwQnCQBRE3+jVQmwoFViAruyi5GIBa9hEsQRPOdiCNXizCiHgQdB8SUAIgs7x8WYY8Sfm/Izb5Khfjs39ipE9lYpClmVj1fVrKJsLa+ChFFPHZQu/QVyUtqcOmAs5cFeK1acoA+H8DulMa1NQozLuh8v9p15choqWq8p4+P75Bl4NKu4di1FLAAAAAElFTkSuQmCC") 2px 2px no-repeat;
+			}
+		}
+		
+		.continue{
+			background-color: #d8d8d8;
+			width:100px;
+			height:34px;
+			border-radius:5px;
+			line-height: 34px;
+			font-size:16px;
+			font-family:PingFangSC-Regular,PingFang SC;
+			font-weight:normal;
+			color:rgba(255,255,255,1);
+			text-align: center;
+			margin-top: 25px;
+		}
+		.toPay{
+			background:rgba(254,112,116,1);
+		}
+		.toPay:hover,.checkToAdd:hover {
+			cursor: pointer;
+		}
+
+	}
+}
