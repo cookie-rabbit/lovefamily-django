@@ -11,13 +11,13 @@ class Order(models.Model):
     total = models.CharField(max_length=10)  # 总价
     order_date = models.DateField()  # 订单日期
     choices = (  # 订单状态列表
-        (0, "Payed"),
-        (1, "Ordered"),
+        (0, "Ordered"),
+        (1, "Payed"),
         (2, "Delivering"),
         (3, "Finished"),
         (4, "Closed"),
     )
-    status = models.IntegerField(choices=choices)  # 订单状态
+    status = models.IntegerField(choices=choices, default=0)  # 订单状态
     address = models.ForeignKey("OrderAddress", on_delete=models.CASCADE, related_name='order')  # 订单地址
     user = models.ForeignKey('user.User', on_delete=models.CASCADE, related_name='order')  # 订单用户
 
@@ -36,7 +36,7 @@ class OrderAddress(models.Model):
     district = models.CharField(max_length=40, default='')
     road = models.CharField(max_length=20, default='')
     postcode = models.CharField(max_length=10)
-    phone = models.CharField(max_length=20)
+    phone_number = models.CharField(max_length=20)
 
     class Meta:
         db_table = "OrderAddress"
