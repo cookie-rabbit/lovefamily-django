@@ -1,217 +1,97 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8">
-		<title>My Orders</title>
-		<meta name="description" content="这里是本网站描述">
-		<meta name="keywords" content="这里是seo关键词,用逗号间隔">
-		<meta name="copyright" content="本页版权">
-		<link rel="icon" href="../assets/images/icon/loveFamily.ico" type="image/x-icon">
-		<!-- <link rel="stylesheet" type="text/css" href="../assets/css/page/myOrders.css" /> -->
-		<link rel="stylesheet/less" type="text/css" href="../assets/css/page/myOrders.less" />
-		<script src="//cdnjs.cloudflare.com/ajax/libs/less.js/3.10.0-beta/less.min.js"></script>
-	</head>
-	<body>
-		<div class="container">
-			<div class="header">
-				<div class="top">
-					<img src="../assets/images/icon.png" alt="" class="icon">
-					<h1>Love Family Online Shop</h1>
-					<div class="top-right">
-						<div class="language hasHover">
-							<!-- class:spread -->
-							<a href="javascript:(0)" class="name">Language<span></span></a>
-							<div class="ul">
-								<a href="" class="li">简体中文</a>
-								<a href="" class="li current">English</a>
-							</div>
-						</div>
-						<!-- 登录前显示------------ begin -->
-						<a href="javascript:(0)" class="toLog">Login In</a>
-						<a href="javascript:(0)" class="toReg">Sign Up</a>
-						<!-- 登录前显示------------ end -->
+{% extends 'base.html' %}
+{% load static %}
 
-						<!-- 登录后显示------------ begin -->
-						<!-- <a href="javascript:(0)" class="toNotice"><span>1</span></a>
-						<a href="javascript:(0)" class="toShoppingCart"><span>11</span></a>
-						<div class="user hasHover">
-							<a href="javascript:(0)" class="name">Frank<span></span></a>
-							<ul class="">
-								<li><a href="">My Setting</a></li>
-								<li><a href="">Logout</a></li>
-							</ul>
-						</div> -->
-						<!-- 登录后显示------------ end -->
+{% block title %}
+    my Orders
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="../static/assets/css/page/myOrders.css"/>
+    {#    <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/3.10.0-beta/less.min.js"></script>#}
+{% endblock %}
+
+{% block content %}
+    <div class="myOrdersContainer">
+        <ul class="type">
+            <li class="current">My Orders</li>
+        </ul>
+        <div class="content">
+            <div class="ul">
+                {% ifequal status '' %}
+                    <a href="http://10.168.2.111:8000/orders/" class="all current" data-type="">All</a>
+                    <a href="http://10.168.2.111:8000/orders/?status=1" class="ordered" data-type="1">Ordered</a>
+                    <a href="http://10.168.2.111:8000/orders/?status=2" class="delivering" data-type="2">Delivering</a>
+                    <a href="http://10.168.2.111:8000/orders/?status=3" class="finished" data-type="3">Finished</a>
+                    <a href="http://10.168.2.111:8000/orders/?status=4" class="closed" data-type="4">Closed</a>
+                {% endifequal %}
+                {% ifequal status 1 %}
+                    <a href="http://10.168.2.111:8000/orders/" class="all" data-type="">All</a>
+                    <a href="http://10.168.2.111:8000/orders/?status=1" class="ordered current"
+                       data-type="1">Ordered</a>
+                    <a href="http://10.168.2.111:8000/orders/?status=2" class="delivering" data-type="2">Delivering</a>
+                    <a href="http://10.168.2.111:8000/orders/?status=3" class="finished" data-type="3">Finished</a>
+                    <a href="http://10.168.2.111:8000/orders/?status=4" class="closed" data-type="4">Closed</a>
+                {% endifequal %}
+                {% ifequal status 2 %}
+                    <a href="http://10.168.2.111:8000/orders/" class="all" data-type="">All</a>
+                    <a href="http://10.168.2.111:8000/orders/?status=1" class="ordered" data-type="1">Ordered</a>
+                    <a href="http://10.168.2.111:8000/orders/?status=2" class="delivering current" data-type="2">Delivering</a>
+                    <a href="http://10.168.2.111:8000/orders/?status=3" class="finished" data-type="3">Finished</a>
+                    <a href="http://10.168.2.111:8000/orders/?status=4" class="closed" data-type="4">Closed</a>
+                {% endifequal %}
+                {% ifequal status 3 %}
+                    <a href="http://10.168.2.111:8000/orders/" class="all" data-type="">All</a>
+                    <a href="http://10.168.2.111:8000/orders/?status=1" class="ordered" data-type="1">Ordered</a>
+                    <a href="http://10.168.2.111:8000/orders/?status=2" class="delivering" data-type="2">Delivering</a>
+                    <a href="http://10.168.2.111:8000/orders/?status=3" class="finished current"
+                       data-type="3">Finished</a>
+                    <a href="http://10.168.2.111:8000/orders/?status=4" class="closed" data-type="4">Closed</a>
+                {% endifequal %}
+                {% ifequal status 4 %}
+                    <a href="http://10.168.2.111:8000/orders/" class="all" data-type="">All</a>
+                    <a href="http://10.168.2.111:8000/orders/?status=1" class="ordered" data-type="1">Ordered</a>
+                    <a href="http://10.168.2.111:8000/orders/?status=2" class="delivering" data-type="2">Delivering</a>
+                    <a href="http://10.168.2.111:8000/orders/?status=3" class="finished" data-type="3">Finished</a>
+                    <a href="http://10.168.2.111:8000/orders/?status=4" class="closed current" data-type="4">Closed</a>
+                {% endifequal %}
+                <label>
+                    <input type="text" placeholder="2019/01/01 to 2019/10/01" class="toSearchOrders">
+                </label><span class="searchPic"></span>
+            </div>
+            {% for order in order_dic %}
+                <div class="orderList">
+                    {% if forloop.first %}
+                        <h3 class="spread">
+                            <span class="order">Order No:<span>{{ order.order_no }}</span></span>
+                            <span class="date">Date:<span>{{ order.order_date }}</span></span>
+                            <span class="total">Toatal:<span>{{ order.total }}</span></span>
+                            <span class="status">Status:<span class={{ 0 }}>{{ order.status }}</span></span>
+                            <i></i>
+                        </h3>
+                    {% else %}
+                        <h3 class="">
+                            <span class="order">Order No:<span>{{ order.order_no }}</span></span>
+                            <span class="date">Date:<span>{{ order.order_date }}</span></span>
+                            <span class="total">Toatal:<span>{{ order.total }}</span></span>
+                            <span class="status">Status:<span
+                                    class={{ order.status|lower }}>{{ order.status }}</span></span>
+                            <i></i>
+                        </h3>
+                    {% endif %}
+                    {% if forloop.first and good_dic != '' %}
+                        {% include 'orderDetail.html' %}
+                    {% endif %}
+                </div>
+            {% endfor %}
+            {% ifequal  next_page 1 %}
+                <div class="more">MORE</div>
+            {% endifequal %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    "{% static 'assets/javascript/page/myOrders.js' %}"
+{% endblock %}
 
 
-						<div class="loginDiv">
-							<input type="text" class="name" placeholder="Email or Phone number">
-							<input type="password" class="password" placeholder="Password">
-							<p>The email or phone number you’ve entered doesn’t match any account. Sign up for an account</p>
-							<div class="submit">Log In</div>
-						</div>
-
-					</div>
-				</div>
-				<div class="hr"></div>
-				<div class="bottom">
-					<div class="left">
-						<div class="Foods hasHover">
-							<a href="javascript:(0)">Foods</a>
-							<div class="ul">
-								<a class="li" href="javascript:(0)">Drink</a>
-								<a class="li" href="javascript:(0)">Fast Foot</a>
-								<a class="li" href="javascript:(0)">Snacks</a>
-								<a class="li" href="javascript:(0)">Meat</a>
-								<a class="li" href="javascript:(0)">Vegetables</a>
-								<a class="li" href="javascript:(0)">Snacks</a>
-								<a class="li" href="javascript:(0)">Drink</a>
-								<a class="li" href="javascript:(0)">Fast Foot</a>
-								<a class="li" href="javascript:(0)">Snacksssss</a>
-								<a class="li" href="javascript:(0)">Meat</a>
-								<a class="li" href="javascript:(0)">Vegetables</a>
-								<a class="li" href="javascript:(0)">Snacks</a>
-							</div>
-						</div>
-
-						<div class="DailyUse hasHover">
-							<a href="javascript:(0)">Daily Use</a>
-							<div class="ul">
-								<a class="li" href="javascript:(0)">Drink</a>
-								<a class="li" href="javascript:(0)">Fast Foot</a>
-								<a class="li" href="javascript:(0)">Snacks</a>
-								<a class="li" href="javascript:(0)">Meat</a>
-								<a class="li" href="javascript:(0)">Vegetables</a>
-								<a class="li" href="javascript:(0)">Snacks</a>
-								<a class="li" href="javascript:(0)">Drink</a>
-								<a class="li" href="javascript:(0)">Fast Foot</a>
-								<a class="li" href="javascript:(0)">Snacksssss</a>
-								<a class="li" href="javascript:(0)">Meat</a>
-								<a class="li" href="javascript:(0)">Vegetables</a>
-								<a class="li" href="javascript:(0)">Snacks</a>
-							</div>
-						</div>
-
-						<div class="Cosmetics hasHover">
-							<a href="javascript:(0)">Cosmetics</a>
-							<div class="ul">
-								<a class="li" href="javascript:(0)">Drink</a>
-								<a class="li" href="javascript:(0)">Fast Foot</a>
-								<a class="li" href="javascript:(0)">Snacks</a>
-								<a class="li" href="javascript:(0)">Meat</a>
-								<a class="li" href="javascript:(0)">Vegetables</a>
-								<a class="li" href="javascript:(0)">Snacks</a>
-								<a class="li" href="javascript:(0)">Drink</a>
-								<a class="li" href="javascript:(0)">Fast Foot</a>
-								<a class="li" href="javascript:(0)">Snacksssss</a>
-								<a class="li" href="javascript:(0)">Meat</a>
-								<a class="li" href="javascript:(0)">Vegetables</a>
-								<a class="li" href="javascript:(0)">Snacks</a>
-							</div>
-						</div>
-					</div>
-					<div class="right">
-						<input type="text" placeholder="Search" class="toSearch"><span class="search"></span>
-					</div>
-				</div>
-			</div>
-			<div class="hr"></div>
-
-			<div class="myOrdersContainer">
-				<ul class="type">
-					<li class="current">My Orders</li>
-				</ul>
-				<div class="content">
-					<div class="ul">
-						<span class="all">All</span>
-						<span>Ordered</span>
-						<span>Delivering</span>
-						<span>Finished</span>
-						<span>Closed</span>
-						<input type="text" class="filterOrder">
-					</div>
-					<div class="orderList">
-						<h3 class="spread">
-							<span class="order">Order No:<span>20191001001</span></span>
-							<span class="date">Date:<span>2019/10/01 10:00</span></span>
-							<span class="total">Toatal:<span>$200</span></span>
-							<span class="status">Status:<span class="delivering">Delivering</span></span>
-							<i></i>
-						</h3>
-						<div class="details">
-							<a href="http://127.0.0.1:8848/shopping/src/html/detail.html" class="listDetail">
-								<img src="../assets/images/thing.png" alt="">
-								<div class="infors">
-									<h4>Sweety Cookie</h4>
-									<p class="num">
-										<span class="price">Price:&nbsp;$&nbsp;<span>66</span></span>
-										<span class="quantity">Price:<span>3</span></span>
-									</p>
-									<p class="desc">
-										New products come, experience a food tour together.New products come, experience a food tour together.New
-										products come, experience a food tour together.New products come, experience a food tour together.
-									</p>
-								</div>
-							</a>
-							<a href="http://127.0.0.1:8848/shopping/src/html/detail.html" class="listDetail">
-								<img src="../assets/images/thing.png" alt="">
-								<div class="infors">
-									<h4>Sweety Cookie</h4>
-									<p class="num">
-										<span class="price">Price:&nbsp;$&nbsp;<span>66</span></span>
-										<span class="quantity">Price:<span>3</span></span>
-									</p>
-									<p class="desc">
-										New products come, experience a food tour together.New products come, experience a food tour together.New
-										products come, experience a food tour together.New products come, experience a food tour together.
-									</p>
-								</div>
-							</a>
-							<a href="http://127.0.0.1:8848/shopping/src/html/detail.html" class="listDetail">
-								<img src="../assets/images/thing.png" alt="">
-								<div class="infors">
-									<h4>Sweety Cookie</h4>
-									<p class="num">
-										<span class="price">Price:&nbsp;$&nbsp;<span>66</span></span>
-										<span class="quantity">Price:<span>3</span></span>
-									</p>
-									<p class="desc">
-										New products come, experience a food tour together.New products come, experience a food tour together.New
-										products come, experience a food tour together.New products come, experience a food tour together.
-									</p>
-								</div>
-							</a>
-						</div>
-                       <h3 class="">
-                       	<span class="order">Order No:<span>20191001001</span></span>
-                       	<span class="date">Date:<span>2019/10/01 10:00</span></span>
-                       	<span class="total">Toatal:<span>$200</span></span>
-                       	<span class="status">Status:<span class="finished">Finished</span></span>
-						<i></i>
-                       </h3>  
-					   <h3 class="">
-					   	<span class="order">Order No:<span>20191001001</span></span>
-					   	<span class="date">Date:<span>2019/10/01 10:00</span></span>
-					   	<span class="total">Toatal:<span>$200</span></span>
-					   	<span class="status">Status:<span class="ordered">Ordered</span></span>
-						<i></i>
-					   </h3>
-					   <h3 class="">
-					   	<span class="order">Order No:<span>20191001001</span></span>
-					   	<span class="date">Date:<span>2019/10/01 10:00</span></span>
-					   	<span class="total">Toatal:<span>$200</span></span>
-					   	<span class="status">Status:<span class="closed">closed</span></span>
-						<i></i>
-					   </h3>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<script src="../assets/javascript/libs/jquery-1.9.1.js"></script>
-		<script src="../assets/javascript/common/base.js"></script>
-		<script src="../assets/javascript/common/header.js"></script>
-		<script src="../assets/javascript/page/myOrders.js"></script>
-
-	</body>
-</html>
