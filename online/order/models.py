@@ -11,8 +11,8 @@ class Order(models.Model):
     total = models.CharField(max_length=10)  # 总价
     order_date = models.DateField()  # 订单日期
     choices = (  # 订单状态列表
-        (0, "Ordered"),
-        (1, "Payed"),
+        (0, "ALL"),
+        (1, "Ordered"),
         (2, "Delivering"),
         (3, "Finished"),
         (4, "Closed"),

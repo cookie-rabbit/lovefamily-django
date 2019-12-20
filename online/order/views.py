@@ -6,6 +6,7 @@ from django.http import JsonResponse, QueryDict, HttpResponse
 from django.views import View
 from django.views.decorators.csrf import csrf_exempt
 from django.utils import timezone
+import django.db as db
 
 from online.constants import PER_PAGE_GOODS_COUNT
 from online.order.models import Order, Order_Goods, OrderAddress
@@ -74,7 +75,7 @@ class OrderAddressView(View):
             return JsonResponse({"errcode": 13, "errmsg": "数据库错误"})
 
 
-# 【渲染】订单详情
+# 订单详情
 class OrdersDetailView(View):
     @method_decorator(user_auth)
     def get(self, request, user):
@@ -98,8 +99,8 @@ class OrdersDetailView(View):
                     good_price = good_detail.on_price
                     good_description_en = good_detail.description_en
                     good_image = str(Image.objects.filter(goods_id=good_id)[0].image)
-                    good_dic.append({"quantity": quantity, "good_name_en": good_name_en, "good_price": good_price,
-                                     "good_description_en": good_description_en, "good_image": good_image})
+                    good_dic.append({"id": good_id, "quantity": quantity, "name_en": good_name_en, "price": good_price,
+                                     "description_en": good_description_en, "image": good_image})
                 res = {"good_dic": good_dic}
                 tpl = get_template("orderDetail.html")
                 data = tpl.render(res)
@@ -115,35 +116,30 @@ class OrdersListView(View):
     @method_decorator(user_auth)
     def get(self, request, user):
         user_id = user.id
-        status_query = request.GET.get('status')
-        order_no = request.GET.get('order_no')
+        status_query = request.GET.get('status', 0)
 
         orders = Order.objects.filter(user_id=user_id).order_by('-order_date')
-        if order_no:
-            try:
-                orders = orders.filter(order_no=order_no)
-            except Exception as e:
-                online_logger.error(e)
-                return JsonResponse({'errcode': 4, 'errmsg': "数据格式错误"})
-        else:
-            if status_query:
-                try:
-                    status_query = int(status_query)
-                except ValueError as e:
-                    online_logger.error(e)
-                    return JsonResponse({'errcode': 1, 'errmsg': "状态码错误"})
-                try:
-                    orders = orders.filter(status=status_query).order_by('-order_date')
-                except Exception as e:
-                    online_logger.error(e)
-                    return JsonResponse({'errcode': 4, 'errmsg': "数据格式错误"})
+        try:
+            status_query = int(status_query)
+        except ValueError as e:
+            online_logger.error(e)
+            return JsonResponse({'errcode': 1, 'errmsg': "状态码错误"})
+        try:
+            if status_query == 0:
+                orders_total = orders.order_by('-order_date')
+            else:
+                orders_total = orders.filter(status=status_query).order_by('-order_date')
+            orders = orders_total[: PER_PAGE_GOODS_COUNT]
 
-        if orders.count() > 10:
-            next_page = 1
-            orders = orders[:10]
-        else:
-            next_page = 0
+        except Exception as e:
+            online_logger.error(e)
+            return JsonResponse({'errcode': 4, 'errmsg': "数据格式错误"})
+        order_count = orders_total.count()
 
+        if order_count > PER_PAGE_GOODS_COUNT:
+            more = 'true'
+        else:
+            more = 'false'
         if orders.count() > 0:
             order_dic = []
             good_dic = []
@@ -175,78 +171,79 @@ class OrdersListView(View):
                                      "description_en": good_description_en, "image": good_image})
             else:
                 return JsonResponse({'errcode': 112, 'errmsg': "商品不存在"})
-
-            res = {"order_dic": order_dic, "good_dic": good_dic, "status": status_query, "next_page": next_page}
         else:
-            res = {"order_dic": '', "good_dic": '', "status": status_query, "next_page": next_page}
+            order_dic = []
+            good_dic = []
+        res = {"order_dic": order_dic, "good_dic": good_dic, "status": status_query, "more": more}
         return render(request, "myOrders.html", context=res)
 
 
 # 创建订单
-class OrderView(View):
-
-    # 创建订单
+class OrderCreateView(View):
     @method_decorator(transaction.atomic)
     @method_decorator(csrf_exempt)
     @method_decorator(user_auth)
     def post(self, request, user):
-        if request.POST:
+        try:
+            name = request.POST.get('name')
+            province = request.POST.get('province')
+            city = request.POST.get('city')
+            district = request.POST.get('district')
+            road = request.POST.get('road')
+            postcode = request.POST.get('postcode')
+            phone_number = request.POST.get('phone_number')
+            goods = ast.literal_eval(request.POST.get('goods'))
+            total = request.POST.get('total')
+        except Exception as e:
+            online_logger.error(e)
+            return JsonResponse({"errcode": 10, "errmsg": "订单信息不完整"})
+
+        user_id = user.id
+        if total.isdigit():
+            time = timezone.localtime(timezone.now()).strftime("%Y-%m-%d")
+            order_no = random.randint(0, 9999999999)
+            status = 0
+
+            save_id = transaction.savepoint()
             try:
-                name = request.POST.get('name')
-                province = request.POST.get('province')
-                city = request.POST.get('city')
-                district = request.POST.get('district')
-                road = request.POST.get('road')
-                postcode = request.POST.get('postcode')
-                phone_number = request.POST.get('phone_number')
-                goods = ast.literal_eval(request.POST.get('goods'))
-                total = request.POST.get('total')
-            except Exception as e:
+                order_address = OrderAddress.objects.create(name=name, province=province, road=road,
+                                                            city=city, district=district, postcode=postcode,
+                                                            phone_number=phone_number)
+
+                order = Order.objects.create(order_no=order_no, total=total, order_date=time, status=status,
+                                             address=order_address, user=User.objects.get(id=user_id))
+            except db.DataError as e:
                 online_logger.error(e)
-                return JsonResponse({"errcode": 10, "errmsg": "订单信息不完整"})
-            else:
-                user_id = user.id
-                if phone_number.isdigit() and total.isdigit():
-                    time = timezone.localtime(timezone.now()).strftime("%Y-%m-%d")
-                    order_no = random.randint(0, 9999999999)
-                    status = 0
+                return JsonResponse({"errcode": 3, "errmsg": "数据格式错误"})
 
-                    save_id = transaction.savepoint()
-                    order_address = OrderAddress.objects.create(name=name, province=province, road=road,
-                                                                city=city, district=district, postcode=postcode,
-                                                                phone_number=phone_number)
+            for good in goods:
+                goods_id = good['good_id']
+                good_count = good['good_count']
+                try:
+                    Goodgoods = Goods.objects.select_for_update().get(id=goods_id)
+                except Goods.DoesNotExist as e:
+                    transaction.savepoint_rollback(save_id)
+                    online_logger.error(e)
+                    return JsonResponse({'errcode': 2, 'errmsg': "商品信息错误"})
+                except Exception as e:
+                    online_logger.error(e)
+                    return JsonResponse({'errcode': 2, 'errmsg': '数据库错误'})
+                count = int(good_count)
 
-                    order = Order.objects.create(order_no=order_no, total=total, order_date=time, status=status,
-                                                 address=order_address, user=User.objects.get(id=user_id))
+                if Goodgoods.stock < count:
+                    transaction.savepoint_rollback(save_id)
+                    return JsonResponse({'errcode': 4, 'errmsg': "库存不足"})
 
-                    for good in goods:
-                        goods_id = good['good_id']
-                        good_count = good['good_count']
-                        try:
-                            Goodgoods = Goods.objects.select_for_update().get(id=goods_id)
-                        except Goods.DoesNotExist as e:
-                            transaction.savepoint_rollback(save_id)
-                            online_logger.error(e)
-                            return JsonResponse({'errcode': 2, 'errmsg': "商品信息错误"})
-                        except Exception as e:
-                            online_logger.error(e)
-                            return JsonResponse({'errcode': 2, 'errmsg': '数据库错误'})
-                        count = int(good_count)
+                Goodgoods.sale += count
+                Goodgoods.stock -= count
+                Goodgoods.save()
 
-                        if Goodgoods.stock < count:
-                            transaction.savepoint_rollback(save_id)
-                            return JsonResponse({'errcode': 4, 'errmsg': "库存不足"})
+                goods = Goods.objects.select_for_update().get(id=goods_id)
+                Order_Goods.objects.create(order=order, goods=goods, quantity=count)
 
-                        Goodgoods.sale += count
-                        Goodgoods.stock -= count
-                        Goodgoods.save()
-
-                        goods = Goods.objects.select_for_update().get(id=goods_id)
-                        Order_Goods.objects.create(order=order, goods=goods, quantity=count)
-
-                    return JsonResponse({"errcode": 5, "data": {"result": "订单创建成功", "href": "https://www.baidu.com"}})
-                else:
-                    return JsonResponse({"errcode": 9, "errmsg": "订单信息格式不正确"})
+            return JsonResponse({"errcode": 0, "data": {"result": "订单创建成功", "href": "https://www.baidu.com"}})
+        else:
+            return JsonResponse({"errcode": 9, "errmsg": "订单信息格式不正确"})
 
 
 # 翻页
@@ -255,24 +252,28 @@ class OrdersOffsetView(View):
     def get(self, request, user):
         user_id = user.id
         offset = request.GET.get('offset', 0)
-        status_query = request.GET.get('status', '')
+        status_query = request.GET.get('status', 0)
 
         try:
             offset = int(offset)
+            status_query = int(status_query)
         except ValueError as e:
             online_logger.error(e)
             return JsonResponse({'errcode': 1, 'errmsg': "跳过条数格式错误"})
         try:
-            orders_total = Order.objects.filter(user_id=user_id, status=status_query).order_by('-order_date')
+            if status_query == 0:
+                orders_total = Order.objects.filter(user_id=user_id).order_by('-order_date')
+            else:
+                orders_total = Order.objects.filter(user_id=user_id, status=status_query).order_by('-order_date')
             orders = orders_total[offset:offset + PER_PAGE_GOODS_COUNT]
         except Exception as e:
             online_logger.error(e)
             return JsonResponse({'errcode': 4, 'errmsg': "数据格式错误"})
 
         if orders.count() > offset + PER_PAGE_GOODS_COUNT:
-            next_page = 1
+            more = 'true'
         else:
-            next_page = 0
+            more = 'false'
         if orders.count() > 0:
             order_dic = []
 
@@ -287,7 +288,43 @@ class OrdersOffsetView(View):
         res_order = {"order_dic": order_dic}
         tpl = get_template("orderBlock.html")
         res = tpl.render(res_order)
-        return JsonResponse({"errcode": 0, "data": {"result": res, "more": next_page}})
+        return JsonResponse({"errcode": 0, "data": {"result": res, "more": more}})
+
+
+# 下单页面用户地址修改
+class UserAddressView(View):
+    @method_decorator(transaction.atomic)
+    @method_decorator(csrf_exempt)
+    @method_decorator(user_auth)
+    def post(self, request, user):
+        user_id = user.id
+        try:
+            name = request.POST.get('name')
+            province = request.POST.get('province')
+            city = request.POST.get('city')
+            district = request.POST.get('district')
+            road = request.POST.get('road')
+            postcode = request.POST.get('postcode')
+            phone_number = request.POST.get('phone_number')
+        except Exception as e:
+            online_logger.error(e)
+            return JsonResponse({"errcode": 10, "errmsg": "订单信息不完整"})
+        try:
+            UserAddress.objects.filter(user_id=user_id).update(name=name, province=province, road=road,
+                                                               city=city, district=district,
+                                                               postcode=postcode,
+                                                               phone_number=phone_number)
+            return JsonResponse({"errcode": 0, "data": {"result": "地址修改成功"}})
+        except db.DataError as e:
+            online_logger.error(e)
+            return JsonResponse({"errcode": 3, "errmsg": "数据格式错误"})
+
+
+# 【渲染】订单页面（地址）
+class OrderPayView(View):
+    @method_decorator(user_auth)
+    def get(self, request, user):
+        pass
 
 
 # 修改订单状态
