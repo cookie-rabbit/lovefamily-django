@@ -53,7 +53,7 @@ def index(request):
         for single_goods in goods:
             image = Image.objects.filter(goods=single_goods)
             goods_list.append({"id": single_goods.id, "name": single_goods.name_en, "price": single_goods.on_price,
-                               "is_hot": single_goods.is_hot, "image": settings.URL_PREFIX + image[0].image.url})
+                               "is_hot": single_goods.is_hot,"is_new":single_goods.is_new, "image": settings.URL_PREFIX + image[0].image.url})
     user_id = request.session.get("user_id",None)
     print(user_id)
     if user_id:
@@ -66,7 +66,7 @@ def index(request):
             online_logger.error(e)
             return JsonResponse({"errcode":"102","errmsg":"db error"})
         cart_quantity = request.session.get("%s_cart" % user_id,0)
-        context = {"category":category,"goods":goods_list,"user":user.username,"cart_quantity":cart_quantity,"order_quantity":order_quantity,"more":more}
+        context = {"category":category,"goods":goods_list,"user":user,"cart_quantity":cart_quantity,"order_quantity":order_quantity,"more":more}
     else:
         context = {"category": category, "goods": goods_list,"user":"","cart_quantity":0,"order_quantity":0,"more":more}
     print(context)
@@ -105,7 +105,7 @@ class GoodsTypeView(View):
             for single_goods in goods:
                 image = Image.objects.filter(goods=single_goods)
                 goods_list.append({"id": single_goods.id, "name": single_goods.name_en, "price": single_goods.on_price,
-                                   "is_hot": single_goods.is_hot, "image": settings.URL_PREFIX + image[0].image.url})
+                                   "is_hot": single_goods.is_hot, "is_new":single_goods.is_new,"image": settings.URL_PREFIX + image[0].image.url})
         result = {"goods": goods_list}
         t = get_template("goods_block.html")
         result = t.render(result)
@@ -148,7 +148,7 @@ class GoodsCategoryView(View):
             for single_goods in goods:
                 image = Image.objects.filter(goods=single_goods)
                 goods_list.append({"id": single_goods.id, "name": single_goods.name_en, "price": single_goods.on_price,
-                                   "is_hot": single_goods.is_hot, "image": settings.URL_PREFIX + image[0].image.url})
+                                   "is_hot": single_goods.is_hot, "is_new":single_goods.is_new,"image": settings.URL_PREFIX + image[0].image.url})
         result = {"goods": goods_list}
         t = get_template("goods_block.html")
         result = t.render(result)
@@ -208,7 +208,7 @@ class GoodsCategoryTemplateView(View):
             for single_goods in goods:
                 image = Image.objects.filter(goods=single_goods)
                 goods_list.append({"id": single_goods.id, "name": single_goods.name_en, "price": single_goods.on_price,
-                                   "is_hot": single_goods.is_hot, "image": settings.URL_PREFIX + image[0].image.url})
+                                   "is_hot": single_goods.is_hot, "is_new":single_goods.is_new,"image": settings.URL_PREFIX + image[0].image.url})
         user_id = request.session.get("user_id", None)
         if user_id:
             try:
@@ -219,7 +219,7 @@ class GoodsCategoryTemplateView(View):
                 online_logger.error(e)
                 return JsonResponse({"errcode": "102", "errmsg": "db error"})
             cart_quantity = request.session.get("%s_cart" % user_id, 0)
-            context = {"category": category,"goods": goods_list, "user": user.username, "cart_quantity": cart_quantity,
+            context = {"category": category,"goods": goods_list, "user": user, "cart_quantity": cart_quantity,
                        "order_quantity": order_quantity}
         else:
             context = {"category": category, "goods": goods_list, "user": "", "cart_quantity": 0, "order_quantity": 0}
@@ -274,7 +274,7 @@ class GoodsTemplateView(View):
                 online_logger.error(e)
                 return JsonResponse({"errcode": "102", "errmsg": "db error"})
             cart_quantity = request.session.get("%s_cart" % user_id, 0)
-            context = {"category": category, "goods": goods_detail, "user": user.username, "cart_quantity": cart_quantity,
+            context = {"category": category, "goods": goods_detail, "user": user, "cart_quantity": cart_quantity,
                        "order_quantity": order_quantity}
         else:
             context = {"category": category, "goods": goods_detail, "user": "", "cart_quantity": 0, "order_quantity": 0}
@@ -310,7 +310,7 @@ class GoodsSearchView(View):
             for single_goods in goods:
                 image = Image.objects.filter(goods=single_goods)
                 goods_list.append({"id": single_goods.id, "name": single_goods.name_en, "price": single_goods.on_price,
-                                   "is_hot": single_goods.is_hot, "image": settings.URL_PREFIX + image[0].image.url})
+                                   "is_hot": single_goods.is_hot,"is_new":single_goods.is_new, "image": settings.URL_PREFIX + image[0].image.url})
         result = {"goods": goods_list}
         t = get_template("goods_block.html")
         result = t.render(result)
@@ -344,7 +344,7 @@ class GoodsSearchTemplateView(View):
             for single_goods in goods:
                 image = Image.objects.filter(goods=single_goods)
                 goods_list.append({"id": single_goods.id, "name": single_goods.name_en, "price": single_goods.on_price,
-                                   "is_hot": single_goods.is_hot, "image": settings.URL_PREFIX + image[0].image.url})
+                                   "is_hot": single_goods.is_hot, "is_new":single_goods.is_new,"image": settings.URL_PREFIX + image[0].image.url})
         category = []
         try:
             cates = Category.objects.filter(super_category__isnull=True)
@@ -370,7 +370,7 @@ class GoodsSearchTemplateView(View):
                 online_logger.error(e)
                 return JsonResponse({"errcode": "102", "errmsg": "db error"})
             cart_quantity = request.session.get("%s_cart" % user_id, 0)
-            context = {"category": category, "goods": goods_list, "user": user.username, "cart_quantity": cart_quantity,
+            context = {"category": category, "goods": goods_list, "user": user, "cart_quantity": cart_quantity,
                        "order_quantity": order_quantity,"keyword":keyword,"more":more}
         else:
             context = {"category": category, "goods": goods_list, "user": "", "cart_quantity": 0, "order_quantity": 0,"keyword":keyword,"more":more}

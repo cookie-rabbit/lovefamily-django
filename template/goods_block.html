@@ -3,12 +3,12 @@
         <img src={{ single_goods.image }} alt="">
         <div class="infor">
             <p class="name">
-                <span class="realName">{{ single_goods.name }}{% if '{ single_goods.is_new }}' %}<i class="new"></i>{% endif %}{% if '{ single_goods.is_hot }}' == True %}<i class="hot"></i>{% endif %}</span>
+                <span class="realName">{{ single_goods.name }}{% if single_goods.is_new %}<i class="new"></i>{% endif %}{% if single_goods.is_hot %}<i class="hot"></i>{% endif %}</span>
                 <span class="toCart" data-id="{{single_goods.id}}">Add to cart</span>
             </p>
             <p class="price">
                 <span class="unit">$</span>{{ single_goods.price }}
-                <span class="toBuy" data-href="order/">Buy Now</span>
+                <span class="toBuy" data-href="/orders/address/">Buy Now</span>
             </p>
         </div>
     </a>

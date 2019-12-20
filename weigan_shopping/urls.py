@@ -27,6 +27,7 @@ urlpatterns = [
     url(r'^',include("online.account.urls")),
     url(r'^', include("online.cart.urls")),
     url(r'^', include("online.goods.urls")),
+    url(r'^',include("online.order.urls")),
     url(r'^admin/', include("management.user.urls")),
 ]
 

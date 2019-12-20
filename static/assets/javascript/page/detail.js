@@ -91,10 +91,12 @@ $(".todo")
 			sucFun: function(res) {
 				if (parseInt(res.errcode) === 0) {
 					/* 修改购物车数量 */
+					$(".toShoppingCart span").html(res.data.quantity);
+					getToast01("Successfully joined the shopping cart");
 				}
 			},
 			errFun: function(err) {
-
+				getToast01("Network anomaly!!!");
 			}
 		};
 		doAjax(req);

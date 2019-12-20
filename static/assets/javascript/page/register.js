@@ -1,5 +1,5 @@
 $(".registerContainer")
-.on("click", ".toSubmit", function() {
+	.on("click", ".toSubmit", function() {
 		var email = $(".baseInfor .name input").val().trim();
 		var phone = $(".baseInfor .phone input").val().trim();
 		var password = $(".baseInfor .pass input").val().trim();
@@ -36,21 +36,21 @@ $(".registerContainer")
 				},
 				sucFun: function(res) {
 					if (parseInt(res.errcode) === 0) {
-						$(".myAccountContainer input").css("opcity","0.7").attr("readonly","true");
+						$(".myAccountContainer input").css("opcity", "0.7").attr("readonly", "true");
 						$(".toSubmit").html("Edit").removeClass("toSave");
-						getToast01("Congraduations for becoming a member of Love Family.<br>Enjoy your purchasing trip!<br> Auto jump... ",1500);	
-					}
-					else{
-						 getToast01(res.errmsg);
+						getToast01(
+							"Congraduations for becoming a member of Love Family.<br>Enjoy your purchasing trip!<br> Auto jump... ",
+							1500);
+						location.href = res.data.url;
+					} else {
+						getToast01(res.errmsg);
 					}
 				},
 				errFun: function(err) {
-
+					getToast01("Network anomaly!!!");
 				}
 			};
 			doAjax(req);
 		}
 
 	})
-
-

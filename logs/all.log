@@ -6049,3 +6049,2209 @@ INFO 2019-12-20 12:05:35,996 basehttp 124 "GET /static/assets/javascript/page/in
 INFO 2019-12-20 12:05:36,019 basehttp 124 "GET /media/1.jpg HTTP/1.1" 200 11259
 INFO 2019-12-20 12:05:36,197 basehttp 124 "GET /static/assets/images/banner.png HTTP/1.1" 200 2295905
 INFO 2019-12-20 12:05:36,224 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 13:40:57,579 basehttp 124 "GET /goods/search/?keyword=cookie HTTP/1.1" 200 3580
+INFO 2019-12-20 13:40:57,632 basehttp 124 "GET /static/assets/javascript/common/base.js HTTP/1.1" 304 0
+INFO 2019-12-20 13:40:57,644 basehttp 124 "GET /static/assets/javascript/common/header.js HTTP/1.1" 304 0
+INFO 2019-12-20 13:41:19,298 basehttp 124 "GET /goods/category/2 HTTP/1.1" 301 0
+INFO 2019-12-20 13:41:19,354 basehttp 124 "GET /goods/category/2/ HTTP/1.1" 200 4280
+INFO 2019-12-20 13:42:06,928 basehttp 124 "GET /index/ HTTP/1.1" 200 4776
+INFO 2019-12-20 13:43:56,272 basehttp 124 "GET /index/ HTTP/1.1" 200 4776
+INFO 2019-12-20 13:43:56,274 basehttp 124 "GET /index/ HTTP/1.1" 200 4776
+ERROR 2019-12-20 13:43:56,312 basehttp 124 "GET /index/ HTTP/1.1" 500 59
+INFO 2019-12-20 13:43:56,915 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 13:44:01,339 basehttp 124 "POST /api/account/login/ HTTP/1.1" 200 43
+INFO 2019-12-20 13:44:03,430 basehttp 124 "POST /api/account/login/ HTTP/1.1" 200 43
+INFO 2019-12-20 13:44:08,417 basehttp 124 "GET /index/ HTTP/1.1" 200 5069
+INFO 2019-12-20 13:44:08,437 basehttp 124 "GET /index/ HTTP/1.1" 200 5069
+ERROR 2019-12-20 13:44:08,441 basehttp 124 "GET /index/ HTTP/1.1" 500 59
+INFO 2019-12-20 13:45:35,425 basehttp 124 "GET /index/ HTTP/1.1" 200 5069
+INFO 2019-12-20 13:45:35,465 basehttp 124 "GET /static/assets/css/page/index.css HTTP/1.1" 200 17063
+INFO 2019-12-20 13:45:35,465 basehttp 124 "GET /static/assets/images/icon.png HTTP/1.1" 200 7011
+INFO 2019-12-20 13:45:35,477 basehttp 124 "GET /static/assets/javascript/common/header.js HTTP/1.1" 200 2624
+INFO 2019-12-20 13:45:35,478 basehttp 124 "GET /static/assets/javascript/common/base.js HTTP/1.1" 200 2125
+INFO 2019-12-20 13:45:35,505 basehttp 124 "GET /static/assets/javascript/page/index.js HTTP/1.1" 200 2663
+INFO 2019-12-20 13:45:35,512 basehttp 124 "GET /media/1.jpg HTTP/1.1" 200 11259
+INFO 2019-12-20 13:45:35,521 basehttp 124 "GET /static/assets/javascript/libs/jquery-1.9.1.js HTTP/1.1" 200 128159
+INFO 2019-12-20 13:45:35,720 basehttp 124 "GET /static/assets/images/banner.png HTTP/1.1" 200 2295905
+INFO 2019-12-20 13:45:35,753 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 13:45:42,433 basehttp 124 "GET /account/ HTTP/1.1" 200 297
+WARNING 2019-12-20 13:45:42,533 base 152 Not Found: /favicon.ico
+WARNING 2019-12-20 13:45:42,534 basehttp 124 "GET /favicon.ico HTTP/1.1" 404 5068
+INFO 2019-12-20 13:45:46,730 basehttp 124 "GET /index/ HTTP/1.1" 200 5069
+INFO 2019-12-20 13:46:26,533 basehttp 124 "GET /index/ HTTP/1.1" 200 4776
+INFO 2019-12-20 13:46:26,610 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 13:46:28,348 basehttp 124 "GET /account/signup/ HTTP/1.1" 200 5130
+INFO 2019-12-20 13:46:42,817 basehttp 124 "POST /api/account/signup/ HTTP/1.1" 200 45
+INFO 2019-12-20 13:46:47,558 basehttp 124 "GET /index HTTP/1.1" 301 0
+INFO 2019-12-20 13:46:47,602 basehttp 124 "GET /index/ HTTP/1.1" 200 5058
+INFO 2019-12-20 13:46:47,652 basehttp 124 "GET /media/1.jpg HTTP/1.1" 200 11259
+ERROR 2019-12-20 13:46:54,188 exception 135 Internal Server Error: /api/carts/
+Traceback (most recent call last):
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\views\generic\base.py", line 68, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\views\generic\base.py", line 88, in dispatch
+    return handler(request, *args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\utils\decorators.py", line 67, in _wrapper
+    return bound_func(*args, **kwargs)
+  File "C:\Users\Administrator\Desktop\lf-django\utils\decorator.py", line 21, in wrapper
+    return func(request,user,*args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\utils\decorators.py", line 63, in bound_func
+    return func.__get__(self, type(self))(*args2, **kwargs2)
+  File "C:\Users\Administrator\Desktop\lf-django\online\cart\views.py", line 50, in post
+    data = json.loads(request.body.decode())
+  File "d:\program files (x86)\python\Lib\json\__init__.py", line 354, in loads
+    return _default_decoder.decode(s)
+  File "d:\program files (x86)\python\Lib\json\decoder.py", line 339, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "d:\program files (x86)\python\Lib\json\decoder.py", line 357, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+ERROR 2019-12-20 13:46:54,254 basehttp 124 "POST /api/carts/ HTTP/1.1" 500 108649
+ERROR 2019-12-20 13:47:08,762 exception 135 Internal Server Error: /api/carts/
+Traceback (most recent call last):
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\views\generic\base.py", line 68, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\views\generic\base.py", line 88, in dispatch
+    return handler(request, *args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\utils\decorators.py", line 67, in _wrapper
+    return bound_func(*args, **kwargs)
+  File "C:\Users\Administrator\Desktop\lf-django\utils\decorator.py", line 21, in wrapper
+    return func(request,user,*args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\utils\decorators.py", line 63, in bound_func
+    return func.__get__(self, type(self))(*args2, **kwargs2)
+  File "C:\Users\Administrator\Desktop\lf-django\online\cart\views.py", line 50, in post
+    data = json.loads(request.body.decode())
+  File "d:\program files (x86)\python\Lib\json\__init__.py", line 354, in loads
+    return _default_decoder.decode(s)
+  File "d:\program files (x86)\python\Lib\json\decoder.py", line 339, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "d:\program files (x86)\python\Lib\json\decoder.py", line 357, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+ERROR 2019-12-20 13:47:08,813 basehttp 124 "POST /api/carts/ HTTP/1.1" 500 108649
+INFO 2019-12-20 13:47:47,015 basehttp 124 "GET /index/ HTTP/1.1" 200 5058
+INFO 2019-12-20 13:47:47,065 basehttp 124 "GET /static/assets/javascript/common/base.js HTTP/1.1" 200 2125
+INFO 2019-12-20 13:47:47,069 basehttp 124 "GET /static/assets/css/page/index.css HTTP/1.1" 200 17063
+INFO 2019-12-20 13:47:47,069 basehttp 124 "GET /static/assets/images/icon.png HTTP/1.1" 200 7011
+INFO 2019-12-20 13:47:47,072 basehttp 124 "GET /static/assets/javascript/common/header.js HTTP/1.1" 200 2624
+INFO 2019-12-20 13:47:47,090 basehttp 124 "GET /static/assets/javascript/libs/jquery-1.9.1.js HTTP/1.1" 200 128159
+INFO 2019-12-20 13:47:47,137 basehttp 124 "GET /media/1.jpg HTTP/1.1" 200 11259
+INFO 2019-12-20 13:47:47,139 basehttp 124 "GET /static/assets/javascript/page/index.js HTTP/1.1" 200 2663
+INFO 2019-12-20 13:47:47,527 basehttp 124 "GET /static/assets/images/banner.png HTTP/1.1" 200 2295905
+INFO 2019-12-20 13:47:47,543 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+ERROR 2019-12-20 13:47:58,937 exception 135 Internal Server Error: /api/carts/
+Traceback (most recent call last):
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\views\generic\base.py", line 68, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\views\generic\base.py", line 88, in dispatch
+    return handler(request, *args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\utils\decorators.py", line 67, in _wrapper
+    return bound_func(*args, **kwargs)
+  File "C:\Users\Administrator\Desktop\lf-django\utils\decorator.py", line 21, in wrapper
+    return func(request,user,*args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\utils\decorators.py", line 63, in bound_func
+    return func.__get__(self, type(self))(*args2, **kwargs2)
+  File "C:\Users\Administrator\Desktop\lf-django\online\cart\views.py", line 78, in post
+    request.session["%s_cart" % user.id] += quantity
+  File "F:\Env\django_env\lib\site-packages\django\contrib\sessions\backends\base.py", line 57, in __getitem__
+    return self._session[key]
+KeyError: '1_cart'
+ERROR 2019-12-20 13:47:59,010 basehttp 124 "POST /api/carts/ HTTP/1.1" 500 97460
+INFO 2019-12-20 13:49:16,596 basehttp 124 "GET /index/ HTTP/1.1" 200 5058
+INFO 2019-12-20 13:49:16,827 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+ERROR 2019-12-20 13:49:19,773 exception 135 Internal Server Error: /api/carts/
+Traceback (most recent call last):
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\views\generic\base.py", line 68, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\views\generic\base.py", line 88, in dispatch
+    return handler(request, *args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\utils\decorators.py", line 67, in _wrapper
+    return bound_func(*args, **kwargs)
+  File "C:\Users\Administrator\Desktop\lf-django\utils\decorator.py", line 21, in wrapper
+    return func(request,user,*args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\utils\decorators.py", line 63, in bound_func
+    return func.__get__(self, type(self))(*args2, **kwargs2)
+  File "C:\Users\Administrator\Desktop\lf-django\online\cart\views.py", line 78, in post
+    request.session["%s_cart" % user.id] += quantity
+  File "F:\Env\django_env\lib\site-packages\django\contrib\sessions\backends\base.py", line 57, in __getitem__
+    return self._session[key]
+KeyError: '1_cart'
+ERROR 2019-12-20 13:49:19,828 basehttp 124 "POST /api/carts/ HTTP/1.1" 500 97460
+INFO 2019-12-20 13:50:02,382 basehttp 124 "GET /index/ HTTP/1.1" 200 5058
+INFO 2019-12-20 13:50:02,653 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+ERROR 2019-12-20 13:50:04,708 exception 135 Internal Server Error: /api/carts/
+Traceback (most recent call last):
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\views\generic\base.py", line 68, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\views\generic\base.py", line 88, in dispatch
+    return handler(request, *args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\utils\decorators.py", line 67, in _wrapper
+    return bound_func(*args, **kwargs)
+  File "C:\Users\Administrator\Desktop\lf-django\utils\decorator.py", line 21, in wrapper
+    return func(request,user,*args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\utils\decorators.py", line 63, in bound_func
+    return func.__get__(self, type(self))(*args2, **kwargs2)
+  File "C:\Users\Administrator\Desktop\lf-django\online\cart\views.py", line 78, in post
+    request.session["%s_cart" % user.id] += quantity
+  File "F:\Env\django_env\lib\site-packages\django\contrib\sessions\backends\base.py", line 57, in __getitem__
+    return self._session[key]
+KeyError: '23_cart'
+ERROR 2019-12-20 13:50:04,749 basehttp 124 "POST /api/carts/ HTTP/1.1" 500 97434
+INFO 2019-12-20 13:52:14,026 basehttp 124 "GET /index/ HTTP/1.1" 200 4776
+INFO 2019-12-20 13:52:14,124 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 13:52:15,209 basehttp 124 "GET /account/signup/ HTTP/1.1" 200 5130
+INFO 2019-12-20 13:52:28,592 basehttp 124 "POST /api/account/signup/ HTTP/1.1" 200 45
+INFO 2019-12-20 13:52:32,842 basehttp 124 "GET /index HTTP/1.1" 301 0
+INFO 2019-12-20 13:52:32,885 basehttp 124 "GET /index/ HTTP/1.1" 200 5058
+INFO 2019-12-20 13:52:32,943 basehttp 124 "GET /media/1.jpg HTTP/1.1" 200 11259
+INFO 2019-12-20 13:52:37,789 basehttp 124 "POST /api/carts/ HTTP/1.1" 200 76
+INFO 2019-12-20 13:52:41,076 basehttp 124 "POST /api/carts/ HTTP/1.1" 200 76
+INFO 2019-12-20 13:52:51,499 basehttp 124 "POST /api/carts/ HTTP/1.1" 200 76
+INFO 2019-12-20 13:52:54,084 basehttp 124 "POST /api/carts/ HTTP/1.1" 200 76
+ERROR 2019-12-20 13:52:58,462 exception 135 Internal Server Error: /carts/
+Traceback (most recent call last):
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\views\generic\base.py", line 68, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\views\generic\base.py", line 88, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\Administrator\Desktop\lf-django\online\cart\views.py", line 38, in get
+    cart_list = [{"id":cart.id,"name":cart.goods.name_en,"description":cart.goods.description_en,"price":cart.goods.price,"image":settings.URL_PREFIX+cart.goods.image.url} for cart in carts]
+  File "C:\Users\Administrator\Desktop\lf-django\online\cart\views.py", line 38, in <listcomp>
+    cart_list = [{"id":cart.id,"name":cart.goods.name_en,"description":cart.goods.description_en,"price":cart.goods.price,"image":settings.URL_PREFIX+cart.goods.image.url} for cart in carts]
+AttributeError: 'Goods' object has no attribute 'price'
+ERROR 2019-12-20 13:52:58,515 basehttp 124 "GET /carts/ HTTP/1.1" 500 84200
+WARNING 2019-12-20 13:52:58,737 base 152 Not Found: /favicon.ico
+WARNING 2019-12-20 13:52:58,740 basehttp 124 "GET /favicon.ico HTTP/1.1" 404 5068
+WARNING 2019-12-20 13:53:04,064 base 152 Not Found: /media/1
+WARNING 2019-12-20 13:53:04,075 base 152 Not Found: /media/2
+WARNING 2019-12-20 13:53:04,076 basehttp 124 "GET /media/1 HTTP/1.1" 404 1758
+WARNING 2019-12-20 13:53:04,080 basehttp 124 "GET /media/2 HTTP/1.1" 404 1758
+WARNING 2019-12-20 13:53:04,093 base 152 Not Found: /media/3
+WARNING 2019-12-20 13:53:04,094 basehttp 124 "GET /media/3 HTTP/1.1" 404 1758
+WARNING 2019-12-20 13:53:04,190 base 152 Not Found: /media/1
+WARNING 2019-12-20 13:53:04,191 basehttp 124 "GET /media/1 HTTP/1.1" 404 1758
+INFO 2019-12-20 13:53:53,237 basehttp 124 "POST /api/carts/ HTTP/1.1" 200 76
+INFO 2019-12-20 13:53:56,989 basehttp 124 "GET /index/ HTTP/1.1" 200 5058
+INFO 2019-12-20 13:53:57,198 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 13:53:58,709 basehttp 124 "GET /index/ HTTP/1.1" 200 5058
+INFO 2019-12-20 13:53:58,914 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+ERROR 2019-12-20 13:54:01,038 exception 135 Internal Server Error: /carts/
+Traceback (most recent call last):
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\views\generic\base.py", line 68, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\views\generic\base.py", line 88, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\Administrator\Desktop\lf-django\online\cart\views.py", line 38, in get
+    cart_list = [{"id":cart.id,"name":cart.goods.name_en,"description":cart.goods.description_en,"price":cart.goods.price,"image":settings.URL_PREFIX+cart.goods.image.url} for cart in carts]
+  File "C:\Users\Administrator\Desktop\lf-django\online\cart\views.py", line 38, in <listcomp>
+    cart_list = [{"id":cart.id,"name":cart.goods.name_en,"description":cart.goods.description_en,"price":cart.goods.price,"image":settings.URL_PREFIX+cart.goods.image.url} for cart in carts]
+AttributeError: 'Goods' object has no attribute 'price'
+ERROR 2019-12-20 13:54:01,094 basehttp 124 "GET /carts/ HTTP/1.1" 500 84200
+INFO 2019-12-20 13:54:04,249 basehttp 124 "GET /index/ HTTP/1.1" 200 5058
+INFO 2019-12-20 13:54:04,455 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+WARNING 2019-12-20 13:54:19,892 base 152 Not Found: /index/order/
+WARNING 2019-12-20 13:54:19,896 basehttp 124 "GET /index/order/ HTTP/1.1" 404 5071
+INFO 2019-12-20 13:54:53,903 basehttp 124 "GET /index/ HTTP/1.1" 200 5061
+INFO 2019-12-20 13:54:54,001 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+WARNING 2019-12-20 13:54:55,348 base 152 Not Found: /order/
+WARNING 2019-12-20 13:54:55,353 basehttp 124 "GET /order/ HTTP/1.1" 404 5053
+WARNING 2019-12-20 13:55:19,090 base 152 Not Found: /orders/
+WARNING 2019-12-20 13:55:19,095 basehttp 124 "GET /orders/ HTTP/1.1" 404 5056
+WARNING 2019-12-20 13:55:45,321 base 152 Not Found: /order/
+WARNING 2019-12-20 13:55:45,326 basehttp 124 "GET /order/ HTTP/1.1" 404 5053
+INFO 2019-12-20 13:58:07,376 basehttp 124 "GET /api/goods/new/ HTTP/1.1" 200 1700
+INFO 2019-12-20 13:58:08,251 basehttp 124 "GET /api/goods/hot/ HTTP/1.1" 200 1700
+INFO 2019-12-20 13:58:13,509 basehttp 124 "GET /api/goods/new/ HTTP/1.1" 200 1700
+INFO 2019-12-20 13:58:22,761 basehttp 124 "GET /api/goods/hot/ HTTP/1.1" 200 1700
+INFO 2019-12-20 13:58:40,027 basehttp 124 "GET /goods/search/?keyword=cookie HTTP/1.1" 200 3581
+INFO 2019-12-20 14:00:23,201 basehttp 124 "GET /goods/search/?keyword=cookie HTTP/1.1" 200 3581
+INFO 2019-12-20 14:00:23,398 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 14:00:25,036 basehttp 124 "GET /account/signup/ HTTP/1.1" 200 5130
+INFO 2019-12-20 14:00:35,634 basehttp 124 "POST /api/account/signup/ HTTP/1.1" 302 0
+INFO 2019-12-20 14:00:35,680 basehttp 124 "GET /index/ HTTP/1.1" 200 5062
+WARNING 2019-12-20 14:01:03,547 base 152 Not Found: /api/order_detail/
+WARNING 2019-12-20 14:01:03,548 basehttp 124 "GET /api/order_detail/?order_no=989023928 HTTP/1.1" 404 5119
+WARNING 2019-12-20 14:01:06,122 base 152 Not Found: /api/order_detail/
+WARNING 2019-12-20 14:01:06,122 basehttp 124 "GET /api/order_detail/?order_no=989023928 HTTP/1.1" 404 5119
+INFO 2019-12-20 14:01:42,691 basehttp 124 "GET /index/ HTTP/1.1" 200 5062
+INFO 2019-12-20 14:01:42,733 basehttp 124 "GET /static/assets/javascript/common/base.js HTTP/1.1" 304 0
+INFO 2019-12-20 14:02:00,093 basehttp 124 "GET /api/goods/new/ HTTP/1.1" 200 1701
+INFO 2019-12-20 14:02:00,988 basehttp 124 "GET /api/goods/hot/ HTTP/1.1" 200 1701
+WARNING 2019-12-20 14:02:19,327 base 152 Not Found: /api/order_detail/
+WARNING 2019-12-20 14:02:19,328 basehttp 124 "GET /api/order_detail/?order_no=989023928 HTTP/1.1" 404 5119
+INFO 2019-12-20 14:02:59,794 basehttp 124 "GET /api/goods/new/ HTTP/1.1" 200 1701
+INFO 2019-12-20 14:03:00,442 basehttp 124 "GET /api/goods/hot/ HTTP/1.1" 200 1701
+WARNING 2019-12-20 14:03:08,845 base 152 Not Found: /api/order_detail/
+WARNING 2019-12-20 14:03:08,847 basehttp 124 "GET /api/order_detail/?order_no=989023928 HTTP/1.1" 404 5119
+INFO 2019-12-20 14:03:12,772 basehttp 124 "GET /api/goods/new/ HTTP/1.1" 200 1701
+INFO 2019-12-20 14:03:13,557 basehttp 124 "GET /api/goods/hot/ HTTP/1.1" 200 1701
+INFO 2019-12-20 14:03:28,045 basehttp 124 "GET /api/goods/new/ HTTP/1.1" 200 1701
+INFO 2019-12-20 14:03:28,602 basehttp 124 "GET /api/goods/hot/ HTTP/1.1" 200 1701
+INFO 2019-12-20 14:03:29,121 basehttp 124 "GET /api/goods/new/ HTTP/1.1" 200 1701
+INFO 2019-12-20 14:03:29,738 basehttp 124 "GET /api/goods/hot/ HTTP/1.1" 200 1701
+INFO 2019-12-20 14:03:40,366 basehttp 124 "GET /index/ HTTP/1.1" 200 4780
+INFO 2019-12-20 14:03:40,397 basehttp 124 "GET /static/assets/css/page/index.css HTTP/1.1" 304 0
+INFO 2019-12-20 14:03:40,402 basehttp 124 "GET /static/assets/javascript/common/base.js HTTP/1.1" 304 0
+INFO 2019-12-20 14:03:40,402 basehttp 124 "GET /static/assets/javascript/page/index.js HTTP/1.1" 304 0
+INFO 2019-12-20 14:03:40,403 basehttp 124 "GET /static/assets/javascript/common/header.js HTTP/1.1" 304 0
+INFO 2019-12-20 14:03:43,597 basehttp 124 "GET /index/ HTTP/1.1" 200 4780
+INFO 2019-12-20 14:03:45,816 basehttp 124 "GET /api/goods/new/ HTTP/1.1" 200 1701
+INFO 2019-12-20 14:04:07,604 basehttp 124 "GET /api/goods/hot/ HTTP/1.1" 200 1701
+INFO 2019-12-20 14:06:09,142 basehttp 124 "GET /index/ HTTP/1.1" 200 4780
+INFO 2019-12-20 14:06:09,180 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 14:06:11,113 basehttp 124 "GET /index/ HTTP/1.1" 200 4780
+INFO 2019-12-20 14:06:11,130 basehttp 124 "GET /static/assets/css/page/index.css HTTP/1.1" 200 17063
+INFO 2019-12-20 14:06:11,130 basehttp 124 "GET /static/assets/images/icon.png HTTP/1.1" 200 7011
+INFO 2019-12-20 14:06:11,135 basehttp 124 "GET /static/assets/javascript/common/base.js HTTP/1.1" 200 2125
+INFO 2019-12-20 14:06:11,136 basehttp 124 "GET /static/assets/javascript/common/header.js HTTP/1.1" 200 2624
+INFO 2019-12-20 14:06:11,142 basehttp 124 "GET /static/assets/javascript/page/index.js HTTP/1.1" 200 2677
+INFO 2019-12-20 14:06:11,144 basehttp 124 "GET /media/1.jpg HTTP/1.1" 200 11259
+INFO 2019-12-20 14:06:11,145 basehttp 124 "GET /static/assets/javascript/libs/jquery-1.9.1.js HTTP/1.1" 200 128159
+INFO 2019-12-20 14:06:11,176 basehttp 124 "GET /static/assets/images/banner.png HTTP/1.1" 200 2295905
+INFO 2019-12-20 14:06:11,184 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 14:06:13,301 basehttp 124 "GET /api/goods/new/ HTTP/1.1" 200 1701
+INFO 2019-12-20 14:06:22,837 basehttp 124 "GET /static/assets/javascript/page/index.js HTTP/1.1" 304 0
+WARNING 2019-12-20 14:06:22,923 base 152 Not Found: /favicon.ico
+WARNING 2019-12-20 14:06:22,923 basehttp 124 "GET /favicon.ico HTTP/1.1" 404 5082
+INFO 2019-12-20 14:06:40,189 basehttp 124 "GET /index/ HTTP/1.1" 200 4780
+INFO 2019-12-20 14:06:40,203 basehttp 124 "GET /static/assets/javascript/page/index.js HTTP/1.1" 304 0
+INFO 2019-12-20 14:06:40,317 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 14:06:42,532 basehttp 124 "GET /api/goods/new/ HTTP/1.1" 200 1701
+INFO 2019-12-20 14:07:44,683 basehttp 124 "GET /api/goods/hot/ HTTP/1.1" 200 1701
+INFO 2019-12-20 14:07:46,249 basehttp 124 "GET /index/ HTTP/1.1" 200 4780
+INFO 2019-12-20 14:07:46,262 basehttp 124 "GET /static/assets/javascript/page/index.js HTTP/1.1" 304 0
+INFO 2019-12-20 14:07:46,305 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 14:08:41,702 basehttp 124 "GET /index/ HTTP/1.1" 200 4780
+INFO 2019-12-20 14:08:41,720 basehttp 124 "GET /static/assets/javascript/page/index.js HTTP/1.1" 304 0
+INFO 2019-12-20 14:08:41,754 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 14:09:15,135 basehttp 124 "GET /index/ HTTP/1.1" 200 4780
+INFO 2019-12-20 14:09:15,151 basehttp 124 "GET /static/assets/css/page/index.css HTTP/1.1" 200 17063
+INFO 2019-12-20 14:09:15,152 basehttp 124 "GET /static/assets/images/icon.png HTTP/1.1" 200 7011
+INFO 2019-12-20 14:09:15,161 basehttp 124 "GET /static/assets/javascript/common/base.js HTTP/1.1" 200 2125
+INFO 2019-12-20 14:09:15,161 basehttp 124 "GET /static/assets/javascript/common/header.js HTTP/1.1" 200 2624
+INFO 2019-12-20 14:09:15,164 basehttp 124 "GET /static/assets/javascript/libs/jquery-1.9.1.js HTTP/1.1" 200 128159
+INFO 2019-12-20 14:09:15,166 basehttp 124 "GET /static/assets/javascript/page/index.js HTTP/1.1" 200 2671
+INFO 2019-12-20 14:09:15,171 basehttp 124 "GET /media/1.jpg HTTP/1.1" 200 11259
+INFO 2019-12-20 14:09:15,194 basehttp 124 "GET /static/assets/images/banner.png HTTP/1.1" 200 2295905
+INFO 2019-12-20 14:09:15,207 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 14:09:16,738 basehttp 124 "GET /api/goods/new/ HTTP/1.1" 200 1701
+INFO 2019-12-20 14:09:18,928 basehttp 124 "GET /api/goods/hot/ HTTP/1.1" 200 1701
+INFO 2019-12-20 14:09:22,689 basehttp 124 "GET /index/ HTTP/1.1" 200 5062
+INFO 2019-12-20 14:09:22,720 basehttp 124 "GET /static/assets/images/icon.png HTTP/1.1" 200 7011
+INFO 2019-12-20 14:09:22,721 basehttp 124 "GET /static/assets/css/page/index.css HTTP/1.1" 200 17063
+INFO 2019-12-20 14:09:22,744 basehttp 124 "GET /static/assets/javascript/common/base.js HTTP/1.1" 200 2125
+INFO 2019-12-20 14:09:22,744 basehttp 124 "GET /static/assets/javascript/common/header.js HTTP/1.1" 200 2624
+INFO 2019-12-20 14:09:22,764 basehttp 124 "GET /static/assets/javascript/libs/jquery-1.9.1.js HTTP/1.1" 200 128159
+INFO 2019-12-20 14:09:22,781 basehttp 124 "GET /media/1.jpg HTTP/1.1" 200 11259
+INFO 2019-12-20 14:09:22,785 basehttp 124 "GET /static/assets/javascript/page/index.js HTTP/1.1" 200 2671
+INFO 2019-12-20 14:09:22,834 basehttp 124 "GET /static/assets/images/banner.png HTTP/1.1" 200 2295905
+INFO 2019-12-20 14:09:22,905 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 14:09:24,578 basehttp 124 "GET /api/goods/new/ HTTP/1.1" 200 1701
+INFO 2019-12-20 14:09:25,867 basehttp 124 "GET /api/goods/hot/ HTTP/1.1" 200 1701
+INFO 2019-12-20 14:09:33,275 basehttp 124 "GET /api/goods/new/ HTTP/1.1" 200 1701
+INFO 2019-12-20 14:09:35,011 basehttp 124 "GET /goods/category/2 HTTP/1.1" 301 0
+INFO 2019-12-20 14:09:35,051 basehttp 124 "GET /goods/category/2/ HTTP/1.1" 200 4283
+INFO 2019-12-20 14:09:35,092 basehttp 124 "GET /static/assets/javascript/page/index.js HTTP/1.1" 304 0
+INFO 2019-12-20 14:09:36,390 basehttp 124 "GET /goods/category/2/ HTTP/1.1" 200 4283
+INFO 2019-12-20 14:09:37,083 basehttp 124 "GET /goods/category/1 HTTP/1.1" 301 0
+INFO 2019-12-20 14:09:37,124 basehttp 124 "GET /goods/category/1/ HTTP/1.1" 200 4700
+INFO 2019-12-20 14:09:39,179 basehttp 124 "GET /goods/category/2/ HTTP/1.1" 200 4283
+INFO 2019-12-20 14:09:40,023 basehttp 124 "GET /goods/category/1/ HTTP/1.1" 200 4700
+INFO 2019-12-20 14:09:45,838 basehttp 124 "GET /api/goods/new/ HTTP/1.1" 200 1701
+INFO 2019-12-20 14:12:10,580 basehttp 124 "GET /account/ HTTP/1.1" 200 297
+INFO 2019-12-20 14:16:41,528 basehttp 124 "GET /index/ HTTP/1.1" 200 5062
+INFO 2019-12-20 14:16:41,569 basehttp 124 "GET /static/assets/javascript/page/index.js HTTP/1.1" 304 0
+INFO 2019-12-20 14:16:41,724 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 14:16:49,059 basehttp 124 "GET /index/ HTTP/1.1" 200 4780
+INFO 2019-12-20 14:16:49,162 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 14:16:52,250 basehttp 124 "POST /api/account/login/ HTTP/1.1" 200 43
+INFO 2019-12-20 14:16:52,300 basehttp 124 "GET /index/ HTTP/1.1" 200 5073
+ERROR 2019-12-20 14:16:55,588 exception 135 Internal Server Error: /account/
+Traceback (most recent call last):
+  File "F:\Env\django_env\lib\site-packages\django\template\base.py", line 507, in parse
+    compile_func = self.tags[command]
+KeyError: 'endblock'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\views\generic\base.py", line 68, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\views\generic\base.py", line 88, in dispatch
+    return handler(request, *args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\utils\decorators.py", line 67, in _wrapper
+    return bound_func(*args, **kwargs)
+  File "C:\Users\Administrator\Desktop\lf-django\utils\decorator.py", line 21, in wrapper
+    return func(request,user,*args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\utils\decorators.py", line 63, in bound_func
+    return func.__get__(self, type(self))(*args2, **kwargs2)
+  File "C:\Users\Administrator\Desktop\lf-django\online\account\views.py", line 72, in get
+    return render(request,"myAccount.html",context=context)
+  File "F:\Env\django_env\lib\site-packages\django\shortcuts.py", line 30, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "F:\Env\django_env\lib\site-packages\django\template\loader.py", line 67, in render_to_string
+    template = get_template(template_name, using=using)
+  File "F:\Env\django_env\lib\site-packages\django\template\loader.py", line 21, in get_template
+    return engine.get_template(template_name)
+  File "F:\Env\django_env\lib\site-packages\django\template\backends\django.py", line 39, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "F:\Env\django_env\lib\site-packages\django\template\engine.py", line 162, in get_template
+    template, origin = self.find_template(template_name)
+  File "F:\Env\django_env\lib\site-packages\django\template\engine.py", line 136, in find_template
+    name, template_dirs=dirs, skip=skip,
+  File "F:\Env\django_env\lib\site-packages\django\template\loaders\base.py", line 44, in get_template
+    contents, origin, origin.template_name, self.engine,
+  File "F:\Env\django_env\lib\site-packages\django\template\base.py", line 191, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "F:\Env\django_env\lib\site-packages\django\template\base.py", line 230, in compile_nodelist
+    return parser.parse()
+  File "F:\Env\django_env\lib\site-packages\django\template\base.py", line 515, in parse
+    raise self.error(token, e)
+  File "F:\Env\django_env\lib\site-packages\django\template\base.py", line 513, in parse
+    compiled_result = compile_func(self, token)
+  File "F:\Env\django_env\lib\site-packages\django\template\loader_tags.py", line 312, in do_extends
+    nodelist = parser.parse()
+  File "F:\Env\django_env\lib\site-packages\django\template\base.py", line 515, in parse
+    raise self.error(token, e)
+  File "F:\Env\django_env\lib\site-packages\django\template\base.py", line 513, in parse
+    compiled_result = compile_func(self, token)
+  File "F:\Env\django_env\lib\site-packages\django\template\loader_tags.py", line 255, in do_block
+    nodelist = parser.parse(('endblock',))
+  File "F:\Env\django_env\lib\site-packages\django\template\base.py", line 515, in parse
+    raise self.error(token, e)
+  File "F:\Env\django_env\lib\site-packages\django\template\base.py", line 513, in parse
+    compiled_result = compile_func(self, token)
+  File "F:\Env\django_env\lib\site-packages\django\template\defaulttags.py", line 969, in do_if
+    nodelist = parser.parse(('elif', 'else', 'endif'))
+  File "F:\Env\django_env\lib\site-packages\django\template\base.py", line 515, in parse
+    raise self.error(token, e)
+  File "F:\Env\django_env\lib\site-packages\django\template\base.py", line 513, in parse
+    compiled_result = compile_func(self, token)
+  File "F:\Env\django_env\lib\site-packages\django\template\defaulttags.py", line 969, in do_if
+    nodelist = parser.parse(('elif', 'else', 'endif'))
+  File "F:\Env\django_env\lib\site-packages\django\template\base.py", line 509, in parse
+    self.invalid_block_tag(token, command, parse_until)
+  File "F:\Env\django_env\lib\site-packages\django\template\base.py", line 565, in invalid_block_tag
+    get_text_list(["'%s'" % p for p in parse_until], 'or'),
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 86: 'endblock', expected 'elif'£¬'else' or 'endif'. Did you forget to register or load this tag?
+ERROR 2019-12-20 14:16:55,725 basehttp 124 "GET /account/ HTTP/1.1" 500 223425
+WARNING 2019-12-20 14:16:55,977 base 152 Not Found: /favicon.ico
+WARNING 2019-12-20 14:16:55,982 basehttp 124 "GET /favicon.ico HTTP/1.1" 404 5082
+INFO 2019-12-20 14:17:37,246 basehttp 124 "GET /account/ HTTP/1.1" 200 5398
+INFO 2019-12-20 14:17:37,356 basehttp 124 "GET /static/assets/javascript/page/myAccount.js HTTP/1.1" 200 2028
+INFO 2019-12-20 14:17:37,401 basehttp 124 "GET /static/assets/css/common/base.less HTTP/1.1" 304 0
+INFO 2019-12-20 14:17:37,464 basehttp 124 "GET /account/ HTTP/1.1" 200 5398
+INFO 2019-12-20 14:17:37,541 basehttp 124 "GET /static/assets/images/icon.png HTTP/1.1" 200 7011
+INFO 2019-12-20 14:17:37,558 basehttp 124 "GET /static/assets/javascript/libs/jquery-1.9.1.js HTTP/1.1" 200 128159
+INFO 2019-12-20 14:17:37,560 basehttp 124 "GET /static/assets/javascript/common/base.js HTTP/1.1" 200 2125
+INFO 2019-12-20 14:17:37,578 basehttp 124 "GET /static/assets/javascript/common/header.js HTTP/1.1" 200 2624
+INFO 2019-12-20 14:17:37,580 basehttp 124 "GET /static/assets/javascript/page/myAccount.js HTTP/1.1" 200 2028
+INFO 2019-12-20 14:17:38,937 basehttp 124 "GET /static/assets/css/page/register.less HTTP/1.1" 200 2815
+INFO 2019-12-20 14:17:38,981 basehttp 124 "GET /static/assets/css/common/base.less HTTP/1.1" 200 5087
+INFO 2019-12-20 14:19:49,170 basehttp 124 "GET /account/ HTTP/1.1" 200 5957
+INFO 2019-12-20 14:19:49,242 basehttp 124 "GET /static/assets/images/icon.png HTTP/1.1" 200 7011
+INFO 2019-12-20 14:19:49,275 basehttp 124 "GET /static/assets/javascript/libs/jquery-1.9.1.js HTTP/1.1" 200 128159
+INFO 2019-12-20 14:19:49,278 basehttp 124 "GET /static/assets/javascript/common/base.js HTTP/1.1" 200 2125
+INFO 2019-12-20 14:19:49,299 basehttp 124 "GET /static/assets/javascript/common/header.js HTTP/1.1" 200 2624
+INFO 2019-12-20 14:19:49,300 basehttp 124 "GET /static/assets/javascript/page/myAccount.js HTTP/1.1" 200 2028
+INFO 2019-12-20 14:19:49,668 basehttp 124 "GET /static/assets/css/page/register.less HTTP/1.1" 200 2815
+INFO 2019-12-20 14:19:49,721 basehttp 124 "GET /static/assets/css/common/base.less HTTP/1.1" 200 5087
+INFO 2019-12-20 14:19:49,759 basehttp 124 "GET /static/assets/css/common/reset.less HTTP/1.1" 200 704
+INFO 2019-12-20 14:19:49,760 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 14:19:49,760 basehttp 124 "GET /static/assets/css/common/header.less HTTP/1.1" 200 7843
+INFO 2019-12-20 14:19:52,671 basehttp 124 "GET /account/ HTTP/1.1" 200 5957
+INFO 2019-12-20 14:19:52,712 basehttp 124 "GET /static/assets/images/icon.png HTTP/1.1" 200 7011
+INFO 2019-12-20 14:19:52,729 basehttp 124 "GET /static/assets/javascript/common/base.js HTTP/1.1" 200 2125
+INFO 2019-12-20 14:19:52,749 basehttp 124 "GET /static/assets/javascript/libs/jquery-1.9.1.js HTTP/1.1" 200 128159
+INFO 2019-12-20 14:19:52,753 basehttp 124 "GET /static/assets/javascript/common/header.js HTTP/1.1" 200 2624
+INFO 2019-12-20 14:19:52,777 basehttp 124 "GET /static/assets/javascript/page/myAccount.js HTTP/1.1" 200 2028
+INFO 2019-12-20 14:19:53,142 basehttp 124 "GET /static/assets/css/page/register.less HTTP/1.1" 200 2815
+INFO 2019-12-20 14:19:53,183 basehttp 124 "GET /static/assets/css/common/base.less HTTP/1.1" 200 5087
+INFO 2019-12-20 14:19:53,212 basehttp 124 "GET /static/assets/css/common/reset.less HTTP/1.1" 200 704
+INFO 2019-12-20 14:19:53,219 basehttp 124 "GET /static/assets/css/common/header.less HTTP/1.1" 200 7843
+INFO 2019-12-20 14:19:53,219 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 14:19:57,705 basehttp 124 "GET /index HTTP/1.1" 301 0
+INFO 2019-12-20 14:19:57,746 basehttp 124 "GET /index/ HTTP/1.1" 200 5073
+INFO 2019-12-20 14:19:57,799 basehttp 124 "GET /static/assets/javascript/page/index.js HTTP/1.1" 304 0
+INFO 2019-12-20 14:19:57,805 basehttp 124 "GET /media/1.jpg HTTP/1.1" 200 11259
+INFO 2019-12-20 14:20:03,067 basehttp 124 "GET /account/ HTTP/1.1" 200 5957
+INFO 2019-12-20 14:20:08,013 basehttp 124 "GET /goods/category/1 HTTP/1.1" 301 0
+INFO 2019-12-20 14:20:08,055 basehttp 124 "GET /goods/category/1/ HTTP/1.1" 200 4983
+INFO 2019-12-20 14:21:00,610 basehttp 124 "GET /goods/category/2 HTTP/1.1" 301 0
+INFO 2019-12-20 14:21:00,652 basehttp 124 "GET /goods/category/2/ HTTP/1.1" 200 4566
+INFO 2019-12-20 14:25:49,320 basehttp 124 "GET /index/ HTTP/1.1" 200 5073
+INFO 2019-12-20 14:25:49,363 basehttp 124 "GET /static/assets/javascript/page/index.js HTTP/1.1" 304 0
+INFO 2019-12-20 14:25:55,314 basehttp 124 "GET /goods/category/2/ HTTP/1.1" 200 4576
+INFO 2019-12-20 14:26:03,400 basehttp 124 "GET /goods/search/?keyword=cookie HTTP/1.1" 200 3874
+INFO 2019-12-20 14:26:07,957 basehttp 124 "GET /account/ HTTP/1.1" 200 5967
+INFO 2019-12-20 14:26:30,723 basehttp 124 "GET /account/ HTTP/1.1" 200 5967
+INFO 2019-12-20 14:30:46,080 basehttp 124 "GET /account/ HTTP/1.1" 200 5970
+INFO 2019-12-20 14:30:46,232 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 14:30:47,568 basehttp 124 "GET /account/ HTTP/1.1" 200 5970
+INFO 2019-12-20 14:30:47,824 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 14:30:53,858 basehttp 124 "GET /index/ HTTP/1.1" 200 5073
+INFO 2019-12-20 14:30:53,914 basehttp 124 "GET /static/assets/javascript/page/index.js HTTP/1.1" 304 0
+INFO 2019-12-20 14:31:00,375 basehttp 124 "GET /account/ HTTP/1.1" 200 5970
+ERROR 2019-12-20 14:31:04,988 exception 135 Internal Server Error: /carts/
+Traceback (most recent call last):
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\views\generic\base.py", line 68, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\views\generic\base.py", line 88, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\Administrator\Desktop\lf-django\online\cart\views.py", line 38, in get
+    cart_list = [{"id":cart.id,"name":cart.goods.name_en,"description":cart.goods.description_en,"price":cart.goods.price,"image":settings.URL_PREFIX+cart.goods.image.url} for cart in carts]
+  File "C:\Users\Administrator\Desktop\lf-django\online\cart\views.py", line 38, in <listcomp>
+    cart_list = [{"id":cart.id,"name":cart.goods.name_en,"description":cart.goods.description_en,"price":cart.goods.price,"image":settings.URL_PREFIX+cart.goods.image.url} for cart in carts]
+AttributeError: 'Goods' object has no attribute 'price'
+ERROR 2019-12-20 14:31:05,036 basehttp 124 "GET /carts/ HTTP/1.1" 500 84210
+WARNING 2019-12-20 14:31:05,285 base 152 Not Found: /favicon.ico
+WARNING 2019-12-20 14:31:05,286 basehttp 124 "GET /favicon.ico HTTP/1.1" 404 5082
+INFO 2019-12-20 14:31:09,713 basehttp 124 "GET /account/ HTTP/1.1" 200 5970
+INFO 2019-12-20 14:31:20,797 basehttp 124 "GET /index/ HTTP/1.1" 200 4780
+INFO 2019-12-20 14:31:20,890 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 14:31:33,248 basehttp 124 "POST /api/account/login/ HTTP/1.1" 200 43
+INFO 2019-12-20 14:31:33,297 basehttp 124 "GET /index/ HTTP/1.1" 200 5062
+INFO 2019-12-20 14:31:39,038 basehttp 124 "GET /account/ HTTP/1.1" 200 5890
+ERROR 2019-12-20 14:32:08,338 exception 135 Internal Server Error: /api/account/
+Traceback (most recent call last):
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\views\generic\base.py", line 68, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\views\generic\base.py", line 88, in dispatch
+    return handler(request, *args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\utils\decorators.py", line 67, in _wrapper
+    return bound_func(*args, **kwargs)
+  File "C:\Users\Administrator\Desktop\lf-django\utils\decorator.py", line 21, in wrapper
+    return func(request,user,*args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\utils\decorators.py", line 63, in bound_func
+    return func.__get__(self, type(self))(*args2, **kwargs2)
+  File "C:\Users\Administrator\Desktop\lf-django\online\account\views.py", line 100, in put
+    data = json.loads(request.body.decode())
+  File "d:\program files (x86)\python\Lib\json\__init__.py", line 354, in loads
+    return _default_decoder.decode(s)
+  File "d:\program files (x86)\python\Lib\json\decoder.py", line 339, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "d:\program files (x86)\python\Lib\json\decoder.py", line 357, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+ERROR 2019-12-20 14:32:08,386 basehttp 124 "PUT /api/account/ HTTP/1.1" 500 109413
+INFO 2019-12-20 14:33:35,276 basehttp 124 "PUT /api/account/ HTTP/1.1" 200 46
+INFO 2019-12-20 14:35:46,447 basehttp 124 "GET /account/ HTTP/1.1" 200 44
+INFO 2019-12-20 14:35:49,482 basehttp 124 "GET /index/ HTTP/1.1" 200 4780
+INFO 2019-12-20 14:35:49,537 basehttp 124 "GET /media/1.jpg HTTP/1.1" 200 11259
+INFO 2019-12-20 14:35:51,579 basehttp 124 "GET /account/signup/ HTTP/1.1" 200 5130
+INFO 2019-12-20 14:35:51,621 basehttp 124 "GET /static/assets/javascript/page/register.js HTTP/1.1" 304 0
+WARNING 2019-12-20 14:39:34,806 base 152 Not Found: /media/4
+WARNING 2019-12-20 14:39:34,811 basehttp 124 "GET /media/4 HTTP/1.1" 404 1758
+WARNING 2019-12-20 14:39:34,936 base 152 Not Found: /media/5
+WARNING 2019-12-20 14:39:34,938 basehttp 124 "GET /media/5 HTTP/1.1" 404 1758
+WARNING 2019-12-20 14:39:35,017 base 152 Not Found: /media/5
+WARNING 2019-12-20 14:39:35,006 base 152 Not Found: /media/4
+WARNING 2019-12-20 14:39:35,021 basehttp 124 "GET /media/5 HTTP/1.1" 404 1758
+WARNING 2019-12-20 14:39:35,022 basehttp 124 "GET /media/4 HTTP/1.1" 404 1758
+WARNING 2019-12-20 14:39:35,042 base 152 Not Found: /media/5
+WARNING 2019-12-20 14:39:35,059 base 152 Not Found: /media/4
+WARNING 2019-12-20 14:39:35,061 basehttp 124 "GET /media/5 HTTP/1.1" 404 1758
+WARNING 2019-12-20 14:39:35,064 basehttp 124 "GET /media/4 HTTP/1.1" 404 1758
+WARNING 2019-12-20 14:39:35,089 base 152 Not Found: /media/5
+WARNING 2019-12-20 14:39:35,099 base 152 Not Found: /media/4
+WARNING 2019-12-20 14:39:35,102 basehttp 124 "GET /media/5 HTTP/1.1" 404 1758
+WARNING 2019-12-20 14:39:35,104 basehttp 124 "GET /media/4 HTTP/1.1" 404 1758
+INFO 2019-12-20 14:39:38,460 basehttp 124 "POST /api/account/signup/ HTTP/1.1" 200 45
+ERROR 2019-12-20 14:39:38,463 basehttp 124 "POST /api/account/signup/ HTTP/1.1" 500 59
+INFO 2019-12-20 14:40:47,476 basehttp 124 "POST /api/account/signup/ HTTP/1.1" 200 45
+ERROR 2019-12-20 14:40:47,479 basehttp 124 "POST /api/account/signup/ HTTP/1.1" 500 59
+ERROR 2019-12-20 14:40:59,988 exception 135 Internal Server Error: /api/account/signup/
+Traceback (most recent call last):
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\views\generic\base.py", line 68, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\views\generic\base.py", line 88, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\Administrator\Desktop\lf-django\online\account\views.py", line 180, in post
+    if not (name | road) :
+TypeError: unsupported operand type(s) for |: 'str' and 'str'
+ERROR 2019-12-20 14:41:00,101 basehttp 124 "POST /api/account/signup/ HTTP/1.1" 500 83953
+INFO 2019-12-20 14:42:12,048 basehttp 124 "POST /api/account/signup/ HTTP/1.1" 200 45
+ERROR 2019-12-20 14:42:12,051 basehttp 124 "POST /api/account/signup/ HTTP/1.1" 500 59
+INFO 2019-12-20 14:42:39,746 basehttp 124 "POST /api/account/signup/ HTTP/1.1" 200 45
+INFO 2019-12-20 14:42:39,767 basehttp 124 "GET /static/assets/images/popBg.png HTTP/1.1" 304 0
+INFO 2019-12-20 14:43:58,031 basehttp 124 "POST /api/account/signup/ HTTP/1.1" 200 45
+INFO 2019-12-20 14:44:24,976 basehttp 124 "POST /api/account/signup/ HTTP/1.1" 200 45
+INFO 2019-12-20 14:44:48,795 basehttp 124 "GET /index HTTP/1.1" 301 0
+INFO 2019-12-20 14:44:48,839 basehttp 124 "GET /index/ HTTP/1.1" 200 5062
+INFO 2019-12-20 14:44:48,898 basehttp 124 "GET /static/assets/javascript/common/header.js HTTP/1.1" 304 0
+INFO 2019-12-20 14:44:48,899 basehttp 124 "GET /static/assets/javascript/common/base.js HTTP/1.1" 304 0
+INFO 2019-12-20 14:44:48,900 basehttp 124 "GET /static/assets/javascript/page/index.js HTTP/1.1" 304 0
+INFO 2019-12-20 14:44:48,901 basehttp 124 "GET /media/1.jpg HTTP/1.1" 200 11259
+INFO 2019-12-20 14:44:52,791 basehttp 124 "GET /account/ HTTP/1.1" 200 5902
+INFO 2019-12-20 14:45:29,200 basehttp 124 "PUT /api/account/ HTTP/1.1" 200 46
+INFO 2019-12-20 14:46:54,762 basehttp 124 "PUT /api/account/ HTTP/1.1" 200 46
+INFO 2019-12-20 14:48:10,961 basehttp 124 "PUT /api/account/ HTTP/1.1" 200 46
+INFO 2019-12-20 14:49:09,989 basehttp 124 "PUT /api/account/ HTTP/1.1" 200 46
+WARNING 2019-12-20 14:49:23,266 base 152 Not Found: /media/4
+WARNING 2019-12-20 14:49:23,267 basehttp 124 "GET /media/4 HTTP/1.1" 404 1758
+WARNING 2019-12-20 14:49:23,502 base 152 Not Found: /media/5
+WARNING 2019-12-20 14:49:23,503 basehttp 124 "GET /media/5 HTTP/1.1" 404 1758
+INFO 2019-12-20 14:49:37,692 basehttp 124 "PUT /api/account/ HTTP/1.1" 200 46
+INFO 2019-12-20 14:50:49,201 basehttp 124 "GET /account/ HTTP/1.1" 200 5902
+INFO 2019-12-20 14:50:49,353 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 14:51:07,370 basehttp 124 "PUT /api/account/ HTTP/1.1" 200 46
+INFO 2019-12-20 14:51:19,303 basehttp 124 "PUT /api/account/ HTTP/1.1" 200 46
+INFO 2019-12-20 14:52:32,717 basehttp 124 "GET /account/ HTTP/1.1" 200 5902
+INFO 2019-12-20 14:52:32,951 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 14:52:44,807 basehttp 124 "PUT /api/account/ HTTP/1.1" 200 46
+WARNING 2019-12-20 14:55:08,643 base 152 Not Found: /media/1
+WARNING 2019-12-20 14:55:08,645 base 152 Not Found: /media/2
+WARNING 2019-12-20 14:55:08,645 basehttp 124 "GET /media/1 HTTP/1.1" 404 1758
+WARNING 2019-12-20 14:55:08,645 basehttp 124 "GET /media/2 HTTP/1.1" 404 1758
+WARNING 2019-12-20 14:55:08,750 base 152 Not Found: /media/3
+WARNING 2019-12-20 14:55:08,750 basehttp 124 "GET /media/3 HTTP/1.1" 404 1758
+WARNING 2019-12-20 14:55:08,889 base 152 Not Found: /media/1
+WARNING 2019-12-20 14:55:08,890 basehttp 124 "GET /media/1 HTTP/1.1" 404 1758
+INFO 2019-12-20 15:01:54,037 basehttp 124 "GET /index HTTP/1.1" 301 0
+INFO 2019-12-20 15:01:54,096 basehttp 124 "GET /index/ HTTP/1.1" 200 4780
+INFO 2019-12-20 15:01:54,148 basehttp 124 "GET /media/1.jpg HTTP/1.1" 200 11259
+INFO 2019-12-20 15:01:54,149 basehttp 124 "GET /static/assets/javascript/page/index.js HTTP/1.1" 304 0
+INFO 2019-12-20 15:01:57,453 basehttp 124 "GET /account/signup/ HTTP/1.1" 200 5130
+INFO 2019-12-20 15:02:14,972 basehttp 124 "POST /api/account/signup/ HTTP/1.1" 200 45
+INFO 2019-12-20 15:02:53,132 basehttp 124 "POST /api/account/signup/ HTTP/1.1" 200 45
+INFO 2019-12-20 15:03:18,456 basehttp 124 "GET /index/ HTTP/1.1" 200 4780
+INFO 2019-12-20 15:03:21,412 basehttp 124 "GET /account/signup/ HTTP/1.1" 200 5130
+INFO 2019-12-20 15:03:35,639 basehttp 124 "GET /index/ HTTP/1.1" 200 4780
+INFO 2019-12-20 15:03:35,656 basehttp 124 "GET /static/assets/javascript/common/base.js HTTP/1.1" 304 0
+INFO 2019-12-20 15:03:35,657 basehttp 124 "GET /static/assets/javascript/common/header.js HTTP/1.1" 304 0
+INFO 2019-12-20 15:03:35,660 basehttp 124 "GET /static/assets/javascript/page/index.js HTTP/1.1" 304 0
+INFO 2019-12-20 15:03:35,699 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 15:03:38,609 basehttp 124 "GET /index/ HTTP/1.1" 200 4780
+INFO 2019-12-20 15:03:44,934 basehttp 124 "GET /account/signup/ HTTP/1.1" 200 5130
+INFO 2019-12-20 15:03:44,949 basehttp 124 "GET /static/assets/javascript/page/register.js HTTP/1.1" 200 2081
+INFO 2019-12-20 15:03:44,971 basehttp 124 "GET /static/assets/css/page/register.less HTTP/1.1" 200 2815
+INFO 2019-12-20 15:03:45,011 basehttp 124 "GET /static/assets/css/common/base.less HTTP/1.1" 200 5087
+INFO 2019-12-20 15:03:45,025 basehttp 124 "GET /static/assets/css/common/reset.less HTTP/1.1" 200 704
+INFO 2019-12-20 15:03:45,026 basehttp 124 "GET /static/assets/css/common/header.less HTTP/1.1" 200 7843
+INFO 2019-12-20 15:03:50,028 basehttp 124 "GET /account/signup/ HTTP/1.1" 200 5130
+INFO 2019-12-20 15:04:15,353 basehttp 124 "POST /api/account/signup/ HTTP/1.1" 200 45
+INFO 2019-12-20 15:04:15,364 basehttp 124 "GET /static/assets/images/popBg.png HTTP/1.1" 200 9999
+INFO 2019-12-20 15:04:45,240 basehttp 124 "GET /index/ HTTP/1.1" 200 5062
+INFO 2019-12-20 15:05:21,939 basehttp 124 "GET /account/ HTTP/1.1" 200 5884
+INFO 2019-12-20 15:05:21,954 basehttp 124 "GET /static/assets/javascript/page/myAccount.js HTTP/1.1" 200 2050
+INFO 2019-12-20 15:05:27,682 basehttp 124 "GET /index/ HTTP/1.1" 200 4780
+INFO 2019-12-20 15:05:27,888 basehttp 124 "GET /static/assets/javascript/common/base.js HTTP/1.1" 304 0
+INFO 2019-12-20 15:05:29,335 basehttp 124 "GET /account/signup/ HTTP/1.1" 200 4850
+WARNING 2019-12-20 15:05:34,461 base 93 Method Not Allowed (POST): /api/account/
+WARNING 2019-12-20 15:05:34,462 basehttp 124 "POST /api/account/ HTTP/1.1" 405 0
+INFO 2019-12-20 15:06:11,992 basehttp 124 "POST /api/account/signup/ HTTP/1.1" 200 45
+INFO 2019-12-20 15:06:48,922 basehttp 124 "POST /api/account/signup/ HTTP/1.1" 200 96
+INFO 2019-12-20 15:06:55,613 basehttp 124 "GET /index HTTP/1.1" 301 0
+INFO 2019-12-20 15:06:55,661 basehttp 124 "GET /index/ HTTP/1.1" 200 5062
+INFO 2019-12-20 15:06:55,711 basehttp 124 "GET /media/1.jpg HTTP/1.1" 200 11259
+INFO 2019-12-20 15:08:05,192 basehttp 124 "GET /account/ HTTP/1.1" 200 5896
+INFO 2019-12-20 15:08:05,233 basehttp 124 "GET /static/assets/javascript/common/header.js HTTP/1.1" 304 0
+INFO 2019-12-20 15:08:58,797 basehttp 124 "PUT /api/account/ HTTP/1.1" 200 46
+INFO 2019-12-20 15:11:35,902 basehttp 124 "GET /account/ HTTP/1.1" 200 5884
+INFO 2019-12-20 15:11:35,945 basehttp 124 "GET /static/assets/images/icon.png HTTP/1.1" 200 7011
+INFO 2019-12-20 15:11:35,948 basehttp 124 "GET /static/assets/javascript/libs/jquery-1.9.1.js HTTP/1.1" 200 128159
+INFO 2019-12-20 15:11:35,952 basehttp 124 "GET /static/assets/javascript/common/base.js HTTP/1.1" 200 2125
+INFO 2019-12-20 15:11:35,958 basehttp 124 "GET /static/assets/javascript/common/header.js HTTP/1.1" 200 2624
+INFO 2019-12-20 15:11:35,959 basehttp 124 "GET /static/assets/javascript/page/myAccount.js HTTP/1.1" 200 2101
+INFO 2019-12-20 15:11:37,178 basehttp 124 "GET /static/assets/css/page/register.less HTTP/1.1" 200 2815
+INFO 2019-12-20 15:11:37,218 basehttp 124 "GET /static/assets/css/common/base.less HTTP/1.1" 200 5087
+INFO 2019-12-20 15:11:37,220 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+ERROR 2019-12-20 15:11:43,705 exception 135 Internal Server Error: /api/account/
+Traceback (most recent call last):
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\views\generic\base.py", line 68, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\views\generic\base.py", line 88, in dispatch
+    return handler(request, *args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\utils\decorators.py", line 67, in _wrapper
+    return bound_func(*args, **kwargs)
+  File "C:\Users\Administrator\Desktop\lf-django\utils\decorator.py", line 21, in wrapper
+    return func(request,user,*args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\utils\decorators.py", line 63, in bound_func
+    return func.__get__(self, type(self))(*args2, **kwargs2)
+  File "C:\Users\Administrator\Desktop\lf-django\online\account\views.py", line 123, in post
+    road = request.PSOT.get("road", None)
+AttributeError: 'WSGIRequest' object has no attribute 'PSOT'
+ERROR 2019-12-20 15:11:43,743 basehttp 124 "POST /api/account/ HTTP/1.1" 500 95191
+INFO 2019-12-20 15:12:03,025 basehttp 124 "GET /account/ HTTP/1.1" 200 5884
+INFO 2019-12-20 15:12:03,037 basehttp 124 "GET /static/assets/javascript/page/myAccount.js HTTP/1.1" 304 0
+INFO 2019-12-20 15:12:03,863 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+WARNING 2019-12-20 15:12:07,237 base 93 Method Not Allowed (PUT): /api/account/
+WARNING 2019-12-20 15:12:07,239 basehttp 124 "PUT /api/account/ HTTP/1.1" 405 0
+ERROR 2019-12-20 15:12:08,167 exception 135 Internal Server Error: /api/account/
+Traceback (most recent call last):
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\views\generic\base.py", line 68, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\views\generic\base.py", line 88, in dispatch
+    return handler(request, *args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\utils\decorators.py", line 67, in _wrapper
+    return bound_func(*args, **kwargs)
+  File "C:\Users\Administrator\Desktop\lf-django\utils\decorator.py", line 21, in wrapper
+    return func(request,user,*args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\utils\decorators.py", line 63, in bound_func
+    return func.__get__(self, type(self))(*args2, **kwargs2)
+  File "C:\Users\Administrator\Desktop\lf-django\online\account\views.py", line 138, in post
+    useraddress = useraddress[0]
+  File "F:\Env\django_env\lib\site-packages\django\db\models\query.py", line 289, in __getitem__
+    return list(qs)[0]
+IndexError: list index out of range
+ERROR 2019-12-20 15:12:08,225 basehttp 124 "POST /api/account/ HTTP/1.1" 500 99838
+WARNING 2019-12-20 15:16:14,010 base 93 Method Not Allowed (PUT): /api/account/
+WARNING 2019-12-20 15:16:14,011 basehttp 124 "PUT /api/account/ HTTP/1.1" 405 0
+ERROR 2019-12-20 15:16:32,703 exception 135 Internal Server Error: /api/account/
+Traceback (most recent call last):
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\views\generic\base.py", line 68, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\views\generic\base.py", line 88, in dispatch
+    return handler(request, *args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\utils\decorators.py", line 67, in _wrapper
+    return bound_func(*args, **kwargs)
+  File "C:\Users\Administrator\Desktop\lf-django\utils\decorator.py", line 21, in wrapper
+    return func(request,user,*args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\utils\decorators.py", line 63, in bound_func
+    return func.__get__(self, type(self))(*args2, **kwargs2)
+  File "C:\Users\Administrator\Desktop\lf-django\online\account\views.py", line 138, in post
+    useraddress = useraddress[0]
+  File "F:\Env\django_env\lib\site-packages\django\db\models\query.py", line 289, in __getitem__
+    return list(qs)[0]
+IndexError: list index out of range
+ERROR 2019-12-20 15:16:32,751 basehttp 124 "POST /api/account/ HTTP/1.1" 500 99850
+WARNING 2019-12-20 15:16:44,178 base 152 Not Found: /media/4
+WARNING 2019-12-20 15:16:44,182 base 152 Not Found: /media/5
+WARNING 2019-12-20 15:16:44,183 basehttp 124 "GET /media/4 HTTP/1.1" 404 1758
+WARNING 2019-12-20 15:16:44,185 basehttp 124 "GET /media/5 HTTP/1.1" 404 1758
+WARNING 2019-12-20 15:16:44,311 base 152 Not Found: /media/4
+WARNING 2019-12-20 15:16:44,312 basehttp 124 "GET /media/4 HTTP/1.1" 404 1758
+WARNING 2019-12-20 15:16:47,519 base 152 Not Found: /media/4
+WARNING 2019-12-20 15:16:47,521 base 152 Not Found: /media/5
+WARNING 2019-12-20 15:16:47,522 basehttp 124 "GET /media/4 HTTP/1.1" 404 1758
+WARNING 2019-12-20 15:16:47,522 basehttp 124 "GET /media/5 HTTP/1.1" 404 1758
+WARNING 2019-12-20 15:16:47,627 base 152 Not Found: /media/4
+WARNING 2019-12-20 15:16:47,627 basehttp 124 "GET /media/4 HTTP/1.1" 404 1758
+INFO 2019-12-20 15:16:54,610 basehttp 124 "GET /account/ HTTP/1.1" 200 5896
+INFO 2019-12-20 15:16:54,668 basehttp 124 "GET /static/assets/javascript/libs/jquery-1.9.1.js HTTP/1.1" 200 128159
+INFO 2019-12-20 15:16:54,685 basehttp 124 "GET /static/assets/javascript/common/base.js HTTP/1.1" 200 2125
+INFO 2019-12-20 15:16:54,697 basehttp 124 "GET /static/assets/javascript/common/header.js HTTP/1.1" 200 2624
+INFO 2019-12-20 15:16:54,709 basehttp 124 "GET /static/assets/javascript/page/myAccount.js HTTP/1.1" 200 2101
+INFO 2019-12-20 15:16:54,768 basehttp 124 "GET /static/assets/images/icon.png HTTP/1.1" 200 7011
+INFO 2019-12-20 15:16:56,038 basehttp 124 "GET /account/ HTTP/1.1" 200 5896
+INFO 2019-12-20 15:16:56,076 basehttp 124 "GET /static/assets/images/icon.png HTTP/1.1" 200 7011
+INFO 2019-12-20 15:16:56,090 basehttp 124 "GET /static/assets/javascript/common/base.js HTTP/1.1" 200 2125
+INFO 2019-12-20 15:16:56,091 basehttp 124 "GET /static/assets/javascript/libs/jquery-1.9.1.js HTTP/1.1" 200 128159
+INFO 2019-12-20 15:16:56,106 basehttp 124 "GET /static/assets/javascript/common/header.js HTTP/1.1" 200 2624
+INFO 2019-12-20 15:16:56,106 basehttp 124 "GET /static/assets/javascript/page/myAccount.js HTTP/1.1" 200 2101
+INFO 2019-12-20 15:16:57,484 basehttp 124 "GET /static/assets/css/page/register.less HTTP/1.1" 200 2815
+INFO 2019-12-20 15:16:57,533 basehttp 124 "GET /static/assets/css/common/base.less HTTP/1.1" 200 5087
+INFO 2019-12-20 15:16:57,575 basehttp 124 "GET /static/assets/css/common/reset.less HTTP/1.1" 200 704
+INFO 2019-12-20 15:16:57,576 basehttp 124 "GET /static/assets/css/common/header.less HTTP/1.1" 200 7843
+INFO 2019-12-20 15:16:57,586 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 15:17:07,869 basehttp 124 "POST /api/account/ HTTP/1.1" 200 42
+INFO 2019-12-20 15:17:17,087 basehttp 124 "POST /api/account/ HTTP/1.1" 200 42
+INFO 2019-12-20 15:18:10,640 basehttp 124 "GET /account/ HTTP/1.1" 200 5887
+INFO 2019-12-20 15:18:10,653 basehttp 124 "GET /static/assets/javascript/common/base.js HTTP/1.1" 304 0
+INFO 2019-12-20 15:18:10,654 basehttp 124 "GET /static/assets/javascript/page/myAccount.js HTTP/1.1" 304 0
+INFO 2019-12-20 15:18:10,721 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 15:18:17,551 basehttp 124 "GET /account/ HTTP/1.1" 200 5887
+INFO 2019-12-20 15:18:17,629 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 15:18:17,896 basehttp 124 "GET /account/ HTTP/1.1" 200 5887
+INFO 2019-12-20 15:18:17,972 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 15:18:18,151 basehttp 124 "GET /account/ HTTP/1.1" 200 5887
+INFO 2019-12-20 15:18:18,255 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 15:18:18,394 basehttp 124 "GET /account/ HTTP/1.1" 200 5887
+INFO 2019-12-20 15:18:18,469 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 15:18:28,372 basehttp 124 "GET /index/ HTTP/1.1" 200 5062
+INFO 2019-12-20 15:18:28,389 basehttp 124 "GET /static/assets/javascript/page/index.js HTTP/1.1" 304 0
+INFO 2019-12-20 15:19:23,851 basehttp 124 "GET /index/ HTTP/1.1" 200 5062
+INFO 2019-12-20 15:19:23,907 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+ERROR 2019-12-20 15:19:25,773 exception 135 Internal Server Error: /api/carts/
+Traceback (most recent call last):
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\views\generic\base.py", line 68, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\views\generic\base.py", line 88, in dispatch
+    return handler(request, *args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\utils\decorators.py", line 67, in _wrapper
+    return bound_func(*args, **kwargs)
+  File "C:\Users\Administrator\Desktop\lf-django\utils\decorator.py", line 21, in wrapper
+    return func(request,user,*args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\utils\decorators.py", line 63, in bound_func
+    return func.__get__(self, type(self))(*args2, **kwargs2)
+  File "C:\Users\Administrator\Desktop\lf-django\online\cart\views.py", line 78, in post
+    request.session["%s_cart" % user.id] += quantity
+  File "F:\Env\django_env\lib\site-packages\django\contrib\sessions\backends\base.py", line 57, in __getitem__
+    return self._session[key]
+KeyError: '36_cart'
+ERROR 2019-12-20 15:19:25,814 basehttp 124 "POST /api/carts/ HTTP/1.1" 500 97436
+INFO 2019-12-20 15:20:42,754 basehttp 124 "GET /index/ HTTP/1.1" 200 5062
+INFO 2019-12-20 15:20:42,804 basehttp 124 "GET /static/assets/javascript/common/base.js HTTP/1.1" 304 0
+INFO 2019-12-20 15:20:42,950 basehttp 124 "GET /static/assets/javascript/page/index.js HTTP/1.1" 304 0
+INFO 2019-12-20 15:20:46,607 basehttp 124 "GET /index/ HTTP/1.1" 200 5062
+INFO 2019-12-20 15:20:46,622 basehttp 124 "GET /static/assets/javascript/common/base.js HTTP/1.1" 304 0
+INFO 2019-12-20 15:20:46,656 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 15:20:49,974 basehttp 124 "GET /index/ HTTP/1.1" 200 5062
+INFO 2019-12-20 15:20:50,012 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 15:20:51,329 basehttp 124 "GET /index/ HTTP/1.1" 200 5062
+INFO 2019-12-20 15:20:51,368 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+ERROR 2019-12-20 15:20:55,556 exception 135 Internal Server Error: /api/carts/
+Traceback (most recent call last):
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\views\generic\base.py", line 68, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\views\generic\base.py", line 88, in dispatch
+    return handler(request, *args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\utils\decorators.py", line 67, in _wrapper
+    return bound_func(*args, **kwargs)
+  File "C:\Users\Administrator\Desktop\lf-django\utils\decorator.py", line 21, in wrapper
+    return func(request,user,*args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\utils\decorators.py", line 63, in bound_func
+    return func.__get__(self, type(self))(*args2, **kwargs2)
+  File "C:\Users\Administrator\Desktop\lf-django\online\cart\views.py", line 78, in post
+    request.session["%s_cart" % user.id] += quantity
+  File "F:\Env\django_env\lib\site-packages\django\contrib\sessions\backends\base.py", line 57, in __getitem__
+    return self._session[key]
+KeyError: '36_cart'
+ERROR 2019-12-20 15:20:55,630 basehttp 124 "POST /api/carts/ HTTP/1.1" 500 97453
+INFO 2019-12-20 15:20:57,830 basehttp 124 "GET /index/ HTTP/1.1" 200 4780
+INFO 2019-12-20 15:20:57,920 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 15:21:22,322 basehttp 124 "POST /api/account/login/ HTTP/1.1" 200 43
+INFO 2019-12-20 15:21:22,385 basehttp 124 "GET /index/ HTTP/1.1" 200 5062
+INFO 2019-12-20 15:21:41,927 basehttp 124 "GET /index/ HTTP/1.1" 200 5062
+INFO 2019-12-20 15:21:41,982 basehttp 124 "GET /static/assets/images/icon.png HTTP/1.1" 200 7011
+INFO 2019-12-20 15:21:41,985 basehttp 124 "GET /static/assets/css/page/index.css HTTP/1.1" 200 17063
+INFO 2019-12-20 15:21:41,991 basehttp 124 "GET /static/assets/javascript/common/base.js HTTP/1.1" 200 2125
+INFO 2019-12-20 15:21:41,997 basehttp 124 "GET /static/assets/javascript/common/header.js HTTP/1.1" 200 2624
+INFO 2019-12-20 15:21:42,017 basehttp 124 "GET /static/assets/javascript/libs/jquery-1.9.1.js HTTP/1.1" 200 128159
+INFO 2019-12-20 15:21:42,046 basehttp 124 "GET /static/assets/javascript/page/index.js HTTP/1.1" 200 2671
+INFO 2019-12-20 15:21:42,061 basehttp 124 "GET /media/1.jpg HTTP/1.1" 200 11259
+INFO 2019-12-20 15:21:42,350 basehttp 124 "GET /static/assets/images/banner.png HTTP/1.1" 200 2295905
+INFO 2019-12-20 15:21:42,366 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 15:21:43,169 basehttp 124 "GET /index/ HTTP/1.1" 200 5062
+INFO 2019-12-20 15:21:43,221 basehttp 124 "GET /static/assets/css/page/index.css HTTP/1.1" 200 17063
+INFO 2019-12-20 15:21:43,224 basehttp 124 "GET /static/assets/javascript/common/header.js HTTP/1.1" 200 2624
+INFO 2019-12-20 15:21:43,225 basehttp 124 "GET /static/assets/images/icon.png HTTP/1.1" 200 7011
+INFO 2019-12-20 15:21:43,226 basehttp 124 "GET /static/assets/javascript/common/base.js HTTP/1.1" 200 2125
+INFO 2019-12-20 15:21:43,239 basehttp 124 "GET /static/assets/javascript/libs/jquery-1.9.1.js HTTP/1.1" 200 128159
+INFO 2019-12-20 15:21:43,264 basehttp 124 "GET /static/assets/javascript/page/index.js HTTP/1.1" 200 2671
+INFO 2019-12-20 15:21:43,271 basehttp 124 "GET /media/1.jpg HTTP/1.1" 200 11259
+INFO 2019-12-20 15:21:43,407 basehttp 124 "GET /static/assets/images/banner.png HTTP/1.1" 200 2295905
+INFO 2019-12-20 15:21:43,437 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 15:22:01,179 basehttp 124 "GET /index/ HTTP/1.1" 200 5062
+INFO 2019-12-20 15:22:01,221 basehttp 124 "GET /static/assets/images/icon.png HTTP/1.1" 200 7011
+INFO 2019-12-20 15:22:01,222 basehttp 124 "GET /static/assets/css/page/index.css HTTP/1.1" 200 17063
+INFO 2019-12-20 15:22:01,238 basehttp 124 "GET /static/assets/javascript/libs/jquery-1.9.1.js HTTP/1.1" 200 128159
+INFO 2019-12-20 15:22:01,258 basehttp 124 "GET /static/assets/javascript/page/index.js HTTP/1.1" 200 2671
+INFO 2019-12-20 15:22:01,261 basehttp 124 "GET /static/assets/javascript/common/base.js HTTP/1.1" 200 2125
+INFO 2019-12-20 15:22:01,267 basehttp 124 "GET /static/assets/javascript/common/header.js HTTP/1.1" 200 2624
+INFO 2019-12-20 15:22:01,269 basehttp 124 "GET /media/1.jpg HTTP/1.1" 200 11259
+INFO 2019-12-20 15:22:01,356 basehttp 124 "GET /static/assets/images/banner.png HTTP/1.1" 200 2295905
+INFO 2019-12-20 15:22:01,388 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 15:22:01,888 basehttp 124 "GET /index/ HTTP/1.1" 200 5062
+INFO 2019-12-20 15:22:01,954 basehttp 124 "GET /static/assets/css/page/index.css HTTP/1.1" 200 17063
+INFO 2019-12-20 15:22:01,957 basehttp 124 "GET /static/assets/javascript/common/base.js HTTP/1.1" 200 2125
+INFO 2019-12-20 15:22:01,958 basehttp 124 "GET /static/assets/images/icon.png HTTP/1.1" 200 7011
+INFO 2019-12-20 15:22:01,959 basehttp 124 "GET /static/assets/javascript/common/header.js HTTP/1.1" 200 2624
+INFO 2019-12-20 15:22:02,010 basehttp 124 "GET /static/assets/javascript/libs/jquery-1.9.1.js HTTP/1.1" 200 128159
+INFO 2019-12-20 15:22:02,016 basehttp 124 "GET /static/assets/javascript/page/index.js HTTP/1.1" 200 2671
+INFO 2019-12-20 15:22:02,035 basehttp 124 "GET /media/1.jpg HTTP/1.1" 200 11259
+INFO 2019-12-20 15:22:02,395 basehttp 124 "GET /static/assets/images/banner.png HTTP/1.1" 200 2295905
+INFO 2019-12-20 15:22:02,408 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 15:22:28,137 basehttp 124 "GET /index/ HTTP/1.1" 200 5062
+INFO 2019-12-20 15:22:28,183 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+ERROR 2019-12-20 15:22:29,329 exception 135 Internal Server Error: /api/carts/
+Traceback (most recent call last):
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\views\generic\base.py", line 68, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\views\generic\base.py", line 88, in dispatch
+    return handler(request, *args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\utils\decorators.py", line 67, in _wrapper
+    return bound_func(*args, **kwargs)
+  File "C:\Users\Administrator\Desktop\lf-django\utils\decorator.py", line 21, in wrapper
+    return func(request,user,*args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\utils\decorators.py", line 63, in bound_func
+    return func.__get__(self, type(self))(*args2, **kwargs2)
+  File "C:\Users\Administrator\Desktop\lf-django\online\cart\views.py", line 78, in post
+    request.session["%s_cart" % user.id] += quantity
+  File "F:\Env\django_env\lib\site-packages\django\contrib\sessions\backends\base.py", line 57, in __getitem__
+    return self._session[key]
+KeyError: '36_cart'
+ERROR 2019-12-20 15:22:29,371 basehttp 124 "POST /api/carts/ HTTP/1.1" 500 97453
+INFO 2019-12-20 15:23:33,577 basehttp 124 "POST /api/carts/ HTTP/1.1" 200 76
+INFO 2019-12-20 15:25:05,170 basehttp 124 "GET /index/ HTTP/1.1" 200 4780
+INFO 2019-12-20 15:25:05,211 basehttp 124 "GET /static/assets/javascript/common/base.js HTTP/1.1" 304 0
+INFO 2019-12-20 15:25:05,283 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 15:25:23,715 basehttp 124 "POST /api/account/login/ HTTP/1.1" 200 43
+INFO 2019-12-20 15:25:23,769 basehttp 124 "GET /index/ HTTP/1.1" 200 5062
+INFO 2019-12-20 15:25:24,060 basehttp 124 "GET /index/ HTTP/1.1" 200 5062
+INFO 2019-12-20 15:25:24,076 basehttp 124 "GET /static/assets/javascript/common/base.js HTTP/1.1" 304 0
+INFO 2019-12-20 15:25:24,117 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 15:25:29,937 basehttp 124 "POST /api/carts/ HTTP/1.1" 200 76
+INFO 2019-12-20 15:25:30,068 basehttp 124 "GET /index/ HTTP/1.1" 200 5062
+INFO 2019-12-20 15:25:30,082 basehttp 124 "GET /static/assets/javascript/page/index.js HTTP/1.1" 304 0
+INFO 2019-12-20 15:25:30,116 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 15:25:30,291 basehttp 124 "GET /index/ HTTP/1.1" 200 5062
+INFO 2019-12-20 15:25:30,330 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 15:25:37,189 basehttp 124 "GET /index/ HTTP/1.1" 200 5062
+INFO 2019-12-20 15:25:37,227 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 15:25:37,846 basehttp 124 "GET /index/ HTTP/1.1" 200 5062
+INFO 2019-12-20 15:25:37,886 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 15:25:38,067 basehttp 124 "GET /index/ HTTP/1.1" 200 5062
+INFO 2019-12-20 15:25:38,106 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 15:25:40,652 basehttp 124 "GET /account/ HTTP/1.1" 200 5887
+INFO 2019-12-20 15:25:40,664 basehttp 124 "GET /static/assets/javascript/page/myAccount.js HTTP/1.1" 304 0
+INFO 2019-12-20 15:27:34,097 basehttp 124 "GET /index/ HTTP/1.1" 200 5062
+ERROR 2019-12-20 15:27:36,011 exception 135 Internal Server Error: /api/carts/
+Traceback (most recent call last):
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\views\generic\base.py", line 68, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\views\generic\base.py", line 88, in dispatch
+    return handler(request, *args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\utils\decorators.py", line 67, in _wrapper
+    return bound_func(*args, **kwargs)
+  File "C:\Users\Administrator\Desktop\lf-django\utils\decorator.py", line 21, in wrapper
+    return func(request,user,*args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\utils\decorators.py", line 63, in bound_func
+    return func.__get__(self, type(self))(*args2, **kwargs2)
+  File "C:\Users\Administrator\Desktop\lf-django\online\cart\views.py", line 78, in post
+    print(request.session["%s_cart" % user.id])
+  File "F:\Env\django_env\lib\site-packages\django\contrib\sessions\backends\base.py", line 57, in __getitem__
+    return self._session[key]
+KeyError: '36_cart'
+ERROR 2019-12-20 15:27:36,063 basehttp 124 "POST /api/carts/ HTTP/1.1" 500 97477
+INFO 2019-12-20 15:27:45,504 basehttp 124 "POST /api/carts/ HTTP/1.1" 200 76
+ERROR 2019-12-20 15:28:01,705 exception 135 Internal Server Error: /api/carts/
+Traceback (most recent call last):
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\views\generic\base.py", line 68, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\views\generic\base.py", line 88, in dispatch
+    return handler(request, *args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\utils\decorators.py", line 67, in _wrapper
+    return bound_func(*args, **kwargs)
+  File "C:\Users\Administrator\Desktop\lf-django\utils\decorator.py", line 21, in wrapper
+    return func(request,user,*args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\utils\decorators.py", line 63, in bound_func
+    return func.__get__(self, type(self))(*args2, **kwargs2)
+  File "C:\Users\Administrator\Desktop\lf-django\online\cart\views.py", line 78, in post
+    print(request.session["%s_cart" % user.id])
+  File "F:\Env\django_env\lib\site-packages\django\contrib\sessions\backends\base.py", line 57, in __getitem__
+    return self._session[key]
+KeyError: '36_cart'
+ERROR 2019-12-20 15:28:01,743 basehttp 124 "POST /api/carts/ HTTP/1.1" 500 97477
+INFO 2019-12-20 15:30:40,069 basehttp 124 "POST /api/carts/ HTTP/1.1" 200 76
+INFO 2019-12-20 15:31:37,272 basehttp 124 "GET /index/ HTTP/1.1" 200 5062
+INFO 2019-12-20 15:31:37,286 basehttp 124 "GET /static/assets/javascript/common/base.js HTTP/1.1" 304 0
+INFO 2019-12-20 15:31:37,312 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+ERROR 2019-12-20 15:31:51,180 exception 135 Internal Server Error: /api/carts/
+Traceback (most recent call last):
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\views\generic\base.py", line 68, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\views\generic\base.py", line 88, in dispatch
+    return handler(request, *args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\utils\decorators.py", line 67, in _wrapper
+    return bound_func(*args, **kwargs)
+  File "C:\Users\Administrator\Desktop\lf-django\utils\decorator.py", line 21, in wrapper
+    return func(request,user,*args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\utils\decorators.py", line 63, in bound_func
+    return func.__get__(self, type(self))(*args2, **kwargs2)
+  File "C:\Users\Administrator\Desktop\lf-django\online\cart\views.py", line 78, in post
+    print(request.session["%s_cart" % user.id])
+  File "F:\Env\django_env\lib\site-packages\django\contrib\sessions\backends\base.py", line 57, in __getitem__
+    return self._session[key]
+KeyError: '36_cart'
+ERROR 2019-12-20 15:31:51,239 basehttp 124 "POST /api/carts/ HTTP/1.1" 500 97477
+INFO 2019-12-20 15:32:13,598 basehttp 124 "GET /index/ HTTP/1.1" 200 5062
+INFO 2019-12-20 15:32:13,635 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 15:32:58,634 basehttp 124 "GET /index/ HTTP/1.1" 200 5062
+INFO 2019-12-20 15:32:58,687 basehttp 124 "GET /static/assets/javascript/common/base.js HTTP/1.1" 304 0
+INFO 2019-12-20 15:32:58,828 basehttp 124 "GET /static/assets/javascript/page/index.js HTTP/1.1" 304 0
+INFO 2019-12-20 15:32:58,912 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+ERROR 2019-12-20 15:35:38,116 exception 135 Internal Server Error: /carts/
+Traceback (most recent call last):
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\views\generic\base.py", line 68, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\views\generic\base.py", line 88, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\Administrator\Desktop\lf-django\online\cart\views.py", line 38, in get
+    cart_list = [{"id":cart.id,"name":cart.goods.name_en,"description":cart.goods.description_en,"price":cart.goods.price,"image":settings.URL_PREFIX+cart.goods.image.url} for cart in carts]
+  File "C:\Users\Administrator\Desktop\lf-django\online\cart\views.py", line 38, in <listcomp>
+    cart_list = [{"id":cart.id,"name":cart.goods.name_en,"description":cart.goods.description_en,"price":cart.goods.price,"image":settings.URL_PREFIX+cart.goods.image.url} for cart in carts]
+AttributeError: 'Goods' object has no attribute 'price'
+ERROR 2019-12-20 15:35:38,162 basehttp 124 "GET /carts/ HTTP/1.1" 500 84157
+WARNING 2019-12-20 15:35:38,393 base 152 Not Found: /favicon.ico
+WARNING 2019-12-20 15:35:38,395 basehttp 124 "GET /favicon.ico HTTP/1.1" 404 5082
+INFO 2019-12-20 15:35:45,014 basehttp 124 "POST /api/carts/ HTTP/1.1" 200 76
+INFO 2019-12-20 15:36:24,467 basehttp 124 "GET /index/ HTTP/1.1" 200 4780
+INFO 2019-12-20 15:36:24,525 basehttp 124 "GET /static/assets/javascript/common/base.js HTTP/1.1" 304 0
+INFO 2019-12-20 15:36:24,590 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 15:36:29,336 basehttp 124 "POST /api/account/login/ HTTP/1.1" 200 43
+INFO 2019-12-20 15:36:29,398 basehttp 124 "GET /index/ HTTP/1.1" 200 5062
+INFO 2019-12-20 15:36:39,504 basehttp 124 "POST /api/carts/ HTTP/1.1" 200 76
+INFO 2019-12-20 15:36:45,069 basehttp 124 "POST /api/carts/ HTTP/1.1" 200 76
+INFO 2019-12-20 15:38:26,400 basehttp 124 "GET /index/ HTTP/1.1" 200 5062
+INFO 2019-12-20 15:38:26,415 basehttp 124 "GET /static/assets/javascript/common/base.js HTTP/1.1" 304 0
+INFO 2019-12-20 15:38:26,415 basehttp 124 "GET /static/assets/javascript/common/header.js HTTP/1.1" 304 0
+INFO 2019-12-20 15:38:26,418 basehttp 124 "GET /static/assets/javascript/page/index.js HTTP/1.1" 304 0
+INFO 2019-12-20 15:38:46,591 basehttp 124 "GET /index/ HTTP/1.1" 200 5062
+INFO 2019-12-20 15:38:50,615 basehttp 124 "GET /index/ HTTP/1.1" 200 5062
+WARNING 2019-12-20 15:39:36,066 base 152 Not Found: /
+WARNING 2019-12-20 15:39:36,067 basehttp 124 "GET / HTTP/1.1" 404 5031
+WARNING 2019-12-20 15:39:36,396 base 152 Not Found: /favicon.ico
+WARNING 2019-12-20 15:39:36,397 basehttp 124 "GET /favicon.ico HTTP/1.1" 404 5082
+INFO 2019-12-20 15:39:57,038 basehttp 124 "GET /index/ HTTP/1.1" 200 4780
+INFO 2019-12-20 15:39:57,089 basehttp 124 "GET /static/assets/javascript/common/base.js HTTP/1.1" 304 0
+INFO 2019-12-20 15:39:57,181 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 15:40:00,731 basehttp 124 "GET /index HTTP/1.1" 301 0
+INFO 2019-12-20 15:40:01,031 basehttp 124 "GET /index/ HTTP/1.1" 200 4780
+INFO 2019-12-20 15:40:01,149 basehttp 124 "GET /static/assets/css/page/index.css HTTP/1.1" 200 17063
+INFO 2019-12-20 15:40:01,150 basehttp 124 "GET /static/assets/javascript/common/base.js HTTP/1.1" 200 2125
+INFO 2019-12-20 15:40:01,154 basehttp 124 "GET /static/assets/images/icon.png HTTP/1.1" 200 7011
+INFO 2019-12-20 15:40:01,154 basehttp 124 "GET /static/assets/javascript/common/header.js HTTP/1.1" 200 2645
+INFO 2019-12-20 15:40:01,197 basehttp 124 "GET /static/assets/javascript/page/index.js HTTP/1.1" 200 2671
+INFO 2019-12-20 15:40:01,197 basehttp 124 "GET /media/1.jpg HTTP/1.1" 200 11259
+INFO 2019-12-20 15:40:01,234 basehttp 124 "GET /static/assets/javascript/libs/jquery-1.9.1.js HTTP/1.1" 200 128159
+INFO 2019-12-20 15:40:01,645 basehttp 124 "GET /index/ HTTP/1.1" 200 5062
+INFO 2019-12-20 15:40:01,662 basehttp 124 "GET /static/assets/css/page/index.css HTTP/1.1" 200 17063
+INFO 2019-12-20 15:40:01,663 basehttp 124 "GET /static/assets/images/icon.png HTTP/1.1" 200 7011
+INFO 2019-12-20 15:40:01,672 basehttp 124 "GET /static/assets/javascript/common/header.js HTTP/1.1" 200 2645
+INFO 2019-12-20 15:40:01,672 basehttp 124 "GET /static/assets/javascript/common/base.js HTTP/1.1" 200 2125
+INFO 2019-12-20 15:40:01,673 basehttp 124 "GET /static/assets/javascript/page/index.js HTTP/1.1" 200 2671
+INFO 2019-12-20 15:40:01,674 basehttp 124 "GET /media/1.jpg HTTP/1.1" 200 11259
+INFO 2019-12-20 15:40:01,675 basehttp 124 "GET /static/assets/javascript/libs/jquery-1.9.1.js HTTP/1.1" 200 128159
+INFO 2019-12-20 15:40:01,712 basehttp 124 "GET /static/assets/images/banner.png HTTP/1.1" 200 2295905
+INFO 2019-12-20 15:40:01,720 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 15:40:02,300 basehttp 124 "GET /static/assets/images/banner.png HTTP/1.1" 200 2295905
+INFO 2019-12-20 15:40:02,397 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 15:40:04,206 basehttp 124 "GET /index/ HTTP/1.1" 200 5062
+INFO 2019-12-20 15:40:04,218 basehttp 124 "GET /static/assets/javascript/common/header.js HTTP/1.1" 304 0
+INFO 2019-12-20 15:40:07,397 basehttp 124 "GET /goods/category/2 HTTP/1.1" 301 0
+INFO 2019-12-20 15:40:07,677 basehttp 124 "GET /goods/category/2/ HTTP/1.1" 200 4283
+INFO 2019-12-20 15:40:07,908 basehttp 124 "GET /static/assets/javascript/common/header.js HTTP/1.1" 304 0
+INFO 2019-12-20 15:40:08,243 basehttp 124 "GET /goods/category/1 HTTP/1.1" 301 0
+INFO 2019-12-20 15:40:08,277 basehttp 124 "GET /goods/category/1/ HTTP/1.1" 200 4700
+INFO 2019-12-20 15:40:11,490 basehttp 124 "GET /account/signup/ HTTP/1.1" 200 4850
+INFO 2019-12-20 15:40:12,657 basehttp 124 "GET /goods/2/ HTTP/1.1" 200 4435
+INFO 2019-12-20 15:40:12,756 basehttp 124 "GET /static/assets/css/page/detail.css HTTP/1.1" 200 22451
+INFO 2019-12-20 15:40:12,826 basehttp 124 "GET /static/assets/javascript/common/header.js HTTP/1.1" 304 0
+INFO 2019-12-20 15:40:12,827 basehttp 124 "GET /static/assets/javascript/page/detail.js HTTP/1.1" 200 2349
+INFO 2019-12-20 15:40:15,306 basehttp 124 "POST /api/account/login/ HTTP/1.1" 200 43
+INFO 2019-12-20 15:40:15,348 basehttp 124 "GET /account/signup/ HTTP/1.1" 200 4850
+INFO 2019-12-20 15:40:16,164 basehttp 124 "POST /api/carts/ HTTP/1.1" 200 44
+WARNING 2019-12-20 15:40:17,256 base 152 Not Found: /goods/2/order/
+WARNING 2019-12-20 15:40:17,257 basehttp 124 "GET /goods/2/order/ HTTP/1.1" 404 5091
+INFO 2019-12-20 15:40:26,321 basehttp 124 "POST /api/account/login/ HTTP/1.1" 200 43
+INFO 2019-12-20 15:40:26,363 basehttp 124 "GET /account/signup/ HTTP/1.1" 200 4850
+INFO 2019-12-20 15:40:30,008 basehttp 124 "GET /account/signup/ HTTP/1.1" 200 4850
+INFO 2019-12-20 15:40:30,113 basehttp 124 "GET /static/assets/javascript/page/register.js HTTP/1.1" 200 2166
+INFO 2019-12-20 15:40:30,119 basehttp 124 "GET /static/assets/javascript/common/header.js HTTP/1.1" 304 0
+INFO 2019-12-20 15:40:34,223 basehttp 124 "GET /index/ HTTP/1.1" 200 5062
+INFO 2019-12-20 15:40:34,237 basehttp 124 "GET /static/assets/javascript/common/header.js HTTP/1.1" 304 0
+INFO 2019-12-20 15:40:36,007 basehttp 124 "POST /api/account/login/ HTTP/1.1" 200 43
+INFO 2019-12-20 15:40:36,051 basehttp 124 "GET /account/signup/ HTTP/1.1" 200 4850
+INFO 2019-12-20 15:40:38,446 basehttp 124 "GET /static/assets/css/page/register.less HTTP/1.1" 200 2815
+INFO 2019-12-20 15:40:38,536 basehttp 124 "GET /static/assets/css/common/base.less HTTP/1.1" 200 5087
+INFO 2019-12-20 15:40:38,598 basehttp 124 "GET /index/ HTTP/1.1" 200 5062
+INFO 2019-12-20 15:40:38,654 basehttp 124 "GET /static/assets/css/common/reset.less HTTP/1.1" 200 704
+INFO 2019-12-20 15:40:38,654 basehttp 124 "GET /static/assets/css/common/header.less HTTP/1.1" 200 7843
+INFO 2019-12-20 15:41:08,255 basehttp 124 "GET /account/signup/ HTTP/1.1" 200 4850
+INFO 2019-12-20 15:41:08,368 basehttp 124 "GET /static/assets/javascript/common/header.js HTTP/1.1" 304 0
+INFO 2019-12-20 15:41:17,557 basehttp 124 "GET /account/signup/ HTTP/1.1" 200 4850
+INFO 2019-12-20 15:41:17,656 basehttp 124 "GET /static/assets/javascript/common/header.js HTTP/1.1" 304 0
+INFO 2019-12-20 15:41:18,828 basehttp 124 "GET /account/signup/ HTTP/1.1" 200 4850
+INFO 2019-12-20 15:41:21,571 basehttp 124 "GET /goods/category/2/ HTTP/1.1" 200 4283
+INFO 2019-12-20 15:41:23,574 basehttp 124 "GET /goods/3/ HTTP/1.1" 200 4435
+WARNING 2019-12-20 15:41:28,657 base 152 Not Found: /goods/3/order/
+WARNING 2019-12-20 15:41:28,657 basehttp 124 "GET /goods/3/order/ HTTP/1.1" 404 5091
+INFO 2019-12-20 15:41:31,954 basehttp 124 "GET /index HTTP/1.1" 301 0
+INFO 2019-12-20 15:41:32,008 basehttp 124 "GET /index/ HTTP/1.1" 200 5077
+INFO 2019-12-20 15:41:32,075 basehttp 124 "GET /static/assets/javascript/page/index.js HTTP/1.1" 304 0
+INFO 2019-12-20 15:41:32,076 basehttp 124 "GET /media/1.jpg HTTP/1.1" 200 11259
+INFO 2019-12-20 15:41:37,509 basehttp 124 "GET /account/ HTTP/1.1" 200 5902
+INFO 2019-12-20 15:41:37,560 basehttp 124 "GET /static/assets/javascript/page/myAccount.js HTTP/1.1" 304 0
+INFO 2019-12-20 15:41:49,760 basehttp 124 "GET /index HTTP/1.1" 301 0
+INFO 2019-12-20 15:41:49,796 basehttp 124 "GET /index/ HTTP/1.1" 200 4780
+INFO 2019-12-20 15:41:49,842 basehttp 124 "GET /media/1.jpg HTTP/1.1" 200 11259
+INFO 2019-12-20 15:41:54,461 basehttp 124 "POST /api/account/login/ HTTP/1.1" 200 43
+INFO 2019-12-20 15:41:54,516 basehttp 124 "GET /index/ HTTP/1.1" 200 5077
+INFO 2019-12-20 15:41:59,632 basehttp 124 "GET /index/ HTTP/1.1" 200 4780
+INFO 2019-12-20 15:41:59,735 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 15:42:09,574 basehttp 124 "POST /api/account/login/ HTTP/1.1" 200 43
+INFO 2019-12-20 15:42:09,631 basehttp 124 "GET /index/ HTTP/1.1" 200 5077
+INFO 2019-12-20 15:42:12,912 basehttp 124 "GET /account/ HTTP/1.1" 200 5902
+INFO 2019-12-20 15:42:23,736 basehttp 124 "GET /account/ HTTP/1.1" 200 44
+INFO 2019-12-20 15:42:25,897 basehttp 124 "GET /index/ HTTP/1.1" 200 4780
+INFO 2019-12-20 15:42:31,097 basehttp 124 "POST /api/account/login/ HTTP/1.1" 200 43
+INFO 2019-12-20 15:42:31,155 basehttp 124 "GET /index/ HTTP/1.1" 200 5087
+INFO 2019-12-20 15:43:12,926 basehttp 124 "GET /index/ HTTP/1.1" 200 5076
+INFO 2019-12-20 15:43:12,938 basehttp 124 "GET /static/assets/javascript/common/header.js HTTP/1.1" 304 0
+INFO 2019-12-20 15:43:13,002 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 15:43:15,771 basehttp 124 "GET /carts/ HTTP/1.1" 200 12
+WARNING 2019-12-20 15:43:15,803 base 152 Not Found: /favicon.ico
+WARNING 2019-12-20 15:43:15,804 basehttp 124 "GET /favicon.ico HTTP/1.1" 404 5082
+INFO 2019-12-20 15:43:23,622 basehttp 124 "GET /index/ HTTP/1.1" 200 5076
+INFO 2019-12-20 15:43:23,689 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 15:45:09,658 basehttp 124 "GET /index/ HTTP/1.1" 200 5067
+INFO 2019-12-20 15:45:09,671 basehttp 124 "GET /static/assets/javascript/common/base.js HTTP/1.1" 304 0
+INFO 2019-12-20 15:45:09,676 basehttp 124 "GET /static/assets/javascript/common/header.js HTTP/1.1" 304 0
+INFO 2019-12-20 15:45:09,728 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 15:45:27,856 basehttp 124 "GET /index/ HTTP/1.1" 200 5067
+INFO 2019-12-20 15:45:27,908 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 15:45:55,251 basehttp 124 "GET /account/ HTTP/1.1" 200 5892
+INFO 2019-12-20 15:45:55,267 basehttp 124 "GET /static/assets/javascript/common/header.js HTTP/1.1" 304 0
+INFO 2019-12-20 15:45:55,268 basehttp 124 "GET /static/assets/javascript/page/myAccount.js HTTP/1.1" 304 0
+INFO 2019-12-20 15:47:00,637 basehttp 124 "GET /account/ HTTP/1.1" 200 5892
+INFO 2019-12-20 15:47:00,651 basehttp 124 "GET /static/assets/javascript/common/header.js HTTP/1.1" 200 2647
+INFO 2019-12-20 15:47:00,770 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 15:47:00,851 basehttp 124 "GET /account/ HTTP/1.1" 200 5892
+INFO 2019-12-20 15:47:00,995 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 15:47:01,077 basehttp 124 "GET /account/ HTTP/1.1" 200 5892
+INFO 2019-12-20 15:47:01,216 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 15:48:12,468 basehttp 124 "GET /account/ HTTP/1.1" 200 5892
+INFO 2019-12-20 15:48:12,482 basehttp 124 "GET /static/assets/images/icon.png HTTP/1.1" 200 7011
+INFO 2019-12-20 15:48:12,485 basehttp 124 "GET /static/assets/javascript/libs/jquery-1.9.1.js HTTP/1.1" 200 128159
+INFO 2019-12-20 15:48:12,488 basehttp 124 "GET /static/assets/javascript/common/base.js HTTP/1.1" 200 2125
+INFO 2019-12-20 15:48:12,495 basehttp 124 "GET /static/assets/javascript/page/myAccount.js HTTP/1.1" 200 2101
+INFO 2019-12-20 15:48:12,496 basehttp 124 "GET /static/assets/javascript/common/header.js HTTP/1.1" 200 2570
+INFO 2019-12-20 15:48:12,887 basehttp 124 "GET /static/assets/css/page/register.less HTTP/1.1" 200 2815
+INFO 2019-12-20 15:48:12,934 basehttp 124 "GET /static/assets/css/common/base.less HTTP/1.1" 200 5087
+INFO 2019-12-20 15:48:12,939 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+ERROR 2019-12-20 15:48:19,875 exception 135 Internal Server Error: /api/account/logout/
+Traceback (most recent call last):
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\views\generic\base.py", line 68, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\views\generic\base.py", line 88, in dispatch
+    return handler(request, *args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\utils\decorators.py", line 67, in _wrapper
+    return bound_func(*args, **kwargs)
+  File "C:\Users\Administrator\Desktop\lf-django\utils\decorator.py", line 21, in wrapper
+    return func(request,user,*args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\utils\decorators.py", line 63, in bound_func
+    return func.__get__(self, type(self))(*args2, **kwargs2)
+  File "C:\Users\Administrator\Desktop\lf-django\online\account\views.py", line 60, in get
+    del request.session['%s_cart' % user.id]
+  File "F:\Env\django_env\lib\site-packages\django\contrib\sessions\backends\base.py", line 64, in __delitem__
+    del self._session[key]
+KeyError: '36_cart'
+ERROR 2019-12-20 15:48:19,933 basehttp 124 "GET /api/account/logout/ HTTP/1.1" 500 95881
+INFO 2019-12-20 15:48:55,332 basehttp 124 "GET /account/ HTTP/1.1" 200 44
+WARNING 2019-12-20 15:48:55,356 base 152 Not Found: /favicon.ico
+WARNING 2019-12-20 15:48:55,356 basehttp 124 "GET /favicon.ico HTTP/1.1" 404 5082
+WARNING 2019-12-20 15:49:01,710 base 152 Not Found: /
+WARNING 2019-12-20 15:49:01,711 basehttp 124 "GET / HTTP/1.1" 404 5031
+INFO 2019-12-20 15:49:12,497 basehttp 124 "GET /index/ HTTP/1.1" 200 4780
+INFO 2019-12-20 15:49:12,518 basehttp 124 "GET /static/assets/javascript/common/header.js HTTP/1.1" 304 0
+INFO 2019-12-20 15:49:12,519 basehttp 124 "GET /static/assets/javascript/page/index.js HTTP/1.1" 304 0
+INFO 2019-12-20 15:49:12,520 basehttp 124 "GET /media/1.jpg HTTP/1.1" 200 11259
+INFO 2019-12-20 15:49:22,330 basehttp 124 "GET /account/signup/ HTTP/1.1" 200 4850
+INFO 2019-12-20 15:49:22,344 basehttp 124 "GET /static/assets/javascript/common/header.js HTTP/1.1" 304 0
+INFO 2019-12-20 15:49:45,904 basehttp 124 "POST /api/account/signup/ HTTP/1.1" 200 96
+INFO 2019-12-20 15:54:43,832 basehttp 124 "POST /api/carts/ HTTP/1.1" 200 77
+INFO 2019-12-20 15:54:47,704 basehttp 124 "POST /api/carts/ HTTP/1.1" 200 77
+INFO 2019-12-20 15:57:21,136 basehttp 124 "GET /index/ HTTP/1.1" 200 5067
+INFO 2019-12-20 15:57:21,184 basehttp 124 "GET /static/assets/javascript/common/base.js HTTP/1.1" 304 0
+INFO 2019-12-20 15:57:21,185 basehttp 124 "GET /static/assets/javascript/common/header.js HTTP/1.1" 200 2659
+INFO 2019-12-20 15:57:21,186 basehttp 124 "GET /media/1.jpg HTTP/1.1" 200 11259
+INFO 2019-12-20 15:57:28,621 basehttp 124 "GET /account/ HTTP/1.1" 200 5891
+INFO 2019-12-20 15:57:28,634 basehttp 124 "GET /static/assets/javascript/page/myAccount.js HTTP/1.1" 304 0
+ERROR 2019-12-20 15:57:32,727 exception 135 Internal Server Error: /api/account/logout/
+Traceback (most recent call last):
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\views\generic\base.py", line 68, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\views\generic\base.py", line 88, in dispatch
+    return handler(request, *args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\utils\decorators.py", line 67, in _wrapper
+    return bound_func(*args, **kwargs)
+  File "C:\Users\Administrator\Desktop\lf-django\utils\decorator.py", line 21, in wrapper
+    return func(request,user,*args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\utils\decorators.py", line 63, in bound_func
+    return func.__get__(self, type(self))(*args2, **kwargs2)
+  File "C:\Users\Administrator\Desktop\lf-django\online\account\views.py", line 60, in get
+    del request.session['%s_cart' % user.id]
+  File "F:\Env\django_env\lib\site-packages\django\contrib\sessions\backends\base.py", line 64, in __delitem__
+    del self._session[key]
+KeyError: '39_cart'
+ERROR 2019-12-20 15:57:32,764 basehttp 124 "GET /api/account/logout/ HTTP/1.1" 500 95881
+INFO 2019-12-20 15:58:29,332 basehttp 124 "GET /account/ HTTP/1.1" 200 5891
+INFO 2019-12-20 15:58:29,343 basehttp 124 "GET /static/assets/javascript/common/header.js HTTP/1.1" 304 0
+INFO 2019-12-20 15:58:29,407 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 15:58:33,323 basehttp 124 "GET /goods/category/2 HTTP/1.1" 301 0
+INFO 2019-12-20 15:58:33,347 basehttp 124 "GET /goods/category/2/ HTTP/1.1" 200 4570
+INFO 2019-12-20 15:58:34,978 basehttp 124 "GET /goods/category/2/ HTTP/1.1" 200 4570
+INFO 2019-12-20 15:58:35,844 basehttp 124 "GET /goods/category/1 HTTP/1.1" 301 0
+INFO 2019-12-20 15:58:35,878 basehttp 124 "GET /goods/category/1/ HTTP/1.1" 200 4987
+INFO 2019-12-20 15:58:38,801 basehttp 124 "GET /goods/category/1/ HTTP/1.1" 200 4987
+INFO 2019-12-20 15:58:40,685 basehttp 124 "GET /goods/category/2/ HTTP/1.1" 200 4570
+ERROR 2019-12-20 15:59:00,758 exception 135 Internal Server Error: /carts/
+Traceback (most recent call last):
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\views\generic\base.py", line 68, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\views\generic\base.py", line 88, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\Administrator\Desktop\lf-django\online\cart\views.py", line 64, in get
+    return JsonResponse(context,safe=False)
+  File "F:\Env\django_env\lib\site-packages\django\http\response.py", line 530, in __init__
+    data = json.dumps(data, cls=encoder, **json_dumps_params)
+  File "d:\program files (x86)\python\Lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "d:\program files (x86)\python\Lib\json\encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "d:\program files (x86)\python\Lib\json\encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "F:\Env\django_env\lib\site-packages\django\core\serializers\json.py", line 121, in default
+    return super(DjangoJSONEncoder, self).default(o)
+  File "d:\program files (x86)\python\Lib\json\encoder.py", line 180, in default
+    o.__class__.__name__)
+TypeError: Object of type 'User' is not JSON serializable
+ERROR 2019-12-20 15:59:00,848 basehttp 124 "GET /carts/ HTTP/1.1" 500 105386
+INFO 2019-12-20 16:15:14,485 basehttp 124 "OPTIONS /api/carts/cart_id/ HTTP/1.1" 200 0
+INFO 2019-12-20 16:18:59,672 basehttp 124 "GET /index/ HTTP/1.1" 200 5067
+INFO 2019-12-20 16:18:59,690 basehttp 124 "GET /static/assets/javascript/common/base.js HTTP/1.1" 304 0
+INFO 2019-12-20 16:18:59,690 basehttp 124 "GET /static/assets/javascript/common/header.js HTTP/1.1" 304 0
+INFO 2019-12-20 16:18:59,691 basehttp 124 "GET /static/assets/javascript/page/index.js HTTP/1.1" 304 0
+INFO 2019-12-20 16:19:06,261 basehttp 124 "GET /api/goods/new/ HTTP/1.1" 200 1701
+INFO 2019-12-20 16:19:36,022 basehttp 124 "GET /carts/ HTTP/1.1" 200 3112
+INFO 2019-12-20 16:19:36,072 basehttp 124 "GET /static/assets/javascript/common/base.js HTTP/1.1" 304 0
+INFO 2019-12-20 16:19:36,074 basehttp 124 "GET /static/assets/javascript/common/header.js HTTP/1.1" 200 2659
+WARNING 2019-12-20 16:19:36,117 base 152 Not Found: /assets/css/page/myCart.less
+INFO 2019-12-20 16:19:36,120 basehttp 124 "GET /static/assets/javascript/page/myCart.js HTTP/1.1" 200 2337
+WARNING 2019-12-20 16:19:36,121 basehttp 124 "GET /assets/css/page/myCart.less HTTP/1.1" 404 5130
+INFO 2019-12-20 16:20:48,009 basehttp 124 "GET /carts/ HTTP/1.1" 200 3117
+INFO 2019-12-20 16:20:48,049 basehttp 124 "GET /static/assets/images/icon.png HTTP/1.1" 200 7011
+INFO 2019-12-20 16:20:48,094 basehttp 124 "GET /static/assets/javascript/libs/jquery-1.9.1.js HTTP/1.1" 200 128159
+INFO 2019-12-20 16:20:48,110 basehttp 124 "GET /static/assets/javascript/common/base.js HTTP/1.1" 200 2125
+INFO 2019-12-20 16:20:48,128 basehttp 124 "GET /static/assets/javascript/common/header.js HTTP/1.1" 200 2659
+INFO 2019-12-20 16:20:48,181 basehttp 124 "GET /static/assets/javascript/page/myCart.js HTTP/1.1" 200 2337
+INFO 2019-12-20 16:20:48,819 basehttp 124 "GET /static/assets/css/page/myCart.less HTTP/1.1" 200 6339
+INFO 2019-12-20 16:20:48,873 basehttp 124 "GET /static/assets/css/common/base.less HTTP/1.1" 200 5087
+INFO 2019-12-20 16:20:48,897 basehttp 124 "GET /static/assets/css/common/reset.less HTTP/1.1" 200 704
+INFO 2019-12-20 16:20:48,900 basehttp 124 "GET /static/assets/css/common/header.less HTTP/1.1" 200 7894
+INFO 2019-12-20 16:20:48,909 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 16:21:22,459 basehttp 124 "GET /api/account/logout/ HTTP/1.1" 200 44
+INFO 2019-12-20 16:21:22,511 basehttp 124 "GET /carts/ HTTP/1.1" 200 3109
+INFO 2019-12-20 16:21:28,422 basehttp 124 "GET /api/account/logout/ HTTP/1.1" 200 44
+INFO 2019-12-20 16:21:42,030 basehttp 124 "GET /index HTTP/1.1" 301 0
+INFO 2019-12-20 16:21:42,071 basehttp 124 "GET /index/ HTTP/1.1" 200 4780
+INFO 2019-12-20 16:21:42,128 basehttp 124 "GET /media/1.jpg HTTP/1.1" 200 11259
+INFO 2019-12-20 16:21:42,130 basehttp 124 "GET /static/assets/javascript/page/index.js HTTP/1.1" 304 0
+INFO 2019-12-20 16:21:50,731 basehttp 124 "POST /api/account/login/ HTTP/1.1" 200 43
+INFO 2019-12-20 16:21:50,787 basehttp 124 "GET /index/ HTTP/1.1" 200 5078
+INFO 2019-12-20 16:21:52,342 basehttp 124 "GET /carts/ HTTP/1.1" 200 3117
+INFO 2019-12-20 16:23:06,945 basehttp 124 "GET /carts/ HTTP/1.1" 200 3117
+INFO 2019-12-20 16:23:06,987 basehttp 124 "GET /static/assets/images/icon.png HTTP/1.1" 200 7011
+INFO 2019-12-20 16:23:07,001 basehttp 124 "GET /static/assets/javascript/libs/jquery-1.9.1.js HTTP/1.1" 200 128159
+INFO 2019-12-20 16:23:07,014 basehttp 124 "GET /static/assets/javascript/common/base.js HTTP/1.1" 200 2125
+INFO 2019-12-20 16:23:07,024 basehttp 124 "GET /static/assets/javascript/common/header.js HTTP/1.1" 200 2659
+INFO 2019-12-20 16:23:07,035 basehttp 124 "GET /static/assets/javascript/page/myCart.js HTTP/1.1" 200 2337
+INFO 2019-12-20 16:23:09,215 basehttp 124 "GET /static/assets/css/page/myCart.less HTTP/1.1" 200 6339
+INFO 2019-12-20 16:23:09,269 basehttp 124 "GET /static/assets/css/common/base.less HTTP/1.1" 200 5087
+INFO 2019-12-20 16:23:09,306 basehttp 124 "GET /static/assets/css/common/header.less HTTP/1.1" 200 7894
+INFO 2019-12-20 16:23:09,307 basehttp 124 "GET /static/assets/css/common/reset.less HTTP/1.1" 200 704
+INFO 2019-12-20 16:23:09,319 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 16:23:47,529 basehttp 124 "GET /index/ HTTP/1.1" 200 5067
+INFO 2019-12-20 16:23:47,546 basehttp 124 "GET /static/assets/css/page/index.css HTTP/1.1" 200 17134
+INFO 2019-12-20 16:23:47,547 basehttp 124 "GET /static/assets/images/icon.png HTTP/1.1" 200 7011
+INFO 2019-12-20 16:23:47,555 basehttp 124 "GET /static/assets/javascript/common/base.js HTTP/1.1" 200 2125
+INFO 2019-12-20 16:23:47,557 basehttp 124 "GET /static/assets/javascript/common/header.js HTTP/1.1" 200 2659
+INFO 2019-12-20 16:23:47,559 basehttp 124 "GET /static/assets/javascript/page/index.js HTTP/1.1" 200 2887
+INFO 2019-12-20 16:23:47,560 basehttp 124 "GET /static/assets/javascript/libs/jquery-1.9.1.js HTTP/1.1" 200 128159
+INFO 2019-12-20 16:23:47,561 basehttp 124 "GET /media/1.jpg HTTP/1.1" 200 11259
+INFO 2019-12-20 16:23:47,617 basehttp 124 "GET /static/assets/images/banner.png HTTP/1.1" 200 2295905
+INFO 2019-12-20 16:23:47,626 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 16:25:10,572 basehttp 124 "GET /carts/ HTTP/1.1" 200 3129
+INFO 2019-12-20 16:25:10,733 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 16:25:12,037 basehttp 124 "GET /carts/ HTTP/1.1" 200 3129
+INFO 2019-12-20 16:25:12,185 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 16:26:19,857 basehttp 124 "GET /carts/ HTTP/1.1" 200 3688
+INFO 2019-12-20 16:26:19,892 basehttp 124 "GET /static/assets/images/icon.png HTTP/1.1" 200 7011
+INFO 2019-12-20 16:26:19,903 basehttp 124 "GET /static/assets/javascript/libs/jquery-1.9.1.js HTTP/1.1" 200 128159
+INFO 2019-12-20 16:26:19,912 basehttp 124 "GET /static/assets/javascript/common/base.js HTTP/1.1" 200 2125
+INFO 2019-12-20 16:26:19,920 basehttp 124 "GET /static/assets/javascript/common/header.js HTTP/1.1" 200 2659
+INFO 2019-12-20 16:26:19,924 basehttp 124 "GET /static/assets/javascript/page/myCart.js HTTP/1.1" 200 2337
+INFO 2019-12-20 16:26:21,361 basehttp 124 "GET /static/assets/css/page/myCart.less HTTP/1.1" 200 6339
+INFO 2019-12-20 16:26:21,420 basehttp 124 "GET /static/assets/css/common/base.less HTTP/1.1" 200 5087
+INFO 2019-12-20 16:26:21,445 basehttp 124 "GET /static/assets/css/common/header.less HTTP/1.1" 304 0
+INFO 2019-12-20 16:26:21,446 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 16:26:29,231 basehttp 124 "GET /goods/search/?keyword=cookie HTTP/1.1" 200 3879
+INFO 2019-12-20 16:26:30,480 basehttp 124 "GET /carts/ HTTP/1.1" 200 3688
+INFO 2019-12-20 16:26:47,079 basehttp 124 "GET /carts/ HTTP/1.1" 200 6944
+INFO 2019-12-20 16:26:47,115 basehttp 124 "GET /static/assets/images/icon.png HTTP/1.1" 200 7011
+INFO 2019-12-20 16:26:47,126 basehttp 124 "GET /media/1.jpg HTTP/1.1" 200 11259
+INFO 2019-12-20 16:26:47,149 basehttp 124 "GET /static/assets/javascript/common/base.js HTTP/1.1" 200 2125
+INFO 2019-12-20 16:26:47,165 basehttp 124 "GET /static/assets/javascript/common/header.js HTTP/1.1" 200 2659
+INFO 2019-12-20 16:26:47,173 basehttp 124 "GET /static/assets/javascript/libs/jquery-1.9.1.js HTTP/1.1" 200 128159
+INFO 2019-12-20 16:26:47,189 basehttp 124 "GET /static/assets/javascript/page/myCart.js HTTP/1.1" 200 2337
+INFO 2019-12-20 16:26:47,817 basehttp 124 "GET /static/assets/css/page/myCart.less HTTP/1.1" 200 6339
+INFO 2019-12-20 16:26:47,877 basehttp 124 "GET /static/assets/css/common/base.less HTTP/1.1" 200 5087
+INFO 2019-12-20 16:26:47,911 basehttp 124 "GET /static/assets/css/common/reset.less HTTP/1.1" 200 704
+INFO 2019-12-20 16:26:47,912 basehttp 124 "GET /static/assets/css/common/header.less HTTP/1.1" 200 7894
+INFO 2019-12-20 16:26:47,921 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+WARNING 2019-12-20 16:26:54,117 base 93 Method Not Allowed (DELETE): /api/carts/3/
+WARNING 2019-12-20 16:26:54,120 basehttp 124 "DELETE /api/carts/3/ HTTP/1.1" 405 0
+INFO 2019-12-20 16:28:38,894 basehttp 124 "GET /carts/ HTTP/1.1" 200 6960
+INFO 2019-12-20 16:28:38,940 basehttp 124 "GET /static/assets/images/icon.png HTTP/1.1" 200 7011
+INFO 2019-12-20 16:28:38,977 basehttp 124 "GET /static/assets/javascript/libs/jquery-1.9.1.js HTTP/1.1" 200 128159
+INFO 2019-12-20 16:28:38,986 basehttp 124 "GET /static/assets/javascript/common/base.js HTTP/1.1" 200 2125
+INFO 2019-12-20 16:28:38,999 basehttp 124 "GET /static/assets/javascript/common/header.js HTTP/1.1" 200 2659
+INFO 2019-12-20 16:28:39,015 basehttp 124 "GET /static/assets/javascript/page/myCart.js HTTP/1.1" 200 2337
+INFO 2019-12-20 16:28:39,085 basehttp 124 "GET /media/1.jpg HTTP/1.1" 200 11259
+INFO 2019-12-20 16:28:39,804 basehttp 124 "GET /static/assets/css/page/myCart.less HTTP/1.1" 200 6339
+INFO 2019-12-20 16:28:39,858 basehttp 124 "GET /static/assets/css/common/base.less HTTP/1.1" 200 5087
+INFO 2019-12-20 16:28:39,890 basehttp 124 "GET /static/assets/css/common/reset.less HTTP/1.1" 200 704
+INFO 2019-12-20 16:28:39,891 basehttp 124 "GET /static/assets/css/common/header.less HTTP/1.1" 200 7894
+INFO 2019-12-20 16:28:39,894 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+WARNING 2019-12-20 16:28:45,786 base 93 Method Not Allowed (PUT): /api/carts/2/
+WARNING 2019-12-20 16:28:45,789 basehttp 124 "PUT /api/carts/2/ HTTP/1.1" 405 0
+INFO 2019-12-20 16:29:44,103 basehttp 124 "GET /carts/ HTTP/1.1" 200 6964
+INFO 2019-12-20 16:29:44,152 basehttp 124 "GET /static/assets/images/icon.png HTTP/1.1" 200 7011
+INFO 2019-12-20 16:29:44,159 basehttp 124 "GET /media/1.jpg HTTP/1.1" 200 11259
+INFO 2019-12-20 16:29:44,174 basehttp 124 "GET /static/assets/javascript/common/base.js HTTP/1.1" 200 2125
+INFO 2019-12-20 16:29:44,178 basehttp 124 "GET /static/assets/javascript/libs/jquery-1.9.1.js HTTP/1.1" 200 128159
+INFO 2019-12-20 16:29:44,199 basehttp 124 "GET /static/assets/javascript/common/header.js HTTP/1.1" 200 2659
+INFO 2019-12-20 16:29:44,201 basehttp 124 "GET /static/assets/javascript/page/myCart.js HTTP/1.1" 200 2337
+INFO 2019-12-20 16:29:44,523 basehttp 124 "GET /carts/ HTTP/1.1" 200 6964
+INFO 2019-12-20 16:29:44,558 basehttp 124 "GET /static/assets/images/icon.png HTTP/1.1" 200 7011
+INFO 2019-12-20 16:29:44,561 basehttp 124 "GET /media/1.jpg HTTP/1.1" 200 11259
+INFO 2019-12-20 16:29:44,574 basehttp 124 "GET /static/assets/javascript/common/base.js HTTP/1.1" 200 2125
+INFO 2019-12-20 16:29:44,580 basehttp 124 "GET /static/assets/javascript/libs/jquery-1.9.1.js HTTP/1.1" 200 128159
+INFO 2019-12-20 16:29:44,593 basehttp 124 "GET /static/assets/javascript/common/header.js HTTP/1.1" 200 2659
+INFO 2019-12-20 16:29:44,595 basehttp 124 "GET /static/assets/javascript/page/myCart.js HTTP/1.1" 200 2337
+INFO 2019-12-20 16:29:45,259 basehttp 124 "GET /static/assets/css/page/myCart.less HTTP/1.1" 200 6339
+INFO 2019-12-20 16:29:45,324 basehttp 124 "GET /static/assets/css/common/base.less HTTP/1.1" 200 5087
+INFO 2019-12-20 16:29:45,336 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 16:30:49,225 basehttp 124 "GET /carts/ HTTP/1.1" 200 6964
+INFO 2019-12-20 16:30:49,258 basehttp 124 "GET /static/assets/images/icon.png HTTP/1.1" 200 7011
+INFO 2019-12-20 16:30:49,259 basehttp 124 "GET /media/1.jpg HTTP/1.1" 200 11259
+INFO 2019-12-20 16:30:49,285 basehttp 124 "GET /static/assets/javascript/common/base.js HTTP/1.1" 200 2125
+INFO 2019-12-20 16:30:49,305 basehttp 124 "GET /static/assets/javascript/libs/jquery-1.9.1.js HTTP/1.1" 200 128159
+INFO 2019-12-20 16:30:49,305 basehttp 124 "GET /static/assets/javascript/common/header.js HTTP/1.1" 200 2659
+INFO 2019-12-20 16:30:49,319 basehttp 124 "GET /static/assets/javascript/page/myCart.js HTTP/1.1" 200 2337
+INFO 2019-12-20 16:30:50,005 basehttp 124 "GET /static/assets/css/page/myCart.less HTTP/1.1" 200 6339
+INFO 2019-12-20 16:30:50,063 basehttp 124 "GET /static/assets/css/common/base.less HTTP/1.1" 200 5087
+INFO 2019-12-20 16:30:50,092 basehttp 124 "GET /static/assets/css/common/reset.less HTTP/1.1" 200 704
+INFO 2019-12-20 16:30:50,096 basehttp 124 "GET /static/assets/css/common/header.less HTTP/1.1" 200 7894
+INFO 2019-12-20 16:30:50,098 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 16:31:08,282 basehttp 124 "GET /goods/category/1 HTTP/1.1" 301 0
+INFO 2019-12-20 16:31:08,328 basehttp 124 "GET /goods/category/1/ HTTP/1.1" 200 4998
+INFO 2019-12-20 16:31:10,945 basehttp 124 "POST /api/carts/ HTTP/1.1" 200 77
+INFO 2019-12-20 16:31:12,983 basehttp 124 "POST /api/carts/ HTTP/1.1" 200 77
+INFO 2019-12-20 16:31:15,450 basehttp 124 "GET /carts/ HTTP/1.1" 200 6964
+WARNING 2019-12-20 16:31:23,826 base 93 Method Not Allowed (PUT): /api/carts/2/
+WARNING 2019-12-20 16:31:23,827 basehttp 124 "PUT /api/carts/2/ HTTP/1.1" 405 0
+WARNING 2019-12-20 16:31:50,303 base 93 Method Not Allowed (DELETE): /api/carts/2/
+WARNING 2019-12-20 16:31:50,305 basehttp 124 "DELETE /api/carts/2/ HTTP/1.1" 405 0
+WARNING 2019-12-20 16:32:22,135 base 93 Method Not Allowed (PUT): /api/carts/3/
+WARNING 2019-12-20 16:32:22,143 basehttp 124 "PUT /api/carts/3/ HTTP/1.1" 405 0
+INFO 2019-12-20 16:34:08,110 basehttp 124 "GET /index/ HTTP/1.1" 200 5067
+INFO 2019-12-20 16:34:08,131 basehttp 124 "GET /static/assets/css/page/index.css HTTP/1.1" 304 0
+INFO 2019-12-20 16:34:08,133 basehttp 124 "GET /static/assets/javascript/common/base.js HTTP/1.1" 304 0
+INFO 2019-12-20 16:34:08,133 basehttp 124 "GET /static/assets/javascript/common/header.js HTTP/1.1" 304 0
+INFO 2019-12-20 16:34:08,134 basehttp 124 "GET /static/assets/javascript/page/index.js HTTP/1.1" 304 0
+INFO 2019-12-20 16:34:08,175 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+ERROR 2019-12-20 16:34:10,042 exception 135 Internal Server Error: /api/account/logout/
+Traceback (most recent call last):
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\views\generic\base.py", line 68, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\views\generic\base.py", line 88, in dispatch
+    return handler(request, *args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\utils\decorators.py", line 67, in _wrapper
+    return bound_func(*args, **kwargs)
+  File "C:\Users\Administrator\Desktop\lf-django\utils\decorator.py", line 21, in wrapper
+    return func(request,user,*args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\utils\decorators.py", line 63, in bound_func
+    return func.__get__(self, type(self))(*args2, **kwargs2)
+  File "C:\Users\Administrator\Desktop\lf-django\online\account\views.py", line 60, in get
+    del request.session['%s_cart' % user.id]
+  File "F:\Env\django_env\lib\site-packages\django\contrib\sessions\backends\base.py", line 64, in __delitem__
+    del self._session[key]
+KeyError: '39_cart'
+ERROR 2019-12-20 16:34:10,114 basehttp 124 "GET /api/account/logout/ HTTP/1.1" 500 95879
+INFO 2019-12-20 16:35:53,561 basehttp 124 "GET /carts/ HTTP/1.1" 200 6964
+INFO 2019-12-20 16:35:53,695 basehttp 124 "GET /static/assets/javascript/common/header.js HTTP/1.1" 304 0
+INFO 2019-12-20 16:35:53,783 basehttp 124 "GET /static/assets/css/common/header.less HTTP/1.1" 304 0
+INFO 2019-12-20 16:35:53,963 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+WARNING 2019-12-20 16:35:57,651 base 93 Method Not Allowed (DELETE): /api/carts/2/
+WARNING 2019-12-20 16:35:57,652 basehttp 124 "DELETE /api/carts/2/ HTTP/1.1" 405 0
+WARNING 2019-12-20 16:36:09,672 base 93 Method Not Allowed (PUT): /api/carts/3/
+WARNING 2019-12-20 16:36:09,673 basehttp 124 "PUT /api/carts/3/ HTTP/1.1" 405 0
+INFO 2019-12-20 16:37:25,073 basehttp 124 "GET /carts/ HTTP/1.1" 200 6964
+INFO 2019-12-20 16:37:25,124 basehttp 124 "GET /static/assets/images/icon.png HTTP/1.1" 200 7011
+INFO 2019-12-20 16:37:25,126 basehttp 124 "GET /media/1.jpg HTTP/1.1" 200 11259
+INFO 2019-12-20 16:37:25,149 basehttp 124 "GET /static/assets/javascript/common/base.js HTTP/1.1" 200 2125
+INFO 2019-12-20 16:37:25,159 basehttp 124 "GET /static/assets/javascript/libs/jquery-1.9.1.js HTTP/1.1" 200 128159
+INFO 2019-12-20 16:37:25,171 basehttp 124 "GET /static/assets/javascript/common/header.js HTTP/1.1" 200 2659
+INFO 2019-12-20 16:37:25,178 basehttp 124 "GET /static/assets/javascript/page/myCart.js HTTP/1.1" 200 2335
+INFO 2019-12-20 16:37:26,170 basehttp 124 "GET /carts/ HTTP/1.1" 200 6964
+INFO 2019-12-20 16:37:26,201 basehttp 124 "GET /static/assets/images/icon.png HTTP/1.1" 200 7011
+INFO 2019-12-20 16:37:26,216 basehttp 124 "GET /media/1.jpg HTTP/1.1" 200 11259
+INFO 2019-12-20 16:37:26,235 basehttp 124 "GET /static/assets/javascript/common/base.js HTTP/1.1" 200 2125
+INFO 2019-12-20 16:37:26,254 basehttp 124 "GET /static/assets/javascript/common/header.js HTTP/1.1" 200 2659
+INFO 2019-12-20 16:37:26,255 basehttp 124 "GET /static/assets/javascript/libs/jquery-1.9.1.js HTTP/1.1" 200 128159
+INFO 2019-12-20 16:37:26,265 basehttp 124 "GET /static/assets/javascript/page/myCart.js HTTP/1.1" 200 2335
+INFO 2019-12-20 16:37:28,617 basehttp 124 "GET /static/assets/css/page/myCart.less HTTP/1.1" 200 6339
+INFO 2019-12-20 16:37:28,671 basehttp 124 "GET /static/assets/css/common/base.less HTTP/1.1" 200 5087
+INFO 2019-12-20 16:37:28,703 basehttp 124 "GET /static/assets/css/common/reset.less HTTP/1.1" 200 704
+INFO 2019-12-20 16:37:28,705 basehttp 124 "GET /static/assets/css/common/header.less HTTP/1.1" 200 7894
+INFO 2019-12-20 16:37:28,711 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+ERROR 2019-12-20 16:37:32,728 exception 135 Internal Server Error: /api/cart/2/
+Traceback (most recent call last):
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\views\generic\base.py", line 68, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\views\generic\base.py", line 88, in dispatch
+    return handler(request, *args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\utils\decorators.py", line 67, in _wrapper
+    return bound_func(*args, **kwargs)
+  File "C:\Users\Administrator\Desktop\lf-django\utils\decorator.py", line 21, in wrapper
+    return func(request,user,*args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\utils\decorators.py", line 63, in bound_func
+    return func.__get__(self, type(self))(*args2, **kwargs2)
+  File "C:\Users\Administrator\Desktop\lf-django\online\cart\views.py", line 112, in put
+    data = json.loads(request.body.decode())
+  File "d:\program files (x86)\python\Lib\json\__init__.py", line 354, in loads
+    return _default_decoder.decode(s)
+  File "d:\program files (x86)\python\Lib\json\decoder.py", line 339, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "d:\program files (x86)\python\Lib\json\decoder.py", line 357, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+ERROR 2019-12-20 16:37:32,784 basehttp 124 "PUT /api/cart/2/ HTTP/1.1" 500 108873
+INFO 2019-12-20 16:39:25,532 basehttp 124 "DELETE /api/cart/2/ HTTP/1.1" 200 69
+INFO 2019-12-20 16:42:10,386 basehttp 124 "GET /index/ HTTP/1.1" 200 5121
+INFO 2019-12-20 16:42:10,426 basehttp 124 "GET /static/assets/javascript/common/header.js HTTP/1.1" 304 0
+INFO 2019-12-20 16:42:10,436 basehttp 124 "GET /static/assets/javascript/page/index.js HTTP/1.1" 200 2887
+INFO 2019-12-20 16:42:14,542 basehttp 124 "POST /api/carts/ HTTP/1.1" 200 76
+INFO 2019-12-20 16:42:17,785 basehttp 124 "GET /carts/ HTTP/1.1" 200 7005
+INFO 2019-12-20 16:42:17,832 basehttp 124 "GET /static/assets/javascript/page/myCart.js HTTP/1.1" 200 2336
+INFO 2019-12-20 16:42:17,952 basehttp 124 "GET /static/assets/css/common/header.less HTTP/1.1" 304 0
+INFO 2019-12-20 16:42:27,138 basehttp 124 "POST /api/cart/3/ HTTP/1.1" 200 70
+INFO 2019-12-20 16:42:39,627 basehttp 124 "POST /api/cart/3/ HTTP/1.1" 200 69
+INFO 2019-12-20 16:42:44,054 basehttp 124 "POST /api/cart/3/ HTTP/1.1" 200 70
+INFO 2019-12-20 16:42:45,282 basehttp 124 "POST /api/cart/3/ HTTP/1.1" 200 70
+INFO 2019-12-20 16:42:46,612 basehttp 124 "POST /api/cart/4/ HTTP/1.1" 200 70
+INFO 2019-12-20 16:42:48,437 basehttp 124 "POST /api/cart/4/ HTTP/1.1" 200 70
+INFO 2019-12-20 16:42:49,519 basehttp 124 "POST /api/cart/4/ HTTP/1.1" 200 70
+INFO 2019-12-20 16:42:50,047 basehttp 124 "POST /api/cart/4/ HTTP/1.1" 200 69
+INFO 2019-12-20 16:42:51,160 basehttp 124 "POST /api/cart/4/ HTTP/1.1" 200 70
+INFO 2019-12-20 16:42:51,345 basehttp 124 "POST /api/cart/4/ HTTP/1.1" 200 70
+INFO 2019-12-20 16:42:51,527 basehttp 124 "POST /api/cart/4/ HTTP/1.1" 200 70
+INFO 2019-12-20 16:42:56,499 basehttp 124 "GET /goods/category/2 HTTP/1.1" 301 0
+INFO 2019-12-20 16:42:56,536 basehttp 124 "GET /goods/category/2/ HTTP/1.1" 200 4625
+INFO 2019-12-20 16:43:01,014 basehttp 124 "GET /goods/3 HTTP/1.1" 301 0
+INFO 2019-12-20 16:43:01,051 basehttp 124 "GET /goods/3/ HTTP/1.1" 200 4777
+INFO 2019-12-20 16:43:01,096 basehttp 124 "GET /static/assets/css/page/detail.css HTTP/1.1" 200 22522
+INFO 2019-12-20 16:43:01,098 basehttp 124 "GET /static/assets/javascript/page/detail.js HTTP/1.1" 304 0
+INFO 2019-12-20 16:43:04,202 basehttp 124 "POST /api/carts/ HTTP/1.1" 200 44
+INFO 2019-12-20 16:43:05,188 basehttp 124 "POST /api/carts/ HTTP/1.1" 200 44
+INFO 2019-12-20 16:43:07,306 basehttp 124 "POST /api/carts/ HTTP/1.1" 200 44
+INFO 2019-12-20 16:43:08,616 basehttp 124 "POST /api/carts/ HTTP/1.1" 200 44
+INFO 2019-12-20 16:43:09,122 basehttp 124 "POST /api/carts/ HTTP/1.1" 200 44
+INFO 2019-12-20 16:43:10,819 basehttp 124 "GET /carts/ HTTP/1.1" 200 7006
+INFO 2019-12-20 16:43:10,852 basehttp 124 "GET /static/assets/javascript/page/myCart.js HTTP/1.1" 304 0
+INFO 2019-12-20 16:43:14,723 basehttp 124 "GET /goods/3/ HTTP/1.1" 200 4777
+INFO 2019-12-20 16:43:17,737 basehttp 124 "POST /api/carts/ HTTP/1.1" 200 44
+INFO 2019-12-20 16:43:24,047 basehttp 124 "GET /carts/ HTTP/1.1" 200 7006
+INFO 2019-12-20 16:43:30,099 basehttp 124 "GET /goods/3/ HTTP/1.1" 200 4777
+INFO 2019-12-20 16:43:34,533 basehttp 124 "POST /api/carts/ HTTP/1.1" 200 44
+INFO 2019-12-20 16:45:21,878 basehttp 124 "GET /carts/ HTTP/1.1" 200 7006
+INFO 2019-12-20 16:45:21,917 basehttp 124 "GET /static/assets/javascript/page/myCart.js HTTP/1.1" 304 0
+INFO 2019-12-20 16:45:26,279 basehttp 124 "POST /api/cart/15/ HTTP/1.1" 200 70
+INFO 2019-12-20 16:45:44,246 basehttp 124 "GET /goods/1 HTTP/1.1" 301 0
+INFO 2019-12-20 16:45:44,285 basehttp 124 "GET /goods/1/ HTTP/1.1" 200 4796
+INFO 2019-12-20 16:46:23,377 basehttp 124 "GET /goods/category/1/ HTTP/1.1" 200 5042
+INFO 2019-12-20 16:46:23,423 basehttp 124 "GET /static/assets/javascript/page/index.js HTTP/1.1" 304 0
+INFO 2019-12-20 16:46:26,757 basehttp 124 "POST /api/carts/ HTTP/1.1" 200 77
+INFO 2019-12-20 16:46:48,487 basehttp 124 "GET /goods/2/ HTTP/1.1" 200 4777
+INFO 2019-12-20 16:49:05,129 basehttp 124 "GET /goods/2/ HTTP/1.1" 200 4789
+INFO 2019-12-20 16:49:05,198 basehttp 124 "GET /static/assets/css/page/detail.css HTTP/1.1" 200 22522
+INFO 2019-12-20 16:49:05,200 basehttp 124 "GET /static/assets/javascript/common/base.js HTTP/1.1" 200 2125
+INFO 2019-12-20 16:49:05,203 basehttp 124 "GET /static/assets/javascript/common/header.js HTTP/1.1" 200 2659
+INFO 2019-12-20 16:49:05,208 basehttp 124 "GET /static/assets/javascript/libs/jquery-1.9.1.js HTTP/1.1" 200 128159
+INFO 2019-12-20 16:49:05,223 basehttp 124 "GET /static/assets/javascript/page/detail.js HTTP/1.1" 200 2349
+INFO 2019-12-20 16:49:05,299 basehttp 124 "GET /static/assets/images/icon.png HTTP/1.1" 200 7011
+INFO 2019-12-20 16:49:05,302 basehttp 124 "GET /media/1.jpg HTTP/1.1" 200 11259
+INFO 2019-12-20 16:49:05,365 basehttp 124 "GET /goods/2/ HTTP/1.1" 200 4789
+INFO 2019-12-20 16:49:05,417 basehttp 124 "GET /static/assets/css/page/detail.css HTTP/1.1" 200 22522
+INFO 2019-12-20 16:49:05,427 basehttp 124 "GET /static/assets/javascript/common/base.js HTTP/1.1" 200 2125
+INFO 2019-12-20 16:49:05,429 basehttp 124 "GET /static/assets/images/icon.png HTTP/1.1" 200 7011
+INFO 2019-12-20 16:49:05,431 basehttp 124 "GET /static/assets/javascript/common/header.js HTTP/1.1" 200 2659
+INFO 2019-12-20 16:49:05,435 basehttp 124 "GET /media/1.jpg HTTP/1.1" 200 11259
+INFO 2019-12-20 16:49:05,443 basehttp 124 "GET /static/assets/javascript/page/detail.js HTTP/1.1" 200 2349
+INFO 2019-12-20 16:49:05,444 basehttp 124 "GET /static/assets/javascript/libs/jquery-1.9.1.js HTTP/1.1" 200 128159
+INFO 2019-12-20 16:49:05,515 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 16:49:09,470 basehttp 124 "POST /api/carts/ HTTP/1.1" 200 77
+INFO 2019-12-20 16:49:17,597 basehttp 124 "POST /api/carts/ HTTP/1.1" 200 77
+INFO 2019-12-20 16:49:29,387 basehttp 124 "POST /api/carts/ HTTP/1.1" 200 77
+INFO 2019-12-20 16:49:38,710 basehttp 124 "GET /carts/ HTTP/1.1" 200 7008
+INFO 2019-12-20 16:49:38,754 basehttp 124 "GET /static/assets/javascript/page/myCart.js HTTP/1.1" 304 0
+INFO 2019-12-20 16:49:38,882 basehttp 124 "GET /static/assets/css/common/header.less HTTP/1.1" 304 0
+INFO 2019-12-20 16:49:42,661 basehttp 124 "POST /api/cart/3/ HTTP/1.1" 200 70
+INFO 2019-12-20 16:49:43,044 basehttp 124 "POST /api/cart/3/ HTTP/1.1" 200 70
+INFO 2019-12-20 16:49:43,282 basehttp 124 "POST /api/cart/3/ HTTP/1.1" 200 70
+INFO 2019-12-20 16:49:47,284 basehttp 124 "DELETE /api/cart/15/ HTTP/1.1" 200 69
+INFO 2019-12-20 16:49:49,448 basehttp 124 "GET /goods/3/ HTTP/1.1" 200 4788
+INFO 2019-12-20 16:49:55,130 basehttp 124 "POST /api/carts/ HTTP/1.1" 200 77
+INFO 2019-12-20 16:50:18,276 basehttp 124 "GET /goods/category/1/ HTTP/1.1" 200 5042
+INFO 2019-12-20 16:50:18,316 basehttp 124 "GET /static/assets/javascript/page/index.js HTTP/1.1" 304 0
+INFO 2019-12-20 16:50:20,037 basehttp 124 "POST /api/carts/ HTTP/1.1" 200 77
+INFO 2019-12-20 16:50:22,808 basehttp 124 "POST /api/carts/ HTTP/1.1" 200 77
+INFO 2019-12-20 16:50:24,983 basehttp 124 "POST /api/carts/ HTTP/1.1" 200 77
+INFO 2019-12-20 16:50:27,052 basehttp 124 "GET /goods/1/ HTTP/1.1" 200 4808
+INFO 2019-12-20 16:50:29,493 basehttp 124 "POST /api/carts/ HTTP/1.1" 200 77
+INFO 2019-12-20 16:51:27,502 basehttp 124 "GET /index/ HTTP/1.1" 200 5111
+INFO 2019-12-20 16:51:27,516 basehttp 124 "GET /static/assets/css/page/index.css HTTP/1.1" 304 0
+INFO 2019-12-20 16:51:27,528 basehttp 124 "GET /static/assets/javascript/common/base.js HTTP/1.1" 304 0
+INFO 2019-12-20 16:51:27,531 basehttp 124 "GET /static/assets/javascript/common/header.js HTTP/1.1" 304 0
+INFO 2019-12-20 16:51:27,533 basehttp 124 "GET /static/assets/javascript/page/index.js HTTP/1.1" 304 0
+ERROR 2019-12-20 16:51:30,307 exception 135 Internal Server Error: /api/carts/
+Traceback (most recent call last):
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\views\generic\base.py", line 68, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\views\generic\base.py", line 88, in dispatch
+    return handler(request, *args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\utils\decorators.py", line 67, in _wrapper
+    return bound_func(*args, **kwargs)
+  File "C:\Users\Administrator\Desktop\lf-django\utils\decorator.py", line 21, in wrapper
+    return func(request,user,*args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\utils\decorators.py", line 63, in bound_func
+    return func.__get__(self, type(self))(*args2, **kwargs2)
+  File "C:\Users\Administrator\Desktop\lf-django\online\cart\views.py", line 103, in post
+    print(request.session["%s_cart" % user.id])
+  File "F:\Env\django_env\lib\site-packages\django\contrib\sessions\backends\base.py", line 57, in __getitem__
+    return self._session[key]
+KeyError: '39_cart'
+ERROR 2019-12-20 16:51:30,354 basehttp 124 "POST /api/carts/ HTTP/1.1" 500 97463
+INFO 2019-12-20 16:51:37,128 basehttp 124 "GET /goods/3/ HTTP/1.1" 200 4778
+INFO 2019-12-20 16:51:37,172 basehttp 124 "GET /static/assets/css/page/detail.css HTTP/1.1" 200 22522
+INFO 2019-12-20 16:51:37,173 basehttp 124 "GET /static/assets/javascript/page/detail.js HTTP/1.1" 200 2349
+ERROR 2019-12-20 16:51:41,502 exception 135 Internal Server Error: /api/carts/
+Traceback (most recent call last):
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\views\generic\base.py", line 68, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\views\generic\base.py", line 88, in dispatch
+    return handler(request, *args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\utils\decorators.py", line 67, in _wrapper
+    return bound_func(*args, **kwargs)
+  File "C:\Users\Administrator\Desktop\lf-django\utils\decorator.py", line 21, in wrapper
+    return func(request,user,*args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\utils\decorators.py", line 63, in bound_func
+    return func.__get__(self, type(self))(*args2, **kwargs2)
+  File "C:\Users\Administrator\Desktop\lf-django\online\cart\views.py", line 103, in post
+    print(request.session["%s_cart" % user.id])
+  File "F:\Env\django_env\lib\site-packages\django\contrib\sessions\backends\base.py", line 57, in __getitem__
+    return self._session[key]
+KeyError: '39_cart'
+ERROR 2019-12-20 16:51:41,542 basehttp 124 "POST /api/carts/ HTTP/1.1" 500 97482
+ERROR 2019-12-20 16:51:44,111 exception 135 Internal Server Error: /api/carts/
+Traceback (most recent call last):
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\views\generic\base.py", line 68, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\views\generic\base.py", line 88, in dispatch
+    return handler(request, *args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\utils\decorators.py", line 67, in _wrapper
+    return bound_func(*args, **kwargs)
+  File "C:\Users\Administrator\Desktop\lf-django\utils\decorator.py", line 21, in wrapper
+    return func(request,user,*args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\utils\decorators.py", line 63, in bound_func
+    return func.__get__(self, type(self))(*args2, **kwargs2)
+  File "C:\Users\Administrator\Desktop\lf-django\online\cart\views.py", line 103, in post
+    print(request.session["%s_cart" % user.id])
+  File "F:\Env\django_env\lib\site-packages\django\contrib\sessions\backends\base.py", line 57, in __getitem__
+    return self._session[key]
+KeyError: '39_cart'
+ERROR 2019-12-20 16:51:44,153 basehttp 124 "POST /api/carts/ HTTP/1.1" 500 97482
+ERROR 2019-12-20 16:51:44,961 exception 135 Internal Server Error: /api/carts/
+Traceback (most recent call last):
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\views\generic\base.py", line 68, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\views\generic\base.py", line 88, in dispatch
+    return handler(request, *args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\utils\decorators.py", line 67, in _wrapper
+    return bound_func(*args, **kwargs)
+  File "C:\Users\Administrator\Desktop\lf-django\utils\decorator.py", line 21, in wrapper
+    return func(request,user,*args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\utils\decorators.py", line 63, in bound_func
+    return func.__get__(self, type(self))(*args2, **kwargs2)
+  File "C:\Users\Administrator\Desktop\lf-django\online\cart\views.py", line 103, in post
+    print(request.session["%s_cart" % user.id])
+  File "F:\Env\django_env\lib\site-packages\django\contrib\sessions\backends\base.py", line 57, in __getitem__
+    return self._session[key]
+KeyError: '39_cart'
+ERROR 2019-12-20 16:51:45,011 basehttp 124 "POST /api/carts/ HTTP/1.1" 500 97482
+INFO 2019-12-20 16:52:03,423 basehttp 124 "GET /account/ HTTP/1.1" 200 5935
+INFO 2019-12-20 16:52:03,436 basehttp 124 "GET /static/assets/javascript/page/myAccount.js HTTP/1.1" 304 0
+INFO 2019-12-20 16:52:09,582 basehttp 124 "GET /index/ HTTP/1.1" 200 5111
+INFO 2019-12-20 16:52:39,785 basehttp 124 "GET /goods/3/ HTTP/1.1" 200 4778
+WARNING 2019-12-20 16:53:06,526 base 152 Not Found: /goods/1/order/
+WARNING 2019-12-20 16:53:06,526 basehttp 124 "GET /goods/1/order/ HTTP/1.1" 404 5091
+WARNING 2019-12-20 16:53:06,639 base 152 Not Found: /favicon.ico
+WARNING 2019-12-20 16:53:06,641 basehttp 124 "GET /favicon.ico HTTP/1.1" 404 5082
+WARNING 2019-12-20 16:53:08,140 base 152 Not Found: /goods/3/order/
+WARNING 2019-12-20 16:53:08,141 basehttp 124 "GET /goods/3/order/ HTTP/1.1" 404 5091
+WARNING 2019-12-20 16:53:08,181 base 152 Not Found: /favicon.ico
+WARNING 2019-12-20 16:53:08,182 basehttp 124 "GET /favicon.ico HTTP/1.1" 404 5082
+INFO 2019-12-20 16:54:15,943 basehttp 124 "GET /goods/1/ HTTP/1.1" 200 4808
+INFO 2019-12-20 16:54:16,218 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 16:54:17,841 basehttp 124 "GET /goods/category/1/ HTTP/1.1" 200 5069
+INFO 2019-12-20 16:54:17,876 basehttp 124 "GET /static/assets/javascript/page/index.js HTTP/1.1" 304 0
+WARNING 2019-12-20 16:54:19,695 base 152 Not Found: /orders/address/
+WARNING 2019-12-20 16:54:19,697 basehttp 124 "GET /orders/address/ HTTP/1.1" 404 5094
+WARNING 2019-12-20 16:54:19,796 base 152 Not Found: /favicon.ico
+WARNING 2019-12-20 16:54:19,799 basehttp 124 "GET /favicon.ico HTTP/1.1" 404 5082
+INFO 2019-12-20 16:55:09,411 basehttp 124 "GET /carts/ HTTP/1.1" 200 7006
+INFO 2019-12-20 16:55:09,456 basehttp 124 "GET /static/assets/javascript/page/myCart.js HTTP/1.1" 304 0
+INFO 2019-12-20 16:55:09,458 basehttp 124 "GET /static/assets/javascript/common/header.js HTTP/1.1" 304 0
+INFO 2019-12-20 16:55:09,576 basehttp 124 "GET /static/assets/css/common/header.less HTTP/1.1" 304 0
+INFO 2019-12-20 16:55:54,525 basehttp 124 "GET /index/ HTTP/1.1" 200 5149
+WARNING 2019-12-20 16:56:04,925 base 152 Not Found: /orders/address/
+WARNING 2019-12-20 16:56:04,931 basehttp 124 "GET /orders/address/ HTTP/1.1" 404 5094
+ERROR 2019-12-20 16:56:45,125 exception 135 Internal Server Error: /api/carts/
+Traceback (most recent call last):
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\views\generic\base.py", line 68, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\views\generic\base.py", line 88, in dispatch
+    return handler(request, *args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\utils\decorators.py", line 67, in _wrapper
+    return bound_func(*args, **kwargs)
+  File "C:\Users\Administrator\Desktop\lf-django\utils\decorator.py", line 21, in wrapper
+    return func(request,user,*args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\utils\decorators.py", line 63, in bound_func
+    return func.__get__(self, type(self))(*args2, **kwargs2)
+  File "C:\Users\Administrator\Desktop\lf-django\online\cart\views.py", line 103, in post
+    print(request.session["%s_cart" % user.id])
+  File "F:\Env\django_env\lib\site-packages\django\contrib\sessions\backends\base.py", line 57, in __getitem__
+    return self._session[key]
+KeyError: '39_cart'
+ERROR 2019-12-20 16:56:45,166 basehttp 124 "POST /api/carts/ HTTP/1.1" 500 97482
+INFO 2019-12-20 16:58:57,904 basehttp 124 "GET /index/ HTTP/1.1" 200 4851
+INFO 2019-12-20 16:58:57,946 basehttp 124 "GET /static/assets/css/page/index.css HTTP/1.1" 304 0
+INFO 2019-12-20 16:58:57,948 basehttp 124 "GET /static/assets/javascript/common/header.js HTTP/1.1" 304 0
+INFO 2019-12-20 16:58:57,948 basehttp 124 "GET /static/assets/javascript/page/index.js HTTP/1.1" 304 0
+INFO 2019-12-20 16:59:04,159 basehttp 124 "GET /index/ HTTP/1.1" 200 4851
+INFO 2019-12-20 16:59:04,174 basehttp 124 "GET /media/1.jpg HTTP/1.1" 200 11259
+INFO 2019-12-20 16:59:04,205 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 16:59:06,372 basehttp 124 "GET /account/signup/ HTTP/1.1" 200 4894
+INFO 2019-12-20 16:59:22,828 basehttp 124 "POST /api/account/signup/ HTTP/1.1" 200 96
+WARNING 2019-12-20 16:59:35,181 base 152 Not Found: /orders/address/
+WARNING 2019-12-20 16:59:35,185 basehttp 124 "GET /orders/address/ HTTP/1.1" 404 5094
+WARNING 2019-12-20 16:59:35,401 base 152 Not Found: /favicon.ico
+WARNING 2019-12-20 16:59:35,406 basehttp 124 "GET /favicon.ico HTTP/1.1" 404 5082
+INFO 2019-12-20 17:00:11,729 basehttp 124 "GET /account/signup/ HTTP/1.1" 200 4894
+INFO 2019-12-20 17:00:26,973 basehttp 124 "GET /account/signup/ HTTP/1.1" 200 4894
+INFO 2019-12-20 17:00:26,987 basehttp 124 "GET /static/assets/images/icon.png HTTP/1.1" 200 7011
+INFO 2019-12-20 17:00:26,991 basehttp 124 "GET /static/assets/javascript/libs/jquery-1.9.1.js HTTP/1.1" 200 128159
+INFO 2019-12-20 17:00:26,993 basehttp 124 "GET /static/assets/javascript/common/base.js HTTP/1.1" 200 2125
+INFO 2019-12-20 17:00:26,999 basehttp 124 "GET /static/assets/javascript/common/header.js HTTP/1.1" 200 2659
+INFO 2019-12-20 17:00:26,999 basehttp 124 "GET /static/assets/javascript/page/register.js HTTP/1.1" 200 2166
+INFO 2019-12-20 17:00:27,571 basehttp 124 "GET /static/assets/css/page/register.less HTTP/1.1" 200 2815
+INFO 2019-12-20 17:00:27,604 basehttp 124 "GET /static/assets/css/common/base.less HTTP/1.1" 200 5087
+INFO 2019-12-20 17:00:27,608 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 17:00:45,323 basehttp 124 "POST /api/account/signup/ HTTP/1.1" 200 96
+INFO 2019-12-20 17:00:45,338 basehttp 124 "GET /index HTTP/1.1" 301 0
+INFO 2019-12-20 17:00:45,372 basehttp 124 "GET /index/ HTTP/1.1" 200 5138
+INFO 2019-12-20 17:00:45,388 basehttp 124 "GET /media/1.jpg HTTP/1.1" 200 11259
+INFO 2019-12-20 17:00:51,848 basehttp 124 "POST /api/carts/ HTTP/1.1" 200 76
+INFO 2019-12-20 17:00:59,456 basehttp 124 "GET /goods/3/ HTTP/1.1" 200 4778
+INFO 2019-12-20 17:00:59,469 basehttp 124 "GET /static/assets/css/page/detail.css HTTP/1.1" 304 0
+INFO 2019-12-20 17:01:00,858 basehttp 124 "POST /api/carts/ HTTP/1.1" 200 76
+INFO 2019-12-20 17:01:31,984 basehttp 124 "GET /goods/3/ HTTP/1.1" 200 4778
+INFO 2019-12-20 17:01:32,008 basehttp 124 "GET /static/assets/images/icon.png HTTP/1.1" 200 7011
+INFO 2019-12-20 17:01:32,008 basehttp 124 "GET /static/assets/css/page/detail.css HTTP/1.1" 200 22522
+INFO 2019-12-20 17:01:32,015 basehttp 124 "GET /media/1.jpg HTTP/1.1" 200 11259
+INFO 2019-12-20 17:01:32,016 basehttp 124 "GET /static/assets/javascript/common/base.js HTTP/1.1" 200 2125
+INFO 2019-12-20 17:01:32,017 basehttp 124 "GET /static/assets/javascript/common/header.js HTTP/1.1" 200 2659
+INFO 2019-12-20 17:01:32,018 basehttp 124 "GET /static/assets/javascript/page/detail.js HTTP/1.1" 200 2502
+INFO 2019-12-20 17:01:32,021 basehttp 124 "GET /static/assets/javascript/libs/jquery-1.9.1.js HTTP/1.1" 200 128159
+INFO 2019-12-20 17:01:32,049 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 17:01:34,177 basehttp 124 "POST /api/carts/ HTTP/1.1" 200 76
+INFO 2019-12-20 17:01:37,690 basehttp 124 "POST /api/carts/ HTTP/1.1" 200 76
+INFO 2019-12-20 17:01:41,527 basehttp 124 "POST /api/carts/ HTTP/1.1" 200 76
+WARNING 2019-12-20 17:01:45,808 base 152 Not Found: /goods/3/order/
+WARNING 2019-12-20 17:01:45,808 basehttp 124 "GET /goods/3/order/ HTTP/1.1" 404 5091
+WARNING 2019-12-20 17:01:45,846 base 152 Not Found: /favicon.ico
+WARNING 2019-12-20 17:01:45,847 basehttp 124 "GET /favicon.ico HTTP/1.1" 404 5082
+INFO 2019-12-20 17:02:39,179 basehttp 124 "GET /index/ HTTP/1.1" 200 5149
+INFO 2019-12-20 17:02:39,242 basehttp 124 "GET /static/assets/javascript/common/header.js HTTP/1.1" 304 0
+INFO 2019-12-20 17:02:39,243 basehttp 124 "GET /static/assets/javascript/common/base.js HTTP/1.1" 304 0
+INFO 2019-12-20 17:02:39,252 basehttp 124 "GET /static/assets/javascript/page/index.js HTTP/1.1" 304 0
+INFO 2019-12-20 17:02:42,660 basehttp 124 "GET /orders/address/ HTTP/1.1" 200 6395
+WARNING 2019-12-20 17:02:42,702 base 152 Not Found: /orders/static/assets/css/page/myOrder.css
+WARNING 2019-12-20 17:02:42,704 basehttp 124 "GET /orders/static/assets/css/page/myOrder.css HTTP/1.1" 404 6498
+INFO 2019-12-20 17:02:42,713 basehttp 124 "GET /static/assets/images/thing.png HTTP/1.1" 200 148959
+INFO 2019-12-20 17:06:29,808 basehttp 124 "POST /api/orders/ HTTP/1.1" 200 44
+INFO 2019-12-20 17:07:57,740 basehttp 124 "GET /index/ HTTP/1.1" 200 4684
+INFO 2019-12-20 17:07:57,795 basehttp 124 "GET /static/assets/javascript/page/index.js HTTP/1.1" 304 0
+INFO 2019-12-20 17:08:07,092 basehttp 124 "GET /api/goods/hot/?current=2 HTTP/1.1" 200 617
+INFO 2019-12-20 17:08:09,226 basehttp 124 "GET /api/goods/hot/?current=2 HTTP/1.1" 200 617
+INFO 2019-12-20 17:08:10,091 basehttp 124 "GET /api/goods/hot/?current=2 HTTP/1.1" 200 617
+ERROR 2019-12-20 17:08:17,008 exception 135 Internal Server Error: /api/goods/new/
+Traceback (most recent call last):
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "F:\Env\django_env\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\views\generic\base.py", line 68, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "F:\Env\django_env\lib\site-packages\django\views\generic\base.py", line 88, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\Administrator\Desktop\lf-django\online\goods\views.py", line 108, in get
+    "is_hot": single_goods.is_hot, "image": settings.URL_PREFIX + image[0].image.url})
+  File "F:\Env\django_env\lib\site-packages\django\db\models\query.py", line 289, in __getitem__
+    return list(qs)[0]
+IndexError: list index out of range
+ERROR 2019-12-20 17:08:17,056 basehttp 124 "GET /api/goods/new/ HTTP/1.1" 500 84242
+INFO 2019-12-20 17:09:20,114 basehttp 124 "GET /index/ HTTP/1.1" 200 4684
+INFO 2019-12-20 17:09:20,195 basehttp 124 "GET /static/assets/css/page/index.css HTTP/1.1" 200 17134
+INFO 2019-12-20 17:09:20,198 basehttp 124 "GET /static/assets/javascript/common/base.js HTTP/1.1" 200 2125
+INFO 2019-12-20 17:09:20,198 basehttp 124 "GET /static/assets/javascript/common/header.js HTTP/1.1" 200 2659
+INFO 2019-12-20 17:09:20,200 basehttp 124 "GET /static/assets/images/icon.png HTTP/1.1" 200 7011
+INFO 2019-12-20 17:09:20,220 basehttp 124 "GET /static/assets/javascript/page/index.js HTTP/1.1" 200 2887
+INFO 2019-12-20 17:09:20,225 basehttp 124 "GET /static/assets/javascript/libs/jquery-1.9.1.js HTTP/1.1" 200 128159
+INFO 2019-12-20 17:09:20,262 basehttp 124 "GET /media/3.jpg HTTP/1.1" 200 10435
+INFO 2019-12-20 17:09:20,280 basehttp 124 "GET /media/1.jpg HTTP/1.1" 200 11259
+INFO 2019-12-20 17:09:20,716 basehttp 124 "GET /static/assets/images/banner.png HTTP/1.1" 200 2295905
+INFO 2019-12-20 17:09:20,741 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 17:09:24,745 basehttp 124 "GET /api/goods/hot/?current=2 HTTP/1.1" 200 617
+INFO 2019-12-20 17:09:35,128 basehttp 124 "GET /api/goods/hot/?current=2 HTTP/1.1" 200 617
+INFO 2019-12-20 17:09:38,213 basehttp 124 "GET /api/goods/new/ HTTP/1.1" 200 1161
+INFO 2019-12-20 17:09:38,233 basehttp 124 "GET /media/2.jpg HTTP/1.1" 200 10435
+INFO 2019-12-20 17:10:00,309 basehttp 124 "GET /api/goods/hot/ HTTP/1.1" 200 1164
+INFO 2019-12-20 17:10:00,325 basehttp 124 "GET /media/3.jpg HTTP/1.1" 304 0
+INFO 2019-12-20 17:12:35,490 basehttp 124 "GET /index/ HTTP/1.1" 200 4697
+INFO 2019-12-20 17:12:35,519 basehttp 124 "GET /media/3.jpg HTTP/1.1" 304 0
+INFO 2019-12-20 17:12:35,601 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 17:13:21,481 basehttp 124 "GET /index/ HTTP/1.1" 200 4626
+INFO 2019-12-20 17:13:21,516 basehttp 124 "GET /static/assets/css/page/index.css HTTP/1.1" 200 17134
+INFO 2019-12-20 17:13:21,517 basehttp 124 "GET /static/assets/images/icon.png HTTP/1.1" 200 7011
+INFO 2019-12-20 17:13:21,525 basehttp 124 "GET /static/assets/javascript/common/base.js HTTP/1.1" 200 2125
+INFO 2019-12-20 17:13:21,525 basehttp 124 "GET /static/assets/javascript/common/header.js HTTP/1.1" 200 2659
+INFO 2019-12-20 17:13:21,540 basehttp 124 "GET /static/assets/javascript/page/index.js HTTP/1.1" 200 2887
+INFO 2019-12-20 17:13:21,565 basehttp 124 "GET /static/assets/javascript/libs/jquery-1.9.1.js HTTP/1.1" 200 128159
+INFO 2019-12-20 17:13:21,571 basehttp 124 "GET /media/3.jpg HTTP/1.1" 200 10435
+INFO 2019-12-20 17:13:21,599 basehttp 124 "GET /media/1.jpg HTTP/1.1" 200 11259
+INFO 2019-12-20 17:13:21,707 basehttp 124 "GET /static/assets/images/banner.png HTTP/1.1" 200 2295905
+INFO 2019-12-20 17:13:21,762 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 17:13:40,318 basehttp 124 "GET /index/ HTTP/1.1" 200 4684
+INFO 2019-12-20 17:13:40,356 basehttp 124 "GET /static/assets/images/icon.png HTTP/1.1" 200 7011
+INFO 2019-12-20 17:13:40,358 basehttp 124 "GET /static/assets/css/page/index.css HTTP/1.1" 200 17134
+INFO 2019-12-20 17:13:40,368 basehttp 124 "GET /static/assets/javascript/common/base.js HTTP/1.1" 200 2125
+INFO 2019-12-20 17:13:40,369 basehttp 124 "GET /static/assets/javascript/common/header.js HTTP/1.1" 200 2659
+INFO 2019-12-20 17:13:40,376 basehttp 124 "GET /static/assets/javascript/libs/jquery-1.9.1.js HTTP/1.1" 200 128159
+INFO 2019-12-20 17:13:40,392 basehttp 124 "GET /static/assets/javascript/page/index.js HTTP/1.1" 200 2887
+INFO 2019-12-20 17:13:40,397 basehttp 124 "GET /media/3.jpg HTTP/1.1" 200 10435
+INFO 2019-12-20 17:13:40,417 basehttp 124 "GET /media/1.jpg HTTP/1.1" 200 11259
+INFO 2019-12-20 17:13:40,486 basehttp 124 "GET /static/assets/images/banner.png HTTP/1.1" 200 2295905
+INFO 2019-12-20 17:13:40,505 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 17:13:41,233 basehttp 124 "GET /index/ HTTP/1.1" 200 4684
+INFO 2019-12-20 17:13:41,276 basehttp 124 "GET /static/assets/css/page/index.css HTTP/1.1" 200 17134
+INFO 2019-12-20 17:13:41,277 basehttp 124 "GET /static/assets/images/icon.png HTTP/1.1" 200 7011
+INFO 2019-12-20 17:13:41,293 basehttp 124 "GET /static/assets/javascript/libs/jquery-1.9.1.js HTTP/1.1" 200 128159
+INFO 2019-12-20 17:13:41,300 basehttp 124 "GET /static/assets/javascript/common/header.js HTTP/1.1" 200 2659
+INFO 2019-12-20 17:13:41,303 basehttp 124 "GET /static/assets/javascript/page/index.js HTTP/1.1" 200 2887
+INFO 2019-12-20 17:13:41,303 basehttp 124 "GET /static/assets/javascript/common/base.js HTTP/1.1" 200 2125
+INFO 2019-12-20 17:13:41,354 basehttp 124 "GET /media/3.jpg HTTP/1.1" 200 10435
+INFO 2019-12-20 17:13:41,384 basehttp 124 "GET /media/1.jpg HTTP/1.1" 200 11259
+INFO 2019-12-20 17:13:41,635 basehttp 124 "GET /static/assets/images/banner.png HTTP/1.1" 200 2295905
+INFO 2019-12-20 17:13:41,657 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 17:13:48,291 basehttp 124 "GET /api/goods/hot/?current=2 HTTP/1.1" 200 617
+INFO 2019-12-20 17:13:53,540 basehttp 124 "GET /api/goods/hot/?current=2 HTTP/1.1" 200 617
+INFO 2019-12-20 17:14:05,379 basehttp 124 "GET /index/ HTTP/1.1" 200 4673
+INFO 2019-12-20 17:14:05,393 basehttp 124 "GET /static/assets/css/page/index.css HTTP/1.1" 304 0
+INFO 2019-12-20 17:14:05,400 basehttp 124 "GET /static/assets/javascript/common/base.js HTTP/1.1" 304 0
+INFO 2019-12-20 17:14:05,401 basehttp 124 "GET /static/assets/javascript/common/header.js HTTP/1.1" 304 0
+INFO 2019-12-20 17:14:05,402 basehttp 124 "GET /static/assets/javascript/page/index.js HTTP/1.1" 304 0
+INFO 2019-12-20 17:14:05,412 basehttp 124 "GET /media/3.jpg HTTP/1.1" 200 10435
+INFO 2019-12-20 17:14:05,818 basehttp 124 "GET /api/goods/new/ HTTP/1.1" 200 1161
+INFO 2019-12-20 17:14:05,833 basehttp 124 "GET /media/2.jpg HTTP/1.1" 304 0
+INFO 2019-12-20 17:14:08,522 basehttp 124 "GET /api/goods/new/ HTTP/1.1" 200 1161
+INFO 2019-12-20 17:14:08,532 basehttp 124 "GET /media/2.jpg HTTP/1.1" 200 10435
+INFO 2019-12-20 17:14:10,718 basehttp 124 "GET /api/goods/hot/ HTTP/1.1" 200 1164
+INFO 2019-12-20 17:14:12,896 basehttp 124 "GET /index/ HTTP/1.1" 200 4673
+INFO 2019-12-20 17:14:12,925 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 17:14:19,647 basehttp 124 "GET /api/goods/hot/ HTTP/1.1" 200 1164
+INFO 2019-12-20 17:14:27,799 basehttp 124 "GET /index/ HTTP/1.1" 200 4673
+INFO 2019-12-20 17:14:27,826 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 17:14:36,177 basehttp 124 "GET /api/goods/hot/?current=2 HTTP/1.1" 200 617
+INFO 2019-12-20 17:14:36,816 basehttp 124 "GET /api/goods/hot/?current=2 HTTP/1.1" 200 617
+INFO 2019-12-20 17:14:38,106 basehttp 124 "GET /index/ HTTP/1.1" 200 4684
+INFO 2019-12-20 17:14:38,147 basehttp 124 "GET /static/assets/css/page/index.css HTTP/1.1" 200 17134
+INFO 2019-12-20 17:14:38,153 basehttp 124 "GET /static/assets/javascript/common/header.js HTTP/1.1" 200 2659
+INFO 2019-12-20 17:14:38,154 basehttp 124 "GET /static/assets/javascript/common/base.js HTTP/1.1" 200 2125
+INFO 2019-12-20 17:14:38,155 basehttp 124 "GET /static/assets/images/icon.png HTTP/1.1" 200 7011
+INFO 2019-12-20 17:14:38,181 basehttp 124 "GET /static/assets/javascript/libs/jquery-1.9.1.js HTTP/1.1" 200 128159
+INFO 2019-12-20 17:14:38,183 basehttp 124 "GET /static/assets/javascript/page/index.js HTTP/1.1" 200 2887
+INFO 2019-12-20 17:14:38,213 basehttp 124 "GET /media/1.jpg HTTP/1.1" 200 11259
+INFO 2019-12-20 17:14:38,214 basehttp 124 "GET /media/3.jpg HTTP/1.1" 200 10435
+INFO 2019-12-20 17:14:38,466 basehttp 124 "GET /static/assets/images/banner.png HTTP/1.1" 200 2295905
+INFO 2019-12-20 17:14:38,480 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 17:14:39,219 basehttp 124 "GET /index/ HTTP/1.1" 200 4684
+INFO 2019-12-20 17:14:39,263 basehttp 124 "GET /static/assets/images/icon.png HTTP/1.1" 200 7011
+INFO 2019-12-20 17:14:39,264 basehttp 124 "GET /static/assets/css/page/index.css HTTP/1.1" 200 17134
+INFO 2019-12-20 17:14:39,272 basehttp 124 "GET /static/assets/javascript/common/base.js HTTP/1.1" 200 2125
+INFO 2019-12-20 17:14:39,272 basehttp 124 "GET /static/assets/javascript/common/header.js HTTP/1.1" 200 2659
+INFO 2019-12-20 17:14:39,291 basehttp 124 "GET /static/assets/javascript/page/index.js HTTP/1.1" 200 2887
+INFO 2019-12-20 17:14:39,310 basehttp 124 "GET /media/3.jpg HTTP/1.1" 200 10435
+INFO 2019-12-20 17:14:39,317 basehttp 124 "GET /media/1.jpg HTTP/1.1" 200 11259
+INFO 2019-12-20 17:14:39,359 basehttp 124 "GET /static/assets/javascript/libs/jquery-1.9.1.js HTTP/1.1" 200 128159
+INFO 2019-12-20 17:14:39,601 basehttp 124 "GET /static/assets/images/banner.png HTTP/1.1" 200 2295905
+INFO 2019-12-20 17:14:39,621 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 17:14:41,955 basehttp 124 "GET /api/goods/new/ HTTP/1.1" 200 1161
+INFO 2019-12-20 17:14:44,827 basehttp 124 "GET /index/ HTTP/1.1" 200 4684
+INFO 2019-12-20 17:14:44,866 basehttp 124 "GET /static/assets/css/page/index.css HTTP/1.1" 200 17134
+INFO 2019-12-20 17:14:44,873 basehttp 124 "GET /static/assets/javascript/common/base.js HTTP/1.1" 200 2125
+INFO 2019-12-20 17:14:44,874 basehttp 124 "GET /static/assets/javascript/common/header.js HTTP/1.1" 200 2659
+INFO 2019-12-20 17:14:44,875 basehttp 124 "GET /static/assets/images/icon.png HTTP/1.1" 200 7011
+INFO 2019-12-20 17:14:44,897 basehttp 124 "GET /static/assets/javascript/page/index.js HTTP/1.1" 200 2887
+INFO 2019-12-20 17:14:44,915 basehttp 124 "GET /static/assets/javascript/libs/jquery-1.9.1.js HTTP/1.1" 200 128159
+INFO 2019-12-20 17:14:44,926 basehttp 124 "GET /media/3.jpg HTTP/1.1" 200 10435
+INFO 2019-12-20 17:14:44,928 basehttp 124 "GET /media/1.jpg HTTP/1.1" 200 11259
+INFO 2019-12-20 17:14:45,101 basehttp 124 "GET /static/assets/images/banner.png HTTP/1.1" 200 2295905
+INFO 2019-12-20 17:14:45,127 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 17:14:46,936 basehttp 124 "GET /api/goods/hot/?current=2 HTTP/1.1" 200 617
+INFO 2019-12-20 17:14:47,108 basehttp 124 "GET /api/goods/new/ HTTP/1.1" 200 1161
+INFO 2019-12-20 17:14:53,116 basehttp 124 "GET /api/goods/hot/ HTTP/1.1" 200 1164
+INFO 2019-12-20 17:14:54,601 basehttp 124 "GET /api/goods/new/ HTTP/1.1" 200 1161
+INFO 2019-12-20 17:14:55,373 basehttp 124 "GET /api/goods/hot/ HTTP/1.1" 200 1164
+INFO 2019-12-20 17:14:56,411 basehttp 124 "GET /api/goods/new/ HTTP/1.1" 200 1161
+INFO 2019-12-20 17:14:57,137 basehttp 124 "GET /api/goods/hot/ HTTP/1.1" 200 1164
+INFO 2019-12-20 17:15:00,577 basehttp 124 "GET /index/ HTTP/1.1" 200 4673
+INFO 2019-12-20 17:15:00,593 basehttp 124 "GET /static/assets/css/page/index.css HTTP/1.1" 200 17134
+INFO 2019-12-20 17:15:00,594 basehttp 124 "GET /static/assets/images/icon.png HTTP/1.1" 200 7011
+INFO 2019-12-20 17:15:00,605 basehttp 124 "GET /static/assets/javascript/common/header.js HTTP/1.1" 200 2659
+INFO 2019-12-20 17:15:00,606 basehttp 124 "GET /static/assets/javascript/common/base.js HTTP/1.1" 200 2125
+INFO 2019-12-20 17:15:00,607 basehttp 124 "GET /static/assets/javascript/page/index.js HTTP/1.1" 200 2887
+INFO 2019-12-20 17:15:00,609 basehttp 124 "GET /media/3.jpg HTTP/1.1" 200 10435
+INFO 2019-12-20 17:15:00,611 basehttp 124 "GET /static/assets/javascript/libs/jquery-1.9.1.js HTTP/1.1" 200 128159
+INFO 2019-12-20 17:15:00,616 basehttp 124 "GET /media/1.jpg HTTP/1.1" 200 11259
+INFO 2019-12-20 17:15:00,680 basehttp 124 "GET /static/assets/images/banner.png HTTP/1.1" 200 2295905
+INFO 2019-12-20 17:15:00,688 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 17:15:02,416 basehttp 124 "GET /api/goods/hot/?current=2 HTTP/1.1" 200 617
+INFO 2019-12-20 17:15:35,595 basehttp 124 "GET /api/goods/new/ HTTP/1.1" 200 1161
+INFO 2019-12-20 17:16:31,767 basehttp 124 "GET /api/goods/hot/ HTTP/1.1" 200 1164
+INFO 2019-12-20 17:16:34,678 basehttp 124 "GET /index/ HTTP/1.1" 200 4684
+INFO 2019-12-20 17:16:34,711 basehttp 124 "GET /media/3.jpg HTTP/1.1" 304 0
+INFO 2019-12-20 17:16:34,949 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 17:16:38,470 basehttp 124 "GET /api/goods/hot/?current=2 HTTP/1.1" 200 617
+INFO 2019-12-20 17:16:39,265 basehttp 124 "GET /index/ HTTP/1.1" 200 4673
+INFO 2019-12-20 17:16:39,279 basehttp 124 "GET /media/3.jpg HTTP/1.1" 304 0
+INFO 2019-12-20 17:16:39,322 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 17:16:40,569 basehttp 124 "GET /api/goods/hot/?current=2 HTTP/1.1" 200 617
+INFO 2019-12-20 17:16:47,855 basehttp 124 "GET /index/ HTTP/1.1" 200 4673
+INFO 2019-12-20 17:16:47,871 basehttp 124 "GET /static/assets/css/page/index.css HTTP/1.1" 200 17134
+INFO 2019-12-20 17:16:47,871 basehttp 124 "GET /static/assets/images/icon.png HTTP/1.1" 200 7011
+INFO 2019-12-20 17:16:47,877 basehttp 124 "GET /static/assets/javascript/common/header.js HTTP/1.1" 200 2659
+INFO 2019-12-20 17:16:47,879 basehttp 124 "GET /static/assets/javascript/common/base.js HTTP/1.1" 200 2125
+INFO 2019-12-20 17:16:47,883 basehttp 124 "GET /static/assets/javascript/page/index.js HTTP/1.1" 200 2908
+INFO 2019-12-20 17:16:47,885 basehttp 124 "GET /media/3.jpg HTTP/1.1" 200 10435
+INFO 2019-12-20 17:16:47,886 basehttp 124 "GET /static/assets/javascript/libs/jquery-1.9.1.js HTTP/1.1" 200 128159
+INFO 2019-12-20 17:16:47,886 basehttp 124 "GET /media/1.jpg HTTP/1.1" 200 11259
+INFO 2019-12-20 17:16:47,933 basehttp 124 "GET /static/assets/images/banner.png HTTP/1.1" 200 2295905
+INFO 2019-12-20 17:16:47,941 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 17:16:54,411 basehttp 124 "GET /api/goods/new/ HTTP/1.1" 200 1161
+INFO 2019-12-20 17:16:54,429 basehttp 124 "GET /media/2.jpg HTTP/1.1" 304 0
+INFO 2019-12-20 17:16:56,075 basehttp 124 "GET /api/goods/hot/ HTTP/1.1" 200 1164
+INFO 2019-12-20 17:16:56,798 basehttp 124 "GET /api/goods/hot/?current=2 HTTP/1.1" 200 617
+INFO 2019-12-20 17:17:01,188 basehttp 124 "GET /index/ HTTP/1.1" 200 4684
+INFO 2019-12-20 17:17:01,402 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 17:17:02,461 basehttp 124 "GET /api/goods/hot/?current=3 HTTP/1.1" 200 606
+INFO 2019-12-20 17:17:03,288 basehttp 124 "GET /api/goods/hot/?current=2 HTTP/1.1" 200 617
+INFO 2019-12-20 17:17:05,343 basehttp 124 "GET /api/goods/hot/?current=2 HTTP/1.1" 200 617
+INFO 2019-12-20 17:17:05,471 basehttp 124 "GET /api/goods/hot/?current=4 HTTP/1.1" 200 608
+INFO 2019-12-20 17:17:05,480 basehttp 124 "GET /media/2.jpg HTTP/1.1" 304 0
+INFO 2019-12-20 17:17:06,377 basehttp 124 "GET /api/goods/hot/?current=5 HTTP/1.1" 200 608
+INFO 2019-12-20 17:17:06,379 basehttp 124 "GET /api/goods/hot/?current=2 HTTP/1.1" 200 617
+INFO 2019-12-20 17:17:12,083 basehttp 124 "GET /api/goods/new/ HTTP/1.1" 200 1161
+INFO 2019-12-20 17:17:20,114 basehttp 124 "GET /index/ HTTP/1.1" 200 4684
+INFO 2019-12-20 17:17:20,153 basehttp 124 "GET /static/assets/images/icon.png HTTP/1.1" 200 7011
+INFO 2019-12-20 17:17:20,157 basehttp 124 "GET /static/assets/css/page/index.css HTTP/1.1" 200 17134
+INFO 2019-12-20 17:17:20,166 basehttp 124 "GET /static/assets/javascript/common/header.js HTTP/1.1" 200 2659
+INFO 2019-12-20 17:17:20,166 basehttp 124 "GET /static/assets/javascript/common/base.js HTTP/1.1" 200 2125
+INFO 2019-12-20 17:17:20,183 basehttp 124 "GET /static/assets/javascript/libs/jquery-1.9.1.js HTTP/1.1" 200 128159
+INFO 2019-12-20 17:17:20,186 basehttp 124 "GET /static/assets/javascript/page/index.js HTTP/1.1" 200 2908
+INFO 2019-12-20 17:17:20,226 basehttp 124 "GET /media/3.jpg HTTP/1.1" 200 10435
+INFO 2019-12-20 17:17:20,228 basehttp 124 "GET /media/1.jpg HTTP/1.1" 200 11259
+INFO 2019-12-20 17:17:20,274 basehttp 124 "GET /static/assets/images/banner.png HTTP/1.1" 200 2295905
+INFO 2019-12-20 17:17:20,303 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 17:17:23,119 basehttp 124 "GET /api/goods/hot/?current=2 HTTP/1.1" 200 617
+INFO 2019-12-20 17:17:30,184 basehttp 124 "GET /api/goods/hot/?current=3 HTTP/1.1" 200 606
+INFO 2019-12-20 17:17:32,326 basehttp 124 "GET /api/goods/hot/?current=4 HTTP/1.1" 200 608
+INFO 2019-12-20 17:17:33,466 basehttp 124 "GET /api/goods/hot/?current=5 HTTP/1.1" 200 608
+INFO 2019-12-20 17:17:36,495 basehttp 124 "GET /api/goods/new/ HTTP/1.1" 200 1161
+INFO 2019-12-20 17:17:39,324 basehttp 124 "GET /api/goods/hot/ HTTP/1.1" 200 1164
+INFO 2019-12-20 17:17:40,540 basehttp 124 "GET /api/goods/new/ HTTP/1.1" 200 1161
+INFO 2019-12-20 17:17:41,395 basehttp 124 "GET /api/goods/hot/ HTTP/1.1" 200 1164
+INFO 2019-12-20 17:18:43,998 basehttp 124 "GET /index/ HTTP/1.1" 200 4684
+INFO 2019-12-20 17:18:44,070 basehttp 124 "GET /static/assets/css/page/index.css HTTP/1.1" 200 17134
+INFO 2019-12-20 17:18:44,072 basehttp 124 "GET /static/assets/images/icon.png HTTP/1.1" 200 7011
+INFO 2019-12-20 17:18:44,073 basehttp 124 "GET /static/assets/javascript/common/base.js HTTP/1.1" 200 2125
+INFO 2019-12-20 17:18:44,076 basehttp 124 "GET /static/assets/javascript/common/header.js HTTP/1.1" 200 2659
+INFO 2019-12-20 17:18:44,095 basehttp 124 "GET /static/assets/javascript/libs/jquery-1.9.1.js HTTP/1.1" 200 128159
+INFO 2019-12-20 17:18:44,099 basehttp 124 "GET /static/assets/javascript/page/index.js HTTP/1.1" 200 2908
+INFO 2019-12-20 17:18:44,118 basehttp 124 "GET /media/3.jpg HTTP/1.1" 200 10435
+INFO 2019-12-20 17:18:44,171 basehttp 124 "GET /media/1.jpg HTTP/1.1" 200 11259
+INFO 2019-12-20 17:18:44,315 basehttp 124 "GET /static/assets/images/banner.png HTTP/1.1" 200 2295905
+INFO 2019-12-20 17:18:44,350 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 17:18:47,286 basehttp 124 "GET /api/goods/hot/?current=2 HTTP/1.1" 200 596
+INFO 2019-12-20 17:18:48,929 basehttp 124 "GET /api/goods/hot/?current=3 HTTP/1.1" 200 606
+INFO 2019-12-20 17:18:50,479 basehttp 124 "GET /api/goods/hot/?current=4 HTTP/1.1" 200 608
+INFO 2019-12-20 17:18:50,498 basehttp 124 "GET /media/2.jpg HTTP/1.1" 304 0
+INFO 2019-12-20 17:18:51,435 basehttp 124 "GET /api/goods/hot/?current=5 HTTP/1.1" 200 608
+INFO 2019-12-20 17:18:57,768 basehttp 124 "GET /api/goods/new/ HTTP/1.1" 200 1161
+INFO 2019-12-20 17:19:00,638 basehttp 124 "GET /api/goods/hot/ HTTP/1.1" 200 1164
+INFO 2019-12-20 17:19:01,807 basehttp 124 "GET /api/goods/new/ HTTP/1.1" 200 1161
+INFO 2019-12-20 17:19:12,688 basehttp 124 "POST /api/orders/ HTTP/1.1" 200 44
+INFO 2019-12-20 17:20:32,627 basehttp 124 "GET /index/ HTTP/1.1" 200 4722
+INFO 2019-12-20 17:20:32,665 basehttp 124 "GET /static/assets/css/page/index.css HTTP/1.1" 200 17134
+INFO 2019-12-20 17:20:32,689 basehttp 124 "GET /static/assets/images/icon.png HTTP/1.1" 200 7011
+INFO 2019-12-20 17:20:32,698 basehttp 124 "GET /media/3.jpg HTTP/1.1" 200 10435
+INFO 2019-12-20 17:20:32,709 basehttp 124 "GET /media/1.jpg HTTP/1.1" 200 11259
+INFO 2019-12-20 17:20:32,939 basehttp 124 "GET /static/assets/images/banner.png HTTP/1.1" 200 2295905
+INFO 2019-12-20 17:20:33,784 basehttp 124 "GET /static/assets/javascript/common/base.js HTTP/1.1" 200 2125
+INFO 2019-12-20 17:20:33,786 basehttp 124 "GET /static/assets/javascript/common/header.js HTTP/1.1" 200 2659
+INFO 2019-12-20 17:20:33,788 basehttp 124 "GET /static/assets/javascript/page/index.js HTTP/1.1" 200 2908
+INFO 2019-12-20 17:20:33,800 basehttp 124 "GET /static/assets/javascript/libs/jquery-1.9.1.js HTTP/1.1" 200 128159
+INFO 2019-12-20 17:20:33,831 basehttp 124 "GET /index/ HTTP/1.1" 200 4722
+INFO 2019-12-20 17:20:33,879 basehttp 124 "GET /static/assets/css/page/index.css HTTP/1.1" 200 17134
+INFO 2019-12-20 17:20:33,887 basehttp 124 "GET /static/assets/images/icon.png HTTP/1.1" 200 7011
+INFO 2019-12-20 17:20:33,888 basehttp 124 "GET /static/assets/javascript/common/base.js HTTP/1.1" 200 2125
+INFO 2019-12-20 17:20:33,888 basehttp 124 "GET /static/assets/javascript/common/header.js HTTP/1.1" 200 2659
+INFO 2019-12-20 17:20:33,899 basehttp 124 "GET /static/assets/javascript/libs/jquery-1.9.1.js HTTP/1.1" 200 128159
+INFO 2019-12-20 17:20:33,947 basehttp 124 "GET /static/assets/javascript/page/index.js HTTP/1.1" 200 2908
+INFO 2019-12-20 17:20:33,959 basehttp 124 "GET /media/1.jpg HTTP/1.1" 200 11259
+INFO 2019-12-20 17:20:33,966 basehttp 124 "GET /media/3.jpg HTTP/1.1" 200 10435
+INFO 2019-12-20 17:20:34,332 basehttp 124 "GET /static/assets/images/banner.png HTTP/1.1" 200 2295905
+INFO 2019-12-20 17:20:34,349 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 17:20:35,942 basehttp 124 "GET /api/goods/new/ HTTP/1.1" 200 1203
+INFO 2019-12-20 17:20:35,960 basehttp 124 "GET /media/2.jpg HTTP/1.1" 304 0
+INFO 2019-12-20 17:20:37,785 basehttp 124 "POST /api/orders/ HTTP/1.1" 200 44
+INFO 2019-12-20 17:20:38,093 basehttp 124 "GET /api/goods/hot/ HTTP/1.1" 200 1206
+INFO 2019-12-20 17:20:39,359 basehttp 124 "GET /index/ HTTP/1.1" 200 4722
+INFO 2019-12-20 17:20:39,389 basehttp 124 "GET /static/assets/css/page/index.css HTTP/1.1" 200 17134
+INFO 2019-12-20 17:20:39,403 basehttp 124 "GET /static/assets/images/icon.png HTTP/1.1" 200 7011
+INFO 2019-12-20 17:20:39,418 basehttp 124 "GET /static/assets/javascript/common/base.js HTTP/1.1" 200 2125
+INFO 2019-12-20 17:20:39,422 basehttp 124 "GET /static/assets/javascript/common/header.js HTTP/1.1" 200 2659
+INFO 2019-12-20 17:20:39,426 basehttp 124 "GET /static/assets/javascript/libs/jquery-1.9.1.js HTTP/1.1" 200 128159
+INFO 2019-12-20 17:20:39,442 basehttp 124 "GET /static/assets/javascript/page/index.js HTTP/1.1" 200 2908
+INFO 2019-12-20 17:20:39,442 basehttp 124 "GET /media/1.jpg HTTP/1.1" 200 11259
+INFO 2019-12-20 17:20:39,444 basehttp 124 "GET /media/3.jpg HTTP/1.1" 200 10435
+INFO 2019-12-20 17:20:39,677 basehttp 124 "GET /static/assets/images/banner.png HTTP/1.1" 200 2295905
+INFO 2019-12-20 17:20:39,702 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 17:20:41,425 basehttp 124 "GET /api/goods/hot/?current=2 HTTP/1.1" 200 617
+INFO 2019-12-20 17:20:42,363 basehttp 124 "GET /api/goods/hot/?current=3 HTTP/1.1" 200 627
+INFO 2019-12-20 17:20:43,931 basehttp 124 "GET /api/goods/hot/?current=4 HTTP/1.1" 200 629
+INFO 2019-12-20 17:20:44,957 basehttp 124 "GET /api/goods/hot/?current=5 HTTP/1.1" 200 629
+INFO 2019-12-20 17:20:52,809 basehttp 124 "GET /api/goods/new/ HTTP/1.1" 200 1203
+INFO 2019-12-20 17:20:54,509 basehttp 124 "GET /api/goods/hot/ HTTP/1.1" 200 1206
+INFO 2019-12-20 17:20:55,303 basehttp 124 "GET /api/goods/new/ HTTP/1.1" 200 1203
+INFO 2019-12-20 17:20:55,831 basehttp 124 "GET /api/goods/hot/ HTTP/1.1" 200 1206
+INFO 2019-12-20 17:20:57,772 basehttp 124 "GET /api/goods/new/ HTTP/1.1" 200 1203
+INFO 2019-12-20 17:20:58,305 basehttp 124 "GET /api/goods/hot/ HTTP/1.1" 200 1206
+INFO 2019-12-20 17:20:58,902 basehttp 124 "GET /api/goods/new/ HTTP/1.1" 200 1203
+INFO 2019-12-20 17:21:09,433 basehttp 124 "GET /index/ HTTP/1.1" 200 4711
+INFO 2019-12-20 17:21:09,446 basehttp 124 "GET /media/3.jpg HTTP/1.1" 304 0
+INFO 2019-12-20 17:21:09,450 basehttp 124 "GET /static/assets/javascript/page/index.js HTTP/1.1" 304 0
+INFO 2019-12-20 17:21:09,494 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 17:21:16,620 basehttp 124 "GET /api/goods/new/ HTTP/1.1" 200 1203
+INFO 2019-12-20 17:21:16,631 basehttp 124 "GET /media/2.jpg HTTP/1.1" 304 0
+INFO 2019-12-20 17:21:31,839 basehttp 124 "GET /api/goods/hot/ HTTP/1.1" 200 1206
+INFO 2019-12-20 17:21:40,949 basehttp 124 "GET /api/goods/new/ HTTP/1.1" 200 1203
+INFO 2019-12-20 17:21:47,135 basehttp 124 "GET /api/goods/hot/ HTTP/1.1" 200 1206
+INFO 2019-12-20 17:21:49,095 basehttp 124 "GET /api/goods/hot/ HTTP/1.1" 200 1206
+INFO 2019-12-20 17:21:49,676 basehttp 124 "GET /api/goods/new/ HTTP/1.1" 200 1203
+INFO 2019-12-20 17:21:50,365 basehttp 124 "GET /api/goods/hot/ HTTP/1.1" 200 1206
+INFO 2019-12-20 17:21:50,904 basehttp 124 "GET /api/goods/new/ HTTP/1.1" 200 1203
+INFO 2019-12-20 17:22:02,158 basehttp 124 "GET /index/ HTTP/1.1" 200 4711
+INFO 2019-12-20 17:22:02,171 basehttp 124 "GET /static/assets/javascript/page/index.js HTTP/1.1" 304 0
+INFO 2019-12-20 17:22:02,205 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 17:22:20,472 basehttp 124 "GET /api/goods/new/ HTTP/1.1" 200 1203
+INFO 2019-12-20 17:22:20,860 basehttp 124 "GET /api/goods/hot/ HTTP/1.1" 200 1206
+INFO 2019-12-20 17:22:21,448 basehttp 124 "GET /api/goods/hot/ HTTP/1.1" 200 1206
+INFO 2019-12-20 17:22:24,763 basehttp 124 "GET /index/ HTTP/1.1" 200 4711
+INFO 2019-12-20 17:22:24,802 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 17:22:25,850 basehttp 124 "GET /api/goods/new/ HTTP/1.1" 200 1203
+INFO 2019-12-20 17:22:26,445 basehttp 124 "GET /api/goods/new/ HTTP/1.1" 200 1203
+INFO 2019-12-20 17:22:26,548 basehttp 124 "GET /api/goods/hot/ HTTP/1.1" 200 1206
+INFO 2019-12-20 17:22:32,280 basehttp 124 "GET /api/goods/hot/ HTTP/1.1" 200 1206
+INFO 2019-12-20 17:22:42,609 basehttp 124 "GET /api/goods/new/ HTTP/1.1" 200 1203
+INFO 2019-12-20 17:22:43,309 basehttp 124 "GET /api/goods/hot/ HTTP/1.1" 200 1206
+INFO 2019-12-20 17:22:44,156 basehttp 124 "GET /api/goods/new/ HTTP/1.1" 200 1203
+INFO 2019-12-20 17:22:44,688 basehttp 124 "GET /api/goods/hot/ HTTP/1.1" 200 1206
+INFO 2019-12-20 17:22:47,358 basehttp 124 "GET /api/goods/new/ HTTP/1.1" 200 1203
+INFO 2019-12-20 17:22:47,778 basehttp 124 "GET /api/goods/hot/ HTTP/1.1" 200 1206
+INFO 2019-12-20 17:22:48,510 basehttp 124 "GET /api/goods/new/ HTTP/1.1" 200 1203
+INFO 2019-12-20 17:22:48,980 basehttp 124 "GET /api/goods/hot/ HTTP/1.1" 200 1206
+INFO 2019-12-20 17:22:49,483 basehttp 124 "GET /api/goods/new/ HTTP/1.1" 200 1203
+INFO 2019-12-20 17:22:56,971 basehttp 124 "GET /api/goods/hot/ HTTP/1.1" 200 1206
+INFO 2019-12-20 17:22:57,627 basehttp 124 "GET /api/goods/new/ HTTP/1.1" 200 1203
+INFO 2019-12-20 17:22:59,075 basehttp 124 "GET /api/goods/hot/ HTTP/1.1" 200 1206
+INFO 2019-12-20 17:22:59,629 basehttp 124 "GET /api/goods/new/ HTTP/1.1" 200 1203
+INFO 2019-12-20 17:23:00,322 basehttp 124 "GET /api/goods/hot/ HTTP/1.1" 200 1206
+INFO 2019-12-20 17:23:00,828 basehttp 124 "GET /api/goods/new/ HTTP/1.1" 200 1203
+INFO 2019-12-20 17:23:01,252 basehttp 124 "GET /api/goods/hot/ HTTP/1.1" 200 1206
+INFO 2019-12-20 17:23:02,040 basehttp 124 "GET /api/goods/new/ HTTP/1.1" 200 1203
+INFO 2019-12-20 17:23:02,938 basehttp 124 "GET /api/goods/hot/ HTTP/1.1" 200 1206
+INFO 2019-12-20 17:23:11,107 basehttp 124 "GET /api/goods/new/ HTTP/1.1" 200 1203
+INFO 2019-12-20 17:23:17,360 basehttp 124 "GET /index/ HTTP/1.1" 200 4711
+INFO 2019-12-20 17:23:17,375 basehttp 124 "GET /media/3.jpg HTTP/1.1" 304 0
+INFO 2019-12-20 17:23:17,376 basehttp 124 "GET /static/assets/javascript/page/index.js HTTP/1.1" 304 0
+INFO 2019-12-20 17:23:17,412 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 17:23:21,931 basehttp 124 "GET /api/goods/new/ HTTP/1.1" 200 1203
+INFO 2019-12-20 17:23:21,944 basehttp 124 "GET /media/2.jpg HTTP/1.1" 304 0
+INFO 2019-12-20 17:23:23,358 basehttp 124 "GET /api/goods/hot/ HTTP/1.1" 200 1206
+INFO 2019-12-20 17:23:49,491 basehttp 124 "GET /index/ HTTP/1.1" 200 4711
+INFO 2019-12-20 17:23:49,525 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 17:24:41,556 basehttp 124 "GET /api/goods/new/ HTTP/1.1" 200 1203
+INFO 2019-12-20 17:24:45,987 basehttp 124 "GET /index/ HTTP/1.1" 200 4722
+INFO 2019-12-20 17:24:46,024 basehttp 124 "GET /media/3.jpg HTTP/1.1" 304 0
+INFO 2019-12-20 17:24:46,027 basehttp 124 "GET /static/assets/javascript/page/index.js HTTP/1.1" 304 0
+INFO 2019-12-20 17:24:46,233 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 17:24:47,366 basehttp 124 "GET /api/goods/hot/?current=2 HTTP/1.1" 200 617
+INFO 2019-12-20 17:24:51,533 basehttp 124 "GET /api/goods/hot/?current=3 HTTP/1.1" 200 627
+INFO 2019-12-20 17:24:52,859 basehttp 124 "GET /api/goods/hot/?current=4 HTTP/1.1" 200 629
+INFO 2019-12-20 17:24:52,874 basehttp 124 "GET /media/2.jpg HTTP/1.1" 304 0
+INFO 2019-12-20 17:24:54,106 basehttp 124 "GET /api/goods/hot/?current=5 HTTP/1.1" 200 629
+INFO 2019-12-20 17:25:01,342 basehttp 124 "GET /carts/ HTTP/1.1" 200 7006
+INFO 2019-12-20 17:25:01,388 basehttp 124 "GET /static/assets/javascript/page/myCart.js HTTP/1.1" 200 2338
+INFO 2019-12-20 17:25:01,514 basehttp 124 "GET /static/assets/css/common/header.less HTTP/1.1" 304 0
+INFO 2019-12-20 17:25:45,231 basehttp 124 "GET /goods/2/ HTTP/1.1" 200 4789
+INFO 2019-12-20 17:25:45,279 basehttp 124 "GET /static/assets/css/page/detail.css HTTP/1.1" 304 0
+WARNING 2019-12-20 17:26:15,450 base 152 Not Found: /goods/2/order/
+WARNING 2019-12-20 17:26:15,453 basehttp 124 "GET /goods/2/order/ HTTP/1.1" 404 6417
+WARNING 2019-12-20 17:26:15,572 base 152 Not Found: /favicon.ico
+WARNING 2019-12-20 17:26:15,574 basehttp 124 "GET /favicon.ico HTTP/1.1" 404 6408
+INFO 2019-12-20 17:26:30,381 basehttp 124 "GET /index/ HTTP/1.1" 200 4711
+INFO 2019-12-20 17:26:30,397 basehttp 124 "GET /static/assets/css/page/index.css HTTP/1.1" 304 0
+INFO 2019-12-20 17:26:30,398 basehttp 124 "GET /static/assets/javascript/common/header.js HTTP/1.1" 304 0
+INFO 2019-12-20 17:26:30,399 basehttp 124 "GET /media/3.jpg HTTP/1.1" 304 0
+INFO 2019-12-20 17:26:30,400 basehttp 124 "GET /static/assets/javascript/page/index.js HTTP/1.1" 200 3005
+INFO 2019-12-20 17:26:30,440 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 17:26:31,608 basehttp 124 "GET /index/ HTTP/1.1" 200 4711
+INFO 2019-12-20 17:26:31,626 basehttp 124 "GET /static/assets/css/page/index.css HTTP/1.1" 200 17134
+INFO 2019-12-20 17:26:31,633 basehttp 124 "GET /static/assets/images/icon.png HTTP/1.1" 200 7011
+INFO 2019-12-20 17:26:31,634 basehttp 124 "GET /static/assets/javascript/common/base.js HTTP/1.1" 200 2125
+INFO 2019-12-20 17:26:31,635 basehttp 124 "GET /static/assets/javascript/common/header.js HTTP/1.1" 200 2659
+INFO 2019-12-20 17:26:31,635 basehttp 124 "GET /static/assets/javascript/page/index.js HTTP/1.1" 200 3005
+INFO 2019-12-20 17:26:31,640 basehttp 124 "GET /media/3.jpg HTTP/1.1" 200 10435
+INFO 2019-12-20 17:26:31,645 basehttp 124 "GET /static/assets/javascript/libs/jquery-1.9.1.js HTTP/1.1" 200 128159
+INFO 2019-12-20 17:26:31,646 basehttp 124 "GET /media/1.jpg HTTP/1.1" 200 11259
+INFO 2019-12-20 17:26:31,688 basehttp 124 "GET /static/assets/images/banner.png HTTP/1.1" 200 2295905
+INFO 2019-12-20 17:26:31,697 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 17:26:59,707 basehttp 124 "GET /carts/ HTTP/1.1" 200 7006
+INFO 2019-12-20 17:26:59,757 basehttp 124 "GET /media/3.jpg HTTP/1.1" 304 0
+INFO 2019-12-20 17:27:09,625 basehttp 124 "GET /goods/category/2/ HTTP/1.1" 200 4230
+INFO 2019-12-20 17:27:09,669 basehttp 124 "GET /static/assets/javascript/page/index.js HTTP/1.1" 200 3009
+INFO 2019-12-20 17:27:11,791 basehttp 124 "GET /index/ HTTP/1.1" 200 4711
+INFO 2019-12-20 17:27:11,807 basehttp 124 "GET /static/assets/css/page/index.css HTTP/1.1" 200 17134
+INFO 2019-12-20 17:27:11,808 basehttp 124 "GET /static/assets/images/icon.png HTTP/1.1" 200 7011
+INFO 2019-12-20 17:27:11,813 basehttp 124 "GET /static/assets/javascript/common/base.js HTTP/1.1" 200 2125
+INFO 2019-12-20 17:27:11,814 basehttp 124 "GET /static/assets/javascript/common/header.js HTTP/1.1" 200 2659
+INFO 2019-12-20 17:27:11,820 basehttp 124 "GET /static/assets/javascript/page/index.js HTTP/1.1" 200 3009
+INFO 2019-12-20 17:27:11,821 basehttp 124 "GET /static/assets/javascript/libs/jquery-1.9.1.js HTTP/1.1" 200 128159
+INFO 2019-12-20 17:27:11,822 basehttp 124 "GET /media/3.jpg HTTP/1.1" 200 10435
+INFO 2019-12-20 17:27:11,828 basehttp 124 "GET /media/1.jpg HTTP/1.1" 200 11259
+INFO 2019-12-20 17:27:11,875 basehttp 124 "GET /static/assets/images/banner.png HTTP/1.1" 200 2295905
+INFO 2019-12-20 17:27:11,884 basehttp 124 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-20 17:27:13,918 basehttp 124 "GET /api/goods/new/ HTTP/1.1" 200 1203
+INFO 2019-12-20 17:27:13,928 basehttp 124 "GET /media/2.jpg HTTP/1.1" 304 0
+INFO 2019-12-20 17:27:16,044 basehttp 124 "GET /api/goods/new/?current=2 HTTP/1.1" 200 627
+INFO 2019-12-20 17:27:16,650 basehttp 124 "GET /api/goods/new/?current=3 HTTP/1.1" 200 630
+INFO 2019-12-20 17:27:19,510 basehttp 124 "GET /api/goods/new/?current=4 HTTP/1.1" 200 617
+INFO 2019-12-20 17:27:19,924 basehttp 124 "GET /api/goods/new/?current=5 HTTP/1.1" 200 631
+INFO 2019-12-20 17:27:21,937 basehttp 124 "GET /api/goods/hot/ HTTP/1.1" 200 1206
+INFO 2019-12-20 17:27:22,777 basehttp 124 "GET /api/goods/hot/?current=2 HTTP/1.1" 200 617
+INFO 2019-12-20 17:27:23,240 basehttp 124 "GET /api/goods/hot/?current=3 HTTP/1.1" 200 627
+INFO 2019-12-20 17:27:23,711 basehttp 124 "GET /index/ HTTP/1.1" 200 4722
+INFO 2019-12-20 17:27:23,785 basehttp 124 "GET /static/assets/javascript/page/index.js HTTP/1.1" 304 0
+INFO 2019-12-20 17:27:23,847 basehttp 124 "GET /api/goods/hot/?current=4 HTTP/1.1" 200 629
+INFO 2019-12-20 17:27:24,626 basehttp 124 "GET /api/goods/hot/?current=5 HTTP/1.1" 200 629
+INFO 2019-12-20 17:27:26,130 basehttp 124 "GET /api/goods/new/ HTTP/1.1" 200 1203
+INFO 2019-12-20 17:27:26,146 basehttp 124 "GET /media/2.jpg HTTP/1.1" 304 0
+INFO 2019-12-20 17:27:27,365 basehttp 124 "GET /api/goods/hot/ HTTP/1.1" 200 1206
+INFO 2019-12-20 17:27:28,449 basehttp 124 "GET /api/goods/hot/?current=2 HTTP/1.1" 200 617
+INFO 2019-12-20 17:27:29,589 basehttp 124 "GET /api/goods/hot/?current=3 HTTP/1.1" 200 627
+INFO 2019-12-20 17:27:30,709 basehttp 124 "GET /api/goods/new/ HTTP/1.1" 200 1203
+INFO 2019-12-20 17:27:31,880 basehttp 124 "GET /api/goods/new/?current=2 HTTP/1.1" 200 627
+INFO 2019-12-20 17:27:32,356 basehttp 124 "GET /api/goods/new/?current=3 HTTP/1.1" 200 630
+INFO 2019-12-20 17:27:34,184 basehttp 124 "GET /api/goods/new/?current=4 HTTP/1.1" 200 617
+INFO 2019-12-20 17:27:35,916 basehttp 124 "GET /api/goods/hot/ HTTP/1.1" 200 1206

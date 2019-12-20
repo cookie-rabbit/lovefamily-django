@@ -8,7 +8,10 @@ $(".contentContainer")
 			sucFun: function(res) {
 				if (parseInt(res.errcode) === 0) {
 					$(".goods").remove();
-					$(".more").before(res.data);
+					if (res.data.more == true) {
+						$(".content").html('<div class="more">MORE</div>');
+					}
+					$(".more").before(res.data.result);
 				} else {
 					getToast01(res.errmsg);
 				}
@@ -28,7 +31,10 @@ $(".contentContainer")
 			},
 			sucFun: function(res) {
 				if (parseInt(res.errcode) === 0) {
-					$(".more").before(res.data);
+					$(".more").before(res.data.result);
+					if (res.data.more == false) {
+						$(".more").remove();
+					}
 				} else {
 					getToast01(res.errmsg);
 				}
@@ -76,7 +82,10 @@ $(".contentContainer")
 			},
 			sucFun: function(res) {
 				if (parseInt(res.errcode) === 0) {
-					$(".more").before(res.data);
+					$(".more").before(res.data.result);
+					if (res.data.more == false) {
+						$(".more").remove();
+					}
 				} else {
 					getToast01(res.errmsg);
 				}
@@ -98,7 +107,10 @@ $(".contentContainer")
 			},
 			sucFun: function(res) {
 				if (parseInt(res.errcode) === 0) {
-					$(".more").before(res.data);
+					$(".more").before(res.data.result);
+					if (res.data.more == false) {
+						$(".more").remove();
+					}
 				} else {
 					getToast01(res.errmsg);
 				}

@@ -93,14 +93,10 @@ $(".loginDiv")
 			$(".loginDiv p").html("Mail or phone and password cannot be empty").show();
 		}
 
-	})
-	.on("click", ".logout", function() {
+	});
+	$(".logout").on("click", function() {
 		var req = {
 			url: baseUrl + 'account/logout/',
-			data: {
-				name: name,
-				password: pass
-			},
 			sucFun: function(res) {
 				if (parseInt(res.errcode) === 0) {
 					location.reload();
@@ -113,4 +109,7 @@ $(".loginDiv")
 			}
 		};
 		doAjax(req);
+	});
+	$(".toIndex").on("click",function(){
+		location.href=$(".header").data("href");
 	});

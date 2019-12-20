@@ -1,6 +1,6 @@
 $(".myAccountContainer")
 	.on("click", ".toSubmit", function() {
-		$(".myAccountContainer input").removeAttr("readonly").css("opcity","1.0");
+		$(".myAccountContainer input").removeAttr("readonly").css("opcity", "1.0");
 		$(this).html("Save").addClass("toSave");
 	})
 	.on("click", ".toSave", function() {
@@ -23,7 +23,7 @@ $(".myAccountContainer")
 		} else {
 			var req = {
 				url: baseUrl + 'account/',
-				method: "put",
+				method: "post",
 				data: {
 					email: email,
 					phone: phone,
@@ -39,12 +39,13 @@ $(".myAccountContainer")
 				},
 				sucFun: function(res) {
 					if (parseInt(res.errcode) === 0) {
-						$(".myAccountContainer input").css("opcity","0.7").attr("readonly","true");
+						$(".myAccountContainer input").css("opcity", "0.7").attr("readonly", "true");
 						$(".toSubmit").html("Edit").removeClass("toSave");
+						getToast01(res.errmsg);
 					}
 				},
 				errFun: function(err) {
-
+					getToast01("Network anomaly!!!");
 				}
 			};
 			doAjax(req);

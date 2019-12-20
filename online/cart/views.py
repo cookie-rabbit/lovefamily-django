@@ -9,8 +9,9 @@ from django.views import View
 
 from management.user.models import User
 from online.cart.models import Cart
-from online.goods.models import Goods
+from online.goods.models import Goods, Image, Category
 from online.logger import online_logger
+from online.order.models import Order
 from utils.decorator import user_auth
 from weigan_shopping import settings
 
@@ -18,38 +19,61 @@ from weigan_shopping import settings
 class CartsView(View):
 
     def get(self,request):
+        category = []
+        try:
+            cates = Category.objects.filter(super_category__isnull=True)
+        except Exception as e:
+            online_logger.error(e)
+            return JsonResponse({"errcode": "102", "errmsg": "db error"})
+        for cate in cates:
+            try:
+                sub_cates = Category.objects.filter(super_category__id=cate.id)
+            except Exception as e:
+                online_logger.error(e)
+                return JsonResponse({"errcode": "102", "errmsg": "db error"})
+            category.append({"id": cate.id, "name": cate.name,
+                             "sub_cates": [{'id': sub_cate.id, 'name': sub_cate.name} for sub_cate in sub_cates if
+                                           sub_cates] if sub_cates else []})
+
         user_id = request.session.get("user_id", None)
         if user_id:
             try:
                 user = User.objects.get(id=user_id)
+                orders = Order.objects.filter(user=user)
+                order_quantity = len(orders)
             except User.DoesNotExist as e:
                 online_logger.error(e)
                 return JsonResponse({"errcode": "102", "errmsg": "can not find user in db"})
             except Exception as e:
                 online_logger.error(e)
                 return JsonResponse({"errcode": "102", "errmsg": "db error"})
-            quantity = request.session.get("%s_cart" % user_id)
-            if quantity:
+            cart_quantity = request.session.get("%s_cart" % user_id)
+            if cart_quantity:
                 try:
                     carts = Cart.objects.filter(user__id=user_id)
                 except Exception as e:
                     online_logger.error(e)
                     return JsonResponse({"errcode": "102", "errmsg": "db error"})
-                cart_list = [{"id":cart.id,"name":cart.goods.name_en,"description":cart.goods.description_en,"price":cart.goods.price,"image":settings.URL_PREFIX+cart.goods.image.url} for cart in carts]
-                context = {"user":user.username,"carts_list":cart_list,"quantity":quantity}
+                cart_list = []
+                sum = 0
+                for cart in carts:
+                    sum += cart.quantity * cart.goods.on_price
+                    image = Image.objects.filter(goods=cart.goods)
+                    cart_list.append({"id":cart.id,"goods_id":cart.goods.id,"name":cart.goods.name_en,"description":cart.goods.description_en,"price":cart.goods.on_price,"image":settings.URL_PREFIX+image[0].image.url,"quantity":cart.quantity})
+                print(sum)
+                context = {"user":user,"carts_list":cart_list,"cart_quantity":cart_quantity,"order_quantity":order_quantity,"sum":sum,"category":category}
             else:
-                context = {"user":user.username}
+                context = {"user":user,"cart_quantity":"","order_quantity":order_quantity,"sum":0,"category":category}
         else:
-            context = {}
+            context = {"sum":0,"category":category}
         print(context)
-        return JsonResponse(context,safe=False)
-        # return render(request,"mycart.html",context=context)
+        # return JsonResponse(context,safe=False)
+        return render(request,"myCart.html",context=context)
 
     @method_decorator(user_auth)
     def post(self,request,user):
-        data = json.loads(request.body.decode())
-        goods_id = data.get("goods_id",None)
-        quantity = data.get("quantity",1)
+        goods_id = request.POST.get("goods_id",None)
+        quantity = request.POST.get("quantity",1)
         if not goods_id:
             return JsonResponse({"errcode":"101","errmsg":"empty params"})
         try:
@@ -76,6 +100,7 @@ class CartsView(View):
         except Exception as e:
             online_logger.error(e)
             return JsonResponse({"errcode": "102", "errmsg": "db error"})
+        print(request.session["%s_cart" % user.id])
         request.session["%s_cart" % user.id] += quantity
         total_quantity = request.session["%s_cart" % user.id]
         return JsonResponse({"errcode":"0","errmsg":"add to cart success","data":{"quantity":str(total_quantity)}})
@@ -83,9 +108,8 @@ class CartsView(View):
 
 class CartView(View):
     @method_decorator(user_auth)
-    def put(self,request,user,cart_id):
-        data = json.loads(request.body.decode())
-        quantity = data.get("quantity",None)
+    def post(self,request,user,cart_id):
+        quantity = request.POST.get("quantity",None)
         if quantity is None:
             return JsonResponse({"errcode":"101","errmsg":"params not all"})
         try:

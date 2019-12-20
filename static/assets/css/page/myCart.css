@@ -85,6 +85,10 @@ input[type="password"]:focus {
   float: left;
   margin-left: 10px;
 }
+.header .top .icon:hover,
+.header .top h1:hover {
+  cursor: pointer;
+}
 .header .top .top-right {
   float: right;
   height: 150px;

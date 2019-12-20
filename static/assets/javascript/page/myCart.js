@@ -50,7 +50,7 @@ $(".myCartContainer")
 		me.parents(".cartGoods").remove();
 		setTotalCount();
 		var req = {
-			url: baseUrl + 'carts/' + me.parents(".cartGoods").data("id") + "/",
+			url: baseUrl + 'cart/' + me.parents(".cartGoods").data("id") + "/",
 			method: "delete",
 			sucFun: function(res) {
 				if (parseInt(res.errcode) === 0) {
@@ -69,11 +69,11 @@ $(".myCartContainer")
 
 function editCart(cart_id, quantity) {
 	var req = {
-		url: baseUrl + 'carts/' + cart_id + "/",
+		url: baseUrl + 'cart/' + cart_id + "/",
 		data: {
 			quantity: quantity
 		},
-		method: "put",
+		method: "post",
 		sucFun: function(res) {
 			if (parseInt(res.errcode) === 0) {
 				$(".toShoppingCart span").html(res.data.quantity);
@@ -87,3 +87,4 @@ function editCart(cart_id, quantity) {
 	};
 	doAjax(req);
 }
+

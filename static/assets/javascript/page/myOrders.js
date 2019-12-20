@@ -1,6 +1,7 @@
 $(".myOrdersContainer")
 	.on("click", ".content .orderList h3", function() {
-		$(this).toggleClass("spread");
+		var me=$(this);
+		me.toggleClass("spread");
 		var detailObj = $(this).parents(".orderList").find(".details");
 		if (detailObj.length > 0) {
 			detailObj.toggleClass("hidden");
@@ -9,11 +10,11 @@ $(".myOrdersContainer")
 			var req = {
 				url: baseUrl + 'order_detail/',
 				data: {
-					order_no: $(this).find(".order span").html()
+					order_no: me.find(".order span").html()
 				},
 				sucFun: function(res) {
 					if (parseInt(res.errcode) === 0) {
-						$(this).after(res.data);
+						me.after(res.data);
 					} else {
 						getToast01(res.errmsg);
 					}
@@ -34,7 +35,10 @@ $(".myOrdersContainer")
 			},
 			sucFun: function(res) {
 				if (parseInt(res.errcode) === 0) {
-					$(".more").before(res.data);
+					$(".more").before(res.data.result);
+					if (res.data.more == false) {
+						$(".more").remove();
+					}
 				} else {
 					getToast01(res.errmsg);
 				}

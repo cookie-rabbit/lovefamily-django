@@ -52,8 +52,8 @@
 {% block bottom %}
     <div class="todo">
         <div class="mainContent">
-            <span class="addCart"><span></span>Add to cart</span>
-            <span class="buyNow" data-href="order/"><span></span>Buy Now</span>
+            <span class="addCart" data-id="{{goods.id}}"><span></span>Add to cart</span>
+            <span class="buyNow" data-href="/orders/address/"><span></span>Buy Now</span>
         </div>
     </div>
 {% endblock %}
