@@ -78,4 +78,31 @@ $(".detailContainer")
 			count = parseInt(count) - 1;
 			me.parents(".quantity").find(".count").val(count);
 		}
+	});
+$(".todo")
+	.on("click", ".addCart", function() {
+		var req = {
+			url: baseUrl + 'carts/',
+			data: {
+				goods_id: $(this).data("id"),
+				quantity: $(".quantity .count").val()
+			},
+			method: "post",
+			sucFun: function(res) {
+				if (parseInt(res.errcode) === 0) {
+					/* 修改购物车数量 */
+				}
+			},
+			errFun: function(err) {
+
+			}
+		};
+		doAjax(req);
+		return false;
 	})
+	.on("click", ".buyNow", function() {
+		var quantity = $(".quantity .count").val();
+		/* 跳转需要携带数量 */
+		location.href = $(this).data("href");
+		return false;
+	});;

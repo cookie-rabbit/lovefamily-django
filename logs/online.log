@@ -49,3 +49,19 @@ ERROR 2019-12-17 18:24:28,607 views 67 must be str, not int
 ERROR 2019-12-17 18:24:36,387 views 67 must be str, not int
 ERROR 2019-12-17 18:25:17,537 views 67 must be str, not int
 ERROR 2019-12-17 18:25:38,616 views 67 must be str, not int
+ERROR 2019-12-18 16:22:55,919 views 33 list index out of range
+ERROR 2019-12-18 16:23:05,174 views 33 list index out of range
+ERROR 2019-12-18 16:23:58,084 views 33 list index out of range
+ERROR 2019-12-18 16:24:00,788 views 33 list index out of range
+ERROR 2019-12-18 16:24:07,973 views 33 list index out of range
+ERROR 2019-12-18 16:24:08,805 views 33 list index out of range
+ERROR 2019-12-18 16:26:39,533 views 33 list index out of range
+ERROR 2019-12-18 17:47:16,818 views 138 (1062, "Duplicate entry '123456789' for key 'phone'")
+ERROR 2019-12-18 17:49:04,759 views 138 (1062, "Duplicate entry '123456789' for key 'phone'")
+ERROR 2019-12-18 18:04:10,720 views 138 (1062, "Duplicate entry '123456789' for key 'phone'")
+ERROR 2019-12-19 11:59:42,825 views 35 list index out of range
+ERROR 2019-12-19 12:00:36,201 views 36 list index out of range
+ERROR 2019-12-19 14:00:59,318 views 121 Cart matching query does not exist.
+ERROR 2019-12-19 14:01:01,023 views 121 Cart matching query does not exist.
+ERROR 2019-12-19 14:01:31,815 views 63 Goods matching query does not exist.
+ERROR 2019-12-19 14:02:36,263 views 121 Cart matching query does not exist.

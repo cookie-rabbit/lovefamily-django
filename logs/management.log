@@ -4,3 +4,14 @@ INFO 2019-12-13 17:11:22,323 views 21 zhaiyatong
 INFO 2019-12-13 17:11:22,323 views 24 123456
 ERROR 2019-12-13 17:12:38,252 views 28 ('list index out of range',)
 ERROR 2019-12-13 17:13:07,653 views 28 list index out of range
+ERROR 2019-12-18 16:37:39,906 views 68 __str__ returned non-string (type NoneType)
+ERROR 2019-12-18 16:37:41,751 views 68 __str__ returned non-string (type NoneType)
+ERROR 2019-12-18 16:39:15,665 views 69 __str__ returned non-string (type NoneType)
+ERROR 2019-12-18 16:39:19,999 views 69 __str__ returned non-string (type NoneType)
+ERROR 2019-12-18 16:47:41,245 views 69 __str__ returned non-string (type NoneType)
+ERROR 2019-12-18 16:48:31,158 views 69 __str__ returned non-string (type NoneType)
+ERROR 2019-12-18 16:49:10,205 views 69 __str__ returned non-string (type NoneType)
+ERROR 2019-12-18 17:18:19,481 views 67 'QuerySet' object has no attribute 'objects'
+ERROR 2019-12-18 17:19:06,044 views 67 'QuerySet' object has no attribute 'objects'
+ERROR 2019-12-18 17:21:12,782 views 67 'QuerySet' object has no attribute 'objects'
+ERROR 2019-12-18 17:32:46,226 views 82 User matching query does not exist.

@@ -12,6 +12,7 @@ from django.utils.decorators import method_decorator
 from django.views import View
 
 from management.user.models import User, UserAddress
+from online.cart.models import Cart
 from online.goods.models import Category
 from online.logger import online_logger
 from utils.decorator import user_auth
@@ -21,21 +22,32 @@ class LoginView(View):
 
     def post(self,request):
         username = request.POST.get("name",None)
+        print(username)
         password = request.POST.get("password",None)
+        print(password)
         if not all([username,password]):
             return JsonResponse({"errcode":"101","errmsg":"params not all"})
         try:
-            user = User.objects.filter(Q(email = username) | Q(username = username))
-            if user is None:
+            user = User.objects.filter(Q(email = username) | Q(phone = username))
+            if user:
+                user = user[0]
+            else:
                 return JsonResponse({"errcode":"105","errmsg":"'please login after sign up"})
-            user = user[0]
         except Exception as e:
             online_logger.error(e)
             return JsonResponse({"errcode":"102","errmsg":"db error"})
         if not user.check_password(password):
             return JsonResponse({"errcode":"104","errmsg":"password error"})
+        try:
+            carts = Cart.objects.filter(user__id=user.id)
+            quantity = [cart.quantity for cart in carts]
+            quantity = sum(quantity)
+        except Exception as e:
+            online_logger.error(e)
+            return JsonResponse({"errcode":"102","errmsg":"db error"})
         request.session['user_id'] = user.id
-        return JsonResponse({"errcode":"0","result":"login success"})
+        request.session['%s_cart' % user.id] = quantity
+        return JsonResponse({"errcode":"0","errmsg":"login success"})
 
 
 class LogoutView(View):
@@ -89,7 +101,7 @@ class UserView(View):
         province = data.get("province", None)
         postcode = data.get("postcode")
         phone_number = data.get("phone_number", None)
-        if all([name, road, district, city, province, postcode, phone]) is None:
+        if all([name, road, district, city, province, postcode, phone_number]) is None:
             try:
                 user.address.delete()
             except Exception as e:
@@ -97,19 +109,21 @@ class UserView(View):
                 return JsonResponse({"errcode":"102","errmsg":"db error"})
             return JsonResponse({"errcode": "0", "result": "save success"})
         else:
-            useraddresss = user.address.all()[0]
+            useraddress = user.address.all()
+            useraddress = useraddress[0]
             try:
-                useraddresss.name = name
-                useraddresss.province = province
-                useraddresss.city = city
-                useraddresss.district = district
-                useraddresss.road = road
-                useraddresss.phone = phone_number
-                useraddresss.save()
+                useraddress = useraddress[0]
+                useraddress.name = name
+                useraddress.province = province
+                useraddress.city = city
+                useraddress.district = district
+                useraddress.road = road
+                useraddress.phone = phone_number
+                useraddress.save()
             except Exception as e:
                 online_logger.error(e)
                 return JsonResponse({"errcode":"102","errmsg":"db error"})
-            return JsonResponse({"errcode": "0", "result": "save success"})
+            return JsonResponse({"errcode": "0", "errmsg": "save success"})
 
 
 class SignUpView(View):
@@ -132,6 +146,7 @@ class SignUpView(View):
         except Exception as e:
             online_logger.error(e)
             return JsonResponse({"errcode":"102","errmsg":"db error"})
+
         name = data.get("name", None)
         road = data.get("road",None)
         district = data.get("district",None)
@@ -141,15 +156,15 @@ class SignUpView(View):
         phone_number = data.get("phone_number",None)
         if all([name,road,district,city,province,postcode,phone]) is None:
             request.session['user_id'] = user.id
-            return JsonResponse({"errcode":"0","result":"sign up success"})
+            return JsonResponse({"errcode":"0","errmsg":"sign up success"})
         else:
             try:
-                useraddress = UserAddress(name=name,province=province,city=city,district=district,road=road,phone_number=phone_number,postcode=postcode,user=user)
+                useraddress = UserAddress.objects.create(name=name,province=province,city=city,district=district,road=road,phone_number=phone_number,postcode=postcode,user=user)
             except Exception as e:
                 online_logger.error(e)
                 return JsonResponse({"errcode":"102","errmsg":"db error"})
             request.session['user_id'] = user.id
-            return JsonResponse({"errcode":"0","result":"sign up success"})
+            return JsonResponse({"errcode":"0","errmsg":"sign up success"})
 
 
 class SignUpTemplateView(View):

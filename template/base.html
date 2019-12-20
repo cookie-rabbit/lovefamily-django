@@ -30,23 +30,22 @@
 								<a href="" class="li current">English</a>
 							</div>
 						</div>
-						<!-- 登录前显示------------ begin -->
-						<a href="javascript:(0)" class="toLog">Login In</a>
-						<a href="/account/signup/" class="toReg">Sign Up</a>
-						<!-- 登录前显示------------ end -->
 
-						<!-- 登录后显示------------ begin -->
-						<!-- <a href="javascript:(0)" class="toNotice"><span>1</span></a>
-						<a href="/carts/" class="toShoppingCart"><span>11</span></a>
-						<div class="user hasHover">
-							<a href="javascript:(0)" class="name">Frank<span></span></a>
-							<div class="ul">
-								<a href="/account/" class="li">My Setting</a>
-								<a href="" class="li">Logout</a>
+
+						{% if user %}
+							<a href="javascript:(0)" class="toNotice"><span>{{order_quantity}}</span></a>
+							<a href="/carts/" class="toShoppingCart"><span>{{ cart_quantity }}</span></a>
+							<div class="user hasHover">
+								<a href="javascript:(0)" class="name">{{ user }}<span></span></a>
+								<div class="ul">
+									<a href="/account/" class="li">My Setting</a>
+									<a href="" class="li" class="'logout">Logout</a>
+								</div>
 							</div>
-						</div> -->
-						<!-- 登录后显示------------ end -->
-
+						{% else %}
+							<a href="javascript:(0)" class="toLog">Login In</a>
+							<a href="/account/signup/" class="toReg">Sign Up</a>
+						{% endif %}
 
 						<div class="loginDiv">
 							<input type="text" class="name" placeholder="Email or Phone number">
@@ -62,7 +61,7 @@
 					<div class="left">
                         {% for cate in category %}
                             <div class="hasHover">
-                                <a href="javascript:(0)">{{ cate.name }}</a>
+                                <a href="/goods/category/{{ cate.id }}">{{ cate.name }}</a>
                                 <div class="ul">
                                     {% for sub_cate in cate.sub_cates %}
                                         <a class="li" href="/goods/category/{{ sub_cate.id }}">{{ sub_cate.name }}</a>
@@ -73,7 +72,7 @@
 
 					</div>
 					<div class="right">
-						<input type="text" placeholder="Search" class="toSearch"><span class="search"></span>
+						<input type="text" placeholder="Search" class="toSearch"><span class="search" data-href="goods/search/?"></span>
 					</div>
 				</div>
 			</div>
@@ -91,7 +90,7 @@
 		<script src="{% static 'assets/javascript/libs/jquery-1.9.1.js' %}"></script>
 		<script src="{% static 'assets/javascript/common/base.js' %}"></script>
 		<script src="{% static 'assets/javascript/common/header.js' %}"></script>
-		<script src={% block js %}{% endblock %}></script>
+		{% block js %}{% endblock %}
 
 	</body>
 </html>

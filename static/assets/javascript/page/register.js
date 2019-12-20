@@ -1,51 +1,56 @@
 $(".registerContainer")
-	.on("click", ".toSubmit", function() {
-		var baseInfor = formatObjVal({
-			name: $(".baseInfor .name input").val(),
-			phone: $(".baseInfor .phone input").val(),
-			pass: $(".baseInfor .pass input").val(),
-			repass:$(".baseInfor .repass input").val()
-		})
-
-		if (setTips(baseInfor.name, baseInfor.pass, baseInfor.repass)) {
-			var addressObj = formatObjVal({
-				fullName: $(".addressContent .fullName input").val(),
-				addressLine1: $(".addressContent .addressLine1 input").val(),
-				addressLine2: $(".addressContent .addressLine2 input").val(),
-				city: $(".addressContent .city input").val(),
-				province: $(".addressContent .province input").val(),
-				zip: $(".addressContent .zip input").val(),
-				phoneNum: $(".addressContent .phoneNum input").val()
-			});
-
-		}
-	})
-	.on("input propertychange", function() {
-		var nameL = $(".baseInfor .name input").val().trim().replace(/\s/g, "").length;
-		var phoneL = $(".baseInfor .phone input").val().trim().replace(/\s/g, "").length;
-		var passL = $(".baseInfor .pass input").val().trim().replace(/\s/g, "").length;
-		var repassL = $(".baseInfor .repass input").val().trim().replace(/\s/g, "").length;
-		console.log(nameL > 0 && phoneL > 0 && passL > 0 && repassL > 0);
-		if (nameL > 0 && phoneL > 0 && passL > 0 && repassL > 0) {
-			$(".submit").addClass("toSubmit");
+.on("click", ".toSubmit", function() {
+		var email = $(".baseInfor .name input").val().trim();
+		var phone = $(".baseInfor .phone input").val().trim();
+		var password = $(".baseInfor .pass input").val().trim();
+		var repassword = $(".baseInfor .repass input").val().trim();
+		var strRegex = /^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/;
+		$(".baseInfor .tips").html("");
+		console.log(email.length);
+		if (email.length == 0) {
+			$(".baseInfor .name .tips").html("Please enter email");
+		} else if (!strRegex.test(email)) {
+			$(".baseInfor .name .tips").html("Please enter the correct email");
+		} else if (phone.length == 0) {
+			$(".baseInfor .phone .tips").html("Please enter phone number");
+		} else if (password.length == 0) {
+			$(".baseInfor .pass .tips").html("Please input a password");
+		} else if (password != repassword) {
+			$(".baseInfor .repass .tips").html("Passwords must match");
 		} else {
-			$(".submit").removeClass("toSubmit");
-		}
-	});
+			var req = {
+				url: baseUrl + 'account/signup/',
+				method: "post",
+				data: {
+					email: email,
+					phone: phone,
+					password: password,
+					repassword: repassword,
+					name: $(".addressContent .fullName input").val().trim(),
+					road: $(".addressContent .addressLine1 input").val().trim(),
+					district: $(".addressContent .addressLine2 input").val().trim(),
+					city: $(".addressContent .city input").val().trim(),
+					province: $(".addressContent .province input").val().trim(),
+					postcode: $(".addressContent .zip input").val().trim(),
+					phone_number: $(".addressContent .phoneNum input").val().trim()
+				},
+				sucFun: function(res) {
+					if (parseInt(res.errcode) === 0) {
+						$(".myAccountContainer input").css("opcity","0.7").attr("readonly","true");
+						$(".toSubmit").html("Edit").removeClass("toSave");
+						getToast01("Congraduations for becoming a member of Love Family.<br>Enjoy your purchasing trip!<br> Auto jump... ",1500);	
+					}
+					else{
+						 getToast01(res.errmsg);
+					}
+				},
+				errFun: function(err) {
 
-function setTips(name, pass, repass) {
-	var regEmail = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)/;
-	if (regEmail.test(name) == false) {
-		$(".baseInfor .name .tips").removeClass("hidden");
-		return false;
-	} else {
-		$(".baseInfor .name .tips").addClass("hidden");
-	}
-	if (pass !== repass) {
-		$(".baseInfor .repass .tips").removeClass("hidden");
-		return false;
-	} else {
-		$(".baseInfor .repass .tips").addClass("hidden");
-	}
-	return true;
-}
+				}
+			};
+			doAjax(req);
+		}
+
+	})
+
+

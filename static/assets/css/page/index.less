@@ -7,6 +7,27 @@
 .contentContainer{
 	width: 1160px;
 	margin: 0 auto;
+	.kinds{
+		a{
+			display: inline-block;
+			font-size:18px;
+			font-family:HelveticaNeue-LightItalic,HelveticaNeue;
+			font-weight:normal;
+			color:rgba(0,0,0,1);
+			line-height:65px;
+			height: 55px;
+		}
+		span{
+			display: inline-block;
+			width: 10px;
+			height: 16px;
+			background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAQCAYAAAAvf+5AAAAA70lEQVQoU6WSsWoCQRRFz+xoIWgl+AGxS2dEXOzEQEgstDdJa+NH+BsWYlDWIpB0CSYfIESxtojaWllYJCLsOmEWVkyi64KvPByYN/dd8ZAmaUiy9wO6+IywsuQd6AlFczqgVofNPl9oaJlc2opnA97jCyo3E9Z/ZVfU0zG5UIpXAeNvm3J1xHJX3ooauvuG6AFfwub6bsTck3+JGrZzJHB4AeISrioffGr+T9Tw8ZzoOsbTRpGSIYq3fYZ7RS030oQjkhaCkjQonCYGejrQZ6wMZ47Bm288XuDAeHUo8EAn9EqBojnzK4W7l8A8VrMfYRpiOWDPVnYAAAAASUVORK5CYII=") no-repeat;
+			background-size: 100%;
+			margin: 0 5px;
+			position: relative;
+			top: 2px;
+		}
+	}
 	.type{
 		padding-left: 20px;
 		li{
@@ -63,7 +84,7 @@
 			position: relative;
 			img{
 				width: 344px;
-				height: 252;
+				height: 252px;
 				display: block;
 				border-top-left-radius: 10px;
 				border-top-right-radius: 10px;
@@ -131,20 +152,4 @@
 		}
 		
 	}
-}
-.more{
-	width:48px;
-	height:22px;
-	font-size:16px;
-	font-family:PingFangSC-Regular,PingFang SC;
-	font-weight:400;
-	color:rgba(162,55,0,1);
-	line-height:22px;
-	padding: 5px 10px;
-	border-top: 1px solid #a23700;
-	border-bottom: 1px solid #a23700;
-	margin: 40px auto;
-}
-.more:hover{
-	 cursor: pointer;
 }

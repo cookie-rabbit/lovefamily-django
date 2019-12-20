@@ -24,7 +24,7 @@ $(".header")
 		}
 		return false;
 	});
-	
+
 $(".toSearch").on("keydown", function(e) {
 	var evt = window.event || e;
 	if (evt.keyCode == 13) {
@@ -33,25 +33,83 @@ $(".toSearch").on("keydown", function(e) {
 });
 
 function toSearch() {
-	var value = $(".toSearch").val().trim().replace(/\s/g, "");
-	if (value.length > 0) {
-		var req = {
-			url: '',
-			data: {
-				value: value
-			},
-			sucFun: function(res) {
-				/* 跳转到搜索结果页面 */
-				location.href = "";
-			},
-			errFun: function(err) {
+	var keyword = $(".toSearch").val().trim().replace(/\s/g, "");
+	if (keyword.length > 0) {
+		/* 取消ajax请求模式 */
+		/*var req = {
+					url: baseUrl + 'goods/search/',
+					data: {
+						keyword: keyword
+					},
+					sucFun: function(res) {
+						if (parseInt(res.errcode) === 0) {
+							location.href = res.data.href;
+						} else {
+							$(".loginDiv p").html(res.errmsg).show();
+						}
 
-			}
-		};
-		doAjax(req);
+					},
+					errFun: function(err) {
+						$(".loginDiv p").html(res.errmsg).show();
+					}
+				};
+				doAjax(req); */
+		location.href = ($(".toSearch").data(href) + "keyword=" + keyword);
 
 	} else {
 		console.log("请输入关键词!!!");
 	}
 
 }
+$(".loginDiv")
+	.on("click", ".submit", function() {
+		var name = $(".loginDiv .name").val().trim();
+		var pass = $(".loginDiv .password").val().trim();
+
+		if (name.length > 0 && pass.length > 0) {
+			$(".loginDiv p").hide();
+			var req = {
+				url: baseUrl + 'account/login/',
+				data: {
+					name: name,
+					password: pass
+				},
+				method: "post",
+				sucFun: function(res) {
+					if (parseInt(res.errcode) === 0) {
+						location.reload();
+					} else {
+						$(".loginDiv p").html(res.errmsg).show();
+					}
+				},
+				errFun: function(err) {
+
+				}
+			};
+			doAjax(req);
+
+		} else {
+			$(".loginDiv p").html("Mail or phone and password cannot be empty").show();
+		}
+
+	})
+	.on("click", ".logout", function() {
+		var req = {
+			url: baseUrl + 'account/logout/',
+			data: {
+				name: name,
+				password: pass
+			},
+			sucFun: function(res) {
+				if (parseInt(res.errcode) === 0) {
+					location.reload();
+				} else {
+					$(".loginDiv p").html(res.errmsg).show();
+				}
+			},
+			errFun: function(err) {
+
+			}
+		};
+		doAjax(req);
+	});

@@ -1,172 +1,67 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8">
-		<title>商品名称</title>
-		<meta name="description" content="这里是本网站描述">
-		<meta name="keywords" content="这里是seo关键词,用逗号间隔">
-		<meta name="copyright" content="本页版权">
-		<link rel="icon" href="../assets/images/icon/loveFamily.ico" type="image/x-icon">
-		<link rel="stylesheet" type="text/css" href="../assets/css/page/detail.css" />
-		<!-- <link rel="stylesheet/less" type="text/css" href="../assets/css/page/detail.less" />
-		<script src="//cdnjs.cloudflare.com/ajax/libs/less.js/3.10.0-beta/less.min.js"></script> -->
-	</head>
-	<body>
-		<div class="container">
-			<div class="header">
-				<div class="top">
-					<img src="../assets/images/icon.png" alt="" class="icon">
-					<h1>Love Family Online Shop</h1>
-					<div class="top-right">
-						<div class="language hasHover">
-							<!-- class:spread -->
-							<a href="javascript:(0)" class="name">Language<span></span></a>
-							<div class="ul">
-								<a href="" class="li">简体中文</a>
-								<a href="" class="li current">English</a>
-							</div>
-						</div>
-						<!-- 登录前显示------------ begin -->
-						<!-- <a href="javascript:(0)" class="toLog">Login In</a>
-						<a href="javascript:(0)" class="toReg">Sign Up</a> -->
-						<!-- 登录前显示------------ end -->
+{% extends 'base.html' %}
+{% load static %}
 
-						<!-- 登录后显示------------ begin -->
-						<a href="javascript:(0)" class="toNotice"><span>1</span></a>
-						<a href="http://127.0.0.1:8848/shopping/src/html/myCart.html" class="toShoppingCart"><span>11</span></a>
-						<div class="user hasHover">
-							<a href="javascript:(0)" class="name">Frank<span></span></a>
-							<div class="ul">
-								<a href="" class="li">My Setting</a>
-								<a href="" class="li">Logout</a>
-							</div>
-						</div>
-						<!-- 登录后显示------------ end -->
+{% block title %}
+    商品名称
+{% endblock %}
 
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/page/detail.css' %}" />
+{% endblock %}
 
-						<div class="loginDiv">
-							<input type="text" class="name" placeholder="Email or Phone number">
-							<input type="password" class="password" placeholder="Password">
-							<p>The email or phone number you’ve entered doesn’t match any account. Sign up for an account</p>
-							<div class="submit">Log In</div>
-						</div>
+{% block hr %}
+   <div class="hr"></div>
+{% endblock %}
 
-					</div>
-				</div>
-				<div class="hr"></div>
-				<div class="bottom">
-					<div class="left">
-						<div class="Foods hasHover">
-							<a href="javascript:(0)">Foods</a>
-							<div class="ul">
-								<a class="li" href="javascript:(0)">Drink</a>
-								<a class="li" href="javascript:(0)">Fast Foot</a>
-								<a class="li" href="javascript:(0)">Snacks</a>
-								<a class="li" href="javascript:(0)">Meat</a>
-								<a class="li" href="javascript:(0)">Vegetables</a>
-								<a class="li" href="javascript:(0)">Snacks</a>
-								<a class="li" href="javascript:(0)">Drink</a>
-								<a class="li" href="javascript:(0)">Fast Foot</a>
-								<a class="li" href="javascript:(0)">Snacksssss</a>
-								<a class="li" href="javascript:(0)">Meat</a>
-								<a class="li" href="javascript:(0)">Vegetables</a>
-								<a class="li" href="javascript:(0)">Snacks</a>
-							</div>
-						</div>
+{% block content %}
+    <div class="detailContainer">
+        <div class="back"><span class="goBack"></span>{{ goods.name }}</div>
+        <div class="information">
+            <div class="pics">
+                <ul class="roll">
+                    {% for image in goods.images  %}
+                        <img class="rollPic" src="{{ image }}" alt="">
+                    {% endfor %}
+                </ul>
+                <div class="prev"></div>
+                <div class="next"></div>
 
-						<div class="DailyUse hasHover">
-							<a href="javascript:(0)">Daily Use</a>
-							<div class="ul">
-								<a class="li" href="javascript:(0)">Drink</a>
-								<a class="li" href="javascript:(0)">Fast Foot</a>
-								<a class="li" href="javascript:(0)">Snacks</a>
-								<a class="li" href="javascript:(0)">Meat</a>
-								<a class="li" href="javascript:(0)">Vegetables</a>
-								<a class="li" href="javascript:(0)">Snacks</a>
-								<a class="li" href="javascript:(0)">Drink</a>
-								<a class="li" href="javascript:(0)">Fast Foot</a>
-								<a class="li" href="javascript:(0)">Snacksssss</a>
-								<a class="li" href="javascript:(0)">Meat</a>
-								<a class="li" href="javascript:(0)">Vegetables</a>
-								<a class="li" href="javascript:(0)">Snacks</a>
-							</div>
-						</div>
+            </div>
 
-						<div class="Cosmetics hasHover">
-							<a href="javascript:(0)">Cosmetics</a>
-							<div class="ul">
-								<a class="li" href="javascript:(0)">Drink</a>
-								<a class="li" href="javascript:(0)">Fast Foot</a>
-								<a class="li" href="javascript:(0)">Snacks</a>
-								<a class="li" href="javascript:(0)">Meat</a>
-								<a class="li" href="javascript:(0)">Vegetables</a>
-								<a class="li" href="javascript:(0)">Snacks</a>
-								<a class="li" href="javascript:(0)">Drink</a>
-								<a class="li" href="javascript:(0)">Fast Foot</a>
-								<a class="li" href="javascript:(0)">Snacksssss</a>
-								<a class="li" href="javascript:(0)">Meat</a>
-								<a class="li" href="javascript:(0)">Vegetables</a>
-								<a class="li" href="javascript:(0)">Snacks</a>
-							</div>
-						</div>
-					</div>
-					<div class="right">
-						<input type="text" placeholder="Search" class="toSearch"><span class="search"></span>
-					</div>
-				</div>
-			</div>
-			<div class="hr"></div>
+            <div class="infors">
+                <h2>{{ goods.name }}</h2>
+                <p class="oriPrice">Price:&nbsp;$&nbsp; <span onclick="oriP">{{ goods.origin_price }}</span><span class="line"></span></p>
+                <p class="realPrice">
+                    Online Price:&nbsp;$&nbsp;<span class="realP">{{ goods.on_price }}</span>
+                    <span class="quantity">
+                        Quantity:
+                        <input type="number" class="count" value="1">
+                        <span class="changeCount">
+                            <span class="add"></span>
+                            <span class="sub"></span>
+                        </span>
+                    </span>
+                </p>
+                <p class="dec">{{ goods.description }}</p>
+            </div>
+        </div>
+        <div class="customDiv"></div>
+    </div>
+{% endblock %}
 
-			<div class="detailContainer">
-				<div class="back"><span class="goBack"></span>Sweety Cookie</div>
-				<div class="information">
-					<div class="pics">
-						<ul class="roll">
-							<img class="rollPic" src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3215835027,2777027890&fm=26&gp=0.jpg" alt="">
-							<img class="rollPic" src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3028322999,1758856363&fm=26&gp=0.jpg" alt="">
-							<img class="rollPic" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1576571130934&di=8b61a3323ec6a00f828cff50e2fc1cb5&imgtype=jpg&src=http%3A%2F%2Fimg0.imgtn.bdimg.com%2Fit%2Fu%3D3526590080%2C3428595613%26fm%3D214%26gp%3D0.jpg" alt="">
-							<img class="rollPic" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1576571161864&di=d420931b2ab33e69589280719c22d789&imgtype=0&src=http%3A%2F%2Fdata.bbs.18183.com%2Fattachment%2Fforum%2F201612%2F15%2F141441ik268pfiki0zc0yi.jpg" alt="">
-							<img class="rollPic" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1576571185800&di=a5fea1b372e86043d5251d7f68f8b2f6&imgtype=jpg&src=http%3A%2F%2Fimg4.imgtn.bdimg.com%2Fit%2Fu%3D3339991674%2C2504959048%26fm%3D214%26gp%3D0.jpg" alt="">
-						</ul>
-						<div class="prev"></div>
-						<div class="next"></div>
+{% block bottom %}
+    <div class="todo">
+        <div class="mainContent">
+            <span class="addCart"><span></span>Add to cart</span>
+            <span class="buyNow" data-href="order/"><span></span>Buy Now</span>
+        </div>
+    </div>
+{% endblock %}
 
-					</div>
-
-					<div class="infors">
-						<h2>Sweety Cookie</h2>
-						<p class="oriPrice">Price:&nbsp;$&nbsp; <span onclick="oriP">66</span><span class="line"></span></p>
-						<p class="realPrice">
-							Online Price:&nbsp;$&nbsp;<span class="realP">66</span>
-							<span class="quantity">
-								Quantity:
-								<input type="number" class="count" value="1">
-								<span class="changeCount">
-									<span class="add"></span>
-									<span class="sub"></span>
-								</span>
-							</span>
-						</p>
-						<p class="dec">This is a bunch of descriptions.This is a bunch of descriptions.This is a bunch of
-							descriptions.This is a bunch of descriptions.This is a bunch of descriptions.This is a bunch of
-							descriptions.This is a bunch of descriptions.This is a bunch of descriptions.This is a bunch of
-							descriptions.This is a bunch of descriptions.This is a bunch of descriptions.This is a bunch of descriptions</p>
-					</div>
-				</div>
-				<div class="customDiv"></div>
-			</div>
-		</div>
-		<div class="todo">
-			<div class="mainContent">
-				<span class="addCart"><span></span>Add to cart</span>
-				<span class="buyNow"><span></span>Buy Now</span>
-			</div>
-		</div>
-		<script src="../assets/javascript/libs/jquery-1.9.1.js"></script>
-		<script src="../assets/javascript/common/base.js"></script>
-		<script src="../assets/javascript/common/header.js"></script>
-		<script src="../assets/javascript/page/detail.js"></script>
+{% block js %}
+    <script src="{% static 'assets/javascript/page/detail.js' %}"></script>
+{% endblock %}
 
 
-	</body>
-</html>
+
+

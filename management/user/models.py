@@ -6,11 +6,11 @@ from django.db import models
 
 class User(models.Model):
     """用户表"""
-    username = models.CharField(max_length=20,null=True)
+    username = models.CharField(max_length=20,default='')
     email = models.EmailField()
-    phone = models.CharField(max_length=15,unique=True)
+    phone = models.CharField(max_length=15)
     password = models.CharField(max_length=100)
-    create_time = models.DateField(null=True)
+    signup_date = models.DateField(null=True)
     status = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
 

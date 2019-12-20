@@ -30,11 +30,10 @@ class Goods(models.Model):
 class Category(models.Model):
     """商品种类表"""
     name = models.CharField(max_length=20)
-    super_category = models.ForeignKey('self', null=True)
+    super_category = models.ForeignKey('self', null=True, on_delete=models.CASCADE)
 
     class Meta:
         db_table = "Category"
 
     def __str__(self):
         return self.name
-

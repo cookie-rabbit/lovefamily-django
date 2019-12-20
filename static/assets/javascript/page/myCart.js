@@ -15,7 +15,7 @@ function setTotalCount() {
 	$(".totalPrice span").html(totalSum);
 }
 
-$(".contentContainer")
+$(".myCartContainer")
 	.on("click", ".checkOrNot", function() {
 		var me = $(this);
 		me.toggleClass("checked");
@@ -30,8 +30,10 @@ $(".contentContainer")
 		var me = $(this);
 		var count = me.parents(".quantity").find(".count").val();
 		count = parseInt(count) + 1;
-		me.parents(".quantity").find(".count").val(count)
+		me.parents(".quantity").find(".count").val(count);
 		setTotalCount();
+		editCart(me.parents(".cartGoods").data("id"), count);
+
 	})
 	.on("click", ".sub", function() {
 		var me = $(this);
@@ -41,9 +43,47 @@ $(".contentContainer")
 			me.parents(".quantity").find(".count").val(count);
 		}
 		setTotalCount();
+		editCart(me.parents(".cartGoods").data("id"), count);
 	})
 	.on("click", ".remove", function() {
 		var me = $(this);
 		me.parents(".cartGoods").remove();
 		setTotalCount();
+		var req = {
+			url: baseUrl + 'carts/' + me.parents(".cartGoods").data("id") + "/",
+			method: "delete",
+			sucFun: function(res) {
+				if (parseInt(res.errcode) === 0) {
+					$(".toShoppingCart span").html(res.data.quantity);
+				} else {
+					getToast01(res.errmsg);
+				}
+			},
+			errFun: function(err) {
+				getToast01("Network anomaly!!!");
+			}
+		};
+		doAjax(req);
 	})
+
+
+function editCart(cart_id, quantity) {
+	var req = {
+		url: baseUrl + 'carts/' + cart_id + "/",
+		data: {
+			quantity: quantity
+		},
+		method: "put",
+		sucFun: function(res) {
+			if (parseInt(res.errcode) === 0) {
+				$(".toShoppingCart span").html(res.data.quantity);
+			} else {
+				getToast01(res.errmsg);
+			}
+		},
+		errFun: function(err) {
+			getToast01("Network anomaly!!!");
+		}
+	};
+	doAjax(req);
+}
