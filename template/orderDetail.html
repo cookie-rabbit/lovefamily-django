@@ -1,0 +1,20 @@
+{% ifnotequal good_dic '' %}
+    {% for good in good_dic %}
+        <div class="details">
+            <a href="/goods/{{ good.id }}/" class="listDetail">
+                <img src={{ good.image }} alt="">
+                <div class="infors">
+                    <h4>{{ good.name_en }}</h4>
+                    <p class="num">
+                        <span class="price">Price:&nbsp;$&nbsp;<span>{{ good.price }}</span></span>
+                        <span class="quantity">quantity:<span>{{ good.quantity }}</span></span>
+                    </p>
+                    <p class="desc">
+                        {{ good.description_en }}
+                    </p>
+                </div>
+            </a>
+        </div>
+    {% endfor %}
+{% else %}
+{% endifnotequal %}
