@@ -54,38 +54,9 @@
                     <a href="http://10.168.2.111:8000/orders/?status=3" class="finished" data-type="3">Finished</a>
                     <a href="http://10.168.2.111:8000/orders/?status=4" class="closed current" data-type="4">Closed</a>
                 {% endifequal %}
-                <label>
-                    <input type="text" placeholder="2019/01/01 to 2019/10/01" class="toSearchOrders">
-                </label><span class="searchPic"></span>
             </div>
-            {% for order in order_dic %}
-                <div class="orderList">
-                    {% if forloop.first %}
-                        <h3 class="spread">
-                            <span class="order">Order No:<span>{{ order.order_no }}</span></span>
-                            <span class="date">Date:<span>{{ order.order_date }}</span></span>
-                            <span class="total">Toatal:<span>{{ order.total }}</span></span>
-                            <span class="status">Status:<span class={{ 0 }}>{{ order.status }}</span></span>
-                            <i></i>
-                        </h3>
-                    {% else %}
-                        <h3 class="">
-                            <span class="order">Order No:<span>{{ order.order_no }}</span></span>
-                            <span class="date">Date:<span>{{ order.order_date }}</span></span>
-                            <span class="total">Toatal:<span>{{ order.total }}</span></span>
-                            <span class="status">Status:<span
-                                    class={{ order.status|lower }}>{{ order.status }}</span></span>
-                            <i></i>
-                        </h3>
-                    {% endif %}
-                    {% if forloop.first and good_dic != '' %}
-                        {% include 'orderDetail.html' %}
-                    {% endif %}
-                </div>
-            {% endfor %}
-            {% ifequal  next_page 1 %}
-                <div class="more">MORE</div>
-            {% endifequal %}
+            {% include 'orderBlock.html' %}
+            <div class="more">MORE</div>
         </div>
     </div>
 {% endblock %}

@@ -76,17 +76,19 @@ class OrderAddressView(View):
 # 【渲染】订单详情
 class OrdersDetailView(View):
     @method_decorator(user_auth)
-    def order_detail(self, request, user, order_no):
+    def get(self, request, user):
         user_id = user.id
-        order = Order.objects.filter(user_id=user_id)
-        if order_no in order:
+        order_no = request.GET.get('order_no')
+        orders = Order.objects.filter(user_id=user_id)
+        order = orders.get(order_no=order_no)
+        if order != '':
             try:
                 goods = Order_Goods.objects.filter(order_id=order.id)
             except Exception as e:
                 online_logger.error(e)
                 return JsonResponse({"res": 111, "errmsg": "数据库错误"})
             if goods != '':
-                good_dict = []
+                good_dic = []
                 for good in goods:
                     good_id = good.goods_id
                     quantity = good.quantity
@@ -95,12 +97,16 @@ class OrdersDetailView(View):
                     good_price = good_detail.price
                     good_description_en = good_detail.description_en
                     good_image = str(good_detail.image)
-                    good_dict.append({"quantity": quantity, "good_name_en": good_name_en, "good_price": good_price,
+                    good_dic.append({"quantity": quantity, "good_name_en": good_name_en, "good_price": good_price,
                                       "good_description_en": good_description_en, "good_image": good_image})
-                res = good_dict
+                res = {"good_dic": good_dic}
                 tpl = get_template("orderDetail.html")
-                res = tpl.render(res)
-                return HttpResponse(res)
+                data = tpl.render(res)
+                return JsonResponse({'errcode': 4, 'data': data})
+            else:
+                return JsonResponse({'errcode': 5, 'data': "商品不存在"})
+        else:
+            return JsonResponse({'errcode': 4, 'data': "订单不存在"})
 
 
 # 【渲染】订单列表
@@ -108,66 +114,38 @@ class OrdersListView(View):
     @method_decorator(user_auth)
     def get(self, request, user):
         user_id = user.id
-        offset = request.GET.get('offset')
-        status = request.GET.get('status')
-        peroid = request.GET.get('peroid')
+        status_query = request.GET.get('status')
         order_no = request.GET.get('order_no')
 
         orders = Order.objects.filter(user_id=user_id).order_by('-order_date')
-
-
-        if offset:
-            try:
-                offset = int(offset)
-            except ValueError as e:
-                online_logger.error(e)
-                return JsonResponse({'errcode': 1, 'data': "跳过条数格式错误"})
-            try:
-                orders = orders[offset:offset+10]
-            except Exception as e:
-                online_logger.error(e)
-                return JsonResponse({'errcode': 4, 'data': "数据格式错误"})
-
-        if status:
-            try:
-                status = int(status)
-            except ValueError as e:
-                online_logger.error(e)
-                return JsonResponse({'errcode': 1, 'data': "状态码错误"})
-            try:
-                orders = orders.filter(status=status)[:10]
-            except Exception as e:
-                online_logger.error(e)
-                return JsonResponse({'errcode': 4, 'data': "数据格式错误"})
-
-        if peroid:
-            try:
-                date_time = peroid.split('to')
-                start_date = datetime.strptime(date_time[0], '%Y/%m/%d').strftime('%Y-%m-%d')
-                end_date = datetime.strptime(date_time[1], '%Y/%m/%d').strftime('%Y-%m-%d')
-            except ValueError as e:
-                online_logger.error(e)
-                return JsonResponse({'errcode': 1, 'data': "日期非法"})
-            try:
-                orders = orders.filter(order_date__range=(start_date, end_date))[:10]
-            except Exception as e:
-                online_logger.error(e)
-                return JsonResponse({'errcode': 4, 'data': "数据格式错误"})
-
         if order_no:
             try:
                 orders = orders.filter(order_no=order_no)
             except Exception as e:
                 online_logger.error(e)
                 return JsonResponse({'errcode': 4, 'data': "数据格式错误"})
+        else:
+            if status_query:
+                try:
+                    status_query = int(status_query)
+                except ValueError as e:
+                    online_logger.error(e)
+                    return JsonResponse({'errcode': 1, 'data': "状态码错误"})
+                try:
+                    orders = orders.filter(status=status_query).order_by('-order_date')
+                except Exception as e:
+                    online_logger.error(e)
+                    return JsonResponse({'errcode': 4, 'data': "数据格式错误"})
 
         if orders.count() > 10:
             next_page = 1
+            orders = orders[:10]
         else:
             next_page = 0
 
         if orders.count() > 0:
             order_dic = []
+            good_dic = []
 
             for order in orders:
                 order_no = order.order_no
@@ -176,37 +154,35 @@ class OrdersListView(View):
                 status = order.get_status_display()
                 order_dic.append({"order_no": order_no, "order_date": order_date, "total": total, "status": status})
 
-            if offset is None:
-                try:
-                    order = orders.first()
-                    goods = Order_Goods.objects.filter(order_id=order.id)
-                except Exception as e:
-                    online_logger.error(e)
-                    return JsonResponse({"res": 111, "errmsg": "数据库错误"})
-                if goods != '':
-                    good_dict = []
-                    for good in goods:
-                        good_id = good.goods_id
-                        quantity = good.quantity
+            try:
 
-                        good_detail = Goods.objects.get(id=good_id)
-                        good_name_en = good_detail.name_en
-                        good_price = good_detail.price
-                        good_description_en = good_detail.description_en
-                        good_image = str(good_detail.image)
-                        good_dict.append({"id": good_id, "quantity": quantity, "name_en": good_name_en, "price": good_price,
-                                          "description_en": good_description_en, "image": good_image})
-                else:
-                    return JsonResponse({'errcode': 112, 'data': "商品不存在"})
+                order = orders.first()
+                goods = Order_Goods.objects.filter(order_id=order.id)
+            except Exception as e:
+                online_logger.error(e)
+                return JsonResponse({"errcode": 111, "data": "数据库错误"})
+            if goods != '':
+                for good in goods:
+                    good_id = good.goods_id
+                    quantity = good.quantity
+
+                    good_detail = Goods.objects.get(id=good_id)
+                    good_name_en = good_detail.name_en
+                    good_price = good_detail.price
+                    good_description_en = good_detail.description_en
+                    good_image = str(good_detail.image)
+                    good_dic.append({"id": good_id, "quantity": quantity, "name_en": good_name_en, "price": good_price,
+                                     "description_en": good_description_en, "image": good_image})
             else:
-                good_dict = ''
-            res = {"order_dic": order_dic, "good_dic": good_dict, "status": status, "next_page": next_page}
-            return render(request, "myOrders.html", context=res)
+                return JsonResponse({'errcode': 112, 'data': "商品不存在"})
+
+            res = {"order_dic": order_dic, "good_dic": good_dic, "status": status_query, "next_page": next_page}
         else:
-            res = {"order_dic": '', "good_dic": '', "status": status, "next_page": next_page}
-            return render(request, "myOrders.html", context=res)
+            res = {"order_dic": '', "good_dic": '', "status": status_query, "next_page": next_page}
+        return render(request, "myOrders.html", context=res)
 
 
+# 创建订单
 class OrderView(View):
 
     # 创建订单
@@ -224,7 +200,6 @@ class OrderView(View):
                 postcode = request.POST.get('postcode')
                 phone_number = request.POST.get('phone_number')
                 goods = ast.literal_eval(request.POST.get('goods'))
-
                 total = request.POST.get('total')
             except Exception as e:
                 online_logger.error(e)
@@ -272,6 +247,62 @@ class OrderView(View):
                     return JsonResponse({"errcode": 5, "data": "订单创建成功"})
                 else:
                     return JsonResponse({"errcode": 9, "data": "订单信息格式不正确"})
+
+
+# 翻页
+class OrdersOffsetView(View):
+    @method_decorator(user_auth)
+    def get(self, request, user):
+        user_id = user.id
+        offset = request.GET.get('offset')
+        status_query = request.GET.get('status')
+
+        if offset and status_query:
+            try:
+                offset = int(offset)
+            except ValueError as e:
+                online_logger.error(e)
+                return JsonResponse({'errcode': 1, 'data': "跳过条数格式错误"})
+            try:
+                orders = Order.objects.filter(user_id=user_id)[offset:offset + 10].order_by('-order_date')
+            except Exception as e:
+                online_logger.error(e)
+                return JsonResponse({'errcode': 4, 'data': "数据格式错误"})
+            try:
+                status_query = int(status_query)
+            except ValueError as e:
+                online_logger.error(e)
+                return JsonResponse({'errcode': 1, 'data': "状态码错误"})
+            try:
+                orders = orders.filter(status=status_query).order_by('-order_date')
+            except Exception as e:
+                online_logger.error(e)
+                return JsonResponse({'errcode': 4, 'data': "数据格式错误"})
+
+            if orders.count() > 10:
+                next_page = 1
+                orders = orders[:10]
+            else:
+                pass
+                next_page = 0
+            if orders.count() > 0:
+                order_dic = []
+
+                for order in orders:
+                    order_no = order.order_no
+                    order_date = order.order_date
+                    total = order.total
+                    status = order.get_status_display()
+                    order_dic.append({"order_no": order_no, "order_date": order_date, "total": total, "status": status})
+                res_order = {"order_dic": order_dic}
+            else:
+                res_order = {"order_dic": ''}
+            tpl = get_template("orderBlock.html")
+            data = tpl.render(res_order)
+            return JsonResponse({"errcode": 0, "data": data, "next_page": next_page})
+        else:
+            return JsonResponse({"errcode": 1, "data": "跳过条数不存在"})
+
 
 # 修改订单状态
 
