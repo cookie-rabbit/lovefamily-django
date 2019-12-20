@@ -42,7 +42,7 @@ class OrderAddress(models.Model):
         db_table = "OrderAddress"
 
     def __str__(self):
-        return self.name, self.phone
+        return self.name, self.phone_number
 
 
 class Order_Goods(models.Model):

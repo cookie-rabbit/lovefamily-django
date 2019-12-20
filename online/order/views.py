@@ -8,7 +8,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.utils import timezone
 
 from online.order.models import Order, Order_Goods, OrderAddress
-from online.goods.models import Goods
+from online.goods.models import Goods, Image
 from management.user.models import User
 from online.logger import online_logger
 from utils.decorator import user_auth
@@ -52,7 +52,7 @@ class OrderAddressView(View):
                 try:
                     good_detail = Goods.objects.get(id=good_id)
                     good_name_en = good_detail.name_en
-                    good_price = good_detail.price
+                    good_price = good_detail.on_price
                     good_description_en = good_detail.description_en
                     good_image = str(good_detail.image)
                     good_dict.append({"id": good_id, "quantity": quantity, "name_en": good_name_en, "price": good_price,
@@ -94,7 +94,7 @@ class OrdersDetailView(View):
                     quantity = good.quantity
                     good_detail = Goods.objects.get(id=good_id)
                     good_name_en = good_detail.name_en
-                    good_price = good_detail.price
+                    good_price = good_detail.on_price
                     good_description_en = good_detail.description_en
                     good_image = str(good_detail.image)
                     good_dic.append({"quantity": quantity, "good_name_en": good_name_en, "good_price": good_price,
@@ -168,9 +168,9 @@ class OrdersListView(View):
 
                     good_detail = Goods.objects.get(id=good_id)
                     good_name_en = good_detail.name_en
-                    good_price = good_detail.price
+                    good_price = good_detail.on_price
                     good_description_en = good_detail.description_en
-                    good_image = str(good_detail.image)
+                    good_image = str(Image.objects.filter(goods_id=good_id)[0].image)
                     good_dic.append({"id": good_id, "quantity": quantity, "name_en": good_name_en, "price": good_price,
                                      "description_en": good_description_en, "image": good_image})
             else:
