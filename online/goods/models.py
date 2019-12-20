@@ -17,6 +17,7 @@ class Goods(models.Model):
     detail_en = models.CharField(max_length=500,null=True)
     stock = models.IntegerField()
     is_hot = models.BooleanField(default=False)
+    is_new = models.BooleanField(default=False)
     added_time = models.DateField(default=timezone.now)
     category = models.ForeignKey('Category',on_delete=models.CASCADE,related_name='goods')
 
@@ -29,8 +30,7 @@ class Goods(models.Model):
 
 class Image(models.Model):
     """商品图片"""
-    image = models.ImageField()
-    is_default = models.BooleanField(default=False)
+    image = models.ImageField(default='1.jpg')
     goods = models.ForeignKey('Goods',on_delete=models.CASCADE,related_name='images')
 
     class Meat:

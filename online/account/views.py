@@ -128,14 +128,14 @@ class UserView(View):
 
 class SignUpView(View):
     def post(self,request):
-        data = json.loads(request.body.decode())
-        email = data.get("email",None)
+        # data = json.loads(request.body.decode())
+        email = request.POST.get("email",None)
         if email:
             if not re.match(r'^[0-9a-zA-Z_]{0,19}@[0-9a-zA-Z]{1,13}\.(com|cn|net){1,3}$',email):
                 return JsonResponse({"errcode":"105","errmsg":"email format error"})
-        phone = data.get("phone",None)
-        password = data.get("password",None)
-        repassword = data.get("repassword",None)
+        phone = request.POST.get("phone",None)
+        password = request.POST.get("password",None)
+        repassword = request.POST.get("repassword",None)
         if password != repassword:
             return JsonResponse({"errcode":"106","errmsg":"password differently"})
         if not all([email,phone,password,repassword]):
@@ -147,13 +147,13 @@ class SignUpView(View):
             online_logger.error(e)
             return JsonResponse({"errcode":"102","errmsg":"db error"})
 
-        name = data.get("name", None)
-        road = data.get("road",None)
-        district = data.get("district",None)
-        city = data.get("city",None)
-        province = data.get("province",None)
-        postcode = data.get("postcode",None)
-        phone_number = data.get("phone_number",None)
+        name = request.POST.get("name", None)
+        road = request.POST.get("road",None)
+        district = request.POST.get("district",None)
+        city = request.POST.get("city",None)
+        province = request.POST.get("province",None)
+        postcode = request.POST.get("postcode",None)
+        phone_number = request.POST.get("phone_number",None)
         if all([name,road,district,city,province,postcode,phone]) is None:
             request.session['user_id'] = user.id
             return JsonResponse({"errcode":"0","errmsg":"sign up success"})
@@ -170,6 +170,22 @@ class SignUpView(View):
 class SignUpTemplateView(View):
 
     def get(self,request):
-        return render(request,'register.html')
+        category = []
+        try:
+            cates = Category.objects.filter(super_category__isnull=True)
+        except Exception as e:
+            online_logger.error(e)
+            return JsonResponse({"errcode": "102", "errmsg": "db error"})
+        for cate in cates:
+            try:
+                sub_cates = Category.objects.filter(super_category__id=cate.id)
+            except Exception as e:
+                online_logger.error(e)
+                return JsonResponse({"errcode": "102", "errmsg": "db error"})
+            category.append({"id": cate.id, "name": cate.name,
+                             "sub_cates": [{'id': sub_cate.id, 'name': sub_cate.name} for sub_cate in sub_cates if
+                                           sub_cates] if sub_cates else []})
+        context = {"category":category}
+        return render(request,'register.html',context=context)
 
 

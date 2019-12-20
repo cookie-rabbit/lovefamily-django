@@ -6,25 +6,19 @@
 {% endblock %}
 
 {% block css %}
-   <link rel="stylesheet" type="text/css" href="{% static 'assets/css/page/index.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/page/index.css' %}" />
 {% endblock %}
 
-
-{% block index_image %}
-    <img src="{% static 'assets/images/banner.png' %}" alt="banner" class="banner">
+{% block hr %}
+    <div class="hr"></div>
 {% endblock %}
-
 
 {% block content %}
     <div class="contentContainer">
-        <ul class="type">
-            <li class="current" data-type="hot">Hot</li>
-            <li data-type="new">New</li>
-        </ul>
         <div class="content">
             {% include 'goods_block.html' %}
             {% if more %}
-                <div class="more">MORE</div>
+                <div class="moreResult" data-keyword="{{ keyword }}">MORE</div>
             {% endif %}
         </div>
     </div>

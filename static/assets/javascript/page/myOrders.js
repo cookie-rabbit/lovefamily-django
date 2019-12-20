@@ -2,22 +2,18 @@ $(".myOrdersContainer")
 	.on("click", ".content .orderList h3", function() {
 		$(this).toggleClass("spread");
 		var detailObj = $(this).parents(".orderList").find(".details");
-		if(detailObj.length>0){
+		if (detailObj.length > 0) {
 			detailObj.toggleClass("hidden");
-		}
-		else{
+		} else {
 			/* ajax请求 */
 			var req = {
-				url: baseUrl + 'carts/',
+				url: baseUrl + 'order_detail/',
 				data: {
-					goods_id: $(this).data("id"),
-					quantity: 1
+					order_no: $(this).find(".order span").html()
 				},
-				method: "post",
 				sucFun: function(res) {
 					if (parseInt(res.errcode) === 0) {
-						$(".toShoppingCart span").html(res.data.quantity);
-						getToast01("Successfully joined the shopping cart");
+						$(this).after(res.data);
 					} else {
 						getToast01(res.errmsg);
 					}
@@ -29,18 +25,16 @@ $(".myOrdersContainer")
 			doAjax(req);
 		}
 	})
-	.on("click",".more",function(){
+	.on("click", ".more", function() {
 		var req = {
-			url: baseUrl + 'carts/',
+			url: baseUrl + 'orders/more',
 			data: {
-				goods_id: $(this).data("id"),
-				quantity: 1
+				status: $(".myOrdersContainer .content .current").data("type"),
+				offset: $(".orderList").length
 			},
-			method: "post",
 			sucFun: function(res) {
 				if (parseInt(res.errcode) === 0) {
-					$(".toShoppingCart span").html(res.data.quantity);
-					getToast01("Successfully joined the shopping cart");
+					$(".more").before(res.data);
 				} else {
 					getToast01(res.errmsg);
 				}
@@ -51,6 +45,6 @@ $(".myOrdersContainer")
 		};
 		doAjax(req);
 	})
-	.on("click",".searchPic",function(){
-		
+	.on("click", ".searchPic", function() {
+
 	});

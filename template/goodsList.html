@@ -25,7 +25,9 @@
         </div>
         <div class="content">
             {% include 'goods_block.html' %}
-            <div class="moreKinds" data-categoryid="{{ current_category.category.id }}">MORE</div>
+            {% if more %}
+                <div class="moreKinds" data-categoryid="{{ current_category.category.id }}">MORE</div>
+            {% endif %}
         </div>
     </div>
 {% endblock %}

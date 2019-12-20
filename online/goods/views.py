@@ -16,7 +16,7 @@ from online.goods.models import Category, Goods, Image
 from online.logger import online_logger
 from online.order.models import Order
 from weigan_shopping import settings
-from online.constants import PER_PAGE_GOODS_COUNT
+from online.constants import PER_PAGE_GOODS_COUNT,INDEX_GOODS_COUNT
 
 
 
@@ -35,9 +35,14 @@ def index(request):
             return JsonResponse({"errcode":"102","errmsg":"db error"})
         category.append({"id":cate.id,"name":cate.name,"sub_cates":[{'id':sub_cate.id,'name':sub_cate.name} for sub_cate in sub_cates if sub_cates ] if sub_cates else []})
 
-    count = 1
+    count = INDEX_GOODS_COUNT
     try:
-        goods = Goods.objects.order_by('-sale')[:count]
+        total_goods = Goods.objects.order_by('-sale')
+        goods = total_goods[:count]
+        if len(total_goods) > count:
+            more = True
+        else:
+            more = False
     except Exception as e:
         online_logger.error(e)
         return JsonResponse({"errcode":"102","errmsg":"db error"})
@@ -46,22 +51,25 @@ def index(request):
         goods_list = []
     else:
         for single_goods in goods:
-            image = Image.objects.filter(goods=single_goods,is_default=True)
+            image = Image.objects.filter(goods=single_goods)
             goods_list.append({"id": single_goods.id, "name": single_goods.name_en, "price": single_goods.on_price,
                                "is_hot": single_goods.is_hot, "image": settings.URL_PREFIX + image[0].image.url})
     user_id = request.session.get("user_id",None)
+    print(user_id)
     if user_id:
         try:
             user = User.objects.get(id=user_id)
+            print(user)
             orders = Order.objects.filter(user = user)
             order_quantity = len(orders)
         except Exception as e:
             online_logger.error(e)
             return JsonResponse({"errcode":"102","errmsg":"db error"})
         cart_quantity = request.session.get("%s_cart" % user_id,0)
-        context = {"category":category,"goods":goods_list,"user":user.username,"cart_quantity":cart_quantity,"order_quantity":order_quantity}
+        context = {"category":category,"goods":goods_list,"user":user.username,"cart_quantity":cart_quantity,"order_quantity":order_quantity,"more":more}
     else:
-        context = {"category": category, "goods": goods_list,"user":"","cart_quantity":0,"order_quantity":0}
+        context = {"category": category, "goods": goods_list,"user":"","cart_quantity":0,"order_quantity":0,"more":more}
+    print(context)
     return render(request,"index.html",context=context)
 
 
@@ -69,15 +77,21 @@ class GoodsTypeView(View):
 
     def get(self,request,type):
         current = request.GET.get("current", 0)
-        count = PER_PAGE_GOODS_COUNT if current != 0 else 6
+        count = PER_PAGE_GOODS_COUNT if current != 0 else INDEX_GOODS_COUNT
         try:
             current = int(current)
             if type == 'hot':
-                goods = Goods.objects.order_by('-sale')[current:current+count]
+                total_goods = Goods.objects.order_by('-sale')
+                goods = total_goods[current:current+count]
             elif type == 'new':
-                goods = Goods.objects.order_by('-added_time')[current:current + count]
+                total_goods = Goods.objects.order_by('-added_time')
+                goods = total_goods[current:current + count]
             else:
                 return JsonResponse({"errcode":"108","errmsg":"illegal request"})
+            if len(total_goods) > current + count:
+                more = True
+            else:
+                more = False
         except TypeError as e:
             online_logger.error(e)
             return JsonResponse({"errcode":"101","errmsg":"params error"})
@@ -89,13 +103,13 @@ class GoodsTypeView(View):
             goods_list = []
         else:
             for single_goods in goods:
-                image = Image.objects.filter(goods=single_goods, is_default=True)
+                image = Image.objects.filter(goods=single_goods)
                 goods_list.append({"id": single_goods.id, "name": single_goods.name_en, "price": single_goods.on_price,
                                    "is_hot": single_goods.is_hot, "image": settings.URL_PREFIX + image[0].image.url})
         result = {"goods": goods_list}
         t = get_template("goods_block.html")
         result = t.render(result)
-        return JsonResponse({"errcode":"0","data":result})
+        return JsonResponse({"errcode":"0","data":{"result":result,"more":more}})
 
 
 class GoodsCategoryView(View):
@@ -106,13 +120,21 @@ class GoodsCategoryView(View):
             return redirect(reverse("category_template",args=category_id))
         count = PER_PAGE_GOODS_COUNT
         try:
+            current = int(current)
             category_id = int(category_id)
             current_category = Category.objects.get(id=category_id)
             if current_category.super_category:
-                goods = Goods.objects.filter(category__id=category_id).order_by('-sale')[:count]
+                total_goods = Goods.objects.filter(category__id=category_id).order_by('-sale')[:count]
+                goods = total_goods[current:current+count]
+
             else:
                 categories = Category.objects.filter(super_category=current_category)
-                goods = Goods.objects.filter(category__in=categories).order_by('-sale')[:count]
+                total_goods = Goods.objects.filter(category__in=categories).order_by('-sale')
+                goods = total_goods[current:current+count]
+            if len(total_goods) > current + count:
+                more = True
+            else:
+                more = False
         except TypeError as e:
             online_logger.error(e)
             return JsonResponse({"errcode":"101","errmsg":"params error"})
@@ -124,13 +146,13 @@ class GoodsCategoryView(View):
             goods_list = []
         else:
             for single_goods in goods:
-                image = Image.objects.filter(goods=single_goods, is_default=True)
+                image = Image.objects.filter(goods=single_goods)
                 goods_list.append({"id": single_goods.id, "name": single_goods.name_en, "price": single_goods.on_price,
                                    "is_hot": single_goods.is_hot, "image": settings.URL_PREFIX + image[0].image.url})
         result = {"goods": goods_list}
         t = get_template("goods_block.html")
         result = t.render(result)
-        return JsonResponse({"errcode":"0","data":result})
+        return JsonResponse({"errcode":"0","data":{"more":more,"result":result}})
 
 
 class GoodsCategoryTemplateView(View):
@@ -157,12 +179,18 @@ class GoodsCategoryTemplateView(View):
             category_id = int(category_id)
             current_category = Category.objects.get(id=category_id)
             if current_category.super_category:
-                goods = Goods.objects.filter(category__id=category_id).order_by('-sale')[:count]
+                total_goods = Goods.objects.filter(category__id=category_id).order_by('-sale')
+                goods = total_goods[:count]
                 super_category = {"id":current_category.super_category.id,"name":current_category.super_category.name}
             else:
                 categories = Category.objects.filter(super_category=current_category)
-                goods = Goods.objects.filter(category__in=categories).order_by('-sale')[:count]
+                total_goods = Goods.objects.filter(category__in=categories).order_by('-sale')
+                goods = total_goods[:count]
                 super_category = ""
+            if len(total_goods) > count:
+                more = True
+            else:
+                more = False
         except TypeError as e:
             online_logger.error(e)
             return JsonResponse({"errcode":"101","errmsg":"params error"})
@@ -178,7 +206,7 @@ class GoodsCategoryTemplateView(View):
             goods_list = []
         else:
             for single_goods in goods:
-                image = Image.objects.filter(goods=single_goods, is_default=True)
+                image = Image.objects.filter(goods=single_goods)
                 goods_list.append({"id": single_goods.id, "name": single_goods.name_en, "price": single_goods.on_price,
                                    "is_hot": single_goods.is_hot, "image": settings.URL_PREFIX + image[0].image.url})
         user_id = request.session.get("user_id", None)
@@ -196,7 +224,7 @@ class GoodsCategoryTemplateView(View):
         else:
             context = {"category": category, "goods": goods_list, "user": "", "cart_quantity": 0, "order_quantity": 0}
 
-        context.update({"current_category":{"super_category":super_category,"category":{"id": current_category.id, "name": current_category.name}}})
+        context.update({"current_category":{"super_category":super_category,"category":{"id": current_category.id, "name": current_category.name}},"more":more})
         print(context)
         return render(request,"goodsList.html",context=context)
 
@@ -262,7 +290,16 @@ class GoodsSearchView(View):
         if keyword is None:
             return JsonResponse({"errcode":"101","errmsg":"empty params"})
         try:
-            goods = Goods.objects.filter(name_en__contains=keyword)[current:current+count]
+            current = int(current)
+            total_goods = Goods.objects.filter(name_en__contains=keyword)
+            goods = total_goods[current:current+count]
+            if len(total_goods) > current + count:
+                more = True
+            else:
+                more = False
+        except TypeError as e:
+            online_logger.error(e)
+            return JsonResponse({"errcode": "101", "errmsg": "params"})
         except Exception as e:
             online_logger.error(e)
             return JsonResponse({"errcode": "102", "errmsg": "db error"})
@@ -271,13 +308,13 @@ class GoodsSearchView(View):
             goods_list = []
         else:
             for single_goods in goods:
-                image = Image.objects.filter(goods=single_goods, is_default=True)
+                image = Image.objects.filter(goods=single_goods)
                 goods_list.append({"id": single_goods.id, "name": single_goods.name_en, "price": single_goods.on_price,
                                    "is_hot": single_goods.is_hot, "image": settings.URL_PREFIX + image[0].image.url})
         result = {"goods": goods_list}
         t = get_template("goods_block.html")
         result = t.render(result)
-        return JsonResponse({"errcode":"0","data":result})
+        return JsonResponse({"errcode":"0","errmsg":{"more":more},"data":result})
 
 
 class GoodsSearchTemplateView(View):
@@ -288,7 +325,12 @@ class GoodsSearchTemplateView(View):
         if keyword is None:
             return JsonResponse({"errcode": "101", "errmsg": "empty params"})
         try:
-            goods = Goods.objects.filter(name_en__contains=keyword)[:count]
+            total_goods = Goods.objects.filter(name_en__contains=keyword)
+            goods = total_goods[:count]
+            if len(total_goods) > count:
+                more = True
+            else:
+                more = False
         except TypeError as e:
             online_logger.error(e)
             return JsonResponse({"errcode":"101","errmsg":"params error"})
@@ -300,10 +342,9 @@ class GoodsSearchTemplateView(View):
             goods_list = []
         else:
             for single_goods in goods:
-                image = Image.objects.filter(goods=single_goods, is_default=True)
+                image = Image.objects.filter(goods=single_goods)
                 goods_list.append({"id": single_goods.id, "name": single_goods.name_en, "price": single_goods.on_price,
                                    "is_hot": single_goods.is_hot, "image": settings.URL_PREFIX + image[0].image.url})
-        goods_list = {"goods": goods_list}
         category = []
         try:
             cates = Category.objects.filter(super_category__isnull=True)
@@ -330,8 +371,7 @@ class GoodsSearchTemplateView(View):
                 return JsonResponse({"errcode": "102", "errmsg": "db error"})
             cart_quantity = request.session.get("%s_cart" % user_id, 0)
             context = {"category": category, "goods": goods_list, "user": user.username, "cart_quantity": cart_quantity,
-                       "order_quantity": order_quantity}
+                       "order_quantity": order_quantity,"keyword":keyword,"more":more}
         else:
-            context = {"category": category, "goods": goods_list, "user": "", "cart_quantity": 0, "order_quantity": 0}
-        # return JsonResponse({"errcode": "0", "data": result})
-        return render(request,"search.html",context=context)
+            context = {"category": category, "goods": goods_list, "user": "", "cart_quantity": 0, "order_quantity": 0,"keyword":keyword,"more":more}
+        return render(request,"searchResult.html",context=context)

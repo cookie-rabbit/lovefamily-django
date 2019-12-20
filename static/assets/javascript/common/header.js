@@ -54,7 +54,8 @@ function toSearch() {
 					}
 				};
 				doAjax(req); */
-		location.href = ($(".toSearch").data(href) + "keyword=" + keyword);
+		alert(keyword);
+		location.href = ($(".toSearch").data("href") + "keyword=" + keyword);
 
 	} else {
 		console.log("请输入关键词!!!");
