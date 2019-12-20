@@ -7,8 +7,8 @@ class Goods(models.Model):
     """商品表"""
     name_ch = models.CharField(max_length=20,null=True)
     name_en = models.CharField(max_length=30,null=True)
-    image = models.ImageField()
-    price = models.IntegerField()
+    origin_price = models.IntegerField(default=0)
+    on_price = models.IntegerField(default=0)
     sale = models.IntegerField()
     on_sale = models.BooleanField()
     description_ch = models.CharField(max_length=500,null=True)
@@ -27,13 +27,27 @@ class Goods(models.Model):
         return self.name_ch
 
 
+class Image(models.Model):
+    """商品图片"""
+    image = models.ImageField()
+    is_default = models.BooleanField(default=False)
+    goods = models.ForeignKey('Goods',on_delete=models.CASCADE,related_name='images')
+
+    class Meat:
+        db_table = "Image"
+
+    def __str__(self):
+        return self.image.url
+
+
 class Category(models.Model):
     """商品种类表"""
     name = models.CharField(max_length=20)
-    super_category = models.ForeignKey('self', null=True, on_delete=models.CASCADE)
+    super_category = models.ForeignKey('self', null=True,on_delete=models.CASCADE)
 
     class Meta:
         db_table = "Category"
 
     def __str__(self):
         return self.name
+
