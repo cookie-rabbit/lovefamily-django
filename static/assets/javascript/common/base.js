@@ -1,6 +1,7 @@
 /* mock测试接口 */
 //var baseUrl = "http://10.168.2.93:3000/mock/21/api/";
-var baseUrl = "http://10.168.2.108:5000/api/"; //亚彤测试地址;
+//var baseUrl = "http://10.168.2.108:5000/api/"; //亚彤测试地址;
+var baseUrl = "http://10.168.2.111:8000/api/";
 
 function doAjax(req) {
 	$.ajax({

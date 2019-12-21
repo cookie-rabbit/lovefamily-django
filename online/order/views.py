@@ -313,7 +313,7 @@ class UserAddressView(View):
             online_logger.error(e)
             return JsonResponse({"errcode": 10, "errmsg": "订单信息不完整"})
         try:
-            UserAddress.objects.filter(user_id=user_id).update(name=name, province=province, road=road,
+            UserAddress.objects.filter(user_id=user_id).update_or_create(name=name, province=province, road=road,
                                                                city=city, district=district,
                                                                postcode=postcode,
                                                                phone_number=phone_number)
