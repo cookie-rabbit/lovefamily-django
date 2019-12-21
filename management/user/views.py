@@ -126,7 +126,7 @@ class UserView(View):
         province = data.get("province", None)
         postcode = data.get("postcode")
         phone_number = data.get("phone_number", None)
-        if all([name, road, district, city, province, postcode, phone_number]) is None:
+        if not name or not road or not district or not province or not postcode or not phone_number:
             try:
                 user.address.delete()
             except Exception as e:

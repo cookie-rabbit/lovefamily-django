@@ -99,7 +99,7 @@ $(".loginDiv")
 			url: baseUrl + 'account/logout/',
 			sucFun: function(res) {
 				if (parseInt(res.errcode) === 0) {
-					location.reload();
+					location.href=res.data.url;
 				} else {
 					$(".loginDiv p").html(res.errmsg).show();
 				}

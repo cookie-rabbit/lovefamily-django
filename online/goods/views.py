@@ -124,7 +124,7 @@ class GoodsCategoryView(View):
             category_id = int(category_id)
             current_category = Category.objects.get(id=category_id)
             if current_category.super_category:
-                total_goods = Goods.objects.filter(category__id=category_id).order_by('-sale')[:count]
+                total_goods = Goods.objects.filter(category__id=category_id).order_by('-sale')
                 goods = total_goods[current:current+count]
 
             else:

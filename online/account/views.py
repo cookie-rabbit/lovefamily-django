@@ -58,7 +58,7 @@ class LogoutView(View):
     def get(self,request,user):
         del request.session['user_id']
         del request.session['%s_cart' % user.id]
-        return JsonResponse({"errcode":"0","errmsg":"logout success"})
+        return JsonResponse({"errcode":"0","errmsg":"logout success","data":{"url":settings.URL_PREFIX + '/index'}})
 
 
 class UserView(View):

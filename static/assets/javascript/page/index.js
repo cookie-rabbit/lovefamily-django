@@ -76,15 +76,15 @@ $(".contentContainer")
 	.on("click", ".moreKinds", function() {
 		var categoryId = $(".moreKinds").data("categoryid");
 		var req = {
-			url: baseUrl + 'good/category/' + categoryId + "/",
+			url: baseUrl + 'goods/category/' + categoryId + "/",
 			data: {
 				current: $(".content .goods").length
 			},
 			sucFun: function(res) {
 				if (parseInt(res.errcode) === 0) {
-					$(".more").before(res.data.result);
+					$(".moreKinds").before(res.data.result);
 					if (res.data.more == false) {
-						$(".more").remove();
+						$(".moreKinds").remove();
 					}
 				} else {
 					getToast01(res.errmsg);
@@ -107,9 +107,9 @@ $(".contentContainer")
 			},
 			sucFun: function(res) {
 				if (parseInt(res.errcode) === 0) {
-					$(".more").before(res.data.result);
+					$(".moreResult").before(res.data.result);
 					if (res.data.more == false) {
-						$(".more").remove();
+						$(".moreResult").remove();
 					}
 				} else {
 					getToast01(res.errmsg);
