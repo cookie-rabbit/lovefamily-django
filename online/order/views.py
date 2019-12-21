@@ -15,6 +15,7 @@ from online.logger import online_logger
 from utils.decorator import user_auth
 from online.cart.models import Cart
 from management.user.models import UserAddress
+import management.user
 
 import ast
 import random
@@ -29,49 +30,51 @@ class OrderAddressView(View):
         user_id = user.id
         good_dict = []
         total = 0
-
         try:
             user = UserAddress.objects.get(id=user_id)
-            if user != '':
-                name = user.name
-                province = user.province
-                city = user.city
-                district = user.district
-                road = user.road
-                phone_number = user.phone_number
-                postcode = user.postcode
-                user_info = {"name": name, "province": province, "city": city, "district": district,
-                             "road": road, "phone_number": phone_number, "postcode": postcode}
+            name = user.name
+            province = user.province
+            city = user.city
+            district = user.district
+            road = user.road
+            phone_number = user.phone_number
+            postcode = user.postcode
+            is_null = 0
 
-            else:
-                return JsonResponse({"errcode": 19, "errmsg": "用户不存在"})
+        except management.user.models.UserAddress.DoesNotExist:
+            name = ''
+            province = ''
+            city = ''
+            district = ''
+            road = ''
+            phone_number = ''
+            postcode = ''
+            is_null = 1
+        user_info = {"name": name, "province": province, "city": city, "district": district,
+                     "road": road, "phone_number": phone_number, "postcode": postcode, "is_null": is_null}
 
-            carts = Cart.objects.filter(user_id=user_id)
-            for cart in carts:
-                good_id = cart.goods_id
-                quantity = cart.quantity
-                try:
-                    good_detail = Goods.objects.get(id=good_id)
-                    good_name_en = good_detail.name_en
-                    good_price = good_detail.on_price
-                    good_description_en = good_detail.description_en
-                    good_image = str(Image.objects.filter(goods_id=good_id)[0].image)
-                    good_dict.append({"id": good_id, "quantity": quantity, "name_en": good_name_en, "price": good_price,
-                                      "description_en": good_description_en, "image": good_image})
-                    total = total + quantity * good_price
+        carts = Cart.objects.filter(user_id=user_id)
+        for cart in carts:
+            good_id = cart.goods_id
+            quantity = cart.quantity
+            try:
+                good_detail = Goods.objects.get(id=good_id)
+                good_name_en = good_detail.name_en
+                good_price = good_detail.on_price
+                good_description_en = good_detail.description_en
+                good_image = str(Image.objects.filter(goods_id=good_id)[0].image)
+                good_dict.append({"id": good_id, "quantity": quantity, "name_en": good_name_en, "price": good_price,
+                                  "description_en": good_description_en, "image": good_image})
+                total = total + quantity * good_price
 
-                except Exception as e:
-                    online_logger.error(e)
-                    return JsonResponse({"errcode": 10, "errmsg": "数据库错误"})
-            res = {"user_info": user_info, "good_dict": good_dict, "total": total}
+            except Exception as e:
+                online_logger.error(e)
+                return JsonResponse({"errcode": 10, "errmsg": "数据库错误"})
+        res = {"user_info": user_info, "good_dict": good_dict, "total": total}
 
-            tpl = get_template("myOrder.html")
-            res = tpl.render(res)
-            return HttpResponse(res)
-
-        except Exception as e:
-            online_logger.error(e)
-            return JsonResponse({"errcode": 13, "errmsg": "数据库错误"})
+        tpl = get_template("myOrder.html")
+        res = tpl.render(res)
+        return HttpResponse(res)
 
 
 # 订单详情
@@ -324,11 +327,10 @@ class UserAddressView(View):
 class OrderPayView(View):
     @method_decorator(user_auth)
     def get(self, request, user, order_id):
-        res = {"abc":"abc"}
+        res = {"abc": "abc"}
         tpl = get_template("payOrder.html")
         res = tpl.render(res)
         return HttpResponse(res)
-
 
 
 # 修改订单状态
