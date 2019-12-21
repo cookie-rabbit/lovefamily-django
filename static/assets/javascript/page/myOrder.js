@@ -27,7 +27,7 @@ $(".myOrderContainer")
 
 		} else {
 			var req = {
-				url: baseUrl + 'order/address',
+				url: baseUrl + 'orders/address',
 				data: {
 					name: name,
 					province: province,
@@ -75,6 +75,7 @@ $(".container")
 			obj.good_count = $(me).data("count");
 			arrs[i] = obj;
 		}
+		console.log(JSON.stringify(arrs));
 		var req = {
 			url: baseUrl + 'orders/',
 			data: {
@@ -85,7 +86,7 @@ $(".container")
 				province: $(".readAddress .province").html().trim(),
 				postcode: $(".readAddress .zip").html().trim(),
 				phone_number: $(".readAddress .phoneNum span").html().trim(),
-				goods: arrs,
+				goods: JSON.stringify(arrs),
 				tital:$(".totalPrice").data("price")
 			},
 			method: "post",

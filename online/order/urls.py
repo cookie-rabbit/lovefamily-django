@@ -11,7 +11,7 @@ urlpatterns = [
     url(r'^orders/address/$', views.OrderAddressView.as_view()),
     url(r'^api/orders/address$', views.UserAddressView.as_view()),
 
-    url(r'^orders/{order_id}/pay', views.OrderPayView.as_view()),
+    url(r'^orders/(.+)/pay', views.OrderPayView.as_view()),
 
     url(r'^admin/orders/{order_id}', views.OderStatusChange),
 

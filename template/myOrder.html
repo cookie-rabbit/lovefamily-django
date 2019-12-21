@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block css %}
-    <link rel="stylesheet" type="text/css" href="../static/assets/css/page/myOrder.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/assets/css/page/myOrder.css"/>
 {% endblock %}
 
 {% block content %}
@@ -50,7 +50,7 @@
         <h3>OrderLine</h3>
         <div class="content">
             {% for good in good_dict %}
-            <div class="cartGoods toBuyIt" data-id={{ forloop.counter }}>
+            <div class="cartGoods toBuyIt" data-id={{ good.id }} data-count={{ good.quantity }}>
                 <a href="javascript:(0)" class="linkImg">
                     <img src="/static/assets/images/thing.png" alt="">
                 </a>
@@ -81,5 +81,5 @@
 {% endblock %}
 
 {% block js %}
-    "{% static 'assets/javascript/page/myOrder.js' %}"
+        <script src="{% static 'assets/javascript/page/myOrder.js' %}"></script>
 {% endblock %}

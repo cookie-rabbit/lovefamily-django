@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block css %}
-    <link rel="stylesheet" type="text/css" href="../static/assets/css/page/myOrders.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/assets/css/page/myOrders.css"/>
     {#    <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/3.10.0-beta/less.min.js"></script>#}
 {% endblock %}
 
@@ -17,15 +17,15 @@
         </ul>
         <div class="content">
             <div class="ul">
-                {% ifequal status '' %}
-                    <a href="http://10.168.2.111:8000/orders/" class="all current" data-type="">All</a>
+                {% ifequal status 0 %}
+                    <a href="http://10.168.2.111:8000/orders/" class="all current" data-type="0">All</a>
                     <a href="http://10.168.2.111:8000/orders/?status=1" class="ordered" data-type="1">Ordered</a>
                     <a href="http://10.168.2.111:8000/orders/?status=2" class="delivering" data-type="2">Delivering</a>
                     <a href="http://10.168.2.111:8000/orders/?status=3" class="finished" data-type="3">Finished</a>
                     <a href="http://10.168.2.111:8000/orders/?status=4" class="closed" data-type="4">Closed</a>
                 {% endifequal %}
                 {% ifequal status 1 %}
-                    <a href="http://10.168.2.111:8000/orders/" class="all" data-type="">All</a>
+                    <a href="http://10.168.2.111:8000/orders/" class="all" data-type="0">All</a>
                     <a href="http://10.168.2.111:8000/orders/?status=1" class="ordered current"
                        data-type="1">Ordered</a>
                     <a href="http://10.168.2.111:8000/orders/?status=2" class="delivering" data-type="2">Delivering</a>
@@ -33,14 +33,14 @@
                     <a href="http://10.168.2.111:8000/orders/?status=4" class="closed" data-type="4">Closed</a>
                 {% endifequal %}
                 {% ifequal status 2 %}
-                    <a href="http://10.168.2.111:8000/orders/" class="all" data-type="">All</a>
+                    <a href="http://10.168.2.111:8000/orders/" class="all" data-type="0">All</a>
                     <a href="http://10.168.2.111:8000/orders/?status=1" class="ordered" data-type="1">Ordered</a>
                     <a href="http://10.168.2.111:8000/orders/?status=2" class="delivering current" data-type="2">Delivering</a>
                     <a href="http://10.168.2.111:8000/orders/?status=3" class="finished" data-type="3">Finished</a>
                     <a href="http://10.168.2.111:8000/orders/?status=4" class="closed" data-type="4">Closed</a>
                 {% endifequal %}
                 {% ifequal status 3 %}
-                    <a href="http://10.168.2.111:8000/orders/" class="all" data-type="">All</a>
+                    <a href="http://10.168.2.111:8000/orders/" class="all" data-type="0">All</a>
                     <a href="http://10.168.2.111:8000/orders/?status=1" class="ordered" data-type="1">Ordered</a>
                     <a href="http://10.168.2.111:8000/orders/?status=2" class="delivering" data-type="2">Delivering</a>
                     <a href="http://10.168.2.111:8000/orders/?status=3" class="finished current"
@@ -48,7 +48,7 @@
                     <a href="http://10.168.2.111:8000/orders/?status=4" class="closed" data-type="4">Closed</a>
                 {% endifequal %}
                 {% ifequal status 4 %}
-                    <a href="http://10.168.2.111:8000/orders/" class="all" data-type="">All</a>
+                    <a href="http://10.168.2.111:8000/orders/" class="all" data-type="0">All</a>
                     <a href="http://10.168.2.111:8000/orders/?status=1" class="ordered" data-type="1">Ordered</a>
                     <a href="http://10.168.2.111:8000/orders/?status=2" class="delivering" data-type="2">Delivering</a>
                     <a href="http://10.168.2.111:8000/orders/?status=3" class="finished" data-type="3">Finished</a>
@@ -62,7 +62,8 @@
 {% endblock %}
 
 {% block js %}
-    "{% static 'assets/javascript/page/myOrders.js' %}"
+    <script src="{% static 'assets/javascript/page/myOrders.js' %}"></script>
+
 {% endblock %}
 
 

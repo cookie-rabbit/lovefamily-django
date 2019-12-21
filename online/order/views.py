@@ -6,7 +6,6 @@ from django.http import JsonResponse, QueryDict, HttpResponse
 from django.views import View
 from django.views.decorators.csrf import csrf_exempt
 from django.utils import timezone
-import django.db as db
 
 from online.constants import PER_PAGE_GOODS_COUNT
 from online.order.models import Order, Order_Goods, OrderAddress
@@ -199,51 +198,52 @@ class OrderCreateView(View):
             return JsonResponse({"errcode": 10, "errmsg": "订单信息不完整"})
 
         user_id = user.id
-        if total.isdigit():
-            time = timezone.localtime(timezone.now()).strftime("%Y-%m-%d")
-            order_no = random.randint(0, 9999999999)
-            status = 0
+        time = timezone.localtime(timezone.now()).strftime("%Y-%m-%d")
+        order_no = random.randint(0, 9999999999)
+        status = 0
+        total = 0
 
-            save_id = transaction.savepoint()
+        save_id = transaction.savepoint()
+        try:
+            order_address = OrderAddress.objects.create(name=name, province=province, road=road,
+                                                        city=city, district=district, postcode=postcode,
+                                                        phone_number=phone_number)
+
+            order = Order.objects.create(order_no=order_no, total=total, order_date=time, status=status,
+                                         address=order_address, user=User.objects.get(id=user_id))
+        except Exception as e:
+            online_logger.error(e)
+            return JsonResponse({"errcode": 3, "errmsg": "数据格式错误"})
+
+        for good in goods:
+            goods_id = good['id']
+            good_count = good['good_count']
             try:
-                order_address = OrderAddress.objects.create(name=name, province=province, road=road,
-                                                            city=city, district=district, postcode=postcode,
-                                                            phone_number=phone_number)
-
-                order = Order.objects.create(order_no=order_no, total=total, order_date=time, status=status,
-                                             address=order_address, user=User.objects.get(id=user_id))
-            except db.DataError as e:
+                Goodgoods = Goods.objects.select_for_update().get(id=goods_id)
+            except Goods.DoesNotExist as e:
+                transaction.savepoint_rollback(save_id)
                 online_logger.error(e)
-                return JsonResponse({"errcode": 3, "errmsg": "数据格式错误"})
+                return JsonResponse({'errcode': 2, 'errmsg': "商品信息错误"})
+            except Exception as e:
+                online_logger.error(e)
+                return JsonResponse({'errcode': 2, 'errmsg': '数据库错误'})
+            count = int(good_count)
 
-            for good in goods:
-                goods_id = good['good_id']
-                good_count = good['good_count']
-                try:
-                    Goodgoods = Goods.objects.select_for_update().get(id=goods_id)
-                except Goods.DoesNotExist as e:
-                    transaction.savepoint_rollback(save_id)
-                    online_logger.error(e)
-                    return JsonResponse({'errcode': 2, 'errmsg': "商品信息错误"})
-                except Exception as e:
-                    online_logger.error(e)
-                    return JsonResponse({'errcode': 2, 'errmsg': '数据库错误'})
-                count = int(good_count)
+            if Goodgoods.stock < count:
+                transaction.savepoint_rollback(save_id)
+                return JsonResponse({'errcode': 4, 'errmsg': "库存不足"})
 
-                if Goodgoods.stock < count:
-                    transaction.savepoint_rollback(save_id)
-                    return JsonResponse({'errcode': 4, 'errmsg': "库存不足"})
+            Goodgoods.sale += count
+            Goodgoods.stock -= count
+            Goodgoods.save()
+            total += good_count * Goodgoods.on_price
 
-                Goodgoods.sale += count
-                Goodgoods.stock -= count
-                Goodgoods.save()
+            goods = Goods.objects.select_for_update().get(id=goods_id)
+            Order_Goods.objects.create(order=order, goods=goods, quantity=count)
+            Order.objects.filter(id=order.id).update(total=total)
 
-                goods = Goods.objects.select_for_update().get(id=goods_id)
-                Order_Goods.objects.create(order=order, goods=goods, quantity=count)
-
-            return JsonResponse({"errcode": 0, "data": {"result": "订单创建成功", "href": "https://www.baidu.com"}})
-        else:
-            return JsonResponse({"errcode": 9, "errmsg": "订单信息格式不正确"})
+        href = "http://10.168.2.111:8000/orders/{order_id}/pay/".format(order_id=order.id)
+        return JsonResponse({"errcode": 0, "data": {"result": "订单创建成功", "href": href}})
 
 
 # 翻页
@@ -315,7 +315,7 @@ class UserAddressView(View):
                                                                postcode=postcode,
                                                                phone_number=phone_number)
             return JsonResponse({"errcode": 0, "data": {"result": "地址修改成功"}})
-        except db.DataError as e:
+        except Exception as e:
             online_logger.error(e)
             return JsonResponse({"errcode": 3, "errmsg": "数据格式错误"})
 
@@ -323,8 +323,12 @@ class UserAddressView(View):
 # 【渲染】订单页面（地址）
 class OrderPayView(View):
     @method_decorator(user_auth)
-    def get(self, request, user):
-        pass
+    def get(self, request, user, order_id):
+        res = {"abc":"abc"}
+        tpl = get_template("payOrder.html")
+        res = tpl.render(res)
+        return HttpResponse(res)
+
 
 
 # 修改订单状态
