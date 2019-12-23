@@ -36,6 +36,9 @@ $(".myOrdersContainer")
 			sucFun: function(res) {
 				if (parseInt(res.errcode) === 0) {
 					$(".more").before(res.data.result);
+					if (res.data.more == false) {
+						$(".more").remove();
+					}
 				} else {
 					getToast01(res.errmsg);
 				}

@@ -57,27 +57,48 @@ class UsersView(View):
         except Exception as e:
             management_logger.error(e)
             return JsonResponse({"errcode":"101","errmsg":"params errror"})
-        search_dict = {}
-        if username:
-            search_dict["username"] = username
-        if phone:
-            search_dict["phone"] = phone
-        if email:
-            search_dict['email'] = email
+        # search_dict = {}
+        # if username:
+        #     search_dict["username"] = username
+        # if phone:
+        #     search_dict["phone"] = phone
+        # if email:
+        #     search_dict['email'] = email
         try:
-            users = User.objects.filter(**search_dict)
+            if username and phone and email:
+                users = User.objects.filter(email__contains=email).filter(phone__contains=phone).filter(username__contains=username)
+            elif username and phone:
+                users = User.objects.filter(username__contains=username).filter(phone__contains=phone)
+            elif username and email:
+                users = User.objects.filter(username__contains=username).filter(email__contains=email)
+            elif phone and email:
+                users = User.objects.filter(phone__contains=phone).filter(email__contains=email)
+            else:
+                users = User.objects.all()
         except Exception as e:
             management_logger.error(e)
             return JsonResponse({"errcode":"102","errmsg":"db error"})
         paginator = Paginator(users, PER_PAGE_USER_COUNT)
         user_list = paginator.page(page)
-        result = [{"id":user.id,"username":user.username,"phone":user.phone,"signup_date":user.signup_date,"status":user.status} for user in user_list]
+        result = []
+        for user in user_list:
+            info = {"id":user.id,"username":user.username,"email":user.email,"phone":user.phone,"signup_date":user.signup_date,"status":user.status}
+            useraddress = list(
+                user.address.all().values('name', 'province', 'city', 'district', 'road', 'phone_number', 'postcode'))
+            if useraddress:
+                info.update(useraddress[0])
+            result.append(info)
         return JsonResponse({"errcode": "0", "data": result})
 
 
 class UserView(View):
+
     @method_decorator(admin_auth)
-    def get(self,request,user,user_id):
+    def put(self,request,user,user_id):
+        data = json.loads(request.body.decode())
+        password = data.get("password", None)
+        status = data.get('status',True)
+        password = make_password(password)
         try:
             user = User.objects.get(id=user_id)
         except User.DoesNotExist as e:
@@ -86,65 +107,12 @@ class UserView(View):
         except Exception as e:
             management_logger.error(e)
             return JsonResponse({"errcode":"102","errmsg":"db error"})
-        result = {"id":user.id,"email": user.email, "phone": user.phone, "password": user.password}
-        useraddress = list(
-            user.address.all().values('name', 'province', 'city', 'district', 'road', 'phone_number', 'postcode'))
-        if useraddress:
-            result.update(useraddress[0])
-        return JsonResponse({"errcode":"0","data":result})
-
-    @method_decorator(admin_auth)
-    def put(self,request,user):
-        data = json.loads(request.body.decode())
-        # email = data.get("email", None)
-        # if email:
-        #     if not re.match(r'^[0-9a-zA-Z_]{0,19}@[0-9a-zA-Z]{1,13}\.(com|cn|net){1,3}$', email):
-        #         return JsonResponse({"errcode": "105", "errmsg": "email format error"})
-        # phone = data.get("phone", None)
-        password = data.get("password", None)
-        repassword = data.get("repassword", None)
-        status = data.get('status',True)
-        if password != repassword:
-            return JsonResponse({"errcode": "106", "errmsg": "password differently"})
-        if not all([password, repassword]):
-            return JsonResponse({"errcode": "101", "errmsg": "params not all"})
-        password = make_password(password)
         try:
-            # user.email = email
-
-            # user.phone = phone
             user.password = password
             user.status = status
             user.save()
         except Exception as e:
             management_logger.error(e)
             return JsonResponse({"errcode": "102", "errmsg": "db error"})
-        name = data.get("name", None)
-        road = data.get("road", None)
-        district = data.get("district", None)
-        city = data.get("city", None)
-        province = data.get("province", None)
-        postcode = data.get("postcode")
-        phone_number = data.get("phone_number", None)
-        if not name or not road or not district or not province or not postcode or not phone_number:
-            try:
-                user.address.delete()
-            except Exception as e:
-                management_logger.error(e)
-                return JsonResponse({"errcode":"102","errmsg":"db error"})
-            return JsonResponse({"errcode": "0", "result": "save success"})
-        else:
-            useraddresss = user.address.all()[0]
-            try:
-                useraddresss.name = name
-                useraddresss.province = province
-                useraddresss.city = city
-                useraddresss.district = district
-                useraddresss.road = road
-                useraddresss.phone = phone_number
-                useraddresss.save()
-            except Exception as e:
-                management_logger.error(e)
-                return JsonResponse({"errcode":"102","errmsg":"db error"})
-            return JsonResponse({"errcode": "0", "errmsg": "update success"})
+        return JsonResponse({"errcode": "0", "errmsg": "update success"})
 

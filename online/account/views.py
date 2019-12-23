@@ -20,6 +20,7 @@ from online.order.models import Order
 from utils.decorator import user_auth
 from weigan_shopping import settings
 
+
 class LoginView(View):
 
     def post(self,request):
@@ -65,25 +66,23 @@ class UserView(View):
 
     @method_decorator(user_auth)
     def get(self,request,user):
-        category = []
-        try:
-            cates = Category.objects.filter(super_category__isnull=True)
-        except Exception as e:
-            online_logger.error(e)
-            return JsonResponse({"errcode": "102", "errmsg": "db error"})
-        for cate in cates:
-            try:
-                sub_cates = Category.objects.filter(super_category__id=cate.id)
-            except Exception as e:
-                online_logger.error(e)
-                return JsonResponse({"errcode": "102", "errmsg": "db error"})
-            category.append({"id": cate.id, "name": cate.name,
-                             "sub_cates": [{'id': sub_cate.id, 'name': sub_cate.name} for sub_cate in sub_cates if
-                                           sub_cates] if sub_cates else []})
-        context = {"category":category,"user": user}
-        useraddress = list(user.address.all().values('name','province','city','district','road','phone_number','postcode'))
-        if useraddress:
-            context.update({"useraddress":useraddress[0]})
+        # category = []
+        # try:
+        #     cates = Category.objects.filter(super_category__isnull=True)
+        # except Exception as e:
+        #     online_logger.error(e)
+        #     return JsonResponse({"errcode": "102", "errmsg": "db error"})
+        # for cate in cates:
+        #     try:
+        #         sub_cates = Category.objects.filter(super_category__id=cate.id)
+        #     except Exception as e:
+        #         online_logger.error(e)
+        #         return JsonResponse({"errcode": "102", "errmsg": "db error"})
+        #     category.append({"id": cate.id, "name": cate.name,
+        #                      "sub_cates": [{'id': sub_cate.id, 'name': sub_cate.name} for sub_cate in sub_cates if
+        #                                    sub_cates] if sub_cates else []})
+        # context = {"category":category,"user": user}
+        context = {"user":user}
         try:
             orders = Order.objects.filter(user=user)
             order_quantity = len(orders)
@@ -94,10 +93,9 @@ class UserView(View):
         context.update({"order_quantity":order_quantity,"cart_quantity":cart_quantity})
         return render(request,"myAccount.html",context=context)
 
-
     @method_decorator(user_auth)
     def post(self,request,user):
-        print(request.POST)
+        username = request.POST.get("username",None)
         email = request.POST.get("email", None)
         if email:
             if not re.match(r'^[0-9a-zA-Z_]{0,19}@[0-9a-zA-Z]{1,13}\.(com|cn|net){1,3}$', email):
@@ -107,11 +105,11 @@ class UserView(View):
         repassword = request.POST.get("repassword", None)
         if password != repassword:
             return JsonResponse({"errcode": "106", "errmsg": "password differently"})
-        print(email,phone,password,repassword)
-        if not all([email, phone, password, repassword]):
+        if not all([username,email, phone, password, repassword]):
             return JsonResponse({"errcode": "101", "errmsg": "params not all"})
         password = make_password(password)
         try:
+            user.username = username
             user.email = email
             user.password = password
             user.phone = phone
@@ -119,6 +117,29 @@ class UserView(View):
         except Exception as e:
             online_logger.error(e)
             return JsonResponse({"errcode": "102", "errmsg": "db error"})
+        return JsonResponse({"errcode": "0", "result": "save success"})
+
+
+class MyAddressView(View):
+    @method_decorator(user_auth)
+    def get(self,request,user):
+        context = {"user": user}
+        useraddress = list(
+            user.address.all().values('name', 'province', 'city', 'district', 'road', 'phone_number', 'postcode'))
+        if useraddress:
+            context.update({"useraddress": useraddress[0]})
+        try:
+            orders = Order.objects.filter(user=user)
+            order_quantity = len(orders)
+        except Exception as e:
+            online_logger.error(e)
+            return JsonResponse({"errcode": "102", "errmsg": "db error"})
+        cart_quantity = request.session.get("%s_cart" % user.id, 0)
+        context.update({"order_quantity": order_quantity, "cart_quantity": cart_quantity})
+        return render(request, "myAddress.html", context=context)
+
+    @method_decorator(user_auth)
+    def post(self,request,user):
         name = request.POST.get("name", None)
         road = request.POST.get("road", None)
         district = request.POST.get("district", None)
@@ -131,7 +152,7 @@ class UserView(View):
                 user.address.delete()
             except Exception as e:
                 online_logger.error(e)
-                return JsonResponse({"errcode":"102","errmsg":"db error"})
+                return JsonResponse({"errcode": "102", "errmsg": "db error"})
             return JsonResponse({"errcode": "0", "result": "save success"})
         else:
             useraddress = user.address.all()
@@ -146,25 +167,38 @@ class UserView(View):
                     useraddress.phone = phone_number
                     useraddress.save()
                 else:
-                    UserAddress.objects.create(name=name,province=province,city=city,district=district,road=road,phone_number=phone_number,postcode=postcode,user=user)
+                    UserAddress.objects.create(name=name, province=province, city=city, district=district, road=road,
+                                               phone_number=phone_number, postcode=postcode, user=user)
             except Exception as e:
                 online_logger.error(e)
-                return JsonResponse({"errcode":"102","errmsg":"db error"})
+                return JsonResponse({"errcode": "102", "errmsg": "db error"})
             return JsonResponse({"errcode": "0", "errmsg": "save success"})
 
 
 class SignUpView(View):
+
     def post(self,request):
+        username = request.POST.get("username",None)
         email = request.POST.get("email",None)
         if email:
             if not re.match(r'^[0-9a-zA-Z_]{0,19}@[0-9a-zA-Z]{1,13}\.(com|cn|net){1,3}$',email):
                 return JsonResponse({"errcode":"105","errmsg":"email format error"})
         phone = request.POST.get("phone",None)
+        if phone:
+            if not re.match(r'^1[0-9]{10}$',phone):
+                return JsonResponse({"errcode":"105","errmsg":"phone format error"})
+        try:
+            users = User.objects.filter(Q(email = email) | Q(phone = phone))
+            if len(users) > 0:
+                return JsonResponse({"errcode":"109","errmsg":"user has registered"})
+        except Exception as e:
+            online_logger.error(e)
+            return JsonResponse({"errcode":"102","errmsg":"db error"})
         password = request.POST.get("password",None)
         repassword = request.POST.get("repassword",None)
         if password != repassword:
             return JsonResponse({"errcode":"106","errmsg":"password differently"})
-        if not all([email,phone,password,repassword]):
+        if not all([username,email,phone,password,repassword]):
             return JsonResponse({"errcode":"101","errmsg":"params not all"})
         password = make_password(password)
         try:
@@ -172,27 +206,10 @@ class SignUpView(View):
         except Exception as e:
             online_logger.error(e)
             return JsonResponse({"errcode":"102","errmsg":"db error"})
+        request.session['user_id'] = user.id
+        request.session['%s_cart' % user.id] = 0
+        return JsonResponse({"errcode": "0", "errmsg": "sign up success", "data": {"url": settings.URL_PREFIX + '/index'}})
 
-        name = request.POST.get("name", None)
-        road = request.POST.get("road",None)
-        district = request.POST.get("district",None)
-        city = request.POST.get("city",None)
-        province = request.POST.get("province",None)
-        postcode = request.POST.get("postcode",None)
-        phone_number = request.POST.get("phone_number",None)
-        if not (name or road or district or city or province or phone_number or postcode):
-            request.session['user_id'] = user.id
-            request.session['%s_cart' % user.id] = 0
-            return JsonResponse({"errcode":"0","errmsg":"sign up success","data":{"url":settings.URL_PREFIX+'/index'}})
-        else:
-            try:
-                useraddress = UserAddress.objects.create(name=name,province=province,city=city,district=district,road=road,phone_number=phone_number,postcode=postcode,user=user)
-            except Exception as e:
-                online_logger.error(e)
-                return JsonResponse({"errcode":"102","errmsg":"db error"})
-            request.session['user_id'] = user.id
-            request.session['%s_cart' % user.id] = 0
-            return JsonResponse({"errcode":"0","errmsg":"sign up success","data":{"url":settings.URL_PREFIX+'/index'}})
 
 class SignUpTemplateView(View):
 
@@ -213,6 +230,7 @@ class SignUpTemplateView(View):
                              "sub_cates": [{'id': sub_cate.id, 'name': sub_cate.name} for sub_cate in sub_cates if
                                            sub_cates] if sub_cates else []})
         context = {"category":category,"user":""}
+        # context = {"user":""}
         return render(request,'register.html',context=context)
 
 

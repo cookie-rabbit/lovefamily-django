@@ -9,7 +9,8 @@ class Goods(models.Model):
     name_en = models.CharField(max_length=30,null=True)
     origin_price = models.IntegerField(default=0)
     on_price = models.IntegerField(default=0)
-    sale = models.IntegerField()
+    actual_sale = models.IntegerField()
+    virtual_sale = models.IntegerField(default=0)
     on_sale = models.BooleanField()
     description_ch = models.CharField(max_length=500,null=True)
     description_en = models.CharField(max_length=500,null=True)
@@ -25,7 +26,7 @@ class Goods(models.Model):
         db_table = "Goods"
 
     def __str__(self):
-        return self.name_ch
+        return self.name_en
 
 
 class Image(models.Model):

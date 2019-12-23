@@ -57,7 +57,8 @@
 					</div>
 				</div>
 				<div class="hr"></div>
-				<div class="bottom">
+            {% block menu %}
+                <div class="bottom">
 					<div class="left">
                         {% for cate in category %}
                             <div class="hasHover">
@@ -69,12 +70,13 @@
                                 </div>
                             </div>
                         {% endfor %}
-
 					</div>
-					<div class="right">
-						<input type="text" placeholder="Search" class="toSearch" data-href="/goods/search/?"><span class="search" ></span>
-					</div>
+                        <div class="right">
+                            <input type="text" placeholder="Search" class="toSearch" data-href="/goods/search/?"><span class="search" ></span>
+                        </div>
 				</div>
+            {% endblock %}
+
 			</div>
 
             {% block hr %}{% endblock %}

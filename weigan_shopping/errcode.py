@@ -30,3 +30,7 @@
     "errcode":"108",
     "errmsg":"illegal request"
 }
+{
+    "errcode":"109",
+    "errmsg":"user has registered"
+}
