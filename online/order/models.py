@@ -48,8 +48,12 @@ class OrderAddress(models.Model):
 class Order_Goods(models.Model):
     """订单--商品表"""
     order = models.ForeignKey("Order", on_delete=models.CASCADE)  # 订单编号
-    goods = models.ForeignKey("goods.Goods", on_delete=models.CASCADE)  # 对应商品
+    # goods = models.ForeignKey("goods.Goods", on_delete=models.CASCADE)  # 对应商品
     quantity = models.IntegerField()  # 商品数量
+    name_en = models.CharField(max_length=30, null=True)
+    on_price = models.IntegerField(default=0)
+    description_en = models.CharField(max_length=500, null=True)
+
 
     class Meta:
         db_table = "Order_Goods"
