@@ -14,9 +14,42 @@
     <div class="myOrderContainer">
     <div class="back"><span class="goBack"></span>My Order</div>
 
-    {% ifequal user_info.isnull 0 %}
+    {% ifequal user_info.is_null 1 %}
         <!-- 有地址时直接显示地址（此模块一直存在）,不显示时添加“hidden”------------begin -->
-        <div class="readAddress ">
+        <div class="readAddress hidden">
+            <h4><S></S>hipping Address</h4>
+            <div class="addressContent">
+                <p class="fullName">{{ user_info.name }}</p>
+                <p class="addressLine1">{{ user_info.road }}</p>
+                <p class="addressLine2">{{ user_info.district }}</p>
+                <p class="state">
+                    <span class="city">{{ user_info.city }}</span>,
+                    <span class="province">{{ user_info.province }}</span>&nbsp;&nbsp;
+                    <span class="zip">{{ user_info.postcode }}</span></p>
+                <p class="phoneNum">Phone:<span>{{ user_info.phone_number }}</span></p>
+            </div>
+            <div><span class="edit">Edit</span></div>
+        </div>
+        <!-- 有地址时直接显示地址------------end -->
+
+        <!-- 没地址时新增地址（此模块一直存在）,不显示时添加“hidden”------------begin -->
+        <div class="editAddress">
+            <h4>Shipping Address</h4>
+            <div class="addressContent">
+                <p class="fullName"><span>Full name</span><input type="text"></p>
+                <p class="addressLine1"><span>Address Line1</span><input type="text"></p>
+                <p class="addressLine2"><span>Address Line2</span><input type="text"></p>
+                <p class="city"><span>City</span><input type="text"></p>
+                <p class="province"><span class="state">State/Province/<br>Region</span><input type="text"></p>
+                <p class="zip"><span>ZIP</span><input type="text"></p>
+                <p class="phoneNum"><span>Phone number</span><input type="text"></p>
+            </div>
+            <div><span class="confirm">Confirm</span></div>
+        </div>
+        <!-- 没地址时新增地址------------end -->
+    {% else %}
+        <!-- 有地址时直接显示地址（此模块一直存在）,不显示时添加“hidden”------------begin -->
+        <div class="readAddress">
             <h4>Shipping Address</h4>
             <div class="addressContent">
                 <p class="fullName">{{ user_info.name }}</p>
@@ -47,39 +80,6 @@
             <div><span class="confirm">Confirm</span></div>
         </div>
         <!-- 没地址时新增地址------------end -->
-    {% else %}
-        <!-- 有地址时直接显示地址（此模块一直存在）,不显示时添加“hidden”------------begin -->
-        <div class="readAddress hidden">
-            <h4>Shipping Address</h4>
-            <div class="addressContent">
-                <p class="fullName">{{ user_info.name }}</p>
-                <p class="addressLine1">{{ user_info.road }}</p>
-                <p class="addressLine2">{{ user_info.district }}</p>
-                <p class="state">
-                    <span class="city">{{ user_info.city }}</span>,
-                    <span class="province">{{ user_info.province }}</span>&nbsp;&nbsp;
-                    <span class="zip">{{ user_info.postcode }}</span></p>
-                <p class="phoneNum">Phone:<span>{{ user_info.phone_number }}</span></p>
-            </div>
-            <div><span class="edit">Edit</span></div>
-        </div>
-        <!-- 有地址时直接显示地址------------end -->
-
-        <!-- 没地址时新增地址（此模块一直存在）,不显示时添加“hidden”------------begin -->
-        <div class="editAddress">
-            <h4>Shipping Address</h4>
-            <div class="addressContent">
-                <p class="fullName"><span>Full name</span><input type="text"></p>
-                <p class="addressLine1"><span>Address Line1</span><input type="text"></p>
-                <p class="addressLine2"><span>Address Line2</span><input type="text"></p>
-                <p class="city"><span>City</span><input type="text"></p>
-                <p class="province"><span class="state">State/Province/<br>Region</span><input type="text"></p>
-                <p class="zip"><span>ZIP</span><input type="text"></p>
-                <p class="phoneNum"><span>Phone number</span><input type="text"></p>
-            </div>
-            <div><span class="confirm">Confirm</span></div>
-        </div>
-        <!-- 没地址时新增地址------------end -->
     {% endifequal %}
 
     <div class="orderLines">
@@ -87,7 +87,7 @@
         <div class="content">
             {% for good in good_dict %}
                 <div class="cartGoods toBuyIt" data-id={{ good.id }} data-count={{ good.quantity }}>
-                    <a href="javascript:(0)" class="linkImg">
+                    <a href="/goods/{{ good.id }}" class="linkImg">
                         <img src="/static/assets/images/thing.png" alt="">
                     </a>
                     <div class="infors">
