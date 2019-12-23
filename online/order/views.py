@@ -30,58 +30,69 @@ class OrderAddressView(View):
         user_id = user.id
         good_dict = []
         total = 0
-        try:
-            user = UserAddress.objects.get(id=user_id)
-            name = user.name
-            province = user.province
-            city = user.city
-            district = user.district
-            road = user.road
-            phone_number = user.phone_number
-            postcode = user.postcode
-            is_null = 0
-
-        except management.user.models.UserAddress.DoesNotExist:
-            name = ''
-            province = ''
-            city = ''
-            district = ''
-            road = ''
-            phone_number = ''
-            postcode = ''
-            is_null = 1
-        user_info = {"name": name, "province": province, "city": city, "district": district,
-                     "road": road, "phone_number": phone_number, "postcode": postcode, "is_null": is_null}
-
-        carts = Cart.objects.filter(user_id=user_id)
-        for cart in carts:
-            good_id = cart.goods_id
-            quantity = cart.quantity
+        if user_id:
             try:
-                good_detail = Goods.objects.get(id=good_id)
-                good_name_en = good_detail.name_en
-                good_price = good_detail.on_price
-                good_description_en = good_detail.description_en
-                good_image = str(Image.objects.filter(goods_id=good_id)[0].image)
-                good_dict.append({"id": good_id, "quantity": quantity, "name_en": good_name_en, "price": good_price,
-                                  "description_en": good_description_en, "image": good_image})
-                total = total + quantity * good_price
-
+                user = UserAddress.objects.get(user_id=user_id)
+                name = user.name
+                province = user.province
+                city = user.city
+                district = user.district
+                road = user.road
+                phone_number = user.phone_number
+                postcode = user.postcode
+                is_null = 0
+            except management.user.models.UserAddress.DoesNotExist:
+                name = ''
+                province = ''
+                city = ''
+                district = ''
+                road = ''
+                phone_number = ''
+                postcode = ''
+                is_null = 1
             except Exception as e:
                 online_logger.error(e)
-                return JsonResponse({"errcode": 10, "errmsg": "数据库错误"})
-        res = {"user_info": user_info, "good_dict": good_dict, "total": total}
+                return JsonResponse({"errcode": 4, "errmsg": "数据库错误"})
 
-        tpl = get_template("myOrder.html")
-        res = tpl.render(res)
-        return HttpResponse(res)
+            orders = Order.objects.filter(user_id=user_id)
+            order_quantity = len(orders)
+            cart_quantity = request.session.get("%s_cart" % user_id, 0)
+            carts = Cart.objects.filter(user_id=user_id)
+
+            for cart in carts:
+                good_id = cart.goods_id
+                quantity = cart.quantity
+                try:
+                    good_detail = Goods.objects.get(id=good_id)
+                    good_name_en = good_detail.name_en
+                    good_price = good_detail.on_price
+                    good_description_en = good_detail.description_en
+                    good_image = str(Image.objects.filter(goods_id=good_id)[0].image)
+
+                    total = total + quantity * good_price
+                    good_dict.append({"id": good_id, "quantity": quantity, "name_en": good_name_en, "price": good_price,
+                                      "description_en": good_description_en, "image": good_image})
+                except Exception as e:
+                    online_logger.error(e)
+                    return JsonResponse({"errcode": 10, "errmsg": "数据库错误"})
+
+            user_info = {"name": name, "province": province, "city": city, "district": district,
+                         "road": road, "phone_number": phone_number, "postcode": postcode, "is_null": is_null}
+            res = {"user_info": user_info, "good_dict": good_dict, "total": total, "user": user,
+                   "cart_quantity": cart_quantity, "order_quantity": order_quantity}
+            tpl = get_template("myOrder.html")
+            res = tpl.render(res)
+            return HttpResponse(res)
+
+        else:
+            JsonResponse({"errcode": 6, "errmsg": "用户不存在"})
 
 
 # 订单详情
 class OrdersDetailView(View):
     @method_decorator(user_auth)
     def get(self, request, user):
-        user_id = user.id
+        user_id = request.session.get("user_id", None)
         order_no = request.GET.get('order_no')
         orders = Order.objects.filter(user_id=user_id)
         order = orders.get(order_no=order_no)
@@ -117,7 +128,7 @@ class OrdersDetailView(View):
 class OrdersListView(View):
     @method_decorator(user_auth)
     def get(self, request, user):
-        user_id = user.id
+        user_id = request.session.get("user_id", None)
         status_query = request.GET.get('status', 0)
 
         orders = Order.objects.filter(user_id=user_id).order_by('-order_date')
@@ -200,7 +211,7 @@ class OrderCreateView(View):
             online_logger.error(e)
             return JsonResponse({"errcode": 10, "errmsg": "订单信息不完整"})
 
-        user_id = user.id
+        user_id = request.session.get("user_id", None)
         time = timezone.localtime(timezone.now()).strftime("%Y-%m-%d")
         order_no = random.randint(0, 9999999999)
         status = 0
@@ -253,7 +264,7 @@ class OrderCreateView(View):
 class OrdersOffsetView(View):
     @method_decorator(user_auth)
     def get(self, request, user):
-        user_id = user.id
+        user_id = request.session.get("user_id", None)
         offset = request.GET.get('offset', 0)
         status_query = request.GET.get('status', 0)
 
@@ -313,11 +324,19 @@ class UserAddressView(View):
             online_logger.error(e)
             return JsonResponse({"errcode": 10, "errmsg": "订单信息不完整"})
         try:
+            UserAddress.objects.get(user_id=user_id)
             UserAddress.objects.filter(user_id=user_id).update(name=name, province=province, road=road,
-                                                               city=city, district=district,
-                                                               postcode=postcode,
+                                                               city=city, district=district, postcode=postcode,
                                                                phone_number=phone_number)
             return JsonResponse({"errcode": 0, "data": {"result": "地址修改成功"}})
+        except management.user.models.UserAddress.DoesNotExist:
+            try:
+                UserAddress.objects.create(user_id=user_id, name=name, province=province, road=road,
+                                           city=city, district=district, postcode=postcode, phone_number=phone_number)
+                return JsonResponse({"errcode": 0, "data": {"result": "地址保存成功"}})
+            except Exception as e:
+                online_logger.error(e)
+                return JsonResponse({"errcode": 4, "errmsg": "数据库错误"})
         except Exception as e:
             online_logger.error(e)
             return JsonResponse({"errcode": 3, "errmsg": "数据格式错误"})
