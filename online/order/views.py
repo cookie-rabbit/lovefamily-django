@@ -363,7 +363,7 @@ class PayOrder(View):
         user = User.objects.filter(user.id)
         if user != '':
             try:
-                order = Order.objects.update(status=1)
+                order = Order.objects.filter(id=order_id).update(status=1)
                 order.save()
                 index_href = "http://10.168.2.111:8000/index/"
                 return JsonResponse({"errcode": 0, "errmsg": "订单支付成功", "href": index_href})

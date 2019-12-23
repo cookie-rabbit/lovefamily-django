@@ -23,12 +23,13 @@ from weigan_shopping.settings import MEDIA_ROOT
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^i18n/', include('django.conf.urls.i18n')),
-    url(r'^media/(?P<path>.*)$',  serve, {"document_root": MEDIA_ROOT}),
-    url(r'^',include("online.account.urls")),
+    url(r'^media/(?P<path>.*)$', serve, {"document_root": MEDIA_ROOT}),
+    url(r'^', include("online.account.urls")),
     url(r'^', include("online.cart.urls")),
     url(r'^', include("online.goods.urls")),
-    url(r'^',include("online.order.urls")),
+    url(r'^', include("online.order.urls")),
+    url(r'^', include("management.goods.urls")),
+    url(r'^', include("management.orders.urls")),
+    url(r'^', include("management.user.urls")),
     url(r'^admin/', include("management.user.urls")),
 ]
-
-

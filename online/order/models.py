@@ -13,9 +13,10 @@ class Order(models.Model):
     choices = (  # 订单状态列表
         (0, "ALL"),
         (1, "Ordered"),
-        (2, "Delivering"),
-        (3, "Finished"),
-        (4, "Closed"),
+        (2, "Payed"),
+        (3, "Delivering"),
+        (4, "Finished"),
+        (5, "Closed"),
     )
     status = models.IntegerField(choices=choices, default=0)  # 订单状态
     address = models.ForeignKey("OrderAddress", on_delete=models.CASCADE, related_name='order')  # 订单地址
