@@ -2,7 +2,7 @@ import json
 
 from django.contrib.auth.hashers import make_password
 from django.core.paginator import Paginator
-from django.db.models import Q
+from django.db.models import Q, F
 from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render, redirect
 # Create your views here.
@@ -37,7 +37,7 @@ def index(request):
 
     count = INDEX_GOODS_COUNT
     try:
-        total_goods = Goods.objects.order_by('-sale')
+        total_goods = Goods.objects.filter(on_sale=True).order_by(F('actual_sale') + F('virtual_sale')).reverse()
         goods = total_goods[:count]
         if len(total_goods) > count:
             more = True
@@ -55,11 +55,9 @@ def index(request):
             goods_list.append({"id": single_goods.id, "name": single_goods.name_en, "price": single_goods.on_price,
                                "is_hot": single_goods.is_hot,"is_new":single_goods.is_new, "image": settings.URL_PREFIX + image[0].image.url})
     user_id = request.session.get("user_id",None)
-    print(user_id)
     if user_id:
         try:
             user = User.objects.get(id=user_id)
-            print(user)
             orders = Order.objects.filter(user = user)
             order_quantity = len(orders)
         except Exception as e:
@@ -69,7 +67,6 @@ def index(request):
         context = {"category":category,"goods":goods_list,"user":user,"cart_quantity":cart_quantity,"order_quantity":order_quantity,"more":more}
     else:
         context = {"category": category, "goods": goods_list,"user":"","cart_quantity":0,"order_quantity":0,"more":more}
-    print(context)
     return render(request,"index.html",context=context)
 
 
@@ -81,10 +78,10 @@ class GoodsTypeView(View):
         try:
             current = int(current)
             if type == 'hot':
-                total_goods = Goods.objects.order_by('-sale')
+                total_goods = Goods.objects.filter(on_sale=True).order_by(F('actual_sale') + F('virtual_sale')).reverse()
                 goods = total_goods[current:current+count]
             elif type == 'new':
-                total_goods = Goods.objects.order_by('-added_time')
+                total_goods = Goods.objects.filter(on_sale=True).order_by('-added_time')
                 goods = total_goods[current:current + count]
             else:
                 return JsonResponse({"errcode":"108","errmsg":"illegal request"})
@@ -124,12 +121,12 @@ class GoodsCategoryView(View):
             category_id = int(category_id)
             current_category = Category.objects.get(id=category_id)
             if current_category.super_category:
-                total_goods = Goods.objects.filter(category__id=category_id).order_by('-sale')
+                total_goods = Goods.objects.filter(on_sale=True).filter(category__id=category_id).order_by(F('actual_sale') + F('virtual_sale'))
                 goods = total_goods[current:current+count]
 
             else:
                 categories = Category.objects.filter(super_category=current_category)
-                total_goods = Goods.objects.filter(category__in=categories).order_by('-sale')
+                total_goods = Goods.objects.filter(on_sale=True).filter(category__in=categories).order_by(F('actual_sale') + F('virtual_sale'))
                 goods = total_goods[current:current+count]
             if len(total_goods) > current + count:
                 more = True
@@ -179,12 +176,12 @@ class GoodsCategoryTemplateView(View):
             category_id = int(category_id)
             current_category = Category.objects.get(id=category_id)
             if current_category.super_category:
-                total_goods = Goods.objects.filter(category__id=category_id).order_by('-sale')
+                total_goods = Goods.objects.filter(on_sale=True).filter(category__id=category_id).order_by('-sale')
                 goods = total_goods[:count]
                 super_category = {"id":current_category.super_category.id,"name":current_category.super_category.name}
             else:
                 categories = Category.objects.filter(super_category=current_category)
-                total_goods = Goods.objects.filter(category__in=categories).order_by('-sale')
+                total_goods = Goods.objects.filter(on_sale=True).filter(category__in=categories).order_by('-sale')
                 goods = total_goods[:count]
                 super_category = ""
             if len(total_goods) > count:
@@ -261,7 +258,7 @@ class GoodsTemplateView(View):
                    "images":[settings.URL_PREFIX  + goods_image.image.url for goods_image in images],
                    "origin_price":single_goods.origin_price,
                    "on_price":single_goods.on_price,
-                   "sale":single_goods.sale,
+                   "sale":single_goods.actual_sale + single_goods.virtual_sale,
                    "detail":single_goods.detail_en,
                    "description":single_goods.description_en}
         user_id = request.session.get("user_id", None)
@@ -291,7 +288,7 @@ class GoodsSearchView(View):
             return JsonResponse({"errcode":"101","errmsg":"empty params"})
         try:
             current = int(current)
-            total_goods = Goods.objects.filter(name_en__contains=keyword)
+            total_goods = Goods.objects.filter(on_sale=True).filter(name_en__contains=keyword)
             goods = total_goods[current:current+count]
             if len(total_goods) > current + count:
                 more = True
@@ -325,7 +322,7 @@ class GoodsSearchTemplateView(View):
         if keyword is None:
             return JsonResponse({"errcode": "101", "errmsg": "empty params"})
         try:
-            total_goods = Goods.objects.filter(name_en__contains=keyword)
+            total_goods = Goods.objects.filter(on_sale=True).filter(name_en__contains=keyword)
             goods = total_goods[:count]
             if len(total_goods) > count:
                 more = True

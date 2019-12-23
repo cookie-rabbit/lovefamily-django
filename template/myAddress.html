@@ -19,33 +19,6 @@
             <li class="current">My Account</li>
             <!-- <li class="current">My Account</li> -->
         </ul>
-        <div class="baseInfor">
-            <p class="name">
-                <span>Email</span>
-                <input type="text" value="{{ user.email }}" readonly="readonly">
-                <span class="star"></span>
-                <span class="tips"></span>
-            </p>
-            <p class="phone">
-                <span>Phone</span>
-                <input type="text" value="{{ user.phone }}" readonly="readonly">
-                <span class="star"></span>
-                <span class="tips"></span>
-            </p>
-            <p class="pass">
-                <span>Password</span>
-                <input type="password" value="{% if user.password %}******{% endif %}" readonly="readonly">
-                <span class="star"></span>
-                <span class="tips"></span>
-            </p>
-            <p class="repass">
-                <span>Re-Password</span>
-                <input type="password" value="{% if user.password %}******{% endif %}" readonly="readonly">
-                <span class="star"></span>
-                <span class="tips"></span>
-            </p>
-        </div>
-        <div class="hr"></div>
         <div class="addressContent">
             <p class="fullName">
                 <span>Full name</span>

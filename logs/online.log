@@ -1,0 +1,5 @@
+ERROR 2019-12-21 09:11:59,900 views 74 UserAddress matching query does not exist.
+ERROR 2019-12-21 09:12:09,804 views 74 UserAddress matching query does not exist.
+ERROR 2019-12-21 09:12:39,281 views 74 UserAddress matching query does not exist.
+ERROR 2019-12-21 09:15:13,620 views 74 UserAddress matching query does not exist.
+ERROR 2019-12-21 09:32:10,342 views 218 (1054, "Unknown column 'phone_number' in 'field list'")
