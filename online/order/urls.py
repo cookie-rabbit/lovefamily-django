@@ -13,6 +13,6 @@ urlpatterns = [
 
     url(r'^orders/(.+)/pay', views.OrderPayView.as_view()),
 
-    url(r'^admin/orders/{order_id}', views.OderStatusChange),
+
 
 ]

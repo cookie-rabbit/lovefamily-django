@@ -107,10 +107,9 @@ class OrdersDetailView(View):
                 for good in goods:
                     good_id = good.goods_id
                     quantity = good.quantity
-                    good_detail = Goods.objects.get(id=good_id)
-                    good_name_en = good_detail.name_en
-                    good_price = good_detail.on_price
-                    good_description_en = good_detail.description_en
+                    good_name_en = good.name_en
+                    good_price = good.on_price
+                    good_description_en = good.description_en
                     good_image = str(Image.objects.filter(goods_id=good_id)[0].image)
                     good_dic.append({"id": good_id, "quantity": quantity, "name_en": good_name_en, "price": good_price,
                                      "description_en": good_description_en, "image": good_image})
@@ -206,7 +205,6 @@ class OrderCreateView(View):
             postcode = request.POST.get('postcode')
             phone_number = request.POST.get('phone_number')
             goods = ast.literal_eval(request.POST.get('goods'))
-            total = request.POST.get('total')
         except Exception as e:
             online_logger.error(e)
             return JsonResponse({"errcode": 10, "errmsg": "订单信息不完整"})
@@ -247,13 +245,19 @@ class OrderCreateView(View):
                 transaction.savepoint_rollback(save_id)
                 return JsonResponse({'errcode': 4, 'errmsg': "库存不足"})
 
-            Goodgoods.sale += count
+            name_en = Goodgoods.name_en
+            on_price = Goodgoods.on_price
+            description_en = Goodgoods.description_en
+
+            good_img = Image.objects.filter(goods_id=goods_id)[0].image
+
+            Goodgoods.actual_sale += count
             Goodgoods.stock -= count
             Goodgoods.save()
             total += good_count * Goodgoods.on_price
 
-            goods = Goods.objects.select_for_update().get(id=goods_id)
-            Order_Goods.objects.create(order=order, goods=goods, quantity=count)
+            Order_Goods.objects.create(order=order, quantity=count, name_en=name_en, on_price=on_price,
+                                       description_en=description_en, img=good_img)
             Order.objects.filter(id=order.id).update(total=total)
 
         href = "http://10.168.2.111:8000/orders/{order_id}/pay/".format(order_id=order.id)
@@ -352,42 +356,17 @@ class OrderPayView(View):
         return HttpResponse(res)
 
 
-# 修改订单状态
-class OderStatusChange(View):
-
-    @method_decorator(transaction.atomic)
-    @method_decorator(csrf_exempt)
-    def put(self, request):
-        if request.method == 'PUT':
-            if request.body:
-                try:
-                    put = QueryDict(request.body)
-                    order_no = put.get('order_no')
-                    status = put.get('status')
-                except Exception as e:
-                    online_logger.error(e)
-                    return JsonResponse({"errcode": 111, "errmsg": "请求数据不全或格式错误"})
-                if status.isdigit() and order_no.isdigit():
-
-                    try:
-                        order = Order.objects.get(order_no=order_no)
-                    except Order.DoesNotExist as e:
-                        online_logger.error(e)
-                        return JsonResponse({"errcode": 111, "errmsg": "订单不存在"})
-                    except Exception as e:
-                        online_logger.error(e)
-                        return JsonResponse({"errcode": 111, "errmsg": "数据库错误"})
-
-                    else:
-                        if order.status == 2:
-                            return JsonResponse({"errcode": 222, "errmsg": "订单已完成，不能修改状态"})
-                        order = Order.objects.get(order_no=order_no)
-                        order.status = status
-                        order.save()
-                        return JsonResponse({"errcode": 5, "errmsg": "订单状态修改成功"})
-                else:
-                    return JsonResponse({"errcode": 8, "errmsg": "订单状态或订单号不正确"})
-            else:
-                return JsonResponse({"errcode": 7, "errmsg": "未收到请求内容或请求方式错误"})
-        else:
-            return JsonResponse({"errcode": 6, "errmsg": "请求方式错误"})
+# 订单支付
+class PayOrder(View):
+    @method_decorator(user_auth)
+    def get(self, request, user, order_id):
+        user = User.objects.filter(user.id)
+        if user != '':
+            try:
+                order = Order.objects.update(status=1)
+                order.save()
+                index_href = "http://10.168.2.111:8000/index/"
+                return JsonResponse({"errcode": 0, "errmsg": "订单支付成功", "href": index_href})
+            except Exception as e:
+                online_logger.error(e)
+                return JsonResponse({"errcode": 4, "errmsg": "数据库错误"})
