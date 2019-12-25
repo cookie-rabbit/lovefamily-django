@@ -135,7 +135,7 @@ class GoodsDetailView(View):
         return JsonResponse({"errcode": "0", "data": result})
 
     @method_decorator(admin_auth)
-    def put(self, request, user, goods_id):
+    def put(self, request, goods_id):
         """修改商品信息"""
         data = json.loads(request.body.decode())
         name = data.get("name", None)

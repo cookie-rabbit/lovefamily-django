@@ -1,6 +1,7 @@
 from django.core.paginator import Paginator
 from django.db import transaction
 from django.http import JsonResponse, QueryDict
+from django.utils import timezone
 from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.decorators.csrf import csrf_exempt
@@ -9,18 +10,19 @@ from management.constants import PER_PAGE_ORDER_COUNT
 from management.logger import management_logger
 from management.user.models import User
 from online.logger import online_logger
-from online.order.models import Order, Order_Goods, OrderAddress
+from online.order.models import Order, Order_Goods, OrderAddress, OrderStatusLog
 
 from utils.decorator import admin_auth
 from itertools import chain
+import json
 
 
-# 修改订单状态
 class OderStatusChange(View):
 
     @method_decorator(transaction.atomic)
     @method_decorator(csrf_exempt)
     def put(self, request):
+        """修改订单状态"""
         if request.method == 'PUT':
             if request.body:
                 try:
@@ -30,8 +32,7 @@ class OderStatusChange(View):
                 except Exception as e:
                     online_logger.error(e)
                     return JsonResponse({"errcode": 111, "errmsg": "请求数据不全或格式错误"})
-                if status.isdigit() and order_no.isdigit():
-
+                if status.isdigit():
                     try:
                         order = Order.objects.get(order_no=order_no)
                     except Order.DoesNotExist as e:
@@ -41,15 +42,16 @@ class OderStatusChange(View):
                         online_logger.error(e)
                         return JsonResponse({"errcode": 111, "errmsg": "数据库错误"})
 
-                    else:
-                        if order.status == 2:
-                            return JsonResponse({"errcode": 222, "errmsg": "订单已完成，不能修改状态"})
-                        order = Order.objects.get(order_no=order_no)
-                        order.status = status
-                        order.save()
-                        return JsonResponse({"errcode": 5, "errmsg": "订单状态修改成功"})
+                    order.status = status
+                    order.save()
+
+                    time = timezone.localtime(timezone.now()).strftime("%Y-%m-%d %H:%M:%S")
+                    user_id = request.session.get("user_id", None)
+                    OrderStatusLog.objects.create(order_no=order_no, status=status, user_id=user_id,
+                                                  change_date=time)
+                    return JsonResponse({"errcode": 0, "errmsg": "订单状态修改成功"})
                 else:
-                    return JsonResponse({"errcode": 8, "errmsg": "订单状态或订单号不正确"})
+                    return JsonResponse({"errcode": 8, "errmsg": "订单状态不正确"})
             else:
                 return JsonResponse({"errcode": 7, "errmsg": "未收到请求内容或请求方式错误"})
         else:
@@ -63,7 +65,7 @@ class OrdersView(View):
     def get(self, request, user):
         """获取订单列表"""
         username = request.GET.get("username", None)
-        order_no = request.GET.get("order_no", "d")
+        order_no = request.GET.get("order_no", "0")
         email = request.GET.get("email", "@")
         phone = request.GET.get("phone", None)
         start_date = request.GET.get("start_date", "2000-01-01")
@@ -97,7 +99,6 @@ class OrdersView(View):
                 total = len(orders)
                 paginator = Paginator(orders, PER_PAGE_ORDER_COUNT)
                 order_list = paginator.page(page)
-                page_num = paginator.num_pages
                 if orders != '':
                     user_name = user.username
                     user_email = user.email
@@ -106,7 +107,7 @@ class OrdersView(View):
                         order_no = order.order_no
                         order_total = order.total
                         order_date = order.order_date
-                        order_status = order.status
+                        order_status = order.get_status_display()
                         order_details = Order_Goods.objects.filter(order_id=order.id)
 
                         order_count = 0
@@ -119,10 +120,10 @@ class OrdersView(View):
                         user_res = {"user_name": user_name, "user_email": user_email, "user_phone": user_phone}
                         com_res = {"user": user_res, "orders": order_detail_res}
                         orderss.append(com_res)
-                    res = orderss
-                    return JsonResponse({"errcode": "0", "data": res, "total": total})
+                    res = {"result": orderss, "total": total}
+                    return JsonResponse({"errcode": "0", "data": res})
                 else:
-                    return JsonResponse({"errcode": "0", "data": ''})
+                    return JsonResponse({"errcode": "0", "data": '[]'})
             except Exception as e:
                 management_logger.error(e)
                 return JsonResponse({"errcode": "102", "errmsg": "db error"})
@@ -185,7 +186,41 @@ class OrderDetailView(View):
                     res = com_res
                     return JsonResponse({"errcode": "0", "data": res})
                 else:
-                    return JsonResponse({"errcode": "0", "data": ''})
+                    return JsonResponse({"errcode": "0", "data": '[]'})
+        except Exception as e:
+            management_logger.error(e)
+            return JsonResponse({"errcode": "102", "errmsg": "db error"})
+
+
+class OrderStatusView(View):
+
+    @method_decorator(csrf_exempt)
+    @method_decorator(admin_auth)
+    def get(self, request, user):
+        """获取订单状态变更详情"""
+        order_no = request.GET.get("order_no", None)
+        try:
+            if order_no is not None:
+                states_log = []
+                states = OrderStatusLog.objects.filter(order_no=order_no)
+                sta_dic = {1: "orderd", 2: "Payed", 3: "Delivering", 4: "Finished", 5: "Closed"}
+
+                if states != '':
+                    for state in states:
+                        status = sta_dic.get(state.status)
+                        try:
+                            username = User.objects.get(id=state.user_id).username
+                        except Exception as e:
+                            management_logger.error(e)
+                            return JsonResponse({"errcode": "102", "errmsg": "db error"})
+                        date = state.change_date
+                        state_log = {"status": status, "user": username, "date": date}
+                        states_log.append(state_log)
+                res = states_log
+                return JsonResponse({"errcode": "0", "data": res})
+            else:
+                return JsonResponse({"errcode": "0", "data": '[]'})
+
         except Exception as e:
             management_logger.error(e)
             return JsonResponse({"errcode": "102", "errmsg": "db error"})

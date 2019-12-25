@@ -18,7 +18,7 @@ from weigan_shopping import env
 
 BASE_DIR = env.BASE_DIR
 
-sys.path.insert(0,BASE_DIR)
+sys.path.insert(0, BASE_DIR)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
@@ -48,6 +48,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
@@ -60,7 +61,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'weigan_shopping.urls'
 
-ALLOWED_HOSTS = ['*',]
+ALLOWED_HOSTS = ['*', ]
 CORS_ORIGIN_WHITELIST = (
     env.CORS_WHITE,
 )
@@ -86,7 +87,7 @@ CORS_ALLOW_HEADERS = (
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR,'template'),],
+        'DIRS': [os.path.join(BASE_DIR, 'template'), ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -96,13 +97,12 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
-    'builtins': ['django.templatetags.static']
+            'builtins': ['django.templatetags.static']
         },
     },
 ]
 
 WSGI_APPLICATION = 'weigan_shopping.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
@@ -155,13 +155,13 @@ LOGGING = {
             'formatter': 'simple'
         },
         'files': {
-                'level': 'INFO',
-                'class': 'logging.handlers.RotatingFileHandler',
-                'filename': os.path.join(BASE_DIR, "logs/all.log"),  # 日志文件的位置
-                'maxBytes': 300 * 1024 * 1024,
-                'backupCount': 10,
-                'formatter': 'verbose'
-            },
+            'level': 'INFO',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': os.path.join(BASE_DIR, "logs/all.log"),  # 日志文件的位置
+            'maxBytes': 300 * 1024 * 1024,
+            'backupCount': 10,
+            'formatter': 'verbose'
+        },
         'online': {
             'level': 'INFO',
             'class': 'logging.handlers.RotatingFileHandler',
@@ -171,13 +171,13 @@ LOGGING = {
             'formatter': 'verbose'
         },
         'management': {
-                    'level': 'DEBUG',
-                    'class': 'logging.handlers.RotatingFileHandler',
-                    'filename': os.path.join(BASE_DIR, "logs/management.log"),  # 日志文件的位置
-                    'maxBytes': 300 * 1024 * 1024,
-                    'backupCount': 10,
-                    'formatter': 'verbose'
-                },
+            'level': 'DEBUG',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': os.path.join(BASE_DIR, "logs/management.log"),  # 日志文件的位置
+            'maxBytes': 300 * 1024 * 1024,
+            'backupCount': 10,
+            'formatter': 'verbose'
+        },
     },
     'loggers': {
         'django': {
@@ -194,7 +194,7 @@ LOGGING = {
             'handlers': ['console', 'management'],
             'propagate': True,
             'level': 'INFO',
-                },
+        },
     }
 }
 
@@ -216,7 +216,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
 
@@ -231,19 +230,19 @@ USE_L10N = True
 USE_TZ = True
 
 LANGUAGES = (
-       ('en', 'English'),
-       ('zh-hans', '中文简体'),
-    )
+    ('en', 'English'),
+    ('zh-hans', '中文简体'),
+)
 
 LOCALE_PATHS = (
-        os.path.join(BASE_DIR, 'locale'),
-    )
+    os.path.join(BASE_DIR, 'locale'),
+)
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS  = [ os.path.join(BASE_DIR,"static")]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 STATIC_ROOT = os.path.join(BASE_DIR, 'common_static')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

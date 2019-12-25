@@ -2,13 +2,13 @@ from django.db import transaction
 from django.shortcuts import render
 from django.template.loader import get_template
 from django.utils.decorators import method_decorator
-from django.http import JsonResponse, QueryDict, HttpResponse
+from django.http import JsonResponse, HttpResponse
 from django.views import View
 from django.views.decorators.csrf import csrf_exempt
 from django.utils import timezone
 
 from online.constants import PER_PAGE_GOODS_COUNT
-from online.order.models import Order, Order_Goods, OrderAddress
+from online.order.models import Order, Order_Goods, OrderAddress, OrderStatusLog
 from online.goods.models import Goods, Image
 from management.user.models import User
 from online.logger import online_logger
@@ -19,8 +19,7 @@ import management.user
 
 import ast
 import random
-from datetime import datetime, timedelta
-import json
+from datetime import datetime
 
 
 # 【渲染】订单页面（地址）
@@ -52,7 +51,7 @@ class OrderAddressView(View):
                 is_null = 1
             except Exception as e:
                 online_logger.error(e)
-                return JsonResponse({"errcode": 4, "errmsg": "数据库错误"})
+                return JsonResponse({"errcode": "102", "errmsg": "db error"})
 
             orders = Order.objects.filter(user_id=user_id)
             order_quantity = len(orders)
@@ -74,7 +73,7 @@ class OrderAddressView(View):
                                       "description_en": good_description_en, "image": good_image})
                 except Exception as e:
                     online_logger.error(e)
-                    return JsonResponse({"errcode": 10, "errmsg": "数据库错误"})
+                    return JsonResponse({"errcode": "102", "errmsg": "db error"})
 
             user_info = {"name": name, "province": province, "city": city, "district": district,
                          "road": road, "phone_number": phone_number, "postcode": postcode, "is_null": is_null}
@@ -85,7 +84,7 @@ class OrderAddressView(View):
             return HttpResponse(res)
 
         else:
-            JsonResponse({"errcode": 6, "errmsg": "用户不存在"})
+            JsonResponse({"errcode": 101, "errmsg": "user_id is None"})
 
 
 # 订单详情
@@ -101,7 +100,7 @@ class OrdersDetailView(View):
                 goods = Order_Goods.objects.filter(order_id=order.id)
             except Exception as e:
                 online_logger.error(e)
-                return JsonResponse({"errcode": 13, "errmsg": "数据库错误"})
+                return JsonResponse({"errcode": 102, "errmsg": "db error"})
             if goods != '':
                 good_dic = []
                 for good in goods:
@@ -118,9 +117,9 @@ class OrdersDetailView(View):
                 data = tpl.render(res)
                 return JsonResponse({'errcode': 0, 'data': data})
             else:
-                return JsonResponse({"errcode": 13, "errmsg": "商品不存在"})
+                return JsonResponse({"errcode": 110, "errmsg": "goods not exist"})
         else:
-            return JsonResponse({'errcode': 4, 'errmsg': "订单不存在"})
+            return JsonResponse({'errcode': 111, 'errmsg': "order not exist"})
 
 
 # 【渲染】订单列表
@@ -135,7 +134,7 @@ class OrdersListView(View):
             status_query = int(status_query)
         except ValueError as e:
             online_logger.error(e)
-            return JsonResponse({'errcode': 1, 'errmsg': "状态码错误"})
+            return JsonResponse({'errcode': 101, 'errmsg': "params error"})
         try:
             if status_query == 0:
                 orders_total = orders.order_by('-order_date')
@@ -145,7 +144,7 @@ class OrdersListView(View):
 
         except Exception as e:
             online_logger.error(e)
-            return JsonResponse({'errcode': 4, 'errmsg': "数据格式错误"})
+            return JsonResponse({'errcode': 101, 'errmsg': "params error"})
         order_count = orders_total.count()
 
         if order_count > PER_PAGE_GOODS_COUNT:
@@ -168,7 +167,7 @@ class OrdersListView(View):
                 goods = Order_Goods.objects.filter(order_id=order.id)
             except Exception as e:
                 online_logger.error(e)
-                return JsonResponse({"errcode": 111, "errmsg": "数据库错误"})
+                return JsonResponse({"errcode": 102, "errmsg": "db error"})
             if goods != '':
                 for good in goods:
                     good_id = good.goods_id
@@ -182,7 +181,7 @@ class OrdersListView(View):
                     good_dic.append({"id": good_id, "quantity": quantity, "name_en": good_name_en, "price": good_price,
                                      "description_en": good_description_en, "image": good_image})
             else:
-                return JsonResponse({'errcode': 112, 'errmsg': "商品不存在"})
+                return JsonResponse({'errcode': 110, 'errmsg': "goods not exist"})
         else:
             order_dic = []
             good_dic = []
@@ -207,11 +206,14 @@ class OrderCreateView(View):
             goods = ast.literal_eval(request.POST.get('goods'))
         except Exception as e:
             online_logger.error(e)
-            return JsonResponse({"errcode": 10, "errmsg": "订单信息不完整"})
+            return JsonResponse({"errcode": 101, "errmsg": "params not all"})
 
         user_id = request.session.get("user_id", None)
         time = timezone.localtime(timezone.now()).strftime("%Y-%m-%d")
-        order_no = random.randint(0, 9999999999)
+
+        i = datetime.now()
+        order_no = "0000" + str(i.year) + str(i.month) + str(i.day) + str(i.hour) + str(i.minute) + str(
+            i.second) + random.randint(0000, 9999)
         status = 0
         total = 0
 
@@ -225,25 +227,25 @@ class OrderCreateView(View):
                                          address=order_address, user=User.objects.get(id=user_id))
         except Exception as e:
             online_logger.error(e)
-            return JsonResponse({"errcode": 3, "errmsg": "数据格式错误"})
+            return JsonResponse({"errcode": 101, "errmsg": "params error"})
 
         for good in goods:
-            goods_id = good['id']
+            goods_id = good['good_id']
             good_count = good['good_count']
             try:
                 Goodgoods = Goods.objects.select_for_update().get(id=goods_id)
             except Goods.DoesNotExist as e:
                 transaction.savepoint_rollback(save_id)
                 online_logger.error(e)
-                return JsonResponse({'errcode': 2, 'errmsg': "商品信息错误"})
+                return JsonResponse({'errcode': 110, 'errmsg': "goods not exist"})
             except Exception as e:
                 online_logger.error(e)
-                return JsonResponse({'errcode': 2, 'errmsg': '数据库错误'})
+                return JsonResponse({'errcode': 102, 'errmsg': 'db error'})
             count = int(good_count)
 
             if Goodgoods.stock < count:
                 transaction.savepoint_rollback(save_id)
-                return JsonResponse({'errcode': 4, 'errmsg': "库存不足"})
+                return JsonResponse({'errcode': 112, 'errmsg': "stock not enough"})
 
             name_en = Goodgoods.name_en
             on_price = Goodgoods.on_price
@@ -260,8 +262,11 @@ class OrderCreateView(View):
                                        description_en=description_en, img=good_img)
             Order.objects.filter(id=order.id).update(total=total)
 
+        time = timezone.localtime(timezone.now()).strftime("%Y-%m-%d %H:%M:%S")
+        OrderStatusLog.objects.create(order_no=order_no, status=0, user_id=user_id, change_date=time)
+
         href = "http://10.168.2.111:8000/orders/{order_id}/pay/".format(order_id=order.id)
-        return JsonResponse({"errcode": 0, "data": {"result": "订单创建成功", "href": href}})
+        return JsonResponse({"errcode": 0, "data": {"result": "ordered success", "href": href}})
 
 
 # 翻页
@@ -277,7 +282,7 @@ class OrdersOffsetView(View):
             status_query = int(status_query)
         except ValueError as e:
             online_logger.error(e)
-            return JsonResponse({'errcode': 1, 'errmsg': "跳过条数格式错误"})
+            return JsonResponse({'errcode': 101, 'errmsg': "params error"})
         try:
             if status_query == 0:
                 orders_total = Order.objects.filter(user_id=user_id).order_by('-order_date')
@@ -286,7 +291,7 @@ class OrdersOffsetView(View):
             orders = orders_total[offset:offset + PER_PAGE_GOODS_COUNT]
         except Exception as e:
             online_logger.error(e)
-            return JsonResponse({'errcode': 4, 'errmsg': "数据格式错误"})
+            return JsonResponse({'errcode': 102, 'errmsg': "db error"})
 
         if orders.count() > offset + PER_PAGE_GOODS_COUNT:
             more = 'true'
@@ -326,24 +331,23 @@ class UserAddressView(View):
             phone_number = request.POST.get('phone_number')
         except Exception as e:
             online_logger.error(e)
-            return JsonResponse({"errcode": 10, "errmsg": "订单信息不完整"})
+            return JsonResponse({"errcode": 101, "errmsg": "params not all"})
         try:
-            UserAddress.objects.get(user_id=user_id)
             UserAddress.objects.filter(user_id=user_id).update(name=name, province=province, road=road,
                                                                city=city, district=district, postcode=postcode,
                                                                phone_number=phone_number)
-            return JsonResponse({"errcode": 0, "data": {"result": "地址修改成功"}})
+            return JsonResponse({"errcode": 0, "errmsg": "updated success"})
         except management.user.models.UserAddress.DoesNotExist:
             try:
                 UserAddress.objects.create(user_id=user_id, name=name, province=province, road=road,
                                            city=city, district=district, postcode=postcode, phone_number=phone_number)
-                return JsonResponse({"errcode": 0, "data": {"result": "地址保存成功"}})
+                return JsonResponse({"errcode": 0, "data": "created success"})
             except Exception as e:
                 online_logger.error(e)
-                return JsonResponse({"errcode": 4, "errmsg": "数据库错误"})
+                return JsonResponse({"errcode": 102, "errmsg": "db error"})
         except Exception as e:
             online_logger.error(e)
-            return JsonResponse({"errcode": 3, "errmsg": "数据格式错误"})
+            return JsonResponse({"errcode": 102, "errmsg": "db error"})
 
 
 # 【渲染】订单页面（地址）
@@ -366,7 +370,7 @@ class PayOrder(View):
                 order = Order.objects.filter(id=order_id).update(status=1)
                 order.save()
                 index_href = "http://10.168.2.111:8000/index/"
-                return JsonResponse({"errcode": 0, "errmsg": "订单支付成功", "href": index_href})
+                return JsonResponse({"errcode": 0, "errmsg": "pay success", "href": index_href})
             except Exception as e:
                 online_logger.error(e)
-                return JsonResponse({"errcode": 4, "errmsg": "数据库错误"})
+                return JsonResponse({"errcode": 102, "errmsg": "db error"})

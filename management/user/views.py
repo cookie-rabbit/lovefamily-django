@@ -9,15 +9,16 @@ from django.shortcuts import render
 # Create your views here.
 from django.utils.decorators import method_decorator
 from django.views import View
+from django.views.decorators.csrf import csrf_exempt
 
 from management.constants import PER_PAGE_USER_COUNT
-from management.user.models import User
+from management.user.models import User, UserAddress
 from management.logger import management_logger
 from utils.decorator import admin_auth
 
 
 class LoginView(View):
-
+    @method_decorator(csrf_exempt)
     def post(self, request):
         """管理员登录"""
         data = json.loads(request.body.decode())
@@ -43,12 +44,13 @@ class LoginView(View):
 
 
 class UsersView(View):
+    @method_decorator(csrf_exempt)
     @method_decorator(admin_auth)
     def get(self, request, user):
         """获取用户列表"""
         username = request.GET.get("username", None)
         phone = request.GET.get("phone", None)
-        email = request.GET.get("email", None)
+        address_name = request.GET.get("addressFullName", None)
         page = request.GET.get("page", 1)
         try:
             page = int(page)
@@ -62,45 +64,47 @@ class UsersView(View):
         #     search_dict["phone"] = phone
         # if email:
         #     search_dict['email'] = email
-        try:
-            if username and phone and email:
-                users = User.objects.filter(email__contains=email).filter(phone__contains=phone).filter(
-                    username__contains=username)
-            elif username and phone:
-                users = User.objects.filter(username__contains=username).filter(phone__contains=phone)
-            elif username and email:
-                users = User.objects.filter(username__contains=username).filter(email__contains=email)
-            elif phone and email:
-                users = User.objects.filter(phone__contains=phone).filter(email__contains=email)
-            else:
-                users = User.objects.all()
-            total = len(users)
-        except Exception as e:
-            management_logger.error(e)
-            return JsonResponse({"errcode": "102", "errmsg": "db error"})
+        user_id = []
+        if address_name:
+            user_address = UserAddress.objects.filter(name__contains=address_name)
+            try:
+                if username and phone:
+                    users = User.objects.filter(id__in=user_id).filter(username__contains=username).filter(phone__contains=phone)
+                elif phone:
+                    users = User.objects.filter(id__in=user_id).filter(username__contains=phone)
+                elif username:
+                    users = User.objects.filter(id__in=user_id).filter(phone__contains=username)
+                else:
+                    users = User.objects.filter(id__in=user_id)
+            except Exception as e:
+                management_logger.error(e)
+                return JsonResponse({"errcode": "102", "errmsg": "db error"})
+        else:
+            users = User.objects.all()
+        total = len(users)
         paginator = Paginator(users, PER_PAGE_USER_COUNT)
         user_list = paginator.page(page)
-        page_num = paginator.num_pages
         result = []
         for user in user_list:
             info = {"id": user.id, "username": user.username, "email": user.email, "phone": user.phone,
                     "signup_date": user.signup_date, "status": user.status, "password": 111111}
             useraddress = list(
-                user.address.all().values('name', 'province', 'city', 'district', 'road', 'phone_number', 'postcode'))
+                user.address.all().values("name", "province", "city", "district", "road", "phone_number", "postcode"))
             if useraddress:
                 info.update(useraddress[0])
             result.append(info)
-        return JsonResponse({"errcode": "0", "data": result, "page_num": page_num, "total": total})
+        res = {"result": result, "total": total}
+        return JsonResponse({"errcode": "0", "data": res})
 
 
 class UserView(View):
-
+    @method_decorator(csrf_exempt)
     @method_decorator(admin_auth)
     def put(self, request, user, user_id):
         """修改用户密码和状态"""
         data = json.loads(request.body.decode())
         password = data.get("password", None)
-        status = data.get('status', True)
+        status = data.get("status", True)
         password = make_password(password)
         try:
             user = User.objects.get(id=user_id)

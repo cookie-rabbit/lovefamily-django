@@ -58,3 +58,15 @@ class Order_Goods(models.Model):
 
     class Meta:
         db_table = "Order_Goods"
+
+
+class OrderStatusLog(models.Model):
+    """订单状态修改历史表"""
+    order_no = models.CharField(max_length=40)
+    status = models.IntegerField()
+    user_id = models.CharField(max_length=40)
+    change_date = models.DateTimeField()
+
+    class Meta:
+        db_table = "OrderStatusLog"
+
