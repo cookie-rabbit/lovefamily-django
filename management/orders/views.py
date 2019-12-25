@@ -1,17 +1,18 @@
 from django.core.paginator import Paginator
 from django.db import transaction
 from django.http import JsonResponse, QueryDict
-from django.shortcuts import render
 from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.decorators.csrf import csrf_exempt
 
+from management.constants import PER_PAGE_ORDER_COUNT
 from management.logger import management_logger
 from management.user.models import User
 from online.logger import online_logger
-from online.order.models import Order,Order_Goods
+from online.order.models import Order, Order_Goods, OrderAddress
 
 from utils.decorator import admin_auth
+from itertools import chain
 
 
 # 修改订单状态
@@ -62,62 +63,129 @@ class OrdersView(View):
     def get(self, request, user):
         """获取订单列表"""
         username = request.GET.get("username", None)
-        order_no = request.GET.get("order_no", None)
-        email = request.GET.get("email", None)
+        order_no = request.GET.get("order_no", "d")
+        email = request.GET.get("email", "@")
         phone = request.GET.get("phone", None)
-        start_date = request.GET.get("start_date", '2000-01-01')
-        end_date = request.GET.get("end_date", '2999-12-12')
+        start_date = request.GET.get("start_date", "2000-01-01")
+        end_date = request.GET.get("end_date", "2999-12-31")
         page = request.GET.get("page", 1)
         try:
             page = int(page)
         except Exception as e:
             management_logger.error(e)
             return JsonResponse({"errcode": "101", "errmsg": "params errror"})
+        # try:
 
-        try:
-            aa = []
-            bb = []
-            cc = []
-            order_count = 0
-            if order_no:
-                pass
-            else:
-                if username and phone and email:
+        if username and phone:
+            users = User.objects.filter(email__contains=email).filter(phone__contains=phone).filter(
+                username__contains=username)
+        elif username:
+            users = User.objects.filter(email__contains=email).filter(username__contains=username)
+        elif phone:
+            users = User.objects.filter(email__contains=email).filter(username__contains=phone)
+        else:
+            users = User.objects.all()
 
-                    users = User.objects.filter(email__contains=email).filter(phone__contains=phone).filter(
-                        username__contains=username)
-                    for user in users:
-                        user_name = user.username
-                        user_email = user.email
-                        user_phone = user.phone
-                        orders = Order.objects.filter(user_id=user.id, date__range=(start_date, end_date))
-                        if orders != '':
-                            for order in orders:
-                                order_no = order.order_no
-                                order_total = order.total
-                                order_date = order.order_date
-                                order_status = order.status
-                                order_details = Order_Goods.objects.filter(order_id=order.id)
-                                for order_detail in order_details:
-                                    good_name = order_detail.name_en
-                                    good_description = order_detail.description_en
-                                    good_count = order_detail.quantity
-                                    order_count += good_count
-                                    good_price = order_detail.on_price
-                                    good_img = order_detail.img
-                                    '''还需要地址，并将数据进行拼接'''
+        if users != '':
+            orderss = []
+            user_id = []
+            for user in users:
+                user_id.append(user.id)
+            try:
+                orders = Order.objects.filter(user_id__in=user_id, order_date__range=[start_date, end_date]).filter(
+                    order_no__contains=order_no).order_by('-id')
+                total = len(orders)
+                paginator = Paginator(orders, PER_PAGE_ORDER_COUNT)
+                order_list = paginator.page(page)
+                page_num = paginator.num_pages
+                if orders != '':
+                    user_name = user.username
+                    user_email = user.email
+                    user_phone = user.phone
+                    for order in order_list:
+                        order_no = order.order_no
+                        order_total = order.total
+                        order_date = order.order_date
+                        order_status = order.status
+                        order_details = Order_Goods.objects.filter(order_id=order.id)
 
-                        else:
-                            pass
-
-                elif username and phone:
-                    users = User.objects.filter(username__contains=username).filter(phone__contains=phone)
-                elif username and email:
-                    users = User.objects.filter(username__contains=username).filter(email__contains=email)
-                elif phone and email:
-                    users = User.objects.filter(phone__contains=phone).filter(email__contains=email)
+                        order_count = 0
+                        for order_detail in order_details:
+                            good_count = order_detail.quantity
+                            order_count += good_count
+                        order_detail_res = {"order_no": order_no, "order_total": order_total,
+                                            "order_date": order_date,
+                                            "order_status": order_status, "order_quantity": order_count}
+                        user_res = {"user_name": user_name, "user_email": user_email, "user_phone": user_phone}
+                        com_res = {"user": user_res, "orders": order_detail_res}
+                        orderss.append(com_res)
+                    res = orderss
+                    return JsonResponse({"errcode": "0", "data": res, "total": total})
                 else:
-                    users = User.objects.all()
+                    return JsonResponse({"errcode": "0", "data": ''})
+            except Exception as e:
+                management_logger.error(e)
+                return JsonResponse({"errcode": "102", "errmsg": "db error"})
+        else:
+            return JsonResponse({"errcode": "0", "data": ""})
+
+
+class OrderDetailView(View):
+
+    @method_decorator(csrf_exempt)
+    @method_decorator(admin_auth)
+    def get(self, request, user):
+        """获取订单详情"""
+        order_no = request.GET.get("order_no", None)
+        try:
+            if order_no is not None:
+                orders = Order.objects.filter(order_no=order_no)
+                if orders != '':
+
+                    user_name = user.username
+                    user_email = user.email
+                    user_phone = user.phone
+                    order = orders[0]
+                    order_no = order.order_no
+                    order_total = order.total
+                    order_date = order.order_date
+                    order_status = order.status
+                    order_details = Order_Goods.objects.filter(order_id=order.id)
+                    goods = []
+
+                    order_count = 0
+                    for order_detail in order_details:
+                        good_name = order_detail.name_en
+                        good_description = order_detail.description_en
+                        good_count = order_detail.quantity
+                        order_count += good_count
+                        good_price = order_detail.on_price
+                        good_img = str(order_detail.img)
+                        '''还需要地址，并将数据进行拼接'''
+                        good_res = {"good_name": good_name, "good_description": good_description,
+                                    "good_count": good_count, "good_price": good_price,
+                                    "good_img": good_img}
+                        goods.append(good_res)
+                    order_add = OrderAddress.objects.get(id=order.address_id)
+                    name = order_add.name
+                    city = order_add.city
+                    district = order_add.district
+                    road = order_add.road
+                    postcode = order_add.postcode
+                    phone_num = order_add.phone_number
+                    province = order_add.province
+                    order_detail_res = {"order_no": order_no, "order_total": order_total,
+                                        "order_date": order_date,
+                                        "order_status": order_status, "order_quantity": order_count}
+                    add_res = {"name": name, "city": city, "district": district, "road": road,
+                               "postcode": postcode, "phone_num": phone_num, "province": province}
+                    order_res = {"goods": goods, "order": order_detail_res, "address": add_res}
+                    user_res = {"user_name": user_name, "user_email": user_email, "user_phone": user_phone}
+                    com_res = {"user": user_res, "orders": order_res}
+                    res = com_res
+                    return JsonResponse({"errcode": "0", "data": res})
+                else:
+                    return JsonResponse({"errcode": "0", "data": ''})
         except Exception as e:
             management_logger.error(e)
             return JsonResponse({"errcode": "102", "errmsg": "db error"})

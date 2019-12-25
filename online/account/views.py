@@ -35,7 +35,7 @@ class LoginView(View):
             if user:
                 user = user[0]
             else:
-                return JsonResponse({"errcode":"105","errmsg":"'please login after sign up"})
+                return JsonResponse({"errcode":"105","errmsg":"please login after sign up"})
         except Exception as e:
             online_logger.error(e)
             return JsonResponse({"errcode":"102","errmsg":"db error"})

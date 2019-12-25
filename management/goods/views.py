@@ -1,4 +1,6 @@
+import base64
 import json
+import time
 
 from django.core.paginator import Paginator
 from django.http import JsonResponse
@@ -85,24 +87,26 @@ class GoodsView(View):
         name = data.get("name", None)
         description = data.get("description", None)
         detail = data.get("detail", None)
-        image = data.get("images", None)
+        images = data.get("images", None)
         on_sale = data.get("on_sale", None)
-        added_time = data.get("added_time", None)
-        origin_price = data.get("price", None)
+        added_time = data.get("added_time", time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
+        origin_price = data.get("price", '')
         on_price = data.get("on_price", None)
         stock = data.get("stock", None)
-        virtual_sale = data.get("virtual_sale", None)
+        virtual_sale = data.get("virtual_sale", 0)
         is_hot = data.get("is_hot", None)
         is_new = data.get("is_new", None)
-        if name is None or on_sale is None or added_time is None or origin_price is None or on_price is None or stock is None \
-                or virtual_sale is None or is_hot is None or is_new is None:
+        if name is None or on_sale is None or on_price is None or stock is None \
+                or is_hot is None or is_new is None:
             return JsonResponse({"errcode": "101", "errmsg": "params error"})
         try:
             goods = Goods.objects.create(name_en=name, detail_en=detail, description_en=description, on_sale=on_sale,
                                          origin_price=origin_price, on_price=on_price,
                                          added_time=added_time, stock=stock, virtual_sale=virtual_sale, is_hot=is_hot,
                                          is_new=is_new)
-            image = Image.objects.create(image='', goods=goods)
+            for image in images:
+                imgdata = base64.b64decode(image)
+                image = Image.objects.create(image='', goods=goods)
         except Exception as e:
             management_logger.error(e)
             return JsonResponse({"errcode": "102", "errmsg": "db error"})
@@ -161,20 +165,20 @@ class GoodsSettingView(View):
         """修改商品设置"""
         data = json.loads(request.body.decode())
         on_sale = data.get("on_sale", None)
-        added_time = data.get("added_time", None)
-        origin_price = data.get("price", None)
+        added_time = data.get("added_time", time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
+        on_price = data.get("price", None)
+        origin_price = data.get("origin_price", '')
         stock = data.get("stock", None)
-        virtual_sale = data.get("virtual_sale", None)
+        virtual_sale = data.get("virtual_sale", 0)
         is_hot = data.get("is_hot", None)
         is_new = data.get("is_new", None)
         print(on_sale, added_time, origin_price, stock, virtual_sale)
-        if on_sale is None or added_time is None or origin_price is None or stock is None \
-                or virtual_sale is None or is_hot is None or is_new is None:
+        if on_sale is None or stock is None or is_hot is None or is_new is None or on_price is None:
             return JsonResponse({"errcode": "101", "errmsg": "params error"})
         try:
             Goods.objects.filter(id=goods_id).update(on_sale=on_sale, added_time=added_time, origin_price=origin_price,
                                                      stock=stock, virtual_sale=virtual_sale, is_hot=is_hot,
-                                                     is_new=is_new)
+                                                     is_new=is_new, on_price=on_price)
         except Exception as e:
             management_logger.error(e)
             return JsonResponse({"errcode": "102", "errmsg": "db error"})
@@ -184,7 +188,7 @@ class GoodsSettingView(View):
 class CategoriesView(View):
     @method_decorator(admin_auth)
     def get(self, request, user):
-        """获取分类列表"""
+        """获取分类"""
         category = []
         try:
             cates = Category.objects.filter(super_category__isnull=True)
@@ -278,3 +282,49 @@ class StatusView(View):
             management_logger.error(e)
             return JsonResponse({"errcode": "102", "errmsg": "can not find good in db"})
         return JsonResponse({"errcode": "0", "errmsg": "update success"})
+
+
+class CategoriesListView(View):
+    @method_decorator(admin_auth)
+    def get(self, request, user):
+        """获取所有分类列表"""
+        category = []
+        try:
+            cates = Category.objects.all()
+        except Exception as e:
+            management_logger.error(e)
+            return JsonResponse({"errcode": "102", "errmsg": "db error"})
+        for cate in cates:
+            quantity = 0
+            parent_name = ''
+            if cate.super_category_id == '':
+                try:
+                    level = 1
+                    sub_cates = Category.objects.filter(super_category__id=cate.id)
+                    if len(sub_cates) > 0:
+                        for sub_cate in sub_cates:
+                            sub_quantity = len(Goods.objects.filter(category=sub_cate))
+                            quantity += sub_quantity
+                            # sub_cate_info.append({'id': sub_cate.id, 'name': sub_cate.name, "quantity": sub_quantity})
+                    quantity += len(Goods.objects.filter(category=cate))
+                except Exception as e:
+                    management_logger.error(e)
+                    return JsonResponse({"errcode": "102", "errmsg": "db error"})
+            else:
+                try:
+                    level = 2
+                    parent_name = ''
+                    super_cates = Category.objects.filter(id=cate.super_category_id)
+                    quantity = len(Goods.objects.filter(category=cate.id))
+                    if len(super_cates) > 0:
+                        parent_name = super_cates.name
+                        # sub_cate_info.append({'id': sub_cate.id, 'name': sub_cate.name, "quantity": sub_quantity})
+                    else:
+                        return JsonResponse({"errcode": "102", "errmsg": "the sub_category has no super_category"})
+                except Exception as e:
+                    management_logger.error(e)
+                    return JsonResponse({"errcode": "102", "errmsg": "db error"})
+            category.append(
+                {"category_id": cate.id, "category_name": cate.name, "goods_total": quantity, "level": level,
+                 "parent_name": parent_name})
+        return JsonResponse({"errcode": 0, "data": category})

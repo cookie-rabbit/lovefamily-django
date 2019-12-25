@@ -74,11 +74,13 @@ class UsersView(View):
                 users = User.objects.filter(phone__contains=phone).filter(email__contains=email)
             else:
                 users = User.objects.all()
+            total = len(users)
         except Exception as e:
             management_logger.error(e)
             return JsonResponse({"errcode": "102", "errmsg": "db error"})
         paginator = Paginator(users, PER_PAGE_USER_COUNT)
         user_list = paginator.page(page)
+        page_num = paginator.num_pages
         result = []
         for user in user_list:
             info = {"id": user.id, "username": user.username, "email": user.email, "phone": user.phone,
@@ -88,7 +90,7 @@ class UsersView(View):
             if useraddress:
                 info.update(useraddress[0])
             result.append(info)
-        return JsonResponse({"errcode": "0", "data": result})
+        return JsonResponse({"errcode": "0", "data": result, "page_num": page_num, "total": total})
 
 
 class UserView(View):
