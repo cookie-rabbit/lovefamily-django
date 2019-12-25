@@ -1,12 +1,6 @@
-import json
-
-from django.contrib.auth.hashers import make_password
-from django.core.paginator import Paginator
-from django.db.models import Q, F
-from django.http import JsonResponse, HttpResponse
+from django.db.models import F
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
-# Create your views here.
-from django.template import Template, Context
 from django.template.loader import get_template
 from django.urls import reverse
 from django.views import View
