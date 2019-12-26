@@ -12,6 +12,7 @@ class Goods(models.Model):
     on_price = models.IntegerField(default=0)
     actual_sale = models.IntegerField()
     virtual_sale = models.IntegerField(default=0)
+    total_sale = models.IntegerField(default=0)
     on_sale = models.BooleanField()
     description_ch = models.CharField(max_length=500, null=True)
     description_en = models.CharField(max_length=500, null=True)

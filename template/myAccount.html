@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block css %}
-    <link rel="stylesheet/less" type="text/css" href="{% static 'assets/css/page/register.less' %}" />
+    <link rel="stylesheet/less" type="text/css" href="{% static 'assets/css/page/register.less' %}"/>
     <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/3.10.0-beta/less.min.js"></script>
 {% endblock %}
 
@@ -15,72 +15,39 @@
 
 {% block content %}
     <div class="registerContainer myAccountContainer">
-        <ul class="type">
-            <li class="current">My Account</li>
-            <!-- <li class="current">My Account</li> -->
-        </ul>
-        <div class="baseInfor">
-            <p class="name">
-                <span>Email</span>
-                <input type="text" value="{{ user.email }}" readonly="readonly">
-                <span class="star"></span>
-                <span class="tips"></span>
-            </p>
-            <p class="phone">
-                <span>Phone</span>
-                <input type="text" value="{{ user.phone }}" readonly="readonly">
-                <span class="star"></span>
-                <span class="tips"></span>
-            </p>
-            <p class="pass">
-                <span>Password</span>
-                <input type="password" value="{% if user.password %}******{% endif %}" readonly="readonly">
-                <span class="star"></span>
-                <span class="tips"></span>
-            </p>
-            <p class="repass">
-                <span>Re-Password</span>
-                <input type="password" value="{% if user.password %}******{% endif %}" readonly="readonly">
-                <span class="star"></span>
-                <span class="tips"></span>
-            </p>
-        </div>
-        <div class="hr"></div>
-        <div class="addressContent">
-            <p class="fullName">
-                <span>Full name</span>
-                <input type="text" value="{{ useraddress.name }}" readonly="readonly">
-            </p>
-            <p class="addressLine1">
-                <span>Address Line1</span>
-                <input type="text" value="{{ useraddress.road }}" readonly="readonly">
-            </p>
-            <p class="addressLine2">
-                <span>Address Line2</span>
-                <input type="text" value="{{ useraddress.district }}" readonly="readonly">
-            </p>
-            <p class="city">
-                <span>City</span>
-                <input type="text" value="{{ useraddress.city }}" readonly="readonly">
-            </p>
-            <p class="province">
-                <span class="state">State/Province/<br>Region</span>
-                <input type="text" value="{{ useraddress.province }}" readonly="readonly">
-            </p>
-            <p class="zip">
-                <span>ZIP</span>
-                <input type="text" value="{{ useraddress.postcode }}" readonly="readonly">
-            </p>
-            <p class="phoneNum">
-                <span>Phone number</span>
-                <input type="text" value="{{ useraddress.phone_number }}" readonly="readonly">
-            </p>
-            <p class="signUp">
-                <span></span>
-                <span class="submit toSubmit">Edit</span>
-            </p>
-        </div>
-
+    <ul class="type">
+        <li class="current">My Account</li>
+        <!-- <li class="current">My Account</li> -->
+    </ul>
+    <div class="baseInfor">
+        <p class="name">
+            <span>Email</span>
+            <input type="text" value="{{ user.email }}" readonly="readonly">
+            <span class="star"></span>
+            <span class="tips"></span>
+        </p>
+        <p class="phone">
+            <span>Phone</span>
+            <input type="text" value="{{ user.phone }}" readonly="readonly">
+            <span class="star"></span>
+            <span class="tips"></span>
+        </p>
+        <p class="pass">
+            <span>Password</span>
+            <input type="password" value="{% if user.password %}******{% endif %}" readonly="readonly">
+            <span class="star"></span>
+            <span class="tips"></span>
+        </p>
+        <p class="repass">
+            <span>Re-Password</span>
+            <input type="password" value="{% if user.password %}******{% endif %}" readonly="readonly">
+            <span class="star"></span>
+            <span class="tips"></span>
+        </p>
+        <p class="signUp">
+            <span></span>
+            <span class="submit toSubmit">Edit</span>
+        </p>
     </div>
 {% endblock %}
 

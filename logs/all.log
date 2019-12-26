@@ -3689,3 +3689,174 @@ WARNING 2019-12-25 18:46:12,105 log 228 Not Found: /api/goods/123
 WARNING 2019-12-25 18:46:12,106 basehttp 154 "GET /api/goods/123?current=1 HTTP/1.1" 404 9077
 WARNING 2019-12-25 18:47:36,304 log 228 Not Found: /goods/category{category_id}
 WARNING 2019-12-25 18:47:36,305 basehttp 154 "GET /goods/category%7Bcategory_id%7D?current= HTTP/1.1" 404 9122
+INFO 2019-12-25 18:52:51,695 autoreload 203 E:\lf-django\online\goods\views.py changed, reloading.
+INFO 2019-12-25 18:52:55,255 autoreload 576 Watching for file changes with StatReloader
+INFO 2019-12-25 18:56:41,269 basehttp 154 "GET /account/ HTTP/1.1" 200 5110
+INFO 2019-12-25 18:56:41,328 basehttp 154 "GET /static/assets/images/icon.png HTTP/1.1" 200 7011
+INFO 2019-12-25 18:56:41,354 basehttp 154 "GET /static/assets/javascript/common/base.js HTTP/1.1" 200 2175
+INFO 2019-12-25 18:56:41,356 basehttp 154 "GET /static/assets/javascript/libs/jquery-1.9.1.js HTTP/1.1" 200 128159
+INFO 2019-12-25 18:56:41,381 basehttp 154 "GET /static/assets/javascript/page/myAccount.js HTTP/1.1" 200 2101
+INFO 2019-12-25 18:56:41,384 basehttp 154 "GET /static/assets/javascript/common/header.js HTTP/1.1" 200 2668
+INFO 2019-12-25 18:58:33,651 basehttp 154 "POST /api/account/ HTTP/1.1" 200 46
+INFO 2019-12-25 18:58:39,563 basehttp 154 "POST /api/account/ HTTP/1.1" 200 46
+INFO 2019-12-25 18:58:42,032 basehttp 154 "GET /account/ HTTP/1.1" 200 5110
+INFO 2019-12-25 18:58:42,295 basehttp 154 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-25 19:02:11,433 basehttp 154 "GET /address/ HTTP/1.1" 200 4052
+INFO 2019-12-25 19:03:21,756 basehttp 154 "GET /api/address/ HTTP/1.1" 200 4052
+INFO 2019-12-25 19:03:44,626 basehttp 154 "POST /api/address/ HTTP/1.1" 200 40
+INFO 2019-12-25 19:13:00,340 basehttp 154 "GET /account/ HTTP/1.1" 200 3772
+INFO 2019-12-25 19:13:00,595 basehttp 154 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-25 19:13:52,968 basehttp 154 "GET /account/ HTTP/1.1" 200 3771
+INFO 2019-12-25 19:13:53,206 basehttp 154 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-25 19:14:11,654 basehttp 154 "GET /account/ HTTP/1.1" 200 3771
+INFO 2019-12-25 19:14:11,920 basehttp 154 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-25 19:21:04,478 autoreload 203 E:\lf-django\online\account\views.py changed, reloading.
+INFO 2019-12-25 19:21:08,196 autoreload 576 Watching for file changes with StatReloader
+INFO 2019-12-25 19:24:52,518 autoreload 203 E:\lf-django\online\account\views.py changed, reloading.
+INFO 2019-12-25 19:24:56,472 autoreload 576 Watching for file changes with StatReloader
+INFO 2019-12-25 19:27:46,739 basehttp 154 "GET /orders/address/ HTTP/1.1" 200 5166
+INFO 2019-12-25 19:27:46,782 basehttp 154 "GET /static/assets/css/page/myOrder.css HTTP/1.1" 200 21462
+INFO 2019-12-25 19:27:46,805 basehttp 154 "GET /static/assets/javascript/page/myOrder.js HTTP/1.1" 200 3808
+INFO 2019-12-25 19:28:17,792 basehttp 154 "GET /account/ HTTP/1.1" 200 3771
+INFO 2019-12-26 09:09:57,973 autoreload 576 Watching for file changes with StatReloader
+INFO 2019-12-26 10:36:22,215 basehttp 154 "GET /account/ HTTP/1.1" 200 3771
+INFO 2019-12-26 10:36:22,423 basehttp 154 "GET /static/assets/javascript/libs/jquery-1.9.1.js HTTP/1.1" 304 0
+INFO 2019-12-26 10:36:22,425 basehttp 154 "GET /static/assets/images/icon.png HTTP/1.1" 304 0
+INFO 2019-12-26 10:36:22,543 basehttp 154 "GET /static/assets/css/page/register.less HTTP/1.1" 304 0
+INFO 2019-12-26 10:36:22,551 basehttp 154 "GET /static/assets/javascript/common/base.js HTTP/1.1" 304 0
+INFO 2019-12-26 10:36:22,554 basehttp 154 "GET /static/assets/javascript/common/header.js HTTP/1.1" 304 0
+INFO 2019-12-26 10:36:22,559 basehttp 154 "GET /static/assets/javascript/page/myAccount.js HTTP/1.1" 304 0
+INFO 2019-12-26 10:36:22,595 basehttp 154 "GET /static/assets/css/common/base.less HTTP/1.1" 304 0
+INFO 2019-12-26 10:36:22,694 basehttp 154 "GET /static/assets/css/common/header.less HTTP/1.1" 304 0
+INFO 2019-12-26 10:36:22,713 basehttp 154 "GET /static/assets/css/common/reset.less HTTP/1.1" 304 0
+INFO 2019-12-26 10:36:22,749 basehttp 154 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-26 10:36:37,510 basehttp 154 "GET /index/ HTTP/1.1" 200 4824
+INFO 2019-12-26 10:36:37,547 basehttp 154 "GET /static/assets/css/page/index.css HTTP/1.1" 304 0
+INFO 2019-12-26 10:36:37,570 basehttp 154 "GET /static/assets/images/banner.png HTTP/1.1" 304 0
+INFO 2019-12-26 10:36:37,626 basehttp 154 "GET /static/assets/javascript/page/index.js HTTP/1.1" 304 0
+WARNING 2019-12-26 10:36:37,766 log 228 Not Found: /media/1
+WARNING 2019-12-26 10:36:37,768 basehttp 154 "GET /media/1 HTTP/1.1" 404 1741
+WARNING 2019-12-26 10:36:37,775 log 228 Not Found: /media/4
+WARNING 2019-12-26 10:36:37,777 basehttp 154 "GET /media/4 HTTP/1.1" 404 1741
+INFO 2019-12-26 10:36:39,053 basehttp 154 "GET /goods/1/ HTTP/1.1" 200 5267
+WARNING 2019-12-26 10:36:39,142 log 228 Not Found: /media/1
+INFO 2019-12-26 10:36:39,144 basehttp 154 "GET /static/assets/css/page/detail.css HTTP/1.1" 200 22522
+WARNING 2019-12-26 10:36:39,149 basehttp 154 "GET /media/1 HTTP/1.1" 404 1741
+INFO 2019-12-26 10:36:39,151 basehttp 154 "GET /static/assets/javascript/page/detail.js HTTP/1.1" 200 2502
+WARNING 2019-12-26 10:36:39,163 log 228 Not Found: /media/2
+WARNING 2019-12-26 10:36:39,169 basehttp 154 "GET /media/2 HTTP/1.1" 404 1741
+WARNING 2019-12-26 10:36:39,179 log 228 Not Found: /media/3
+WARNING 2019-12-26 10:36:39,204 basehttp 154 "GET /media/3 HTTP/1.1" 404 1741
+WARNING 2019-12-26 10:36:39,249 log 228 Not Found: /media/1
+WARNING 2019-12-26 10:36:39,250 basehttp 154 "GET /media/1 HTTP/1.1" 404 1741
+INFO 2019-12-26 10:44:39,618 basehttp 154 "GET /goods/1/ HTTP/1.1" 200 5269
+WARNING 2019-12-26 10:44:39,700 log 228 Not Found: /media/1
+WARNING 2019-12-26 10:44:39,712 log 228 Not Found: /media/2
+WARNING 2019-12-26 10:44:39,719 basehttp 154 "GET /media/1 HTTP/1.1" 404 1741
+WARNING 2019-12-26 10:44:39,720 basehttp 154 "GET /media/2 HTTP/1.1" 404 1741
+WARNING 2019-12-26 10:44:39,735 log 228 Not Found: /media/3
+WARNING 2019-12-26 10:44:39,737 basehttp 154 "GET /media/3 HTTP/1.1" 404 1741
+INFO 2019-12-26 10:44:39,856 basehttp 154 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-26 10:44:40,558 basehttp 154 "GET /index/ HTTP/1.1" 200 4818
+WARNING 2019-12-26 10:44:40,625 log 228 Not Found: /media/1
+WARNING 2019-12-26 10:44:40,625 basehttp 154 "GET /media/1 HTTP/1.1" 404 1741
+WARNING 2019-12-26 10:44:40,631 log 228 Not Found: /media/4
+WARNING 2019-12-26 10:44:40,632 basehttp 154 "GET /media/4 HTTP/1.1" 404 1741
+INFO 2019-12-26 10:44:46,924 basehttp 154 "GET /goods/category/3 HTTP/1.1" 301 0
+INFO 2019-12-26 10:44:47,005 basehttp 154 "GET /goods/category/3/ HTTP/1.1" 200 40
+INFO 2019-12-26 10:46:29,377 basehttp 154 "GET /goods/category/3/ HTTP/1.1" 200 40
+INFO 2019-12-26 10:50:49,148 basehttp 154 "GET /goods/category/3/ HTTP/1.1" 200 40
+INFO 2019-12-26 10:56:47,276 autoreload 203 E:\lf-django\online\goods\models.py changed, reloading.
+INFO 2019-12-26 10:56:59,423 autoreload 576 Watching for file changes with StatReloader
+INFO 2019-12-26 10:57:10,411 autoreload 203 E:\lf-django\online\goods\models.py changed, reloading.
+INFO 2019-12-26 10:57:13,790 autoreload 576 Watching for file changes with StatReloader
+INFO 2019-12-26 10:58:45,406 autoreload 203 E:\lf-django\online\goods\views.py changed, reloading.
+INFO 2019-12-26 10:58:48,959 autoreload 576 Watching for file changes with StatReloader
+INFO 2019-12-26 10:58:52,075 autoreload 203 E:\lf-django\online\goods\views.py changed, reloading.
+INFO 2019-12-26 10:58:55,528 autoreload 576 Watching for file changes with StatReloader
+INFO 2019-12-26 11:03:05,829 basehttp 154 "GET /goods/category/3/ HTTP/1.1" 200 4426
+WARNING 2019-12-26 11:03:05,952 log 228 Not Found: /media/1
+WARNING 2019-12-26 11:03:05,957 basehttp 154 "GET /media/1 HTTP/1.1" 404 1741
+INFO 2019-12-26 11:03:11,182 basehttp 154 "GET /api/goods/category/3/?current=1 HTTP/1.1" 200 579
+WARNING 2019-12-26 11:03:11,236 log 228 Not Found: /media/1
+WARNING 2019-12-26 11:03:11,240 basehttp 154 "GET /media/1 HTTP/1.1" 404 1741
+INFO 2019-12-26 11:03:27,211 autoreload 203 E:\lf-django\online\constants.py changed, reloading.
+INFO 2019-12-26 11:03:30,634 autoreload 576 Watching for file changes with StatReloader
+INFO 2019-12-26 11:03:33,715 autoreload 203 E:\lf-django\online\constants.py changed, reloading.
+INFO 2019-12-26 11:03:37,291 autoreload 576 Watching for file changes with StatReloader
+INFO 2019-12-26 11:03:39,650 basehttp 154 "GET /goods/category/3/ HTTP/1.1" 200 4426
+WARNING 2019-12-26 11:03:39,725 log 228 Not Found: /media/1
+WARNING 2019-12-26 11:03:39,727 basehttp 154 "GET /media/1 HTTP/1.1" 404 1741
+INFO 2019-12-26 11:03:39,885 basehttp 154 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-26 11:06:09,428 autoreload 203 E:\lf-django\online\goods\views.py changed, reloading.
+INFO 2019-12-26 11:06:13,091 autoreload 576 Watching for file changes with StatReloader
+INFO 2019-12-26 11:06:23,607 autoreload 203 E:\lf-django\online\goods\views.py changed, reloading.
+INFO 2019-12-26 11:06:27,024 autoreload 576 Watching for file changes with StatReloader
+INFO 2019-12-26 11:06:34,529 autoreload 203 E:\lf-django\online\goods\views.py changed, reloading.
+INFO 2019-12-26 11:06:38,332 autoreload 576 Watching for file changes with StatReloader
+INFO 2019-12-26 11:06:45,943 autoreload 203 E:\lf-django\online\goods\views.py changed, reloading.
+INFO 2019-12-26 11:06:50,062 autoreload 576 Watching for file changes with StatReloader
+INFO 2019-12-26 11:06:53,311 autoreload 203 E:\lf-django\online\goods\views.py changed, reloading.
+INFO 2019-12-26 11:06:56,795 autoreload 576 Watching for file changes with StatReloader
+INFO 2019-12-26 11:07:28,761 autoreload 203 E:\lf-django\online\goods\views.py changed, reloading.
+INFO 2019-12-26 11:07:32,892 autoreload 576 Watching for file changes with StatReloader
+INFO 2019-12-26 11:07:36,692 autoreload 203 E:\lf-django\online\goods\views.py changed, reloading.
+INFO 2019-12-26 11:07:40,431 autoreload 576 Watching for file changes with StatReloader
+INFO 2019-12-26 11:08:02,615 autoreload 203 E:\lf-django\online\goods\views.py changed, reloading.
+INFO 2019-12-26 11:08:06,016 autoreload 576 Watching for file changes with StatReloader
+INFO 2019-12-26 11:08:18,715 autoreload 203 E:\lf-django\online\goods\views.py changed, reloading.
+INFO 2019-12-26 11:08:22,273 autoreload 576 Watching for file changes with StatReloader
+INFO 2019-12-26 11:08:25,279 basehttp 154 "GET /goods/category/3/ HTTP/1.1" 200 40
+INFO 2019-12-26 11:08:38,494 autoreload 203 E:\lf-django\online\goods\views.py changed, reloading.
+INFO 2019-12-26 11:08:42,187 autoreload 576 Watching for file changes with StatReloader
+INFO 2019-12-26 11:08:46,232 basehttp 154 "GET /goods/category/3/ HTTP/1.1" 200 40
+INFO 2019-12-26 11:08:56,891 autoreload 203 E:\lf-django\online\goods\views.py changed, reloading.
+INFO 2019-12-26 11:09:00,386 autoreload 576 Watching for file changes with StatReloader
+INFO 2019-12-26 11:09:03,950 basehttp 154 "GET /goods/category/3/ HTTP/1.1" 200 4426
+WARNING 2019-12-26 11:09:04,068 log 228 Not Found: /media/4
+WARNING 2019-12-26 11:09:04,069 basehttp 154 "GET /media/4 HTTP/1.1" 404 1741
+INFO 2019-12-26 11:09:04,178 basehttp 154 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-26 11:10:07,259 autoreload 203 E:\lf-django\online\goods\views.py changed, reloading.
+INFO 2019-12-26 11:10:10,654 autoreload 576 Watching for file changes with StatReloader
+INFO 2019-12-26 11:10:16,718 basehttp 154 "GET /goods/category/3/ HTTP/1.1" 200 40
+INFO 2019-12-26 11:11:35,336 autoreload 203 E:\lf-django\online\goods\views.py changed, reloading.
+INFO 2019-12-26 11:11:38,748 autoreload 576 Watching for file changes with StatReloader
+INFO 2019-12-26 11:11:41,875 basehttp 154 "GET /goods/category/3/ HTTP/1.1" 200 4426
+WARNING 2019-12-26 11:11:41,950 log 228 Not Found: /media/1
+WARNING 2019-12-26 11:11:41,952 basehttp 154 "GET /media/1 HTTP/1.1" 404 1741
+INFO 2019-12-26 11:11:42,065 basehttp 154 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-26 11:12:06,961 basehttp 154 "GET /goods/category/3/ HTTP/1.1" 200 4426
+WARNING 2019-12-26 11:12:07,010 log 228 Not Found: /media/4
+WARNING 2019-12-26 11:12:07,011 basehttp 154 "GET /media/4 HTTP/1.1" 404 1741
+INFO 2019-12-26 11:12:07,114 basehttp 154 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-26 11:12:09,793 basehttp 154 "GET /api/goods/category/3/?current=1 HTTP/1.1" 200 579
+WARNING 2019-12-26 11:12:09,826 log 228 Not Found: /media/4
+WARNING 2019-12-26 11:12:09,828 basehttp 154 "GET /media/4 HTTP/1.1" 404 1741
+INFO 2019-12-26 11:12:13,052 basehttp 154 "GET /goods/2/ HTTP/1.1" 200 5157
+WARNING 2019-12-26 11:12:13,131 log 228 Not Found: /media/5
+WARNING 2019-12-26 11:12:13,133 basehttp 154 "GET /media/5 HTTP/1.1" 404 1741
+WARNING 2019-12-26 11:12:13,153 log 228 Not Found: /media/4
+WARNING 2019-12-26 11:12:13,155 basehttp 154 "GET /media/4 HTTP/1.1" 404 1741
+INFO 2019-12-26 11:13:28,568 basehttp 154 "GET /goods/2/ HTTP/1.1" 200 5157
+WARNING 2019-12-26 11:13:28,661 log 228 Not Found: /media/5
+WARNING 2019-12-26 11:13:28,667 log 228 Not Found: /media/4
+WARNING 2019-12-26 11:13:28,668 basehttp 154 "GET /media/4 HTTP/1.1" 404 1741
+WARNING 2019-12-26 11:13:28,672 basehttp 154 "GET /media/5 HTTP/1.1" 404 1741
+INFO 2019-12-26 11:14:30,790 basehttp 154 "GET /goods/2/ HTTP/1.1" 200 5058
+WARNING 2019-12-26 11:14:30,851 log 228 Not Found: /media/4
+WARNING 2019-12-26 11:14:30,852 basehttp 154 "GET /media/4 HTTP/1.1" 404 1741
+WARNING 2019-12-26 11:14:30,861 log 228 Not Found: /media/5
+WARNING 2019-12-26 11:14:30,862 basehttp 154 "GET /media/5 HTTP/1.1" 404 1741
+INFO 2019-12-26 11:14:30,934 basehttp 154 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-26 11:14:41,788 basehttp 154 "GET /goods/2/ HTTP/1.1" 200 5058
+WARNING 2019-12-26 11:14:41,853 log 228 Not Found: /media/4
+WARNING 2019-12-26 11:14:41,854 basehttp 154 "GET /media/4 HTTP/1.1" 404 1741
+WARNING 2019-12-26 11:14:41,860 log 228 Not Found: /media/5
+WARNING 2019-12-26 11:14:41,862 basehttp 154 "GET /media/5 HTTP/1.1" 404 1741
+INFO 2019-12-26 11:14:41,938 basehttp 154 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150
+INFO 2019-12-26 11:14:53,243 basehttp 154 "GET /goods/2/ HTTP/1.1" 200 5192
+WARNING 2019-12-26 11:14:53,307 log 228 Not Found: /media/4
+WARNING 2019-12-26 11:14:53,309 basehttp 154 "GET /media/4 HTTP/1.1" 404 1741
+WARNING 2019-12-26 11:14:53,313 log 228 Not Found: /media/5
+WARNING 2019-12-26 11:14:53,315 basehttp 154 "GET /media/5 HTTP/1.1" 404 1741
+INFO 2019-12-26 11:14:53,404 basehttp 154 "GET /static/assets/images/icon/loveFamily.ico HTTP/1.1" 200 1150

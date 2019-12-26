@@ -30,7 +30,9 @@
 
             <div class="infors">
                 <h2>{{ goods.name }}</h2>
+                {% ifnotequal goods.origin_price 0%}
                 <p class="oriPrice">Price:&nbsp;$&nbsp; <span onclick="oriP">{{ goods.origin_price }}</span><span class="line"></span></p>
+                {% endifnotequal %}
                 <p class="realPrice">
                     Online Price:&nbsp;$&nbsp;<span class="realP">{{ goods.on_price }}</span>
                     <span class="quantity">

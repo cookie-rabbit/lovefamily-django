@@ -150,7 +150,7 @@ class MyAddressView(View):
             except Exception as e:
                 online_logger.error(e)
                 return JsonResponse({"errcode": "102", "errmsg": "db error"})
-            return JsonResponse({"errcode": "0", "result": "save success"})
+            return JsonResponse({"errcode": "0", "errmsg": "save success"})
         else:
             useraddress = user.address.all()
             try:
