@@ -104,13 +104,12 @@ class OrdersDetailView(View):
             if goods != '':
                 good_dic = []
                 for good in goods:
-                    good_id = good.goods_id
                     quantity = good.quantity
                     good_name_en = good.name_en
                     good_price = good.on_price
                     good_description_en = good.description_en
-                    good_image = str(Image.objects.filter(goods_id=good_id)[0].image)
-                    good_dic.append({"id": good_id, "quantity": quantity, "name_en": good_name_en, "price": good_price,
+                    good_image = str(good.img)
+                    good_dic.append({"quantity": quantity, "name_en": good_name_en, "price": good_price,
                                      "description_en": good_description_en, "image": good_image})
                 res = {"good_dic": good_dic}
                 tpl = get_template("orderDetail.html")
@@ -130,6 +129,7 @@ class OrdersListView(View):
         status_query = request.GET.get('status', 0)
 
         orders = Order.objects.filter(user_id=user_id).order_by('-order_date')
+        order_quantity = len(orders)
         try:
             status_query = int(status_query)
         except ValueError as e:
@@ -170,27 +170,28 @@ class OrdersListView(View):
                 return JsonResponse({"errcode": 102, "errmsg": "db error"})
             if goods != '':
                 for good in goods:
-                    good_id = good.goods_id
                     quantity = good.quantity
 
-                    good_detail = Goods.objects.get(id=good_id)
-                    good_name_en = good_detail.name_en
-                    good_price = good_detail.on_price
-                    good_description_en = good_detail.description_en
-                    good_image = str(Image.objects.filter(goods_id=good_id)[0].image)
-                    good_dic.append({"id": good_id, "quantity": quantity, "name_en": good_name_en, "price": good_price,
+                    good_name_en = good.name_en
+                    good_price = good.on_price
+                    good_description_en = good.description_en
+                    good_image = str(good.img)
+                    good_dic.append({"quantity": quantity, "name_en": good_name_en, "price": good_price,
                                      "description_en": good_description_en, "image": good_image})
             else:
                 return JsonResponse({'errcode': 110, 'errmsg': "goods not exist"})
         else:
             order_dic = []
             good_dic = []
-        res = {"order_dic": order_dic, "good_dic": good_dic, "status": status_query, "more": more}
+
+        cart_quantity = request.session.get("%s_cart" % user_id)
+        res = {"order_dic": order_dic, "good_dic": good_dic, "status": status_query, "more": more,
+               "cart_quantity": cart_quantity, "order_quantity": order_quantity}
         return render(request, "myOrders.html", context=res)
 
 
-# 创建订单
 class OrderCreateView(View):
+    # 创建订单
     @method_decorator(transaction.atomic)
     @method_decorator(csrf_exempt)
     @method_decorator(user_auth)
@@ -213,8 +214,8 @@ class OrderCreateView(View):
 
         i = datetime.now()
         order_no = "0000" + str(i.year) + str(i.month) + str(i.day) + str(i.hour) + str(i.minute) + str(
-            i.second) + random.randint(0000, 9999)
-        status = 0
+            i.second) + str(random.randint(0000, 9999))
+        status = 1
         total = 0
 
         save_id = transaction.savepoint()
@@ -263,14 +264,12 @@ class OrderCreateView(View):
             Order.objects.filter(id=order.id).update(total=total)
 
         time = timezone.localtime(timezone.now()).strftime("%Y-%m-%d %H:%M:%S")
-        OrderStatusLog.objects.create(order_no=order_no, status=0, user_id=user_id, change_date=time)
+        OrderStatusLog.objects.create(order_no=order_no, status=1, user_id=user_id, change_date=time)
 
         href = "http://10.168.2.111:8000/orders/{order_id}/pay/".format(order_id=order.id)
         return JsonResponse({"errcode": 0, "data": {"result": "ordered success", "href": href}})
 
-
-# 翻页
-class OrdersOffsetView(View):
+    # 翻页
     @method_decorator(user_auth)
     def get(self, request, user):
         user_id = request.session.get("user_id", None)

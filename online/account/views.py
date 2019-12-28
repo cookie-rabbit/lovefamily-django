@@ -92,7 +92,7 @@ class UserView(View):
 
     @method_decorator(user_auth)
     def post(self, request, user):
-        username = request.POST.get("username", None)
+        username = request.POST.get("username", '')
         email = request.POST.get("email", None)
         if email:
             if not re.match(r'^[0-9a-zA-Z_]{0,19}@[0-9a-zA-Z]{1,13}\.(com|cn|net){1,3}$', email):

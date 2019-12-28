@@ -18,8 +18,9 @@ from utils.decorator import admin_auth
 
 
 class LoginView(View):
+    @method_decorator(admin_auth)
     @method_decorator(csrf_exempt)
-    def post(self, request):
+    def post(self, user, request):
         """管理员登录"""
         data = json.loads(request.body.decode())
         username = data.get("username", None)
@@ -57,30 +58,41 @@ class UsersView(View):
         except Exception as e:
             management_logger.error(e)
             return JsonResponse({"errcode": "101", "errmsg": "params errror"})
-        # search_dict = {}
-        # if username:
-        #     search_dict["username"] = username
-        # if phone:
-        #     search_dict["phone"] = phone
-        # if email:
-        #     search_dict['email'] = email
+
         user_id = []
         if address_name:
             user_address = UserAddress.objects.filter(name__contains=address_name)
+            for user_add in user_address:
+                user_id.append(user_add.user_id)
             try:
                 if username and phone:
-                    users = User.objects.filter(id__in=user_id).filter(username__contains=username).filter(phone__contains=phone)
+                    users = User.objects.filter(id__in=user_id).filter(username__contains=username).filter(
+                        phone__contains=phone)
                 elif phone:
-                    users = User.objects.filter(id__in=user_id).filter(username__contains=phone)
+                    users = User.objects.filter(id__in=user_id).filter(phone__contains=phone)
                 elif username:
-                    users = User.objects.filter(id__in=user_id).filter(phone__contains=username)
+                    users = User.objects.filter(id__in=user_id).filter(username__contains=username)
                 else:
                     users = User.objects.filter(id__in=user_id)
             except Exception as e:
                 management_logger.error(e)
                 return JsonResponse({"errcode": "102", "errmsg": "db error"})
+
         else:
             users = User.objects.all()
+            try:
+                if username and phone:
+                    users = users.filter(username__contains=username).filter(phone__contains=phone)
+                elif phone:
+                    users = users.filter(phone__contains=phone)
+                elif username:
+                    users = users.filter(username__contains=username)
+                else:
+                    pass
+            except Exception as e:
+                management_logger.error(e)
+                return JsonResponse({"errcode": "102", "errmsg": "db error"})
+
         total = len(users)
         paginator = Paginator(users, PER_PAGE_USER_COUNT)
         user_list = paginator.page(page)
@@ -93,7 +105,7 @@ class UsersView(View):
             if useraddress:
                 info.update(useraddress[0])
             result.append(info)
-        res = {"result": result, "total": total}
+        res = {"items": result, "total": total}
         return JsonResponse({"errcode": "0", "data": res})
 
 
@@ -117,8 +129,10 @@ class UserView(View):
         try:
             if password:
                 user.password = password
-            if status:
-                user.status = status
+            if str(status) == "True":
+                user.status = 1
+            else:
+                user.status = 0
             user.save()
         except Exception as e:
             management_logger.error(e)

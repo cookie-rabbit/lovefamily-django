@@ -7,7 +7,7 @@ from management import user
 
 class Order(models.Model):
     """订单表"""
-    order_no = models.CharField(max_length=20)  # 订单编号
+    order_no = models.CharField(max_length=40)  # 订单编号
     total = models.CharField(max_length=10)  # 总价
     order_date = models.DateField()  # 订单日期
     choices = (  # 订单状态列表
@@ -34,9 +34,9 @@ class OrderAddress(models.Model):
     name = models.CharField(max_length=40)
     province = models.CharField(max_length=80, default='')
     city = models.CharField(max_length=40, default='')
-    district = models.CharField(max_length=40, default='')
-    road = models.CharField(max_length=20, default='')
-    postcode = models.CharField(max_length=10)
+    district = models.CharField(max_length=80, default='')
+    road = models.CharField(max_length=80, default='')
+    postcode = models.CharField(max_length=20)
     phone_number = models.CharField(max_length=20)
 
     class Meta:
