@@ -168,16 +168,16 @@ class OrderDetailView(View):
                     status = put.get('status')
                 except Exception as e:
                     online_logger.error(e)
-                    return JsonResponse({"errcode": 111, "errmsg": "请求数据不全或格式错误"})
+                    return JsonResponse({"errcode": "101", "errmsg": "params errror"})
                 if int(status):
                     try:
                         order = Order.objects.get(order_no=order_no)
                     except Order.DoesNotExist as e:
                         online_logger.error(e)
-                        return JsonResponse({"errcode": 111, "errmsg": "订单不存在"})
+                        return JsonResponse({"errcode": "111", "errmsg": "order not exist"})
                     except Exception as e:
                         online_logger.error(e)
-                        return JsonResponse({"errcode": 111, "errmsg": "数据库错误"})
+                        return JsonResponse({"errcode": "102", "errmsg": "db error"})
                     order.status = status
                     order.save()
 
@@ -186,13 +186,13 @@ class OrderDetailView(View):
                     user_id = 6
                     OrderStatusLog.objects.create(order_no=order_no, status=status, user_id=user_id,
                                                   change_date=time)
-                    return JsonResponse({"errcode": 0, "errmsg": "订单状态修改成功"})
+                    return JsonResponse({"errcode": 0, "errmsg": "update success"})
                 else:
-                    return JsonResponse({"errcode": 8, "errmsg": "订单状态不正确"})
+                    return JsonResponse({"errcode": "101", "errmsg": "params errror"})
             else:
-                return JsonResponse({"errcode": 7, "errmsg": "未收到请求内容或请求方式错误"})
+                return JsonResponse({"errcode": "101", "errmsg": "params errror"})
         else:
-            return JsonResponse({"errcode": 6, "errmsg": "请求方式错误"})
+            return JsonResponse({"errcode": "101", "errmsg": "params errror"})
 
 
 class OrderLogsView(View):
