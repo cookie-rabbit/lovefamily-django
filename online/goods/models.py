@@ -8,7 +8,7 @@ class Goods(models.Model):
     """商品表"""
     name_ch = models.CharField(max_length=20, null=True)
     name_en = models.CharField(max_length=30, null=True)
-    origin_price = models.IntegerField(default=0)
+    origin_price = models.IntegerField(default=None, null=True)
     on_price = models.IntegerField(default=0)
     actual_sale = models.IntegerField(default=0)
     virtual_sale = models.IntegerField(default=0)
@@ -21,6 +21,7 @@ class Goods(models.Model):
     is_hot = models.BooleanField(default=False)
     is_new = models.BooleanField(default=False)
     added_time = models.DateTimeField(default=timezone.now)
+    super_category_id = models.CharField(max_length=10, null=True)
     category = models.ForeignKey('Category', on_delete=models.CASCADE, related_name='goods')
 
     class Meta:
@@ -46,6 +47,7 @@ class Category(models.Model):
     """商品种类表"""
     name = models.CharField(max_length=20)
     super_category = models.ForeignKey('self', null=True, on_delete=models.CASCADE)
+    disabled = models.IntegerField(default=0)
 
     class Meta:
         db_table = "Category"

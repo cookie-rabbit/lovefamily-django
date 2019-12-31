@@ -14,6 +14,7 @@ from online.constants import PER_PAGE_GOODS_COUNT, INDEX_GOODS_COUNT
 
 
 def index(request):
+    """首页"""
     category = []
     try:
         cates = Category.objects.filter(super_category__isnull=True)
@@ -69,7 +70,7 @@ def index(request):
 
 
 class GoodsTypeView(View):
-
+    """获取热销、新品"""
     def get(self, request, type):
         current = request.GET.get("current", 0)
         count = PER_PAGE_GOODS_COUNT if current != 0 else INDEX_GOODS_COUNT
@@ -110,7 +111,7 @@ class GoodsTypeView(View):
 
 
 class GoodsCategoryView(View):
-
+    """按分类获取商品"""
     def get(self, request, category_id):
         current = request.GET.get("current", 0)
         if current == 0:
@@ -156,7 +157,7 @@ class GoodsCategoryView(View):
 
 
 class GoodsCategoryTemplateView(View):
-
+    """商品类型模板"""
     def get(self, request, category_id):
         category = []
         try:
@@ -235,7 +236,7 @@ class GoodsCategoryTemplateView(View):
 
 
 class GoodsTemplateView(View):
-
+    """商品详情模板"""
     def get(self, request, goods_id):
         category = []
         try:

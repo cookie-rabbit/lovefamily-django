@@ -21,8 +21,10 @@ import ast
 import random
 from datetime import datetime
 
-
 # 【渲染】订单页面（地址）
+from weigan_shopping import settings
+
+
 class OrderAddressView(View):
     @method_decorator(user_auth)
     def get(self, request, user):
@@ -66,11 +68,12 @@ class OrderAddressView(View):
                     good_name_en = good_detail.name_en
                     good_price = good_detail.on_price
                     good_description_en = good_detail.description_en
-                    good_image = str(Image.objects.filter(goods_id=good_id)[0].image)
+                    good_image = Image.objects.filter(goods_id=good_id)
 
                     total = total + quantity * good_price
                     good_dict.append({"id": good_id, "quantity": quantity, "name_en": good_name_en, "price": good_price,
-                                      "description_en": good_description_en, "image": good_image})
+                                      "description_en": good_description_en,
+                                      "image": settings.URL_PREFIX + good_image[0].image.url})
                 except Exception as e:
                     online_logger.error(e)
                     return JsonResponse({"errcode": "102", "errmsg": "db error"})
@@ -108,9 +111,10 @@ class OrdersDetailView(View):
                     good_name_en = good.name_en
                     good_price = good.on_price
                     good_description_en = good.description_en
-                    good_image = str(good.img)
+                    good_image = Image.objects.filter(goods_id=good.id)
                     good_dic.append({"quantity": quantity, "name_en": good_name_en, "price": good_price,
-                                     "description_en": good_description_en, "image": good_image})
+                                     "description_en": good_description_en,
+                                     "image": settings.URL_PREFIX + good_image[0].image.url})
                 res = {"good_dic": good_dic}
                 tpl = get_template("orderDetail.html")
                 data = tpl.render(res)

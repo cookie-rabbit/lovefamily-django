@@ -16,9 +16,12 @@ from utils.decorator import admin_auth
 from itertools import chain
 import json
 
+from weigan_shopping import settings
+
 
 class OrdersView(View):
     """获取订单列表"""
+
     @method_decorator(csrf_exempt)
     @method_decorator(admin_auth)
     def get(self, request, user):
@@ -26,6 +29,7 @@ class OrdersView(View):
         username = request.GET.get("username", None)
         order_no = request.GET.get("order_no", "000")
         email = request.GET.get("email", "@")
+        status = request.GET.get("status", 0)
         phone = request.GET.get("phone", None)
         start_date = request.GET.get("start_date", "2000-01-01")
         end_date = request.GET.get("end_date", "2999-12-31")
@@ -42,7 +46,7 @@ class OrdersView(View):
         elif username:
             users = User.objects.filter(email__contains=email).filter(username__contains=username)
         elif phone:
-            users = User.objects.filter(email__contains=email).filter(username__contains=phone)
+            users = User.objects.filter(email__contains=email).filter(phone__contains=phone)
         elif email != '@':
             users = User.objects.filter(email__contains=email)
         else:
@@ -52,11 +56,22 @@ class OrdersView(View):
         if users != '':
             orderss = []
             user_id = []
+            try:
+                status = int(status)
+            except Exception as e:
+                management_logger.error(e)
+                return JsonResponse({"errcode": "101", "errmsg": "params error"})
             for user in users:
                 user_id.append(user.id)
             try:
-                orders = Order.objects.filter(user_id__in=user_id).filter(
-                    order_no__contains=order_no).filter(order_date__range=(start_date, end_date)).order_by('-id')
+                if status in [1, 2, 3, 4, 5]:
+                    orders = Order.objects.filter(user_id__in=user_id).filter(order_no__contains=order_no).filter(
+                        order_date__range=(start_date, end_date)).filter(status=status).order_by('-id')
+                elif status == 0:
+                    orders = Order.objects.filter(user_id__in=user_id).filter(order_no__contains=order_no).filter(
+                        order_date__range=(start_date, end_date)).order_by('-id')
+                else:
+                    return JsonResponse({"errcode": "101", "errmsg": "params error"})
                 total = len(orders)
                 paginator = Paginator(orders, PER_PAGE_ORDER_COUNT)
                 order_list = paginator.page(page)
@@ -96,6 +111,7 @@ class OrdersView(View):
 
 class OrderDetailView(View):
     """获取订单详情"""
+
     @method_decorator(csrf_exempt)
     @method_decorator(admin_auth)
     def get(self, request, user, order_no):
@@ -104,7 +120,6 @@ class OrderDetailView(View):
                 request = request
                 orders = Order.objects.filter(order_no=order_no)
                 if orders != '':
-
 
                     order = orders[0]
                     user = User.objects.get(id=order.user_id)
@@ -130,7 +145,7 @@ class OrderDetailView(View):
                         '''还需要地址，并将数据进行拼接'''
                         good_res = {"good_name": good_name, "good_description": good_description,
                                     "good_count": good_count, "good_price": good_price,
-                                    "good_img": good_img}
+                                    "good_img": settings.URL_PREFIX + '/media/' +good_img}
                         goods.append(good_res)
                     order_add = OrderAddress.objects.get(id=order.address_id)
                     name = order_add.name
@@ -157,6 +172,7 @@ class OrderDetailView(View):
             return JsonResponse({"errcode": "102", "errmsg": "db error"})
 
     """修改订单状态"""
+
     @method_decorator(transaction.atomic)
     @method_decorator(csrf_exempt)
     def put(self, request, order_no):

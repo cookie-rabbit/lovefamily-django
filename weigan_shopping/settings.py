@@ -67,6 +67,7 @@ CORS_ORIGIN_WHITELIST = (
 )
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
+DATA_UPLOAD_MAX_MEMORY_SIZE = 5242880
 withCredentials = True
 CORS_ALLOW_HEADERS = (
     'XMLHttpRequest',
@@ -128,6 +129,7 @@ CACHES = {
     },
 }
 SESSION_ENGINE = "django.contrib.sessions.backends.cached_db"
+SESSION_COOKIE_HTTPONLY = True
 SESSION_CACHE_ALIAS = "default"
 
 # 日志文件配置

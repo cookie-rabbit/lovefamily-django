@@ -18,7 +18,7 @@ from weigan_shopping import settings
 
 
 class LoginView(View):
-
+    """用户登录"""
     def post(self, request):
         username = request.POST.get("name", None)
         print(username)
@@ -50,7 +50,7 @@ class LoginView(View):
 
 
 class LogoutView(View):
-
+    """用户退出登录"""
     @method_decorator(user_auth)
     def get(self, request, user):
         del request.session['user_id']
@@ -63,6 +63,7 @@ class UserView(View):
 
     @method_decorator(user_auth)
     def get(self, request, user):
+        """获取用户信息"""
         # category = []
         # try:
         #     cates = Category.objects.filter(super_category__isnull=True)
@@ -92,6 +93,7 @@ class UserView(View):
 
     @method_decorator(user_auth)
     def post(self, request, user):
+        """修改用户信息"""
         username = request.POST.get("username", '')
         email = request.POST.get("email", None)
         if email:
@@ -120,6 +122,7 @@ class UserView(View):
 class MyAddressView(View):
     @method_decorator(user_auth)
     def get(self, request, user):
+        """获取用户地址"""
         context = {"user": user}
         useraddress = list(
             user.address.all().values('name', 'province', 'city', 'district', 'road', 'phone_number', 'postcode'))
@@ -137,6 +140,7 @@ class MyAddressView(View):
 
     @method_decorator(user_auth)
     def post(self, request, user):
+        """修改用户地址"""
         name = request.POST.get("name", None)
         road = request.POST.get("road", None)
         district = request.POST.get("district", None)
@@ -173,7 +177,7 @@ class MyAddressView(View):
 
 
 class SignUpView(View):
-
+    """注册"""
     def post(self, request):
         username = request.POST.get("username", None)
         email = request.POST.get("email", None)

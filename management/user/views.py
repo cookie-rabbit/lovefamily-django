@@ -1,15 +1,10 @@
 import json
-import re
 
 from django.contrib.auth.hashers import make_password
 from django.core.paginator import Paginator
-from django.http import HttpResponse, JsonResponse
-from django.shortcuts import render
-
-# Create your views here.
+from django.http import JsonResponse
 from django.utils.decorators import method_decorator
 from django.views import View
-from django.views.decorators.csrf import csrf_exempt
 
 from management.constants import PER_PAGE_USER_COUNT
 from management.user.models import User, UserAddress
@@ -18,9 +13,7 @@ from utils.decorator import admin_auth
 
 
 class LoginView(View):
-    @method_decorator(admin_auth)
-    @method_decorator(csrf_exempt)
-    def post(self, user, request):
+    def post(self, request):
         """管理员登录"""
         data = json.loads(request.body.decode())
         username = data.get("username", None)
@@ -41,14 +34,16 @@ class LoginView(View):
         if not user.check_password(password):
             return JsonResponse({"errcode": "104", "errmsg": "password error"})
         request.session['user_id'] = user.id
+        request.session.set_test_cookie()
         return JsonResponse({"errcode": "0", "errmsg": "login success"})
 
 
 class UsersView(View):
-    @method_decorator(csrf_exempt)
     @method_decorator(admin_auth)
     def get(self, request, user):
         """获取用户列表"""
+        if request.session.test_cookie_worked():
+            print(111)
         username = request.GET.get("username", None)
         phone = request.GET.get("phone", None)
         address_name = request.GET.get("addressFullName", None)
@@ -110,12 +105,11 @@ class UsersView(View):
 
 
 class UserView(View):
-    @method_decorator(csrf_exempt)
     @method_decorator(admin_auth)
     def put(self, request, user, user_id):
         """修改用户密码和状态"""
         data = json.loads(request.body.decode())
-        password = data.get("password", None)
+        password = data.get("pass", None)
         status = data.get("status", True)
         password = make_password(password)
         try:
