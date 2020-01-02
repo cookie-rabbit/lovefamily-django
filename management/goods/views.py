@@ -7,9 +7,8 @@ from django.db import transaction
 from django.http import JsonResponse
 from django.utils.decorators import method_decorator
 from django.views import View
-from django.views.decorators.csrf import csrf_exempt
 
-from management.constants import PER_PAGE_GOODS_COUNT
+from management.constants import PER_PAGE_GOODS_COUNT, PER_PAGE_CATAGORY_COUNT
 from management.logger import management_logger
 from online.goods.models import Goods, Category
 from online.goods.models import Image as Images
@@ -59,12 +58,10 @@ class GoodsView(View):
         except Exception as e:
             management_logger.error(e)
             return JsonResponse({"errcode": "102", "errmsg": "db error"})
+        total = len(goods)
         paginator = Paginator(goods, PER_PAGE_GOODS_COUNT)
         goods_list = paginator.page(page)
         names = []
-        for goods in goods_list:
-            bbb = goods.category.super_category
-            aaa = goods.category.super_category.name
         for goods in goods_list:
             name = goods.name_en
             names.append(name)
@@ -72,7 +69,7 @@ class GoodsView(View):
                    "category": goods.category.name, "super_category": goods.category.super_category.name,
                    "sale": goods.actual_sale + goods.virtual_sale, "stock": goods.stock, "on_sale": goods.on_sale} for
                   goods in goods_list]
-        return JsonResponse({"errcode": "0", "data": result})
+        return JsonResponse({"errcode": "0", "data": result, "total": total})
 
     @method_decorator(admin_auth)
     @method_decorator(transaction.atomic)
@@ -85,10 +82,16 @@ class GoodsView(View):
         images = data.get("image", None)
         on_sale = data.get("on_sale", None)
         added_time = data.get("added_time", time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
+        if added_time != '':
+            return JsonResponse({"errcode": "102", "errmsg": "added_time can't lower be null"})
         category_id = data.get("category_id", None)
         super_category_id = data.get("super_category_id", None)
         origin_price = data.get("price", 0)
+        if origin_price < 0:
+            return JsonResponse({"errcode": "102", "errmsg": "origin_price can't lower than 0"})
         on_price = data.get("on_price", None)
+        if on_price < 0:
+            return JsonResponse({"errcode": "102", "errmsg": "on_price can't lower than 0"})
         stock = data.get("stock", None)
         virtual_sale = data.get("virtual_sale", 0)
         is_hot = data.get("is_hot", None)
@@ -208,9 +211,20 @@ class GoodsDetailView(View):
                 """修改商品设置"""
                 data = json.loads(request.body.decode())
                 on_sale = data.get("on_sale", None)
-                added_time = data.get("added_time", time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
-                on_price = data.get("on_price", None)
-                origin_price = data.get("price", None)
+                time_now = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+                added_time = data.get("added_time", time_now)
+                if added_time is None:
+                    return JsonResponse({"errcode": "102", "errmsg": "must set the sale date"})
+                try:
+                    origin_price = float(data.get("price", 0))
+                    if origin_price < 0:
+                        return JsonResponse({"errcode": "102", "errmsg": "origin_price can't lower than 0"})
+                    on_price = float(data.get("on_price", None))
+                    if on_price < 0:
+                        return JsonResponse({"errcode": "102", "errmsg": "on_price can't lower than 0"})
+                except Exception as e:
+                    management_logger.error(e)
+                    return JsonResponse({"errcode": "102", "errmsg": "price and on_price must be a number"})
                 category_id = data.get("category_id", None)
                 stock = data.get("stock", None)
                 virtual_sale = data.get("virtual_sale", 0)
@@ -317,20 +331,22 @@ class CategoryView(View):
             try:
                 category = Category.objects.get(id=category_id)
                 category.name = category_name
-                length = len(Category.objects.filter(super_category_id=category_id))
-                if length == 0:
-                    parent_category = Category.objects.get(id=parent_category_id)
-                    if parent_category_id is None:
-                        category.super_category_id = None
-                    elif parent_category_id and parent_category_id and parent_category_id != category_id:
+
+                if parent_category_id is None:
+                    category.super_category_id = None
+                elif parent_category_id and category_id and parent_category_id != category_id:
+                    length = len(Category.objects.filter(super_category_id=category_id))
+                    if length == 0:
+                        parent_category = Category.objects.get(id=parent_category_id)
                         category.super_category = parent_category
                     else:
-                        return JsonResponse({"errcode": "113", "errmsg": "can't set it self as a partner category"})
-                    category.save()
+                        return JsonResponse(
+                            {"errcode": "114",
+                             "errmsg": "can't set a parent category as child category which is not null"})
                 else:
-                    return JsonResponse(
-                        {"errcode": "114",
-                         "errmsg": "can't set a partner category as child category which is not null"})
+                    return JsonResponse({"errcode": "113", "errmsg": "can't set it self as a parent category"})
+
+                category.save()
 
             except Category.DoesNotExist as e:
                 management_logger.error(e)
@@ -393,13 +409,17 @@ class CategoriesListView(View):
     @method_decorator(admin_auth)
     def get(self, request, user):
         """获取所有分类列表"""
+        page = request.GET.get("page", 1)
         category = []
         try:
             cates = Category.objects.all()
         except Exception as e:
             management_logger.error(e)
             return JsonResponse({"errcode": "102", "errmsg": "db error"})
-        for cate in cates:
+        total = len(cates)
+        paginator = Paginator(cates, PER_PAGE_CATAGORY_COUNT)
+        cates_list = paginator.page(page)
+        for cate in cates_list:
             quantity = 0
             parent_name = ''
             disabled = cate.disabled
@@ -437,4 +457,4 @@ class CategoriesListView(View):
             category.append(
                 {"category_id": cate.id, "category_name": cate.name, "goods_total": quantity, "category_level": level,
                  "parent_name": parent_name, "disabled": disabled})
-        return JsonResponse({"errcode": 0, "data": category})
+        return JsonResponse({"errcode": 0, "data": category, "total": total})

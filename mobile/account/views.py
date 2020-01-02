@@ -47,6 +47,7 @@ class LoginView(View):
             request.session['user_id'] = user.id
             request.session['%s_cart' % user.id] = quantity
             return JsonResponse({"errcode": "0", "errmsg": "login success"})
+
         elif type == 'signup':
             username = request.POST.get("username", None)
             email = request.POST.get("email", None)
@@ -73,7 +74,7 @@ class LoginView(View):
             password = make_password(password)
             try:
                 signup_date = timezone.localtime(timezone.now()).strftime("%Y-%m-%d %H:%M:%S")
-                user = User.objects.create(email=email, phone=phone, password=password, signup_date=signup_date)
+                user = User.objects.create(username=username, email=email, phone=phone, password=password, signup_date=signup_date)
             except Exception as e:
                 mobile_logger.error(e)
                 return JsonResponse({"errcode": "102", "errmsg": "db error"})

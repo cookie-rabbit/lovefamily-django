@@ -15,58 +15,9 @@ from online.constants import PER_PAGE_GOODS_COUNT, INDEX_GOODS_COUNT
 
 def index(request):
     """首页"""
-    category = []
-    try:
-        cates = Category.objects.filter(super_category__isnull=True)
-    except Exception as e:
-        online_logger.error(e)
-        return JsonResponse({"errcode": "102", "errmsg": "db error"})
-    for cate in cates:
-        try:
-            sub_cates = Category.objects.filter(super_category__id=cate.id)
-        except Exception as e:
-            online_logger.error(e)
-            return JsonResponse({"errcode": "102", "errmsg": "db error"})
-        category.append({"id": cate.id, "name": cate.name,
-                         "sub_cates": [{'id': sub_cate.id, 'name': sub_cate.name} for sub_cate in sub_cates if
-                                       sub_cates] if sub_cates else []})
-
-    count = INDEX_GOODS_COUNT
-    try:
-        total_goods = Goods.objects.filter(on_sale=True).order_by(F('actual_sale') + F('virtual_sale')).reverse()
-        goods = total_goods[:count]
-        if len(total_goods) > count:
-            more = True
-        else:
-            more = False
-    except Exception as e:
-        online_logger.error(e)
-        return JsonResponse({"errcode": "102", "errmsg": "db error"})
-    goods_list = []
-    if goods is None:
-        goods_list = []
-    else:
-        for single_goods in goods:
-            image = Image.objects.filter(goods=single_goods)
-            goods_list.append({"id": single_goods.id, "name": single_goods.name_en, "price": single_goods.on_price,
-                               "is_hot": single_goods.is_hot, "is_new": single_goods.is_new,
-                               "image": settings.URL_PREFIX + image[0].image.url})
-    user_id = request.session.get("user_id", None)
-    if user_id:
-        try:
-            user = User.objects.get(id=user_id)
-            orders = Order.objects.filter(user=user)
-            order_quantity = len(orders)
-        except Exception as e:
-            online_logger.error(e)
-            return JsonResponse({"errcode": "102", "errmsg": "db error"})
-        cart_quantity = request.session.get("%s_cart" % user_id, 0)
-        context = {"category": category, "goods": goods_list, "user": user, "cart_quantity": cart_quantity,
-                   "order_quantity": order_quantity, "more": more}
-    else:
-        context = {"category": category, "goods": goods_list, "user": "", "cart_quantity": 0, "order_quantity": 0,
-                   "more": more}
-    return render(request, "index.html", context=context)
+    img = settings.URL_PREFIX + "/media/index.jpg"
+    data = {"img":img}
+    return JsonResponse({"errcode": "0", "data": data})
 
 
 class GoodsTypeView(View):
