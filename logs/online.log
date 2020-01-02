@@ -57,3 +57,12 @@ ERROR 2019-12-26 10:50:49,142 views 192 Cannot resolve keyword 'sale' into field
 ERROR 2019-12-26 11:08:25,276 views 203 Cannot resolve keyword 'vitual_sale' into field. Choices are: actual_sale, added_time, cart, category, category_id, description_ch, description_en, detail_ch, detail_en, id, images, is_hot, is_new, name_ch, name_en, on_price, on_sale, origin_price, stock, total_sale, virtual_sale
 ERROR 2019-12-26 11:08:46,230 views 203 Cannot resolve keyword 'actual_sal' into field. Choices are: actual_sale, added_time, cart, category, category_id, description_ch, description_en, detail_ch, detail_en, id, images, is_hot, is_new, name_ch, name_en, on_price, on_sale, origin_price, stock, total_sale, virtual_sale
 ERROR 2019-12-26 11:10:16,715 views 203 Cannot resolve keyword '-virtual_sale' into field. Choices are: actual_sale, added_time, cart, category, category_id, description_ch, description_en, detail_ch, detail_en, id, images, is_hot, is_new, name_ch, name_en, on_price, on_sale, origin_price, stock, total_sale, virtual_sale
+ERROR 2019-12-26 13:48:46,471 views 229 (1406, "Data too long for column 'order_no' at row 1")
+ERROR 2019-12-26 13:48:48,230 views 229 (1406, "Data too long for column 'order_no' at row 1")
+ERROR 2019-12-26 13:48:57,739 views 229 (1406, "Data too long for column 'order_no' at row 1")
+ERROR 2019-12-26 13:50:14,714 views 229 (1406, "Data too long for column 'order_no' at row 1")
+ERROR 2019-12-28 11:39:20,428 views 167 'bytes' object has no attribute 'get'
+ERROR 2019-12-28 11:54:09,588 views 167 Expecting value: line 1 column 1 (char 0)
+ERROR 2019-12-28 11:54:25,380 views 167 Expecting value: line 1 column 1 (char 0)
+ERROR 2019-12-28 11:55:19,128 views 167 Expecting value: line 1 column 1 (char 0)
+ERROR 2019-12-28 13:50:00,944 views 283 invalid literal for int() with base 10: ''
