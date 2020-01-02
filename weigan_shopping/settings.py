@@ -127,9 +127,15 @@ CACHES = {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
         }
     },
+    "account": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://" + env.REDIS_HOST + ":" + env.REDIS_PORT + "/2",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    }
 }
 SESSION_ENGINE = "django.contrib.sessions.backends.cached_db"
-SESSION_COOKIE_HTTPONLY = True
 SESSION_CACHE_ALIAS = "default"
 
 # 日志文件配置

@@ -1,7 +1,4 @@
-import json
-
 from django.http import JsonResponse
-from django.shortcuts import render
 
 # Create your views here.
 from django.utils.decorators import method_decorator
@@ -11,36 +8,18 @@ from management.user.models import User
 from online.cart.models import Cart
 from online.goods.models import Goods, Image, Category
 from online.logger import online_logger
-from online.order.models import Order
 from utils.decorator import user_auth
 from weigan_shopping import settings
 
 
 class CartsView(View):
+    """ 获取购物车列表"""
 
     def get(self, request):
-        category = []
-        try:
-            cates = Category.objects.filter(super_category__isnull=True)
-        except Exception as e:
-            online_logger.error(e)
-            return JsonResponse({"errcode": "102", "errmsg": "db error"})
-        for cate in cates:
-            try:
-                sub_cates = Category.objects.filter(super_category__id=cate.id)
-            except Exception as e:
-                online_logger.error(e)
-                return JsonResponse({"errcode": "102", "errmsg": "db error"})
-            category.append({"id": cate.id, "name": cate.name,
-                             "sub_cates": [{'id': sub_cate.id, 'name': sub_cate.name} for sub_cate in sub_cates if
-                                           sub_cates] if sub_cates else []})
-
         user_id = request.session.get("user_id", None)
         if user_id:
             try:
                 user = User.objects.get(id=user_id)
-                orders = Order.objects.filter(user=user)
-                order_quantity = len(orders)
             except User.DoesNotExist as e:
                 online_logger.error(e)
                 return JsonResponse({"errcode": "102", "errmsg": "can not find user in db"})
@@ -63,16 +42,14 @@ class CartsView(View):
                                       "description": cart.goods.description_en, "price": cart.goods.on_price,
                                       "image": settings.URL_PREFIX + image[0].image.url, "quantity": cart.quantity})
                 print(sum)
-                context = {"user": user, "carts_list": cart_list, "cart_quantity": cart_quantity,
-                           "order_quantity": order_quantity, "sum": sum, "category": category}
+                data = {"carts_list": cart_list, "cart_quantity": cart_quantity, "sum": sum}
             else:
-                context = {"user": user, "cart_quantity": "", "order_quantity": order_quantity, "sum": 0,
-                           "category": category}
+                data = {"carts_list": "", "cart_quantity": "", "sum": 0}
         else:
-            context = {"sum": 0, "category": category}
-        print(context)
-        # return JsonResponse(context,safe=False)
-        return JsonResponse({"errcode": "0", "data": context})
+            data = {"carts_list": "", "cart_quantity": "", "sum": 0}
+        return JsonResponse({"errcode": "0", "data": data})
+
+    """新增到购物车"""
 
     @method_decorator(user_auth)
     def post(self, request, user):
@@ -108,10 +85,12 @@ class CartsView(View):
         request.session["%s_cart" % user.id] += quantity
         total_quantity = request.session["%s_cart" % user.id]
         return JsonResponse(
-            {"errcode": "0", "errmsg": "add to cart success", "data": {"quantity": str(total_quantity)}})
+            {"errcode": "0", "errmsg": "add to cart success", "data": {"quantity": total_quantity}})
 
 
 class CartView(View):
+    """修改购物车指定条目"""
+
     @method_decorator(user_auth)
     def post(self, request, user, cart_id):
         quantity = request.POST.get("quantity", None)
@@ -136,6 +115,8 @@ class CartView(View):
         request.session['%s_cart' % user.id] += sub_quantity
         total_quantity = request.session["%s_cart" % user.id]
         return JsonResponse({"errcode": "0", "errmsg": "update success", "data": {"quantity": total_quantity}})
+
+    """删除购物车指定条目"""
 
     @method_decorator(user_auth)
     def delete(self, request, user, cart_id):

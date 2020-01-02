@@ -56,17 +56,17 @@ class UsersView(View):
 
         user_id = []
         if address_name:
-            user_address = UserAddress.objects.filter(name__contains=address_name)
+            user_address = UserAddress.objects.filter(name__icontains=address_name)
             for user_add in user_address:
                 user_id.append(user_add.user_id)
             try:
                 if username and phone:
-                    users = User.objects.filter(id__in=user_id).filter(username__contains=username).filter(
+                    users = User.objects.filter(id__in=user_id).filter(username__icontains=username).filter(
                         phone__contains=phone)
                 elif phone:
                     users = User.objects.filter(id__in=user_id).filter(phone__contains=phone)
                 elif username:
-                    users = User.objects.filter(id__in=user_id).filter(username__contains=username)
+                    users = User.objects.filter(id__in=user_id).filter(username__icontains=username)
                 else:
                     users = User.objects.filter(id__in=user_id)
             except Exception as e:
@@ -77,11 +77,11 @@ class UsersView(View):
             users = User.objects.all()
             try:
                 if username and phone:
-                    users = users.filter(username__contains=username).filter(phone__contains=phone)
+                    users = users.filter(username__icontains=username).filter(phone__contains=phone)
                 elif phone:
                     users = users.filter(phone__contains=phone)
                 elif username:
-                    users = users.filter(username__contains=username)
+                    users = users.filter(username__icontains=username)
                 else:
                     pass
             except Exception as e:

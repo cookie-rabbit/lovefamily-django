@@ -17,7 +17,7 @@ from weigan_shopping import settings
 
 
 class CartsView(View):
-
+    """获取购物车列表"""
     def get(self,request):
         category = []
         try:

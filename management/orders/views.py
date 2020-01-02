@@ -42,9 +42,9 @@ class OrdersView(View):
 
         if username and phone:
             users = User.objects.filter(email__contains=email).filter(phone__contains=phone).filter(
-                username__contains=username)
+                username__icontains=username)
         elif username:
-            users = User.objects.filter(email__contains=email).filter(username__contains=username)
+            users = User.objects.filter(email__contains=email).filter(username__icontains=username)
         elif phone:
             users = User.objects.filter(email__contains=email).filter(phone__contains=phone)
         elif email != '@':

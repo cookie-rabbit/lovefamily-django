@@ -47,13 +47,13 @@ class GoodsView(View):
         print(search_dict)
         try:
             if search_dict and name:
-                goods = Goods.objects.filter(**search_dict).filter(name_en__contains=name)
+                goods = Goods.objects.filter(**search_dict).filter(name_en__icontains=name)
                 print(goods)
             elif search_dict:
                 goods = Goods.objects.filter(**search_dict)
                 print(goods)
             elif name:
-                goods = Goods.objects.filter(name_en__contains=name)
+                goods = Goods.objects.filter(name_en__icontains=name)
             else:
                 goods = Goods.objects.all().order_by('added_time')
         except Exception as e:
