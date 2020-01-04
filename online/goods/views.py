@@ -182,7 +182,7 @@ class GoodsCategoryTemplateView(View):
             current_category = Category.objects.get(id=category_id)
             if current_category.super_category:
                 total_goods = Goods.objects.filter(on_sale=True).filter(category__id=category_id).order_by(
-                    (-F('virtual_sale') - F('actual_sale')))
+                    (F('virtual_sale') + F('actual_sale')))
                 goods = total_goods[:count]
                 super_category = {"id": current_category.super_category.id,
                                   "name": current_category.super_category.name}
