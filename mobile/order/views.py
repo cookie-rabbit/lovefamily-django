@@ -27,7 +27,9 @@ from weigan_shopping import settings
 # 获取订单信息及地址
 class OrderAddressView(View):
     @method_decorator(user_auth)
-    def get(self, request, user):
+    def post(self, request, user):
+        carts_id = request.POST.get('carts_id')
+        carts_id = carts_id.split(",")
         user_id = user.id
         good_dict = []
         total = 0
@@ -55,7 +57,7 @@ class OrderAddressView(View):
                 online_logger.error(e)
                 return JsonResponse({"errcode": "102", "errmsg": "db error"})
 
-            carts = Cart.objects.filter(user_id=user_id)
+            carts = Cart.objects.filter(id__in=carts_id).filter(user_id=user_id)
             for cart in carts:
                 good_id = cart.goods_id
                 quantity = cart.quantity
@@ -200,7 +202,7 @@ class OrdersView(View):
             online_logger.error(e)
             return JsonResponse({"errcode": 101, "errmsg": "params not all"})
 
-        user_id = request.session.get("user_id", None)
+        user_id = user.id
         time = timezone.localtime(timezone.now()).strftime("%Y-%m-%d")
 
         i = datetime.now()

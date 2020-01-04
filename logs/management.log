@@ -110,3 +110,70 @@ ERROR 2019-12-30 18:24:04,983 views 56 Cannot resolve keyword 'status' into fiel
 ERROR 2019-12-30 18:24:11,473 views 56 Cannot resolve keyword 'status' into field. Choices are: actual_sale, added_time, cart, category, category_id, description_ch, description_en, detail_ch, detail_en, id, images, is_hot, is_new, name_ch, name_en, on_price, on_sale, origin_price, stock, super_category_id, virtual_sale
 ERROR 2019-12-30 18:24:36,914 views 56 Cannot resolve keyword 'status' into field. Choices are: actual_sale, added_time, cart, category, category_id, description_ch, description_en, detail_ch, detail_en, id, images, is_hot, is_new, name_ch, name_en, on_price, on_sale, origin_price, stock, super_category_id, virtual_sale
 ERROR 2019-12-30 18:25:11,694 views 56 ['’true‘ 必须为 True 或者 False。']
+ERROR 2020-01-02 15:46:50,400 views 203 (1406, "Data too long for column 'name_en' at row 1")
+ERROR 2020-01-02 15:46:53,915 views 203 (1406, "Data too long for column 'name_en' at row 1")
+ERROR 2020-01-02 15:46:54,645 views 203 (1406, "Data too long for column 'name_en' at row 1")
+ERROR 2020-01-02 15:46:55,870 views 203 (1406, "Data too long for column 'name_en' at row 1")
+ERROR 2020-01-02 15:46:56,967 views 203 (1406, "Data too long for column 'name_en' at row 1")
+ERROR 2020-01-02 15:47:41,249 views 203 (1406, "Data too long for column 'name_en' at row 1")
+ERROR 2020-01-02 15:47:45,483 views 203 (1406, "Data too long for column 'name_en' at row 1")
+ERROR 2020-01-02 16:14:35,053 views 119 (1048, "Column 'added_time' cannot be null")
+ERROR 2020-01-02 16:14:38,750 views 119 (1048, "Column 'added_time' cannot be null")
+ERROR 2020-01-02 16:14:42,634 views 119 (1048, "Column 'added_time' cannot be null")
+ERROR 2020-01-02 16:14:47,378 views 119 (1048, "Column 'added_time' cannot be null")
+ERROR 2020-01-02 16:14:51,392 views 119 (1048, "Column 'added_time' cannot be null")
+ERROR 2020-01-02 16:15:02,875 views 119 (1048, "Column 'added_time' cannot be null")
+ERROR 2020-01-02 16:15:08,074 views 119 (1048, "Column 'added_time' cannot be null")
+ERROR 2020-01-02 16:38:37,891 views 226 could not convert string to float: 
+ERROR 2020-01-02 16:38:48,705 views 243 (1048, "Column 'added_time' cannot be null")
+ERROR 2020-01-02 16:39:22,830 views 243 (1048, "Column 'added_time' cannot be null")
+ERROR 2020-01-02 16:40:19,875 views 243 (1048, "Column 'added_time' cannot be null")
+ERROR 2020-01-02 16:40:44,932 views 227 could not convert string to float: 
+ERROR 2020-01-02 16:40:44,935 views 227 could not convert string to float: 
+ERROR 2020-01-02 16:40:44,947 views 244 (1048, "Column 'added_time' cannot be null")
+ERROR 2020-01-02 16:40:45,467 views 227 could not convert string to float: 
+ERROR 2020-01-02 16:40:45,469 views 227 could not convert string to float: 
+ERROR 2020-01-02 16:40:49,760 views 227 could not convert string to float: 
+ERROR 2020-01-02 16:40:54,696 views 227 could not convert string to float: 
+ERROR 2020-01-02 16:46:09,611 views 244 (1048, "Column 'added_time' cannot be null")
+ERROR 2020-01-02 17:18:29,207 views 318 (1406, "Data too long for column 'name' at row 1")
+ERROR 2020-01-02 17:18:31,504 views 318 (1406, "Data too long for column 'name' at row 1")
+ERROR 2020-01-02 17:18:36,072 views 318 (1406, "Data too long for column 'name' at row 1")
+ERROR 2020-01-02 17:27:08,761 views 318 (1406, "Data too long for column 'name' at row 1")
+ERROR 2020-01-02 17:27:10,174 views 318 (1406, "Data too long for column 'name' at row 1")
+ERROR 2020-01-02 17:27:10,400 views 318 (1406, "Data too long for column 'name' at row 1")
+ERROR 2020-01-02 17:27:10,679 views 318 (1406, "Data too long for column 'name' at row 1")
+ERROR 2020-01-02 17:27:10,921 views 318 (1406, "Data too long for column 'name' at row 1")
+ERROR 2020-01-02 17:27:11,116 views 318 (1406, "Data too long for column 'name' at row 1")
+ERROR 2020-01-02 17:27:11,348 views 318 (1406, "Data too long for column 'name' at row 1")
+ERROR 2020-01-02 17:27:11,555 views 318 (1406, "Data too long for column 'name' at row 1")
+ERROR 2020-01-02 17:27:11,794 views 318 (1406, "Data too long for column 'name' at row 1")
+ERROR 2020-01-02 17:27:12,035 views 318 (1406, "Data too long for column 'name' at row 1")
+ERROR 2020-01-02 17:27:12,317 views 318 (1406, "Data too long for column 'name' at row 1")
+ERROR 2020-01-02 17:27:12,628 views 318 (1406, "Data too long for column 'name' at row 1")
+ERROR 2020-01-02 17:27:13,680 views 318 (1406, "Data too long for column 'name' at row 1")
+ERROR 2020-01-02 17:27:15,089 views 318 (1406, "Data too long for column 'name' at row 1")
+ERROR 2020-01-02 17:27:15,658 views 318 (1406, "Data too long for column 'name' at row 1")
+ERROR 2020-01-02 17:27:15,893 views 318 (1406, "Data too long for column 'name' at row 1")
+ERROR 2020-01-02 17:27:16,076 views 318 (1406, "Data too long for column 'name' at row 1")
+ERROR 2020-01-02 17:27:16,269 views 318 (1406, "Data too long for column 'name' at row 1")
+ERROR 2020-01-02 17:27:16,512 views 318 (1406, "Data too long for column 'name' at row 1")
+ERROR 2020-01-02 17:27:17,131 views 318 (1406, "Data too long for column 'name' at row 1")
+ERROR 2020-01-02 17:27:17,431 views 318 (1406, "Data too long for column 'name' at row 1")
+ERROR 2020-01-02 17:27:17,922 views 318 (1406, "Data too long for column 'name' at row 1")
+ERROR 2020-01-02 17:27:19,503 views 318 (1406, "Data too long for column 'name' at row 1")
+ERROR 2020-01-02 17:27:19,707 views 318 (1406, "Data too long for column 'name' at row 1")
+ERROR 2020-01-02 17:27:19,877 views 318 (1406, "Data too long for column 'name' at row 1")
+ERROR 2020-01-02 17:27:20,056 views 318 (1406, "Data too long for column 'name' at row 1")
+ERROR 2020-01-02 17:27:20,255 views 318 (1406, "Data too long for column 'name' at row 1")
+ERROR 2020-01-02 17:27:20,433 views 318 (1406, "Data too long for column 'name' at row 1")
+ERROR 2020-01-02 17:27:20,652 views 318 (1406, "Data too long for column 'name' at row 1")
+ERROR 2020-01-02 17:27:20,800 views 318 (1406, "Data too long for column 'name' at row 1")
+ERROR 2020-01-02 17:27:20,995 views 318 (1406, "Data too long for column 'name' at row 1")
+ERROR 2020-01-02 17:27:21,158 views 318 (1406, "Data too long for column 'name' at row 1")
+ERROR 2020-01-02 17:36:17,002 views 353 Category matching query does not exist.
+ERROR 2020-01-02 17:36:19,232 views 353 Category matching query does not exist.
+ERROR 2020-01-02 17:36:26,184 views 353 Category matching query does not exist.
+ERROR 2020-01-02 17:37:20,282 views 353 Category matching query does not exist.
+ERROR 2020-01-02 17:38:36,608 views 354 Category matching query does not exist.
+ERROR 2020-01-02 17:38:40,707 views 354 Category matching query does not exist.

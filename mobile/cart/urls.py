@@ -1,6 +1,6 @@
 from django.conf.urls import url
 
-from online.cart import views
+from mobile.cart import views
 
 urlpatterns = [
     url(r'^api/mobile/carts/', views.CartsView.as_view()),  # 新增，获取购物车列表

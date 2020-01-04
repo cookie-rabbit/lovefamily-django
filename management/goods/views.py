@@ -77,8 +77,13 @@ class GoodsView(View):
         """新增商品"""
         data = json.loads(request.body.decode())
         name = data.get("name", None)
+        if len(name) > 30:
+            return JsonResponse({"errcode": "115", "errmsg": "the content is too long for name"})
         description = data.get("description", None)
+        if len(description) > 500:
+            return JsonResponse({"errcode": "115", "errmsg": "the content is too long for description"})
         detail = data.get("detail", None)
+
         images = data.get("image", None)
         on_sale = data.get("on_sale", None)
         added_time = data.get("added_time", time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
@@ -298,6 +303,8 @@ class CategoriesView(View):
         """创建分类"""
         data = json.loads(request.body.decode())
         category_name = data.get("category_name", None)
+        if len(category_name) > 30:
+            return JsonResponse({"errcode": "115", "errmsg": "the content is too long for category name"})
         parent_category_id = data.get("parent_category_id", None)
         print(parent_category_id)
         if category_name is None:

@@ -31,13 +31,13 @@ class User(models.Model):
 
 class UserAddress(models.Model):
     """用户地址"""
-    name = models.CharField(max_length=20, null=True)
-    province = models.CharField(max_length=20, null=True)
-    city = models.CharField(max_length=20, null=True)
-    district = models.CharField(max_length=20, null=True)
-    road = models.CharField(max_length=20, null=True)
-    phone_number = models.CharField(max_length=20, null=True)
-    postcode = models.CharField(max_length=20, null=True)
+    name = models.CharField(max_length=40, null=True)
+    province = models.CharField(max_length=100, null=True)
+    city = models.CharField(max_length=100, null=True)
+    district = models.CharField(max_length=100, null=True)
+    road = models.CharField(max_length=100, null=True)
+    phone_number = models.CharField(max_length=40, null=True)
+    postcode = models.CharField(max_length=40, null=True)
     user = models.ForeignKey('User', on_delete=models.CASCADE, related_name='address')
 
     class Meta:

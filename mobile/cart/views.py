@@ -15,8 +15,9 @@ from weigan_shopping import settings
 class CartsView(View):
     """ 获取购物车列表"""
 
-    def get(self, request):
-        user_id = request.session.get("user_id", None)
+    @method_decorator(user_auth)
+    def get(self, request, user):
+        user_id = user.id
         if user_id:
             try:
                 user = User.objects.get(id=user_id)
@@ -39,7 +40,8 @@ class CartsView(View):
                     sum += cart.quantity * cart.goods.on_price
                     image = Image.objects.filter(goods=cart.goods)
                     cart_list.append({"id": cart.id, "goods_id": cart.goods.id, "name": cart.goods.name_en,
-                                      "description": cart.goods.description_en, "price": cart.goods.on_price,
+                                      "description": cart.goods.description_en, "price": cart.goods.origin_price,
+                                      "on_price": cart.goods.on_price,
                                       "image": settings.URL_PREFIX + image[0].image.url, "quantity": cart.quantity})
                 print(sum)
                 data = {"carts_list": cart_list, "cart_quantity": cart_quantity, "sum": sum}

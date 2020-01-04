@@ -34,7 +34,7 @@ class LoginView(View):
         if not user.check_password(password):
             return JsonResponse({"errcode": "104", "errmsg": "password error"})
         request.session['user_id'] = user.id
-        request.session.set_test_cookie()
+        # request.session.set_test_cookie()
         return JsonResponse({"errcode": "0", "errmsg": "login success"})
 
 
@@ -42,8 +42,7 @@ class UsersView(View):
     @method_decorator(admin_auth)
     def get(self, request, user):
         """获取用户列表"""
-        if request.session.test_cookie_worked():
-            print(111)
+
         username = request.GET.get("username", None)
         phone = request.GET.get("phone", None)
         address_name = request.GET.get("addressFullName", None)

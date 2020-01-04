@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from online.order import views
+from mobile.order import views
 
 urlpatterns = [
     url(r'^api/mobile/orders/$', views.OrdersView.as_view()),  # 创建订单,获取订单列表（翻页）

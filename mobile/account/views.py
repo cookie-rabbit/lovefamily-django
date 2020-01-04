@@ -1,5 +1,5 @@
 import re
-
+import json
 from django.contrib.auth.hashers import make_password
 from django.db.models import Q
 from django.http import JsonResponse
@@ -18,11 +18,12 @@ class LoginView(View):
     """用户登录，注册"""
 
     def post(self, request):
-        type = request.POST.get('type', None)
+        data = json.loads(request.body.decode())
+        type = data.get("type")
         if type == 'login':
-            username = request.POST.get("name", None)
+            username = data.get("username")
             print(username)
-            password = request.POST.get("password", None)
+            password = data.get("password")
             print(password)
             if not all([username, password]):
                 return JsonResponse({"errcode": "101", "errmsg": "params not all"})
@@ -32,6 +33,8 @@ class LoginView(View):
                     user = user[0]
                 else:
                     return JsonResponse({"errcode": "105", "errmsg": "please login after sign up"})
+                if user.status != 1:
+                    return JsonResponse({"errcode": "116", "errmsg": "the user has been baned"})
             except Exception as e:
                 mobile_logger.error(e)
                 return JsonResponse({"errcode": "102", "errmsg": "db error"})
@@ -73,8 +76,9 @@ class LoginView(View):
                 return JsonResponse({"errcode": "101", "errmsg": "params not all"})
             password = make_password(password)
             try:
-                signup_date = timezone.localtime(timezone.now()).strftime("%Y-%m-%d %H:%M:%S")
-                user = User.objects.create(username=username, email=email, phone=phone, password=password, signup_date=signup_date)
+                signup_date = timezone.localtime(timezone.now()).strftime("%Y-%m-%d")
+                user = User.objects.create(username=username, email=email, phone=phone, password=password,
+                                           signup_date=signup_date)
             except Exception as e:
                 mobile_logger.error(e)
                 return JsonResponse({"errcode": "102", "errmsg": "db error"})
@@ -99,7 +103,7 @@ class UserView(View):
 
     @method_decorator(user_auth)
     def get(self, request, user):
-        type = request.POST.get('type', None)
+        type = request.GET.get("type", None)
         if type == "info":
             """获取用户信息"""
             try:

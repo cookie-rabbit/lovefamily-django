@@ -66,3 +66,6 @@ ERROR 2019-12-28 11:54:09,588 views 167 Expecting value: line 1 column 1 (char 0
 ERROR 2019-12-28 11:54:25,380 views 167 Expecting value: line 1 column 1 (char 0)
 ERROR 2019-12-28 11:55:19,128 views 167 Expecting value: line 1 column 1 (char 0)
 ERROR 2019-12-28 13:50:00,944 views 283 invalid literal for int() with base 10: ''
+ERROR 2020-01-02 11:53:10,172 views 204 Cannot resolve keyword 'total_sale' into field. Choices are: actual_sale, added_time, cart, category, category_id, description_ch, description_en, detail_ch, detail_en, id, images, is_hot, is_new, name_ch, name_en, on_price, on_sale, origin_price, stock, super_category_id, virtual_sale
+ERROR 2020-01-02 13:54:36,075 views 204 Cannot resolve keyword 'total_sale' into field. Choices are: actual_sale, added_time, cart, category, category_id, description_ch, description_en, detail_ch, detail_en, id, images, is_hot, is_new, name_ch, name_en, on_price, on_sale, origin_price, stock, super_category_id, virtual_sale
+ERROR 2020-01-02 14:06:50,208 views 204 Cannot resolve keyword 'total_sale' into field. Choices are: actual_sale, added_time, cart, category, category_id, description_ch, description_en, detail_ch, detail_en, id, images, is_hot, is_new, name_ch, name_en, on_price, on_sale, origin_price, stock, super_category_id, virtual_sale

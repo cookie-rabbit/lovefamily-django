@@ -186,7 +186,7 @@ class SignUpView(View):
                 return JsonResponse({"errcode": "106", "errmsg": "email format error"})
         phone = request.POST.get("phone", None)
         if phone:
-            if not re.match(r'^1[0-9]{10}$', phone):
+            if not re.match(r'^[0-9a-zA-Z_]{0,19}[0-9a-zA-Z]{1,13}$', phone):
                 return JsonResponse({"errcode": "103", "errmsg": "phone format error"})
         try:
             users = User.objects.filter(Q(email=email) | Q(phone=phone))
@@ -203,8 +203,8 @@ class SignUpView(View):
             return JsonResponse({"errcode": "101", "errmsg": "params not all"})
         password = make_password(password)
         try:
-            signup_date = timezone.localtime(timezone.now()).strftime("%Y-%m-%d %H:%M:%S")
-            user = User.objects.create(email=email, phone=phone, password=password, signup_date=signup_date)
+            signup_date = timezone.localtime(timezone.now()).strftime("%Y-%m-%d")
+            user = User.objects.create(username=username, email=email, phone=phone, password=password, signup_date=signup_date)
         except Exception as e:
             online_logger.error(e)
             return JsonResponse({"errcode": "102", "errmsg": "db error"})

@@ -20,7 +20,7 @@ class Goods(models.Model):
     stock = models.IntegerField()
     is_hot = models.BooleanField(default=False)
     is_new = models.BooleanField(default=False)
-    added_time = models.DateTimeField(auto_now_add=True, blank=True)
+    added_time = models.DateTimeField()
     super_category_id = models.CharField(max_length=10, null=True)
     category = models.ForeignKey('Category', on_delete=models.CASCADE, related_name='goods')
 

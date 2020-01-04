@@ -32,4 +32,9 @@ urlpatterns = [
     url(r'^', include("management.orders.urls")),
     url(r'^', include("management.user.urls")),
     url(r'^admin/', include("management.user.urls")),
+    url(r'^', include("mobile.account.urls")),
+    url(r'^', include("mobile.card.urls")),
+    url(r'^', include("mobile.cart.urls")),
+    url(r'^', include("mobile.goods.urls")),
+    url(r'^', include("mobile.order.urls")),
 ]
