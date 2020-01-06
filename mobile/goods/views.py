@@ -1,8 +1,6 @@
 from django.db.models import F
 from django.http import JsonResponse
-from django.shortcuts import render, redirect
-from django.template.loader import get_template
-from django.urls import reverse
+from django.shortcuts import render
 from django.utils.decorators import method_decorator
 from django.views import View
 
@@ -18,9 +16,8 @@ from online.constants import PER_PAGE_GOODS_COUNT, INDEX_GOODS_COUNT
 def index(request):
     """首页"""
     img = settings.URL_PREFIX + "/media/index.jpg"
-    data = {"img": img}
+    data = {"url": img}
     return JsonResponse({"errcode": "0", "data": data})
-
 
 
 class GoodsTypeView(View):

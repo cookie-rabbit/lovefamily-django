@@ -40,11 +40,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders',
     'management.user.apps.UserConfig',
+    'management.orders.apps.OrdersConfig',
     'online.goods.apps.GoodsConfig',
     'online.order.apps.OrderConfig',
     'online.cart.apps.CartConfig',
     'online.card.apps.CardConfig',
-    'online.account.apps.AccountConfig'
+    'online.account.apps.AccountConfig',
 ]
 
 MIDDLEWARE = [

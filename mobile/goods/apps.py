@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class GoodsConfig(AppConfig):
-    name = 'online.goods'
+    name = 'mobile.goods'

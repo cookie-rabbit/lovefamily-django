@@ -7,7 +7,7 @@ from django.utils.decorators import method_decorator
 from django.views import View
 
 from management.constants import PER_PAGE_USER_COUNT
-from management.user.models import User, UserAddress
+from management.user.models import User, UserAddress, Admin
 from management.logger import management_logger
 from utils.decorator import admin_auth
 
@@ -21,7 +21,7 @@ class LoginView(View):
         if not all([username, password]):
             return JsonResponse({"errcode": "101", "errmsg": 'params not all'})
         try:
-            user = User.objects.filter(username=username)
+            user = Admin.objects.filter(username=username)
             if not user:
                 return JsonResponse({"errcode": "102", "errmsg": "can not find user in db"})
             else:
@@ -29,12 +29,9 @@ class LoginView(View):
         except Exception as e:
             management_logger.error(e)
             return JsonResponse({"errcode": "102", "errmsg": "db error"})
-        if not user.is_admin:
-            return JsonResponse({"errcode": "103", "errmsg": "not permission to access"})
         if not user.check_password(password):
             return JsonResponse({"errcode": "104", "errmsg": "password error"})
         request.session['user_id'] = user.id
-        # request.session.set_test_cookie()
         return JsonResponse({"errcode": "0", "errmsg": "login success"})
 
 

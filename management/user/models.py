@@ -45,3 +45,22 @@ class UserAddress(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Admin(models.Model):
+    """管理员表"""
+    username = models.CharField(max_length=40,default='admin')
+    password = models.CharField(max_length=100)
+
+    def set_password(self, value):
+        self.password = make_password(value)
+        self._password = value
+
+    def check_password(self, value):
+        return check_password(value, self.password)
+
+    class Meta:
+        db_table = 'Admin'
+
+    def __str__(self):
+        return self.username
