@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class CartConfig(AppConfig):
-    name = 'online.cart'
+    name = 'mobile.cart'
