@@ -126,7 +126,7 @@ class OrdersView(View):
         status_query = request.GET.get('status', 0)
 
         orders = Order.objects.filter(user_id=user_id).order_by('-order_date')
-        order_quantity = len(orders)
+        # order_quantity = len(orders)
         try:
             status_query = int(status_query)
         except ValueError as e:
@@ -190,13 +190,14 @@ class OrdersView(View):
     @method_decorator(user_auth)
     def post(self, request, user):
         try:
-            name = request.POST.get('name')
-            province = request.POST.get('province')
-            city = request.POST.get('city')
-            district = request.POST.get('district')
-            road = request.POST.get('road')
-            postcode = request.POST.get('postcode')
-            phone_number = request.POST.get('phone_number')
+            user = UserAddress.objects.get(id=user.id)
+            name = UserAddress.name
+            province = UserAddress.province
+            city = UserAddress.city
+            district = UserAddress.district
+            road = UserAddress.road
+            postcode = UserAddress.postcode
+            phone_number = UserAddress.phone_number
             goods = ast.literal_eval(request.POST.get('goods'))
         except Exception as e:
             online_logger.error(e)
@@ -236,7 +237,6 @@ class OrdersView(View):
                 online_logger.error(e)
                 return JsonResponse({'errcode': 102, 'errmsg': 'db error'})
             count = int(good_count)
-
             if Goodgoods.stock < count:
                 transaction.savepoint_rollback(save_id)
                 return JsonResponse({'errcode': 112, 'errmsg': "stock not enough"})
