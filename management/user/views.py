@@ -31,7 +31,7 @@ class LoginView(View):
             return JsonResponse({"errcode": "102", "errmsg": "db error"})
         if not user.check_password(password):
             return JsonResponse({"errcode": "104", "errmsg": "password error"})
-        request.session['user_id'] = user.id
+        request.session['admin_id'] = user.id
         return JsonResponse({"errcode": "0", "errmsg": "login success"})
 
 
