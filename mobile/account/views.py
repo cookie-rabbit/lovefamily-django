@@ -69,7 +69,7 @@ class LoginView(View):
                 mobile_logger.error(e)
                 return JsonResponse({"errcode": "102", "errmsg": "db error"})
             password = request.POST.get("password", None)
-            repassword = request.POST.get("repassword", None)
+            repassword = request.POST.get("re_password", None)
             if password != repassword:
                 return JsonResponse({"errcode": "107", "errmsg": "password differently"})
             if not all([email, phone, password, repassword]):
