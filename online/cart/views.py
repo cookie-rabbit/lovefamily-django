@@ -6,6 +6,7 @@ from django.shortcuts import render
 # Create your views here.
 from django.utils.decorators import method_decorator
 from django.views import View
+from django.views.decorators.csrf import csrf_exempt
 
 from management.user.models import User
 from online.cart.models import Cart
@@ -18,6 +19,7 @@ from weigan_shopping import settings
 
 class CartsView(View):
     """获取购物车列表"""
+    @method_decorator(csrf_exempt)
     def get(self,request):
         category = []
         try:
@@ -71,6 +73,7 @@ class CartsView(View):
         return render(request,"myCart.html",context=context)
 
     @method_decorator(user_auth)
+    @method_decorator(csrf_exempt)
     def post(self,request,user):
         goods_id = request.POST.get("goods_id",None)
         quantity = request.POST.get("quantity",1)

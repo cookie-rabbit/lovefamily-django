@@ -6,8 +6,7 @@ from online.logger import online_logger
 
 def user_auth(func):
     def wrapper(request, *args, **kwargs):
-        user_id = 6
-        # user_id = request.session.get("user_id", None)
+        user_id = request.session.get("user_id", None)
         if not user_id:
             return JsonResponse({"errcode": "107", "errmsg": "please login"})
         try:
