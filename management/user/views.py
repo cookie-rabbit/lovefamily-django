@@ -10,6 +10,7 @@ from management.constants import PER_PAGE_USER_COUNT
 from management.user.models import User, UserAddress, Admin
 from management.logger import management_logger
 from utils.decorator import admin_auth
+from weigan_shopping import settings
 
 
 class LoginView(View):
@@ -33,6 +34,14 @@ class LoginView(View):
             return JsonResponse({"errcode": "104", "errmsg": "password error"})
         request.session['admin_id'] = user.id
         return JsonResponse({"errcode": "0", "errmsg": "login success"})
+
+class LogoutView(View):
+    """管理员退出登录"""
+    @method_decorator(admin_auth)
+    def get(self, request, user):
+        del request.session['admin_id']
+        return JsonResponse(
+            {"errcode": "0", "errmsg": "logout success", "data": {"url": settings.URL_ADMIN_PREFIX + '/#/login'}})
 
 
 class UsersView(View):
