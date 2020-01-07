@@ -1,11 +1,13 @@
 from django.db import transaction
 from django.shortcuts import render
 from django.template.loader import get_template
+from django.urls import reverse
 from django.utils.decorators import method_decorator
 from django.http import JsonResponse, HttpResponse
 from django.views import View
 from django.views.decorators.csrf import csrf_exempt
 from django.utils import timezone
+from paypal.standard.forms import PayPalPaymentsForm
 
 from online.constants import PER_PAGE_GOODS_COUNT
 from online.order.models import Order, Order_Goods, OrderAddress, OrderStatusLog
@@ -25,6 +27,7 @@ from datetime import datetime
 from weigan_shopping import settings
 
 
+# 【渲染】订单页面（地址）
 class OrderAddressView(View):
     @method_decorator(user_auth)
     def get(self, request, user):
@@ -357,10 +360,20 @@ class UserAddressView(View):
 class OrderPayView(View):
     @method_decorator(user_auth)
     def get(self, request, user, order_id):
-        res = {"abc": "abc"}
-        tpl = get_template("payOrder.html")
-        res = tpl.render(res)
-        return HttpResponse(res)
+        paypal_dict = {
+            "business": "sb-cfr9k847350@business.example.com",
+            "amount": "10000000.00",
+            "item_name": "name of the item",
+            "invoice": "unique-invoice-id",
+            "notify_url": "www.baidu.com",
+            "return": "www.baidu.com",
+            "cancel_return": "www.baidu.com",
+            "custom": "premium_plan",  # Custom command to correlate to some function later (optional)
+        }
+
+        form = PayPalPaymentsForm(initial=paypal_dict)
+        context = {"form": form}
+        return render(request, "payOrder.html", context)
 
 
 # 订单支付

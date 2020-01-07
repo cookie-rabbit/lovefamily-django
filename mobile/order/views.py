@@ -1,8 +1,6 @@
 from django.db import transaction
-from django.shortcuts import render
-from django.template.loader import get_template
 from django.utils.decorators import method_decorator
-from django.http import JsonResponse, HttpResponse
+from django.http import JsonResponse
 from django.views import View
 from django.views.decorators.csrf import csrf_exempt
 from django.utils import timezone
@@ -16,73 +14,76 @@ from utils.decorator import user_auth
 from online.cart.models import Cart
 from management.user.models import UserAddress
 import management.user
+from weigan_shopping import settings
 
 import ast
 import random
+import json
 from datetime import datetime
-
-from weigan_shopping import settings
 
 
 # 获取订单信息及地址
 class OrderAddressView(View):
     @method_decorator(user_auth)
     def post(self, request, user):
-        carts_id = request.POST.get('carts_id')
-        carts_id = carts_id.split(",")
-        user_id = user.id
-        good_dict = []
-        total = 0
-        if user_id:
-            try:
-                user = UserAddress.objects.get(user_id=user_id)
-                name = user.name
-                province = user.province
-                city = user.city
-                district = user.district
-                road = user.road
-                phone_number = user.phone_number
-                postcode = user.postcode
-                is_null = 0
-            except management.user.models.UserAddress.DoesNotExist:
-                name = ''
-                province = ''
-                city = ''
-                district = ''
-                road = ''
-                phone_number = ''
-                postcode = ''
-                is_null = 1
-            except Exception as e:
-                online_logger.error(e)
-                return JsonResponse({"errcode": "102", "errmsg": "db error"})
-
-            carts = Cart.objects.filter(id__in=carts_id).filter(user_id=user_id)
-            for cart in carts:
-                good_id = cart.goods_id
-                quantity = cart.quantity
+        data = json.loads(request.body.decode())
+        carts_id = data.get('carts_id', None)
+        if carts_id is not None:
+            carts_id = carts_id.split(",")
+            user_id = user.id
+            good_dict = []
+            total = 0
+            if user_id:
                 try:
-                    good_detail = Goods.objects.get(id=good_id)
-                    good_name_en = good_detail.name_en
-                    good_price = good_detail.on_price
-                    good_description_en = good_detail.description_en
-                    good_image = Image.objects.filter(goods_id=good_id)
-
-                    total = total + quantity * good_price
-                    good_dict.append({"id": good_id, "quantity": quantity, "name": good_name_en, "price": good_price,
-                                      "description": good_description_en,
-                                      "image": settings.URL_PREFIX + good_image[0].image.url})
+                    user = UserAddress.objects.get(user_id=user_id)
+                    name = user.name
+                    province = user.province
+                    city = user.city
+                    district = user.district
+                    road = user.road
+                    phone_number = user.phone_number
+                    postcode = user.postcode
+                    is_null = 0
+                except management.user.models.UserAddress.DoesNotExist:
+                    name = ''
+                    province = ''
+                    city = ''
+                    district = ''
+                    road = ''
+                    phone_number = ''
+                    postcode = ''
+                    is_null = 1
                 except Exception as e:
                     online_logger.error(e)
                     return JsonResponse({"errcode": "102", "errmsg": "db error"})
 
-            user_info = {"name": name, "province": province, "city": city, "district": district,
-                         "road": road, "phone_number": phone_number, "postcode": postcode, "is_null": is_null}
-            res = {"user_info": user_info, "good_dict": good_dict, "total": total}
-            return JsonResponse({"errcode": "0", "data": res})
+                carts = Cart.objects.filter(id__in=carts_id).filter(user_id=user_id)
+                for cart in carts:
+                    good_id = cart.goods_id
+                    quantity = cart.quantity
+                    try:
+                        good_detail = Goods.objects.get(id=good_id)
+                        good_name_en = good_detail.name_en
+                        good_price = good_detail.on_price
+                        good_description_en = good_detail.description_en
+                        good_image = Image.objects.filter(goods_id=good_id)
 
-        else:
-            JsonResponse({"errcode": "101", "errmsg": "user_id is None"})
+                        total = total + quantity * good_price
+                        good_dict.append(
+                            {"id": good_id, "quantity": quantity, "name": good_name_en, "price": good_price,
+                             "description": good_description_en,
+                             "image": settings.URL_PREFIX + good_image[0].image.url})
+                    except Exception as e:
+                        online_logger.error(e)
+                        return JsonResponse({"errcode": "102", "errmsg": "db error"})
+
+                user_info = {"name": name, "province": province, "city": city, "district": district,
+                             "road": road, "phone_number": phone_number, "postcode": postcode, "is_null": is_null}
+                res = {"user_info": user_info, "good_dict": good_dict, "total": total}
+                return JsonResponse({"errcode": "0", "data": res})
+
+            else:
+                JsonResponse({"errcode": "101", "errmsg": "user_id is None"})
 
 
 # 获取订单详情
@@ -190,6 +191,7 @@ class OrdersView(View):
     @method_decorator(user_auth)
     def post(self, request, user):
         try:
+            data = json.loads(request.body.decode())
             user = UserAddress.objects.get(id=user.id)
             name = UserAddress.name
             province = UserAddress.province
@@ -198,7 +200,7 @@ class OrdersView(View):
             road = UserAddress.road
             postcode = UserAddress.postcode
             phone_number = UserAddress.phone_number
-            goods = ast.literal_eval(request.POST.get('goods'))
+            goods = ast.literal_eval(data.get('goods'))
         except Exception as e:
             online_logger.error(e)
             return JsonResponse({"errcode": 101, "errmsg": "params not all"})
@@ -271,13 +273,14 @@ class UserAddressView(View):
     def post(self, request, user):
         user_id = user.id
         try:
-            name = request.POST.get('name')
-            province = request.POST.get('province')
-            city = request.POST.get('city')
-            district = request.POST.get('district')
-            road = request.POST.get('road')
-            postcode = request.POST.get('postcode')
-            phone_number = request.POST.get('phone_number')
+            data = json.loads(request.body.decode())
+            name = data.get('name')
+            province = data.get('province')
+            city = data.get('city')
+            district = data.get('district')
+            road = data.get('road')
+            postcode = data.get('postcode')
+            phone_number = data.get('phone_number')
         except Exception as e:
             online_logger.error(e)
             return JsonResponse({"errcode": 101, "errmsg": "params not all"})

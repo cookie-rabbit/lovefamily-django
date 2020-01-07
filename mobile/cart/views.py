@@ -1,3 +1,4 @@
+import json
 from django.http import JsonResponse
 
 # Create your views here.
@@ -46,17 +47,18 @@ class CartsView(View):
                 print(sum)
                 data = {"carts_list": cart_list, "cart_quantity": cart_quantity, "sum": sum}
             else:
-                data = {"carts_list": "", "cart_quantity": "", "sum": 0}
+                data = {"carts_list": [], "cart_quantity": 0, "sum": 0}
         else:
-            data = {"carts_list": "", "cart_quantity": "", "sum": 0}
+            data = {"carts_list": "", "cart_quantity": 0, "sum": 0}
         return JsonResponse({"errcode": "0", "data": data})
 
     """新增到购物车"""
 
     @method_decorator(user_auth)
     def post(self, request, user):
-        goods_id = request.POST.get("goods_id", None)
-        quantity = request.POST.get("quantity", 1)
+        data = json.loads(request.body.decode())
+        goods_id = data.get("goods_id", None)
+        quantity = data.get("quantity", 1)
         if not goods_id:
             return JsonResponse({"errcode": "101", "errmsg": "empty params"})
         try:
@@ -87,15 +89,16 @@ class CartsView(View):
         request.session["%s_cart" % user.id] += quantity
         total_quantity = request.session["%s_cart" % user.id]
         return JsonResponse(
-            {"errcode": "0", "errmsg": "add to cart success", "data": {"quantity": total_quantity}})
+            {"errcode": "0", "errmsg": "Added to cart", "data": {"quantity": total_quantity}})
 
 
 class CartView(View):
     """修改购物车指定条目"""
 
     @method_decorator(user_auth)
-    def post(self, request, user, cart_id):
-        quantity = request.POST.get("quantity", None)
+    def put(self, request, user, cart_id):
+        data = json.loads(request.body.decode())
+        quantity = data.get("quantity", None)
         if quantity is None:
             return JsonResponse({"errcode": "101", "errmsg": "params not all"})
         try:

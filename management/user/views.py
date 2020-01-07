@@ -67,26 +67,26 @@ class UsersView(View):
             try:
                 if username and phone:
                     users = User.objects.filter(id__in=user_id).filter(username__icontains=username).filter(
-                        phone__contains=phone)
+                        phone__contains=phone).order_by('id')
                 elif phone:
-                    users = User.objects.filter(id__in=user_id).filter(phone__contains=phone)
+                    users = User.objects.filter(id__in=user_id).filter(phone__contains=phone).order_by('id')
                 elif username:
-                    users = User.objects.filter(id__in=user_id).filter(username__icontains=username)
+                    users = User.objects.filter(id__in=user_id).filter(username__icontains=username).order_by('id')
                 else:
-                    users = User.objects.filter(id__in=user_id)
+                    users = User.objects.filter(id__in=user_id).order_by('id')
             except Exception as e:
                 management_logger.error(e)
                 return JsonResponse({"errcode": "102", "errmsg": "db error"})
 
         else:
-            users = User.objects.all()
+            users = User.objects.all().order_by('id')
             try:
                 if username and phone:
-                    users = users.filter(username__icontains=username).filter(phone__contains=phone)
+                    users = users.filter(username__icontains=username).filter(phone__contains=phone).order_by('id')
                 elif phone:
-                    users = users.filter(phone__contains=phone)
+                    users = users.filter(phone__contains=phone).order_by('id')
                 elif username:
-                    users = users.filter(username__icontains=username)
+                    users = users.filter(username__icontains=username).order_by('id')
                 else:
                     pass
             except Exception as e:

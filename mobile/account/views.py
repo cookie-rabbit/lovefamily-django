@@ -52,12 +52,13 @@ class LoginView(View):
             return JsonResponse({"errcode": "0", "errmsg": "login success"})
 
         elif type == 'signup':
-            username = request.POST.get("username", None)
-            email = request.POST.get("email", None)
+            data = json.loads(request.body.decode())
+            username = data.get("username", None)
+            email = data.get("email", None)
             if email:
                 if not re.match(r'^[0-9a-zA-Z_]{0,19}@[0-9a-zA-Z]{1,13}\.(com|cn|net){1,3}$', email):
                     return JsonResponse({"errcode": "106", "errmsg": "email format error"})
-            phone = request.POST.get("phone", None)
+            phone = data.get("phone", None)
             if phone:
                 if not re.match(r'^1[0-9]{10}$', phone):
                     return JsonResponse({"errcode": "103", "errmsg": "phone format error"})
@@ -68,8 +69,8 @@ class LoginView(View):
             except Exception as e:
                 mobile_logger.error(e)
                 return JsonResponse({"errcode": "102", "errmsg": "db error"})
-            password = request.POST.get("password", None)
-            repassword = request.POST.get("re_password", None)
+            password = data.get("password", None)
+            repassword = data.get("re_password", None)
             if password != repassword:
                 return JsonResponse({"errcode": "107", "errmsg": "password differently"})
             if not all([email, phone, password, repassword]):
@@ -145,16 +146,17 @@ class UserView(View):
 
     @method_decorator(user_auth)
     def post(self, request, user):
-        type = request.POST.get('type', None)
+        data = json.loads(request.body.decode())
+        type = data.get('type', None)
         if type == "info":
             """修改用户信息"""
-            email = request.POST.get("email", None)
+            email = data.get("email", None)
             if email:
                 if not re.match(r'^[0-9a-zA-Z_]{0,19}@[0-9a-zA-Z]{1,13}\.(com|cn|net){1,3}$', email):
                     return JsonResponse({"errcode": "106", "errmsg": "email format error"})
-            phone_number = request.POST.get("phone_number", None)
-            password = request.POST.get("password", None)
-            re_password = request.POST.get("re_password", None)
+            phone_number = data.get("phone_number", None)
+            password = data.get("password", None)
+            re_password = data.get("re_password", None)
             if password != re_password:
                 return JsonResponse({"errcode": "106", "errmsg": "password differently"})
             if not all([email, phone_number, password, re_password]):
@@ -180,13 +182,14 @@ class UserView(View):
 
         elif type == "address":
             """修改用户地址"""
-            name = request.POST.get("name", None)
-            road = request.POST.get("road", None)
-            district = request.POST.get("district", None)
-            city = request.POST.get("city", None)
-            province = request.POST.get("province", None)
-            postcode = request.POST.get("postcode")
-            phone_number = request.POST.get("phone_number", None)
+            data = json.loads(request.body.decode())
+            name = data.get("name", None)
+            road = data.get("road", None)
+            district = data.get("district", None)
+            city = data.get("city", None)
+            province = data.get("province", None)
+            postcode = data.get("postcode", None)
+            phone_number = data.get("phone_number", None)
             if not (name or road or district or city or province or phone_number or postcode):
                 try:
                     user.address.delete()

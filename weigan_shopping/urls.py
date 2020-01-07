@@ -25,6 +25,7 @@ urlpatterns = [
     url(r'^i18n/', include('django.conf.urls.i18n')),
     url(r'^media/(?P<path>.*)$', serve, {"document_root": MEDIA_ROOT}),
     url(r'^', include("online.account.urls")),
+    url(r'^', include("online.card.urls")),
     url(r'^', include("online.cart.urls")),
     url(r'^', include("online.goods.urls")),
     url(r'^', include("online.order.urls")),

@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'paypal.standard.ipn',
     'corsheaders',
     'management.user.apps.UserConfig',
     'management.orders.apps.OrdersConfig',
@@ -47,6 +48,8 @@ INSTALLED_APPS = [
     'online.card.apps.CardConfig',
     'online.account.apps.AccountConfig',
 ]
+
+PAYPAL_TEST = True
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
