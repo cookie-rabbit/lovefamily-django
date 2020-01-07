@@ -198,8 +198,7 @@ class OrderDetailView(View):
                     order.save()
 
                     time = timezone.localtime(timezone.now()).strftime("%Y-%m-%d %H:%M:%S")
-                    # user_id = request.session.get('user_id')
-                    user_id = 6
+                    user_id = request.session.get('admin_id')
                     OrderStatusLog.objects.create(order_no=order_no, status=status, user_id=user_id,
                                                   change_date=time)
                     return JsonResponse({"errcode": 0, "errmsg": "update success"})

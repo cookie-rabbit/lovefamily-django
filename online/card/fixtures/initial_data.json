@@ -1,0 +1,1 @@
+[{"model": "card.card", "pk": 1, "fields": {"cardid": "21321", "name": "\u5c0f\u7c73", "user": 1}}, {"model": "card.card", "pk": 2, "fields": {"cardid": "67867867", "name": "\u534e\u4e3a", "user": 4}}]
