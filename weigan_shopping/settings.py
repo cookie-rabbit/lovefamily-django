@@ -267,10 +267,11 @@ LOCALE_PATHS = (
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = ''
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 URL_PREFIX = "http://" + env.API_HOST + ":" + env.API_PORT
+URL_ADMIN_PREFIX = "http://" + env.ADMIN_API_HOST + ":" + env.ADMIN_API_HOST
 
 PASSWORD_HASHERS = [
     'django.contrib.auth.hashers.UnsaltedMD5PasswordHasher'
