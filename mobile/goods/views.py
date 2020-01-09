@@ -132,9 +132,7 @@ class GoodsTypeView(View):
 
 class GoodsTemplateView(View):
     """获取商品详情"""
-
-    @method_decorator(user_auth)
-    def get(self, request, goods_id, user):
+    def get(self, request, goods_id):
         try:
             single_goods = Goods.objects.get(id=goods_id)
             images = Image.objects.filter(goods__id=goods_id)
@@ -152,7 +150,7 @@ class GoodsTemplateView(View):
                         "sale": single_goods.actual_sale + single_goods.virtual_sale,
                         "detail": single_goods.detail_en,
                         "description": single_goods.description_en}
-        user_id = user.id
+        user_id = request.session.get("user_id", None)
         if user_id:
             cart_quantity = request.session.get("%s_cart" % user_id, 0)
             context = {"goods": goods_detail, "cart_quantity": cart_quantity}
@@ -162,8 +160,7 @@ class GoodsTemplateView(View):
 
 
 class CategoriesView(View):
-    @method_decorator(user_auth)
-    def get(self, request, user):
+    def get(self, request):
         """获取分类"""
         category = []
         try:
@@ -196,8 +193,7 @@ class CategoriesView(View):
 class GoodsSearchView(View):
     """商品搜索"""
 
-    @method_decorator(user_auth)
-    def get(self, request, user):
+    def get(self, request):
         keyword = request.GET.get("keyword", None)
         current = request.GET.get("current", 0)
         type = request.GET.get("type", "hot")
@@ -239,7 +235,7 @@ class GoodsSearchView(View):
                         {"id": single_goods.id, "name": single_goods.name_en, "price": single_goods.origin_price,
                          "on_price": single_goods.on_price, "is_hot": single_goods.is_hot,
                          "image": settings.URL_PREFIX + image[0].image.url})
-        user_id = user.id
+        user_id = request.session.get("user_id", None)
         if user_id:
             cart_quantity = request.session.get("%s_cart" % user_id, 0)
             context = {"goods": goods_list, "cart_quantity": cart_quantity, "keyword": keyword, "more": more}

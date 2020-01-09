@@ -59,20 +59,17 @@ class LoginView(View):
                 if not re.match(r'^[0-9a-zA-Z_]{0,19}@[0-9a-zA-Z]{1,13}\.(com|cn|net){1,3}$', email):
                     return JsonResponse({"errcode": "106", "errmsg": "email format error"})
             phone = data.get("phone", None)
-            if phone:
-                if not re.match(r'^1[0-9]{10}$', phone):
-                    return JsonResponse({"errcode": "103", "errmsg": "phone format error"})
             try:
-                users = User.objects.filter(Q(email=email) | Q(phone=phone))
+                users = User.objects.filter(Q(email=email) | Q(phone=phone) | Q(username=username))
                 if len(users) > 0:
-                    return JsonResponse({"errcode": "109", "errmsg": "user has registered"})
+                    return JsonResponse({"errcode": "109", "errmsg": "user has been registered"})
             except Exception as e:
                 mobile_logger.error(e)
                 return JsonResponse({"errcode": "102", "errmsg": "db error"})
             password = data.get("password", None)
             repassword = data.get("re_password", None)
             if password != repassword:
-                return JsonResponse({"errcode": "107", "errmsg": "password differently"})
+                return JsonResponse({"errcode": "107", "errmsg": "Passwords must be matched"})
             if not all([email, phone, password, repassword]):
                 return JsonResponse({"errcode": "101", "errmsg": "params not all"})
             password = make_password(password)
@@ -83,10 +80,8 @@ class LoginView(View):
             except Exception as e:
                 mobile_logger.error(e)
                 return JsonResponse({"errcode": "102", "errmsg": "db error"})
-            request.session['user_id'] = user.id
-            request.session['%s_cart' % user.id] = 0
             return JsonResponse(
-                {"errcode": "0", "errmsg": "sign up success", "data": {"url": settings.URL_PREFIX + '/index'}})
+                {"errcode": "0", "errmsg": "sign up success"})
 
 
 class LogoutView(View):
@@ -97,7 +92,7 @@ class LogoutView(View):
         del request.session['user_id']
         del request.session['%s_cart' % user.id]
         return JsonResponse(
-            {"errcode": "0", "errmsg": "logout success", "data": {"url": settings.URL_PREFIX + '/index'}})
+            {"errcode": "0", "errmsg": "logout success"})
 
 
 class UserView(View):
@@ -129,7 +124,12 @@ class UserView(View):
             """获取用户地址"""
             try:
                 user = User.objects.get(id=user.id)
-                useradd = UserAddress.objects.get(user_id=user.id)
+            except Exception as e:
+                mobile_logger.error(e)
+                return JsonResponse({"errcode": "102", "errmsg": "db error"})
+            useradd = UserAddress.objects.filter(user_id=user.id)
+            if useradd:
+                useradd = useradd[0]
                 name = useradd.name
                 province = useradd.province
                 city = useradd.city
@@ -137,11 +137,12 @@ class UserView(View):
                 road = useradd.road
                 phone_number = useradd.phone_number
                 postcode = useradd.postcode
-                data = {"useradd": useradd, "name": name, "province": province, "city": city, "district": district,
+                data = {"name": name, "province": province, "city": city, "district": district,
                         "road": road, "phone_number": phone_number, "postcode": postcode}
-            except Exception as e:
-                mobile_logger.error(e)
-                return JsonResponse({"errcode": "102", "errmsg": "db error"})
+            else:
+                data = {"name": '', "province": '', "city": '', "district": '',
+                        "road": '', "phone_number": '', "postcode": ''}
+
             return JsonResponse({"errcode": "0", "data": data})
 
     @method_decorator(user_auth)
@@ -154,7 +155,7 @@ class UserView(View):
             if email:
                 if not re.match(r'^[0-9a-zA-Z_]{0,19}@[0-9a-zA-Z]{1,13}\.(com|cn|net){1,3}$', email):
                     return JsonResponse({"errcode": "106", "errmsg": "email format error"})
-            phone_number = data.get("phone_number", None)
+            phone_number = data.get("phone", None)
             password = data.get("password", None)
             re_password = data.get("re_password", None)
             if password != re_password:
@@ -182,7 +183,6 @@ class UserView(View):
 
         elif type == "address":
             """修改用户地址"""
-            data = json.loads(request.body.decode())
             name = data.get("name", None)
             road = data.get("road", None)
             district = data.get("district", None)
@@ -217,3 +217,5 @@ class UserView(View):
                     mobile_logger.error(e)
                     return JsonResponse({"errcode": "102", "errmsg": "db error"})
                 return JsonResponse({"errcode": "0", "errmsg": "save success"})
+        else:
+            return JsonResponse({"errcode": "101", "errmsg": "params 'type' can't find"})

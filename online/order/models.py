@@ -21,6 +21,8 @@ class Order(models.Model):
     status = models.IntegerField(choices=choices, default=0)  # 订单状态
     address = models.ForeignKey("OrderAddress", on_delete=models.CASCADE, related_name='order')  # 订单地址
     user = models.ForeignKey('user.User', on_delete=models.CASCADE, related_name='order')  # 订单用户
+    paid_date = models.DateTimeField(null=True)
+
 
     class Meta:
         db_table = "Order"

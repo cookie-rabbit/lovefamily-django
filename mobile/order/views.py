@@ -28,35 +28,37 @@ class OrderAddressView(View):
     def post(self, request, user):
         data = json.loads(request.body.decode())
         carts_id = data.get('carts_id', None)
-        if carts_id is not None:
-            carts_id = carts_id.split(",")
-            user_id = user.id
-            good_dict = []
-            total = 0
-            if user_id:
-                try:
-                    user = UserAddress.objects.get(user_id=user_id)
-                    name = user.name
-                    province = user.province
-                    city = user.city
-                    district = user.district
-                    road = user.road
-                    phone_number = user.phone_number
-                    postcode = user.postcode
-                    is_null = 0
-                except management.user.models.UserAddress.DoesNotExist:
-                    name = ''
-                    province = ''
-                    city = ''
-                    district = ''
-                    road = ''
-                    phone_number = ''
-                    postcode = ''
-                    is_null = 1
-                except Exception as e:
-                    online_logger.error(e)
-                    return JsonResponse({"errcode": "102", "errmsg": "db error"})
+        goods_id = data.get('goods_id', None)
+        goods_num = data.get('goods_num', 0)
+        user_id = user.id
+        good_dict = []
+        total = 0
+        if user_id:
+            try:
+                user = UserAddress.objects.get(user_id=user_id)
+                name = user.name
+                province = user.province
+                city = user.city
+                district = user.district
+                road = user.road
+                phone_number = user.phone_number
+                postcode = user.postcode
+                is_null = 0
+            except management.user.models.UserAddress.DoesNotExist:
+                name = ''
+                province = ''
+                city = ''
+                district = ''
+                road = ''
+                phone_number = ''
+                postcode = ''
+                is_null = 1
+            except Exception as e:
+                online_logger.error(e)
+                return JsonResponse({"errcode": "102", "errmsg": "db error"})
 
+            if carts_id is not None:
+                carts_id = carts_id.split(",")
                 carts = Cart.objects.filter(id__in=carts_id).filter(user_id=user_id)
                 for cart in carts:
                     good_id = cart.goods_id
@@ -70,20 +72,43 @@ class OrderAddressView(View):
 
                         total = total + quantity * good_price
                         good_dict.append(
-                            {"id": good_id, "quantity": quantity, "name": good_name_en, "price": good_price,
+                            {"id": good_id, "quantity": quantity, "name": good_name_en, "on_price": good_price,
                              "description": good_description_en,
                              "image": settings.URL_PREFIX + good_image[0].image.url})
                     except Exception as e:
                         online_logger.error(e)
                         return JsonResponse({"errcode": "102", "errmsg": "db error"})
 
-                user_info = {"name": name, "province": province, "city": city, "district": district,
-                             "road": road, "phone_number": phone_number, "postcode": postcode, "is_null": is_null}
-                res = {"user_info": user_info, "good_dict": good_dict, "total": total}
-                return JsonResponse({"errcode": "0", "data": res})
+            elif goods_id is not None:
+                if int(goods_num) > 0:
+                    good_id = goods_id
+                    quantity = int(goods_num)
+                    try:
+                        good_detail = Goods.objects.get(id=good_id)
+                        good_name_en = good_detail.name_en
+                        good_price = good_detail.on_price
+                        good_description_en = good_detail.description_en
+                        good_image = Image.objects.filter(goods_id=good_id)
 
+                        total = total + quantity * good_price
+                        good_dict.append(
+                            {"id": good_id, "quantity": quantity, "name": good_name_en, "on_price": good_price,
+                             "description": good_description_en,
+                             "image": settings.URL_PREFIX + good_image[0].image.url})
+                    except Exception as e:
+                        online_logger.error(e)
+                        return JsonResponse({"errcode": "102", "errmsg": "db error"})
             else:
-                JsonResponse({"errcode": "101", "errmsg": "user_id is None"})
+                good_dict = []
+                total = 0
+
+            user_info = {"name": name, "province": province, "city": city, "district": district,
+                         "road": road, "phone_number": phone_number, "postcode": postcode, "is_null": is_null}
+            res = {"user_info": user_info, "good_dict": good_dict, "total": total}
+            return JsonResponse({"errcode": "0", "data": res})
+
+        else:
+            JsonResponse({"errcode": "101", "errmsg": "user_id is None"})
 
 
 # 获取订单详情
@@ -127,7 +152,6 @@ class OrdersView(View):
         status_query = request.GET.get('status', 0)
 
         orders = Order.objects.filter(user_id=user_id).order_by('-order_date')
-        # order_quantity = len(orders)
         try:
             status_query = int(status_query)
         except ValueError as e:
@@ -176,8 +200,8 @@ class OrdersView(View):
             #         good_image = str(good.img)
             #         good_dic.append({"quantity": quantity, "name_en": good_name_en, "price": good_price,
             #                          "description_en": good_description_en, "image": good_image})
-            else:
-                return JsonResponse({'errcode': 110, 'errmsg': "goods not exist"})
+            # else:
+            #     return JsonResponse({'errcode': 110, 'errmsg': "goods not exist"})
         else:
             order_dic = []
             # good_dic = []
@@ -192,15 +216,16 @@ class OrdersView(View):
     def post(self, request, user):
         try:
             data = json.loads(request.body.decode())
-            user = UserAddress.objects.get(id=user.id)
-            name = UserAddress.name
-            province = UserAddress.province
-            city = UserAddress.city
-            district = UserAddress.district
-            road = UserAddress.road
-            postcode = UserAddress.postcode
-            phone_number = UserAddress.phone_number
-            goods = ast.literal_eval(data.get('goods'))
+            user_add = UserAddress.objects.get(user_id=user.id)
+            name = user_add.name
+            province = user_add.province
+            city = user_add.city
+            district = user_add.district
+            road = user_add.road
+            postcode = user_add.postcode
+            phone_number = user_add.phone_number
+            goods = data.get('goods')
+            is_cart = data.get('is_cart',0)
         except Exception as e:
             online_logger.error(e)
             return JsonResponse({"errcode": 101, "errmsg": "params not all"})
@@ -223,13 +248,16 @@ class OrdersView(View):
             order = Order.objects.create(order_no=order_no, total=total, order_date=time, status=status,
                                          address=order_address, user=User.objects.get(id=user_id))
         except Exception as e:
+            transaction.savepoint_rollback(save_id)
             online_logger.error(e)
             return JsonResponse({"errcode": 101, "errmsg": "params error"})
 
+        goods_ids = []
         for good in goods:
-            goods_id = good['good_id']
-            good_count = good['good_count']
             try:
+                goods_id = good['good_id']
+                goods_ids.append(goods_id)
+                good_count = good['good_count']
                 Goodgoods = Goods.objects.select_for_update().get(id=goods_id)
             except Goods.DoesNotExist as e:
                 transaction.savepoint_rollback(save_id)
@@ -260,6 +288,12 @@ class OrdersView(View):
 
         time = timezone.localtime(timezone.now()).strftime("%Y-%m-%d %H:%M:%S")
         OrderStatusLog.objects.create(order_no=order_no, status=1, user_id=user_id, change_date=time)
+        if is_cart == 1:
+            try:
+                Cart.objects.filter(goods_id__in=goods_ids).delete()
+            except Exception as e:
+                online_logger.error(e)
+                return JsonResponse({'errcode': 102, 'errmsg': 'db error'})
 
         href = "http://10.168.2.111:8000/orders/{order_id}/pay/".format(order_id=order.id)
         return JsonResponse({"errcode": 0, "data": {"result": "ordered success", "href": href}})
