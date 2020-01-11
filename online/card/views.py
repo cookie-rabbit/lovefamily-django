@@ -9,10 +9,10 @@ class PaymentView(View):
         # What you want the button to do.
         paypal_dict = {
             "business": "sb-jc6dl844717@business.example.com",
-            "amount": "30.6",
+            "amount": "17.5",
             "item_name": "aabbcctest",
-            "invoice": "1324546089",
-            "notify_url": "https://c15ae968.ngrok.io/api/online/paypal/",
+            "invoice": "0003601388939",
+            "notify_url": "https://fe8f24e4.ngrok.io/paypal/",
             "return": "https://www.baidu.com",
             "cancel_return": "https://www.baidu.com",
             "custom": "premium_plan",  # Custom command to correlate to some function later (optional)

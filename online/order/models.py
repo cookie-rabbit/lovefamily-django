@@ -1,3 +1,4 @@
+import pytz
 from django.db import models
 from management import user
 
@@ -51,7 +52,7 @@ class OrderAddress(models.Model):
 class Order_Goods(models.Model):
     """订单--商品表"""
     order = models.ForeignKey("Order", on_delete=models.CASCADE)  # 订单编号
-    # goods = models.ForeignKey("goods.Goods", on_delete=models.CASCADE)  # 对应商品
+    goods = models.ForeignKey("goods.Goods", on_delete=models.CASCADE, null=True)  # 对应商品
     name_en = models.CharField(max_length=30, null=True)
     img = models.ImageField(default='1.jpg')
     on_price = models.IntegerField(default=0)

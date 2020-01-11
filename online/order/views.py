@@ -56,7 +56,7 @@ class OrderAddressView(View):
                 is_null = 1
             except Exception as e:
                 online_logger.error(e)
-                return JsonResponse({"errcode": "102", "errmsg": "db error"})
+                return JsonResponse({"errcode": "102", "errmsg": "Db error"})
 
             orders = Order.objects.filter(user_id=user_id)
             order_quantity = len(orders)
@@ -79,7 +79,7 @@ class OrderAddressView(View):
                                       "image": settings.URL_PREFIX + good_image[0].image.url})
                 except Exception as e:
                     online_logger.error(e)
-                    return JsonResponse({"errcode": "102", "errmsg": "db error"})
+                    return JsonResponse({"errcode": "102", "errmsg": "Db error"})
 
             user_info = {"name": name, "province": province, "city": city, "district": district,
                          "road": road, "phone_number": phone_number, "postcode": postcode, "is_null": is_null}
@@ -106,7 +106,7 @@ class OrdersDetailView(View):
                 goods = Order_Goods.objects.filter(order_id=order.id)
             except Exception as e:
                 online_logger.error(e)
-                return JsonResponse({"errcode": 102, "errmsg": "db error"})
+                return JsonResponse({"errcode": 102, "errmsg": "Db error"})
             if goods != '':
                 good_dic = []
                 for good in goods:
@@ -174,7 +174,7 @@ class OrdersListView(View):
                 goods = Order_Goods.objects.filter(order_id=order.id)
             except Exception as e:
                 online_logger.error(e)
-                return JsonResponse({"errcode": 102, "errmsg": "db error"})
+                return JsonResponse({"errcode": 102, "errmsg": "Db error"})
             if goods != '':
                 for good in goods:
                     quantity = good.quantity
@@ -248,7 +248,7 @@ class OrderCreateView(View):
                 return JsonResponse({'errcode': 110, 'errmsg': "goods not exist"})
             except Exception as e:
                 online_logger.error(e)
-                return JsonResponse({'errcode': 102, 'errmsg': 'db error'})
+                return JsonResponse({'errcode': 102, 'errmsg': 'Db error'})
             count = int(good_count)
 
             if Goodgoods.stock < count:
@@ -297,7 +297,7 @@ class OrderCreateView(View):
             orders = orders_total[offset:offset + PER_PAGE_GOODS_COUNT]
         except Exception as e:
             online_logger.error(e)
-            return JsonResponse({'errcode': 102, 'errmsg': "db error"})
+            return JsonResponse({'errcode': 102, 'errmsg': "Db error"})
 
         if orders.count() > offset + PER_PAGE_GOODS_COUNT:
             more = 'true'
@@ -350,10 +350,10 @@ class UserAddressView(View):
                 return JsonResponse({"errcode": 0, "data": "created success"})
             except Exception as e:
                 online_logger.error(e)
-                return JsonResponse({"errcode": 102, "errmsg": "db error"})
+                return JsonResponse({"errcode": 102, "errmsg": "Db error"})
         except Exception as e:
             online_logger.error(e)
-            return JsonResponse({"errcode": 102, "errmsg": "db error"})
+            return JsonResponse({"errcode": 102, "errmsg": "Db error"})
 
 
 # 【渲染】订单页面（地址）
@@ -389,4 +389,4 @@ class PayOrder(View):
                 return JsonResponse({"errcode": 0, "errmsg": "pay success", "href": index_href})
             except Exception as e:
                 online_logger.error(e)
-                return JsonResponse({"errcode": 102, "errmsg": "db error"})
+                return JsonResponse({"errcode": 102, "errmsg": "Db error"})

@@ -104,7 +104,7 @@ class OrdersView(View):
                     return JsonResponse({"errcode": "0", "data": res})
             except Exception as e:
                 management_logger.error(e)
-                return JsonResponse({"errcode": "102", "errmsg": "db error"})
+                return JsonResponse({"errcode": "102", "errmsg": "Db error"})
         else:
             return JsonResponse({"errcode": "0", "data": res})
 
@@ -169,13 +169,14 @@ class OrderDetailView(View):
                     return JsonResponse({"errcode": "0", "data": '[]'})
         except Exception as e:
             management_logger.error(e)
-            return JsonResponse({"errcode": "102", "errmsg": "db error"})
+            return JsonResponse({"errcode": "102", "errmsg": "Db error"})
 
     """修改订单状态"""
 
     @method_decorator(transaction.atomic)
     @method_decorator(csrf_exempt)
-    def put(self, request, order_no):
+    @method_decorator(admin_auth)
+    def put(self, request, user, order_no):
         type = request.GET.get('type', 'status')
         if type == "status":
             if request.body:
@@ -193,7 +194,7 @@ class OrderDetailView(View):
                         return JsonResponse({"errcode": "111", "errmsg": "order not exist"})
                     except Exception as e:
                         online_logger.error(e)
-                        return JsonResponse({"errcode": "102", "errmsg": "db error"})
+                        return JsonResponse({"errcode": "102", "errmsg": "Db error"})
                     order.status = status
                     order.save()
 
@@ -213,7 +214,8 @@ class OrderDetailView(View):
 class OrderLogsView(View):
 
     @method_decorator(csrf_exempt)
-    def get(self, request, order_no):
+    @method_decorator(admin_auth)
+    def get(self, request, user, order_no):
         """获取订单日志"""
         try:
             if order_no is not None:
@@ -229,7 +231,7 @@ class OrderLogsView(View):
                             username = User.objects.get(id=state.user_id).username
                         except Exception as e:
                             management_logger.error(e)
-                            return JsonResponse({"errcode": "102", "errmsg": "db error"})
+                            return JsonResponse({"errcode": "102", "errmsg": "Db error"})
                         date = state.change_date
                         state_log = {"status": status, "user": username, "date": date}
                         states_log.append(state_log)
@@ -240,4 +242,4 @@ class OrderLogsView(View):
 
         except Exception as e:
             management_logger.error(e)
-            return JsonResponse({"errcode": "102", "errmsg": "db error"})
+            return JsonResponse({"errcode": "102", "errmsg": "Db error"})

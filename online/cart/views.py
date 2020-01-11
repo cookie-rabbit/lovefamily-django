@@ -27,13 +27,13 @@ class CartsView(View):
             cates = Category.objects.filter(super_category__isnull=True)
         except Exception as e:
             online_logger.error(e)
-            return JsonResponse({"errcode": "102", "errmsg": "db error"})
+            return JsonResponse({"errcode": "102", "errmsg": "Db error"})
         for cate in cates:
             try:
                 sub_cates = Category.objects.filter(super_category__id=cate.id)
             except Exception as e:
                 online_logger.error(e)
-                return JsonResponse({"errcode": "102", "errmsg": "db error"})
+                return JsonResponse({"errcode": "102", "errmsg": "Db error"})
             category.append({"id": cate.id, "name": cate.name,
                              "sub_cates": [{'id': sub_cate.id, 'name': sub_cate.name} for sub_cate in sub_cates if
                                            sub_cates] if sub_cates else []})
@@ -49,14 +49,14 @@ class CartsView(View):
                 return JsonResponse({"errcode": "102", "errmsg": "can not find user in db"})
             except Exception as e:
                 online_logger.error(e)
-                return JsonResponse({"errcode": "102", "errmsg": "db error"})
+                return JsonResponse({"errcode": "102", "errmsg": "Db error"})
             cart_quantity = request.session.get("%s_cart" % user_id)
             if cart_quantity:
                 try:
                     carts = Cart.objects.filter(user__id=user_id)
                 except Exception as e:
                     online_logger.error(e)
-                    return JsonResponse({"errcode": "102", "errmsg": "db error"})
+                    return JsonResponse({"errcode": "102", "errmsg": "Db error"})
                 cart_list = []
                 sum = 0
                 for cart in carts:
@@ -97,7 +97,7 @@ class CartsView(View):
             return JsonResponse({"errcode": "102", "errmsg": "can not find goods in db"})
         except Exception as e:
             online_logger.error(e)
-            return JsonResponse({"errcode": "102", "errmsg": "db error"})
+            return JsonResponse({"errcode": "102", "errmsg": "Db error"})
         try:
             carts = Cart.objects.filter(user=user, goods=single_goods)
             if carts:
@@ -108,7 +108,7 @@ class CartsView(View):
                 cart = Cart.objects.create(user=user, quantity=quantity, goods=single_goods)
         except Exception as e:
             online_logger.error(e)
-            return JsonResponse({"errcode": "102", "errmsg": "db error"})
+            return JsonResponse({"errcode": "102", "errmsg": "Db error"})
         print(request.session["%s_cart" % user.id])
         request.session["%s_cart" % user.id] += quantity
         total_quantity = request.session["%s_cart" % user.id]
@@ -136,7 +136,7 @@ class CartView(View):
             return JsonResponse({"errcode": "101", "errmsg": "params error"})
         except Exception as e:
             online_logger.error(e)
-            return JsonResponse({"errcode": "102", "errmsg": "db error"})
+            return JsonResponse({"errcode": "102", "errmsg": "Db error"})
         sub_quantity = quantity - before_quantity
         request.session['%s_cart' % user.id] += sub_quantity
         total_quantity = request.session["%s_cart" % user.id]
@@ -153,7 +153,7 @@ class CartView(View):
             return JsonResponse({"errcode": "101", "errmsg": "params error"})
         except Exception as e:
             online_logger.error(e)
-            return JsonResponse({"errcode": "102", "errmsg": "db error"})
+            return JsonResponse({"errcode": "102", "errmsg": "Db error"})
         request.session["%s_cart" % user.id] -= cart.quantity
         total_quantity = request.session["%s_cart" % user.id]
         return JsonResponse({"errcode": "0", "errmsg": "delete success", "data": {"quantity": total_quantity}})

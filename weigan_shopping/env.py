@@ -9,8 +9,7 @@ DB_HOST = os.getenv("DB_HOST", "127.0.0.1")
 DB_PORT = os.getenv("DB_PORT", "3306")
 REDIS_HOST = os.getenv("REDIS_HOST", "127.0.0.1")
 REDIS_PORT = os.getenv("REDIS_PORT", "6379")
-API_HOST = os.getenv("API_HOST", "10.168.2.111")#PC端地址
-API_PORT = os.getenv("API_PORT", "8000")#PC端接口
-ADMIN_API_HOST = os.getenv("ADMIN_API_HOST", "10.168.2.107")#后台地址
-ADMIN_API_PORT = os.getenv("ADMIN_API_PORT", "9526")#后台端口
-
+API_HOST = os.getenv("API_HOST", "10.168.2.111")  # PC端地址
+API_PORT = os.getenv("API_PORT", "8000")  # PC端接口
+ADMIN_API_HOST = os.getenv("ADMIN_API_HOST", "10.168.2.107")  # 后台地址
+ADMIN_API_PORT = os.getenv("ADMIN_API_PORT", "9526")  # 后台端口

@@ -49,7 +49,7 @@ class GoodsTypeView(View):
                 return JsonResponse({"errcode": "101", "errmsg": "params error"})
             except Exception as e:
                 online_logger.error(e)
-                return JsonResponse({"errcode": "102", "errmsg": "db error"})
+                return JsonResponse({"errcode": "102", "errmsg": "Db error"})
             goods_list = []
             if goods is None:
                 goods_list = []
@@ -104,7 +104,7 @@ class GoodsTypeView(View):
                 return JsonResponse({"errcode": "101", "errmsg": "params error"})
             except Exception as e:
                 online_logger.error(e)
-                return JsonResponse({"errcode": "102", "errmsg": "db error"})
+                return JsonResponse({"errcode": "102", "errmsg": "Db error"})
             goods_list = []
             if goods is None:
                 goods_list = []
@@ -141,7 +141,7 @@ class GoodsTemplateView(View):
             return JsonResponse({"errcode": "102", "errmsg": "can not find goods in db"})
         except Exception as e:
             online_logger.error(e)
-            return JsonResponse({"errcode": "102", "errmsg": "db error"})
+            return JsonResponse({"errcode": "102", "errmsg": "Db error"})
         goods_detail = {"id": single_goods.id,
                         "name": single_goods.name_en,
                         "images": [settings.URL_PREFIX + goods_image.image.url for goods_image in images],
@@ -168,7 +168,7 @@ class CategoriesView(View):
             quantity = 0
         except Exception as e:
             online_logger.error(e)
-            return JsonResponse({"errcode": "102", "errmsg": "db error"})
+            return JsonResponse({"errcode": "102", "errmsg": "Db error"})
         for cate in cates:
             try:
                 sub_cates = Category.objects.filter(super_category__id=cate.id)
@@ -181,7 +181,7 @@ class CategoriesView(View):
                 quantity += len(Goods.objects.filter(category=cate))
             except Exception as e:
                 online_logger.error(e)
-                return JsonResponse({"errcode": "102", "errmsg": "db error"})
+                return JsonResponse({"errcode": "102", "errmsg": "Db error"})
             if len(sub_cates) > 0:
                 category.append({"id": cate.id, "name": cate.name, "quantity": quantity,
                                  "sub_cates": sub_cate_info})
@@ -218,7 +218,7 @@ class GoodsSearchView(View):
             return JsonResponse({"errcode": "101", "errmsg": "params error"})
         except Exception as e:
             online_logger.error(e)
-            return JsonResponse({"errcode": "102", "errmsg": "db error"})
+            return JsonResponse({"errcode": "102", "errmsg": "Db error"})
         goods_list = []
         if goods is None:
             goods_list = []
