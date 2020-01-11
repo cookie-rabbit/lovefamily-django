@@ -114,17 +114,20 @@ class GoodsTypeView(View):
                     if single_goods.is_hot is True:
                         goods_list.append(
                             {"id": single_goods.id, "name": single_goods.name_en,
-                             "description": single_goods.description_en, "price": single_goods.on_price,
+                             "description": single_goods.description_en, "price": single_goods.origin_price,
+                             "on_price": single_goods.on_price,
                              "is_hot": single_goods.is_hot, "image": settings.URL_PREFIX + image[0].image.url})
                     elif single_goods.is_new is True:
                         goods_list.append(
                             {"id": single_goods.id, "name": single_goods.name_en,
-                             "description": single_goods.description_en, "price": single_goods.on_price,
+                             "description": single_goods.description_en, "price": single_goods.origin_price,
+                             "on_price": single_goods.on_price,
                              "is_new": single_goods.is_new, "image": settings.URL_PREFIX + image[0].image.url})
                     else:
                         goods_list.append(
                             {"id": single_goods.id, "name": single_goods.name_en,
-                             "description": single_goods.description_en, "price": single_goods.on_price,
+                             "description": single_goods.description_en, "price": single_goods.origin_price,
+                             "on_price": single_goods.on_price,
                              "image": settings.URL_PREFIX + image[0].image.url})
 
             return JsonResponse({"errcode": "0", "data": {"more": more, "item": goods_list}})
@@ -132,6 +135,7 @@ class GoodsTypeView(View):
 
 class GoodsTemplateView(View):
     """获取商品详情"""
+
     def get(self, request, goods_id):
         try:
             single_goods = Goods.objects.get(id=goods_id)
