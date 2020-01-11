@@ -34,7 +34,7 @@ class LoginView(View):
                 return JsonResponse({"errcode": "105", "errmsg": "please login after sign up"})
         except Exception as e:
             online_logger.error(e)
-            return JsonResponse({"errcode": "102", "errmsg": "db error"})
+            return JsonResponse({"errcode": "102", "errmsg": "Db error"})
         if not user.check_password(password):
             return JsonResponse({"errcode": "104", "errmsg": "password error"})
         try:
@@ -43,7 +43,7 @@ class LoginView(View):
             quantity = sum(quantity)
         except Exception as e:
             online_logger.error(e)
-            return JsonResponse({"errcode": "102", "errmsg": "db error"})
+            return JsonResponse({"errcode": "102", "errmsg": "Db error"})
         request.session['user_id'] = user.id
         request.session['%s_cart' % user.id] = quantity
         return JsonResponse({"errcode": "0", "errmsg": "login success"})
@@ -69,13 +69,13 @@ class UserView(View):
         #     cates = Category.objects.filter(super_category__isnull=True)
         # except Exception as e:
         #     online_logger.error(e)
-        #     return JsonResponse({"errcode": "102", "errmsg": "db error"})
+        #     return JsonResponse({"errcode": "102", "errmsg": "Db error"})
         # for cate in cates:
         #     try:
         #         sub_cates = Category.objects.filter(super_category__id=cate.id)
         #     except Exception as e:
         #         online_logger.error(e)
-        #         return JsonResponse({"errcode": "102", "errmsg": "db error"})
+        #         return JsonResponse({"errcode": "102", "errmsg": "Db error"})
         #     category.append({"id": cate.id, "name": cate.name,
         #                      "sub_cates": [{'id': sub_cate.id, 'name': sub_cate.name} for sub_cate in sub_cates if
         #                                    sub_cates] if sub_cates else []})
@@ -86,7 +86,7 @@ class UserView(View):
             order_quantity = len(orders)
         except Exception as e:
             online_logger.error(e)
-            return JsonResponse({"errcode": "102", "errmsg": "db error"})
+            return JsonResponse({"errcode": "102", "errmsg": "Db error"})
         cart_quantity = request.session.get("%s_cart" % user.id, 0)
         context.update({"order_quantity": order_quantity, "cart_quantity": cart_quantity})
         return render(request, "myAccount.html", context=context)
@@ -115,7 +115,7 @@ class UserView(View):
             user.save()
         except Exception as e:
             online_logger.error(e)
-            return JsonResponse({"errcode": "102", "errmsg": "db error"})
+            return JsonResponse({"errcode": "102", "errmsg": "Db error"})
         return JsonResponse({"errcode": "0", "result": "save success"})
 
 
@@ -133,7 +133,7 @@ class MyAddressView(View):
             order_quantity = len(orders)
         except Exception as e:
             online_logger.error(e)
-            return JsonResponse({"errcode": "102", "errmsg": "db error"})
+            return JsonResponse({"errcode": "102", "errmsg": "Db error"})
         cart_quantity = request.session.get("%s_cart" % user.id, 0)
         context.update({"order_quantity": order_quantity, "cart_quantity": cart_quantity})
         return render(request, "myAddress.html", context=context)
@@ -153,7 +153,7 @@ class MyAddressView(View):
                 user.address.delete()
             except Exception as e:
                 online_logger.error(e)
-                return JsonResponse({"errcode": "102", "errmsg": "db error"})
+                return JsonResponse({"errcode": "102", "errmsg": "Db error"})
             return JsonResponse({"errcode": "0", "errmsg": "save success"})
         else:
             useraddress = user.address.all()
@@ -172,7 +172,7 @@ class MyAddressView(View):
                                                phone_number=phone_number, postcode=postcode, user=user)
             except Exception as e:
                 online_logger.error(e)
-                return JsonResponse({"errcode": "102", "errmsg": "db error"})
+                return JsonResponse({"errcode": "102", "errmsg": "Db error"})
             return JsonResponse({"errcode": "0", "errmsg": "save success"})
 
 
@@ -194,11 +194,11 @@ class SignUpView(View):
                 return JsonResponse({"errcode": "109", "errmsg": "user has registered"})
         except Exception as e:
             online_logger.error(e)
-            return JsonResponse({"errcode": "102", "errmsg": "db error"})
+            return JsonResponse({"errcode": "102", "errmsg": "Db error"})
         password = request.POST.get("password", None)
         repassword = request.POST.get("repassword", None)
         if password != repassword:
-            return JsonResponse({"errcode": "107", "errmsg": "password differently"})
+            return JsonResponse({"errcode": "107", "errmsg": "Passwords must be matched"})
         if not all([email, phone, password, repassword]):
             return JsonResponse({"errcode": "101", "errmsg": "params not all"})
         password = make_password(password)
@@ -207,7 +207,7 @@ class SignUpView(View):
             user = User.objects.create(username=username, email=email, phone=phone, password=password, signup_date=signup_date)
         except Exception as e:
             online_logger.error(e)
-            return JsonResponse({"errcode": "102", "errmsg": "db error"})
+            return JsonResponse({"errcode": "102", "errmsg": "Db error"})
         request.session['user_id'] = user.id
         request.session['%s_cart' % user.id] = 0
         return JsonResponse(
@@ -222,13 +222,13 @@ class SignUpTemplateView(View):
             cates = Category.objects.filter(super_category__isnull=True)
         except Exception as e:
             online_logger.error(e)
-            return JsonResponse({"errcode": "102", "errmsg": "db error"})
+            return JsonResponse({"errcode": "102", "errmsg": "Db error"})
         for cate in cates:
             try:
                 sub_cates = Category.objects.filter(super_category__id=cate.id)
             except Exception as e:
                 online_logger.error(e)
-                return JsonResponse({"errcode": "102", "errmsg": "db error"})
+                return JsonResponse({"errcode": "102", "errmsg": "Db error"})
             category.append({"id": cate.id, "name": cate.name,
                              "sub_cates": [{'id': sub_cate.id, 'name': sub_cate.name} for sub_cate in sub_cates if
                                            sub_cates] if sub_cates else []})

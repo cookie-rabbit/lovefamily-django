@@ -1,11 +1,13 @@
 from django.db import transaction
 from django.shortcuts import render
 from django.template.loader import get_template
+from django.urls import reverse
 from django.utils.decorators import method_decorator
 from django.http import JsonResponse, HttpResponse
 from django.views import View
 from django.views.decorators.csrf import csrf_exempt
 from django.utils import timezone
+from paypal.standard.forms import PayPalPaymentsForm
 
 from online.constants import PER_PAGE_GOODS_COUNT
 from online.order.models import Order, Order_Goods, OrderAddress, OrderStatusLog
@@ -25,6 +27,7 @@ from datetime import datetime
 from weigan_shopping import settings
 
 
+# 【渲染】订单页面（地址）
 class OrderAddressView(View):
     @method_decorator(user_auth)
     def get(self, request, user):
@@ -53,7 +56,7 @@ class OrderAddressView(View):
                 is_null = 1
             except Exception as e:
                 online_logger.error(e)
-                return JsonResponse({"errcode": "102", "errmsg": "db error"})
+                return JsonResponse({"errcode": "102", "errmsg": "Db error"})
 
             orders = Order.objects.filter(user_id=user_id)
             order_quantity = len(orders)
@@ -76,7 +79,7 @@ class OrderAddressView(View):
                                       "image": settings.URL_PREFIX + good_image[0].image.url})
                 except Exception as e:
                     online_logger.error(e)
-                    return JsonResponse({"errcode": "102", "errmsg": "db error"})
+                    return JsonResponse({"errcode": "102", "errmsg": "Db error"})
 
             user_info = {"name": name, "province": province, "city": city, "district": district,
                          "road": road, "phone_number": phone_number, "postcode": postcode, "is_null": is_null}
@@ -103,7 +106,7 @@ class OrdersDetailView(View):
                 goods = Order_Goods.objects.filter(order_id=order.id)
             except Exception as e:
                 online_logger.error(e)
-                return JsonResponse({"errcode": 102, "errmsg": "db error"})
+                return JsonResponse({"errcode": 102, "errmsg": "Db error"})
             if goods != '':
                 good_dic = []
                 for good in goods:
@@ -171,7 +174,7 @@ class OrdersListView(View):
                 goods = Order_Goods.objects.filter(order_id=order.id)
             except Exception as e:
                 online_logger.error(e)
-                return JsonResponse({"errcode": 102, "errmsg": "db error"})
+                return JsonResponse({"errcode": 102, "errmsg": "Db error"})
             if goods != '':
                 for good in goods:
                     quantity = good.quantity
@@ -245,7 +248,7 @@ class OrderCreateView(View):
                 return JsonResponse({'errcode': 110, 'errmsg': "goods not exist"})
             except Exception as e:
                 online_logger.error(e)
-                return JsonResponse({'errcode': 102, 'errmsg': 'db error'})
+                return JsonResponse({'errcode': 102, 'errmsg': 'Db error'})
             count = int(good_count)
 
             if Goodgoods.stock < count:
@@ -294,7 +297,7 @@ class OrderCreateView(View):
             orders = orders_total[offset:offset + PER_PAGE_GOODS_COUNT]
         except Exception as e:
             online_logger.error(e)
-            return JsonResponse({'errcode': 102, 'errmsg': "db error"})
+            return JsonResponse({'errcode': 102, 'errmsg': "Db error"})
 
         if orders.count() > offset + PER_PAGE_GOODS_COUNT:
             more = 'true'
@@ -347,20 +350,30 @@ class UserAddressView(View):
                 return JsonResponse({"errcode": 0, "data": "created success"})
             except Exception as e:
                 online_logger.error(e)
-                return JsonResponse({"errcode": 102, "errmsg": "db error"})
+                return JsonResponse({"errcode": 102, "errmsg": "Db error"})
         except Exception as e:
             online_logger.error(e)
-            return JsonResponse({"errcode": 102, "errmsg": "db error"})
+            return JsonResponse({"errcode": 102, "errmsg": "Db error"})
 
 
 # 【渲染】订单页面（地址）
 class OrderPayView(View):
     @method_decorator(user_auth)
     def get(self, request, user, order_id):
-        res = {"abc": "abc"}
-        tpl = get_template("payOrder.html")
-        res = tpl.render(res)
-        return HttpResponse(res)
+        paypal_dict = {
+            "business": "sb-cfr9k847350@business.example.com",
+            "amount": "10000000.00",
+            "item_name": "name of the item",
+            "invoice": "unique-invoice-id",
+            "notify_url": "www.baidu.com",
+            "return": "www.baidu.com",
+            "cancel_return": "www.baidu.com",
+            "custom": "premium_plan",  # Custom command to correlate to some function later (optional)
+        }
+
+        form = PayPalPaymentsForm(initial=paypal_dict)
+        context = {"form": form}
+        return render(request, "payOrder.html", context)
 
 
 # 订单支付
@@ -376,4 +389,4 @@ class PayOrder(View):
                 return JsonResponse({"errcode": 0, "errmsg": "pay success", "href": index_href})
             except Exception as e:
                 online_logger.error(e)
-                return JsonResponse({"errcode": 102, "errmsg": "db error"})
+                return JsonResponse({"errcode": 102, "errmsg": "Db error"})

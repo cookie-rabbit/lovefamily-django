@@ -1,0 +1,1 @@
+default_app_config = 'online.card.apps.CardConfig'

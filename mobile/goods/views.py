@@ -49,7 +49,7 @@ class GoodsTypeView(View):
                 return JsonResponse({"errcode": "101", "errmsg": "params error"})
             except Exception as e:
                 online_logger.error(e)
-                return JsonResponse({"errcode": "102", "errmsg": "db error"})
+                return JsonResponse({"errcode": "102", "errmsg": "Db error"})
             goods_list = []
             if goods is None:
                 goods_list = []
@@ -104,7 +104,7 @@ class GoodsTypeView(View):
                 return JsonResponse({"errcode": "101", "errmsg": "params error"})
             except Exception as e:
                 online_logger.error(e)
-                return JsonResponse({"errcode": "102", "errmsg": "db error"})
+                return JsonResponse({"errcode": "102", "errmsg": "Db error"})
             goods_list = []
             if goods is None:
                 goods_list = []
@@ -132,9 +132,7 @@ class GoodsTypeView(View):
 
 class GoodsTemplateView(View):
     """获取商品详情"""
-
-    @method_decorator(user_auth)
-    def get(self, request, goods_id, user):
+    def get(self, request, goods_id):
         try:
             single_goods = Goods.objects.get(id=goods_id)
             images = Image.objects.filter(goods__id=goods_id)
@@ -143,7 +141,7 @@ class GoodsTemplateView(View):
             return JsonResponse({"errcode": "102", "errmsg": "can not find goods in db"})
         except Exception as e:
             online_logger.error(e)
-            return JsonResponse({"errcode": "102", "errmsg": "db error"})
+            return JsonResponse({"errcode": "102", "errmsg": "Db error"})
         goods_detail = {"id": single_goods.id,
                         "name": single_goods.name_en,
                         "images": [settings.URL_PREFIX + goods_image.image.url for goods_image in images],
@@ -152,7 +150,7 @@ class GoodsTemplateView(View):
                         "sale": single_goods.actual_sale + single_goods.virtual_sale,
                         "detail": single_goods.detail_en,
                         "description": single_goods.description_en}
-        user_id = user.id
+        user_id = request.session.get("user_id", None)
         if user_id:
             cart_quantity = request.session.get("%s_cart" % user_id, 0)
             context = {"goods": goods_detail, "cart_quantity": cart_quantity}
@@ -162,8 +160,7 @@ class GoodsTemplateView(View):
 
 
 class CategoriesView(View):
-    @method_decorator(user_auth)
-    def get(self, request, user):
+    def get(self, request):
         """获取分类"""
         category = []
         try:
@@ -171,7 +168,7 @@ class CategoriesView(View):
             quantity = 0
         except Exception as e:
             online_logger.error(e)
-            return JsonResponse({"errcode": "102", "errmsg": "db error"})
+            return JsonResponse({"errcode": "102", "errmsg": "Db error"})
         for cate in cates:
             try:
                 sub_cates = Category.objects.filter(super_category__id=cate.id)
@@ -184,7 +181,7 @@ class CategoriesView(View):
                 quantity += len(Goods.objects.filter(category=cate))
             except Exception as e:
                 online_logger.error(e)
-                return JsonResponse({"errcode": "102", "errmsg": "db error"})
+                return JsonResponse({"errcode": "102", "errmsg": "Db error"})
             if len(sub_cates) > 0:
                 category.append({"id": cate.id, "name": cate.name, "quantity": quantity,
                                  "sub_cates": sub_cate_info})
@@ -196,16 +193,21 @@ class CategoriesView(View):
 class GoodsSearchView(View):
     """商品搜索"""
 
-    @method_decorator(user_auth)
-    def get(self, request, user):
+    def get(self, request):
         keyword = request.GET.get("keyword", None)
         current = request.GET.get("current", 0)
+        type = request.GET.get("type", "hot")
         count = PER_PAGE_GOODS_COUNT
         if keyword is None:
             return JsonResponse({"errcode": "101", "errmsg": "empty params"})
         try:
             current = int(current)
-            total_goods = Goods.objects.filter(on_sale=True).filter(name_en__icontains=keyword)
+            if type == 'new':
+                total_goods = Goods.objects.filter(on_sale=True).filter(name_en__icontains=keyword).order_by(
+                    '-added_time')
+            else:
+                total_goods = Goods.objects.filter(on_sale=True).filter(name_en__icontains=keyword).order_by(
+                    F('actual_sale') + F('virtual_sale')).reverse()
             goods = total_goods[current:current + count]
             if len(total_goods) > current + count:
                 more = True
@@ -216,33 +218,24 @@ class GoodsSearchView(View):
             return JsonResponse({"errcode": "101", "errmsg": "params error"})
         except Exception as e:
             online_logger.error(e)
-            return JsonResponse({"errcode": "102", "errmsg": "db error"})
+            return JsonResponse({"errcode": "102", "errmsg": "Db error"})
         goods_list = []
         if goods is None:
             goods_list = []
         else:
             for single_goods in goods:
                 image = Image.objects.filter(goods=single_goods)
-                goods_list.append(
-                    {"id": single_goods.id, "name": single_goods.name_en, "price": single_goods.origin_price,
-                     "on_price": single_goods.on_price, "is_hot": single_goods.is_hot, "is_new": single_goods.is_new,
-                     "image": settings.URL_PREFIX + image[0].image.url})
-        # category = []
-        # try:
-        #     cates = Category.objects.filter(super_category__isnull=True)
-        # except Exception as e:
-        #     online_logger.error(e)
-        #     return JsonResponse({"errcode": "102", "errmsg": "db error"})
-        # for cate in cates:
-        #     try:
-        #         sub_cates = Category.objects.filter(super_category__id=cate.id)
-        #     except Exception as e:
-        #         online_logger.error(e)
-        #         return JsonResponse({"errcode": "102", "errmsg": "db error"})
-        #     category.append({"id": cate.id, "name": cate.name,
-        #                      "sub_cates": [{'id': sub_cate.id, 'name': sub_cate.name} for sub_cate in sub_cates if
-        #                                    sub_cates] if sub_cates else []})
-        user_id = user.id
+                if type == "new":
+                    goods_list.append(
+                        {"id": single_goods.id, "name": single_goods.name_en, "price": single_goods.origin_price,
+                         "on_price": single_goods.on_price, "is_new": single_goods.is_new,
+                         "image": settings.URL_PREFIX + image[0].image.url})
+                else:
+                    goods_list.append(
+                        {"id": single_goods.id, "name": single_goods.name_en, "price": single_goods.origin_price,
+                         "on_price": single_goods.on_price, "is_hot": single_goods.is_hot,
+                         "image": settings.URL_PREFIX + image[0].image.url})
+        user_id = request.session.get("user_id", None)
         if user_id:
             cart_quantity = request.session.get("%s_cart" % user_id, 0)
             context = {"goods": goods_list, "cart_quantity": cart_quantity, "keyword": keyword, "more": more}

@@ -29,7 +29,7 @@ class LoginView(View):
                 user = user[0]
         except Exception as e:
             management_logger.error(e)
-            return JsonResponse({"errcode": "102", "errmsg": "db error"})
+            return JsonResponse({"errcode": "102", "errmsg": "Db error"})
         if not user.check_password(password):
             return JsonResponse({"errcode": "104", "errmsg": "password error"})
         request.session['admin_id'] = user.id
@@ -41,7 +41,7 @@ class LogoutView(View):
     def get(self, request, user):
         del request.session['admin_id']
         return JsonResponse(
-            {"errcode": "0", "errmsg": "logout success", "data": {"url": settings.URL_ADMIN_PREFIX + '/#/login'}})
+            {"errcode": "0", "errmsg": "logout success"})
 
 
 class UsersView(View):
@@ -67,31 +67,31 @@ class UsersView(View):
             try:
                 if username and phone:
                     users = User.objects.filter(id__in=user_id).filter(username__icontains=username).filter(
-                        phone__contains=phone)
+                        phone__contains=phone).order_by('id')
                 elif phone:
-                    users = User.objects.filter(id__in=user_id).filter(phone__contains=phone)
+                    users = User.objects.filter(id__in=user_id).filter(phone__contains=phone).order_by('id')
                 elif username:
-                    users = User.objects.filter(id__in=user_id).filter(username__icontains=username)
+                    users = User.objects.filter(id__in=user_id).filter(username__icontains=username).order_by('id')
                 else:
-                    users = User.objects.filter(id__in=user_id)
+                    users = User.objects.filter(id__in=user_id).order_by('id')
             except Exception as e:
                 management_logger.error(e)
-                return JsonResponse({"errcode": "102", "errmsg": "db error"})
+                return JsonResponse({"errcode": "102", "errmsg": "Db error"})
 
         else:
-            users = User.objects.all()
+            users = User.objects.all().order_by('id')
             try:
                 if username and phone:
-                    users = users.filter(username__icontains=username).filter(phone__contains=phone)
+                    users = users.filter(username__icontains=username).filter(phone__contains=phone).order_by('id')
                 elif phone:
-                    users = users.filter(phone__contains=phone)
+                    users = users.filter(phone__contains=phone).order_by('id')
                 elif username:
-                    users = users.filter(username__icontains=username)
+                    users = users.filter(username__icontains=username).order_by('id')
                 else:
                     pass
             except Exception as e:
                 management_logger.error(e)
-                return JsonResponse({"errcode": "102", "errmsg": "db error"})
+                return JsonResponse({"errcode": "102", "errmsg": "Db error"})
 
         total = len(users)
         paginator = Paginator(users, PER_PAGE_USER_COUNT)
@@ -124,7 +124,7 @@ class UserView(View):
             return JsonResponse({"errcode": "102", "errmsg": "can not find user in db"})
         except Exception as e:
             management_logger.error(e)
-            return JsonResponse({"errcode": "102", "errmsg": "db error"})
+            return JsonResponse({"errcode": "102", "errmsg": "Db error"})
         try:
             if password:
                 user.password = password
@@ -135,5 +135,5 @@ class UserView(View):
             user.save()
         except Exception as e:
             management_logger.error(e)
-            return JsonResponse({"errcode": "102", "errmsg": "db error"})
+            return JsonResponse({"errcode": "102", "errmsg": "Db error"})
         return JsonResponse({"errcode": "0", "errmsg": "update success"})

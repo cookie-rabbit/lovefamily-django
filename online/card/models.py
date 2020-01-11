@@ -15,3 +15,16 @@ class Card(models.Model):
 
     def __str__(self):
         return self.cardid
+
+
+class OrderPay(models.Model):
+    """支付信息"""
+    payment_id = models.CharField(max_length=40)
+    order_id = models.CharField(max_length=40)
+
+
+    class Meta:
+        db_table = "Card"
+
+    def __str__(self):
+        return self.payment_id

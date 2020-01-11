@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block css %}
-    <link rel="stylesheet/less" type="text/css" href="{% static 'assets/css/page/myCart.less' %}" />
+    <link rel="stylesheet/less" type="text/css" href="{% static 'assets/css/page/myCart.less' %}"/>
     <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/3.10.0-beta/less.min.js"></script>
 {% endblock %}
 
@@ -49,6 +49,8 @@
         <div class="total">
             <p class="totalPrice">Sum:&nbsp;$&nbsp;<span>{{ sum }}</span></p>
             <div class="buyNow">Buy Now</div>
+            <script src="https://www.paypal.com/sdk/js?client-id=sb"></script>
+            <script>paypal.Buttons().render('body');</script>
         </div>
     </div>
 {% endblock %}

@@ -1,3 +1,4 @@
+import json
 from django.http import JsonResponse
 
 # Create your views here.
@@ -26,14 +27,14 @@ class CartsView(View):
                 return JsonResponse({"errcode": "102", "errmsg": "can not find user in db"})
             except Exception as e:
                 online_logger.error(e)
-                return JsonResponse({"errcode": "102", "errmsg": "db error"})
+                return JsonResponse({"errcode": "102", "errmsg": "Db error"})
             cart_quantity = request.session.get("%s_cart" % user_id)
             if cart_quantity:
                 try:
                     carts = Cart.objects.filter(user__id=user_id)
                 except Exception as e:
                     online_logger.error(e)
-                    return JsonResponse({"errcode": "102", "errmsg": "db error"})
+                    return JsonResponse({"errcode": "102", "errmsg": "Db error"})
                 cart_list = []
                 sum = 0
                 for cart in carts:
@@ -46,17 +47,18 @@ class CartsView(View):
                 print(sum)
                 data = {"carts_list": cart_list, "cart_quantity": cart_quantity, "sum": sum}
             else:
-                data = {"carts_list": "", "cart_quantity": "", "sum": 0}
+                data = {"carts_list": [], "cart_quantity": 0, "sum": 0}
         else:
-            data = {"carts_list": "", "cart_quantity": "", "sum": 0}
+            data = {"carts_list": "", "cart_quantity": 0, "sum": 0}
         return JsonResponse({"errcode": "0", "data": data})
 
     """新增到购物车"""
 
     @method_decorator(user_auth)
     def post(self, request, user):
-        goods_id = request.POST.get("goods_id", None)
-        quantity = request.POST.get("quantity", 1)
+        data = json.loads(request.body.decode())
+        goods_id = data.get("goods_id", None)
+        quantity = data.get("quantity", 1)
         if not goods_id:
             return JsonResponse({"errcode": "101", "errmsg": "empty params"})
         try:
@@ -71,7 +73,7 @@ class CartsView(View):
             return JsonResponse({"errcode": "102", "errmsg": "can not find goods in db"})
         except Exception as e:
             online_logger.error(e)
-            return JsonResponse({"errcode": "102", "errmsg": "db error"})
+            return JsonResponse({"errcode": "102", "errmsg": "Db error"})
         try:
             carts = Cart.objects.filter(user=user, goods=single_goods)
             if carts:
@@ -82,20 +84,21 @@ class CartsView(View):
                 cart = Cart.objects.create(user=user, quantity=quantity, goods=single_goods)
         except Exception as e:
             online_logger.error(e)
-            return JsonResponse({"errcode": "102", "errmsg": "db error"})
+            return JsonResponse({"errcode": "102", "errmsg": "Db error"})
         print(request.session["%s_cart" % user.id])
         request.session["%s_cart" % user.id] += quantity
         total_quantity = request.session["%s_cart" % user.id]
         return JsonResponse(
-            {"errcode": "0", "errmsg": "add to cart success", "data": {"quantity": total_quantity}})
+            {"errcode": "0", "errmsg": "Added to cart", "data": {"quantity": total_quantity}})
 
 
 class CartView(View):
     """修改购物车指定条目"""
 
     @method_decorator(user_auth)
-    def post(self, request, user, cart_id):
-        quantity = request.POST.get("quantity", None)
+    def put(self, request, user, cart_id):
+        data = json.loads(request.body.decode())
+        quantity = data.get("quantity", None)
         if quantity is None:
             return JsonResponse({"errcode": "101", "errmsg": "params not all"})
         try:
@@ -112,7 +115,7 @@ class CartView(View):
             return JsonResponse({"errcode": "101", "errmsg": "params error"})
         except Exception as e:
             online_logger.error(e)
-            return JsonResponse({"errcode": "102", "errmsg": "db error"})
+            return JsonResponse({"errcode": "102", "errmsg": "Db error"})
         sub_quantity = quantity - before_quantity
         request.session['%s_cart' % user.id] += sub_quantity
         total_quantity = request.session["%s_cart" % user.id]
@@ -131,7 +134,7 @@ class CartView(View):
             return JsonResponse({"errcode": "101", "errmsg": "params error"})
         except Exception as e:
             online_logger.error(e)
-            return JsonResponse({"errcode": "102", "errmsg": "db error"})
+            return JsonResponse({"errcode": "102", "errmsg": "Db error"})
         request.session["%s_cart" % user.id] -= cart.quantity
         total_quantity = request.session["%s_cart" % user.id]
         return JsonResponse({"errcode": "0", "errmsg": "delete success", "data": {"quantity": total_quantity}})

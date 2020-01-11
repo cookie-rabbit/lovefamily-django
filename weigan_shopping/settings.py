@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'paypal.standard.ipn',
     'corsheaders',
     'management.user.apps.UserConfig',
     'management.orders.apps.OrdersConfig',
@@ -47,6 +48,8 @@ INSTALLED_APPS = [
     'online.card.apps.CardConfig',
     'online.account.apps.AccountConfig',
 ]
+
+PAYPAL_TEST = True
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
@@ -202,6 +205,22 @@ LOGGING = {
             'backupCount': 10,
             'formatter': 'verbose'
         },
+        'mobile': {
+            'level': 'DEBUG',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': os.path.join(BASE_DIR, "logs/mobile.log"),  # 日志文件的位置
+            'maxBytes': 300 * 1024 * 1024,
+            'backupCount': 10,
+            'formatter': 'verbose'
+        },
+        'payment': {
+            'level': 'DEBUG',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': os.path.join(BASE_DIR, "logs/payment.log"),  # 日志文件的位置
+            'maxBytes': 300 * 1024 * 1024,
+            'backupCount': 10,
+            'formatter': 'verbose'
+        },
     },
     'loggers': {
         'django': {
@@ -216,6 +235,16 @@ LOGGING = {
         },
         'management': {
             'handlers': ['console', 'management'],
+            'propagate': True,
+            'level': 'INFO',
+        },
+        'mobile': {
+            'handlers': ['console', 'mobile'],
+            'propagate': True,
+            'level': 'INFO',
+        },
+        'payment': {
+            'handlers': ['console', 'payment'],
             'propagate': True,
             'level': 'INFO',
         },
@@ -245,7 +274,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 
@@ -276,3 +305,10 @@ URL_ADMIN_PREFIX = "http://" + env.ADMIN_API_HOST + ":" + env.ADMIN_API_HOST
 PASSWORD_HASHERS = [
     'django.contrib.auth.hashers.UnsaltedMD5PasswordHasher'
 ]
+
+
+PAYMENT_NOTIFY_URL = "https://fe8f24e4.ngrok.io/paypal/"
+PAYMENT_RETURN_URL = "https://www.baidu.com"
+PAYMENT_CANCEL_URL = "https://www.baidu.com"
+PAYMENT_ITEM = "love-family"
+PAYMENT_BUSSINESS = "sb-jc6dl844717@business.example.com"
