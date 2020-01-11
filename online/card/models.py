@@ -24,7 +24,7 @@ class OrderPay(models.Model):
 
 
     class Meta:
-        db_table = "Card"
+        db_table = "OrderPay"
 
     def __str__(self):
         return self.payment_id

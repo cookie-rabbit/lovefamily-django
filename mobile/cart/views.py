@@ -44,7 +44,6 @@ class CartsView(View):
                                       "description": cart.goods.description_en, "price": cart.goods.origin_price,
                                       "on_price": cart.goods.on_price,
                                       "image": settings.URL_PREFIX + image[0].image.url, "quantity": cart.quantity})
-                print(sum)
                 data = {"carts_list": cart_list, "cart_quantity": cart_quantity, "sum": sum}
             else:
                 data = {"carts_list": [], "cart_quantity": 0, "sum": 0}
