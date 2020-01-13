@@ -26,13 +26,10 @@ def payment_success(sender, **kwargs):
                "the txn_id is {}, the payment_status is {}".format(name, invoice, created_at, payment_date, txn_id,
                                                                    payment_status)
         payment_logger.info(text)
-        print(text)
-        print("success")
 
 
 def payment_failure(sender, **kwargs):
     ipn_obj = sender
-    aaa = ipn_obj.payment_date
     created_at = ipn_obj.created_at  # 创建日期
     invoice = ipn_obj.invoice  # 订单号
     name = ipn_obj.address_name  # 支付人姓名
@@ -43,7 +40,6 @@ def payment_failure(sender, **kwargs):
            "the txn_id is {}, the payment_status is {}".format(name, invoice, created_at, payment_date, txn_id,
                                                                payment_status)
     payment_logger.info(text)
-    print("failed")
 
 
 valid_ipn_received.connect(payment_success)

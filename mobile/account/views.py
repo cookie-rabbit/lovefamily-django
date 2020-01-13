@@ -49,6 +49,15 @@ class LoginView(View):
                 return JsonResponse({"errcode": "102", "errmsg": "Db error"})
             request.session['user_id'] = user.id
             request.session['%s_cart' % user.id] = quantity
+            if 'HTTP_X_FORWARDED_FOR' in request.META:
+                ip_address = request.META['HTTP_X_FORWARDED_FOR']
+            else:
+                ip_address = request.META['REMOTE_ADDR']
+            text = "The user who's user_id {} has been logged in at {},the ip address is {}".format(user.id,
+                                                                                                    timezone.now(),
+                                                                                                    ip_address)
+            mobile_logger.info(text)
+            print(text)
             return JsonResponse({"errcode": "0", "errmsg": "login success"})
 
         elif type == 'signup':

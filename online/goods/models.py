@@ -6,8 +6,8 @@ from datetime import datetime
 
 class Goods(models.Model):
     """商品表"""
-    name_ch = models.CharField(max_length=20, null=True)
-    name_en = models.CharField(max_length=30, null=True)
+    name_ch = models.CharField(max_length=40, null=True)
+    name_en = models.CharField(max_length=100, null=True)
     origin_price = models.FloatField(default=None, null=True)
     on_price = models.FloatField(default=0)
     actual_sale = models.IntegerField(default=0)
@@ -21,7 +21,7 @@ class Goods(models.Model):
     is_hot = models.BooleanField(default=False)
     is_new = models.BooleanField(default=False)
     added_time = models.DateTimeField()
-    super_category_id = models.CharField(max_length=10, null=True)
+    super_category_id = models.CharField(max_length=20, null=True)
     category = models.ForeignKey('Category', on_delete=models.CASCADE, related_name='goods')
 
     class Meta:

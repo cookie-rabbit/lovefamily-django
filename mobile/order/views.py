@@ -212,14 +212,14 @@ class OrdersView(View):
                 orders_total = orders.order_by('-order_date')
             else:
                 orders_total = orders.filter(status=status_query).order_by('-order_date')
-            orders = orders_total[offset: offset+PER_PAGE_GOODS_COUNT]
+            orders = orders_total[offset: offset + PER_PAGE_GOODS_COUNT]
 
         except Exception as e:
             online_logger.error(e)
             return JsonResponse({'errcode': 101, 'errmsg': "params error"})
         order_count = orders_total.count()
 
-        if order_count > PER_PAGE_GOODS_COUNT+offset:
+        if order_count > PER_PAGE_GOODS_COUNT + offset:
             more = 'true'
         else:
             more = 'false'
@@ -266,11 +266,25 @@ class OrdersView(View):
         user_id = user.id
         time = timezone.now()
         i = timezone.now()
-        order_no = "0000" + str(i.year) + str(i.month) + str(i.day) + str(i.hour) + str(i.minute) + str(
-            i.second) + str(random.randint(0000, 9999))
+        month = str(i.month)
+        day = str(i.day)
+        hour = str(i.hour)
+        minute = str(i.minute)
+        second = str(i.second)
+        if len(month) <2:
+            month = '0' + month
+        if len(day) <2:
+            day = '0' + day
+        if len(hour) <2:
+            hour = '0' + hour
+        if len(minute) <2:
+            minute = '0' + minute
+        if len(second) <2:
+            second = '0' + second
+
+        order_no = "0000" + str(i.year) + month + day + hour + minute + second + str(random.randint(0000, 9999))
         status = 1
         total = 0
-        save_id = transaction.savepoint()
         try:
             order_address = OrderAddress.objects.create(name=name, province=province, road=road,
                                                         city=city, district=district, postcode=postcode,
@@ -279,7 +293,6 @@ class OrdersView(View):
             order = Order.objects.create(order_no=order_no, total=total, order_date=time, status=status,
                                          address=order_address, user=User.objects.get(id=user_id))
         except Exception as e:
-            transaction.savepoint_rollback(save_id)
             online_logger.error(e)
             return JsonResponse({"errcode": 101, "errmsg": "params error"})
 
@@ -291,19 +304,16 @@ class OrdersView(View):
                 good_count = good['good_count']
                 Goodgoods = Goods.objects.select_for_update().get(id=goods_id)
             except Goods.DoesNotExist as e:
-                transaction.savepoint_rollback(save_id)
                 online_logger.error(e)
                 return JsonResponse({'errcode': 110, 'errmsg': "goods not exist"})
 
             except Exception as e:
-                transaction.savepoint_rollback(save_id)
                 online_logger.error(e)
                 return JsonResponse({'errcode': 102, 'errmsg': 'Db error'})
 
             count = int(good_count)
             if Goodgoods.stock < count:
-                transaction.savepoint_rollback(save_id)
-                return JsonResponse({'errcode': 112, 'errmsg': "stock not enough"})
+                return JsonResponse({'errcode': 112, 'errmsg': "the {} stock is not enough".format(Goodgoods.name_en)})
 
             try:
                 name_en = Goodgoods.name_en
@@ -314,11 +324,11 @@ class OrdersView(View):
                 Goodgoods.stock -= count
                 Goodgoods.save()
                 total += int(good_count) * Goodgoods.on_price
-                Order_Goods.objects.create(goods_id=goods_id, order=order, quantity=count, name_en=name_en, on_price=on_price,
+                Order_Goods.objects.create(goods_id=goods_id, order=order, quantity=count, name_en=name_en,
+                                           on_price=on_price,
                                            description_en=description_en, img=good_img)
                 Order.objects.filter(id=order.id).update(total=total)
             except Exception as e:
-                transaction.savepoint_rollback(save_id)
                 online_logger.error(e)
                 return JsonResponse({'errcode': 102, 'errmsg': 'Db error'})
 
@@ -326,7 +336,6 @@ class OrdersView(View):
             time = timezone.now()
             OrderStatusLog.objects.create(order_no=order_no, status=1, user_id=user_id, change_date=time)
         except Exception as e:
-            transaction.savepoint_rollback(save_id)
             online_logger.error(e)
             return JsonResponse({'errcode': 102, 'errmsg': 'Db error'})
 
@@ -335,7 +344,6 @@ class OrdersView(View):
                 Cart.objects.filter(goods_id__in=goods_ids).delete()
             except Exception as e:
                 online_logger.error(e)
-                transaction.savepoint_rollback(save_id)
                 return JsonResponse({'errcode': 102, 'errmsg': 'Db error'})
 
         # href = "http://10.168.2.111:8000/orders/{order_id}/pay/".format(order_id=order.id)
@@ -383,6 +391,7 @@ class UserAddressView(View):
             return JsonResponse({"errcode": 102, "errmsg": "Db error"})
 
 
+# 提交支付
 class PayView(View):
     def get(self, request, order_no):
         try:
