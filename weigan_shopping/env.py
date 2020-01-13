@@ -14,8 +14,10 @@ API_PORT = os.getenv("API_PORT", "8000")  # PC端接口
 ADMIN_API_HOST = os.getenv("ADMIN_API_HOST", "10.168.2.107")  # 后台地址
 ADMIN_API_PORT = os.getenv("ADMIN_API_PORT", "9526")  # 后台端口
 
-PAYMENT_NOTIFY_URL = "https://fe8f24e4.ngrok.io/paypal/"
-PAYMENT_RETURN_URL = "https://www.baidu.com"
-PAYMENT_CANCEL_URL = "https://www.baidu.com"
+MOBILE_URL = "http://10.168.2.107:8080/#/"
+
+PAYMENT_NOTIFY_URL = "https://ddfd9d89.ngrok.io/paypal/"
+PAYMENT_RETURN_URL = MOBILE_URL
+PAYMENT_CANCEL_URL = MOBILE_URL + "cashier?order_no="
 PAYMENT_ITEM = "love-family"
 PAYMENT_BUSSINESS = "sb-jc6dl844717@business.example.com"

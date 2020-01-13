@@ -21,7 +21,7 @@ class PaymentView(View):
             "invoice": self.order_no,
             "notify_url": settings.PAYMENT_NOTIFY_URL,
             "return": settings.PAYMENT_RETURN_URL,
-            "cancel_return": settings.PAYMENT_CANCEL_URL,
+            "cancel_return": settings.PAYMENT_CANCEL_URL + self.order_no,
             "custom": "premium_plan",  # Custom command to correlate to some function later (optional)
         }
 
@@ -29,5 +29,3 @@ class PaymentView(View):
         form = PayPalPaymentsForm(initial=paypal_dict)
         context = {"form": form}
         return render(self.request, "testPay.html", context)
-
-
