@@ -16,7 +16,6 @@ from utils.decorator import user_auth
 class LoginView(View):
     """用户登录，注册"""
 
-
     def post(self, request):
         data = json.loads(request.body.decode())
         type = data.get("type")
@@ -32,7 +31,7 @@ class LoginView(View):
                 else:
                     return JsonResponse({"errcode": "105", "errmsg": "The user has not registered yet"})
                 if user.status != 1:
-                    return JsonResponse({"errcode": "116", "errmsg": "The user has been baned"})
+                    return JsonResponse({"errcode": "116", "errmsg": "The user has been forbidden"})
             except Exception as e:
                 mobile_logger.error(e)
                 return JsonResponse({"errcode": "102", "errmsg": "Db error"})

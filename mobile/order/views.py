@@ -419,14 +419,3 @@ class PayView(View):
         data = {"total": total, "content": a}
         return JsonResponse({"errcode": 0, "data": data})
 
-
-# 定时，将超过24h未支付的订单关闭
-def order_closed():
-    orders = Order.objects.filter(status=1)
-    for order in orders:
-        order_time = order.order_date
-        time_now = timezone.now()
-        a = time_now - order_time
-        if a > 24:
-            Order.objects.get(id=order.id).update(status=5)
-    mobile_logger.info("At {} the orders which time outed has been closed".format(timezone.now()))

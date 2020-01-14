@@ -16,7 +16,7 @@ ADMIN_API_PORT = os.getenv("ADMIN_API_PORT", "9526")  # 后台端口
 
 MOBILE_URL = "http://10.168.2.107:8080/#/"
 
-PAYMENT_NOTIFY_URL = "https://ddfd9d89.ngrok.io/paypal/"
+PAYMENT_NOTIFY_URL = "https://ff4163eb.ngrok.io/paypal/"
 PAYMENT_RETURN_URL = MOBILE_URL + "paySuccess"
 PAYMENT_CANCEL_URL = MOBILE_URL + "cashier?order_no="
 PAYMENT_ITEM = "love-family"

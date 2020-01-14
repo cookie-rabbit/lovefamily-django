@@ -224,10 +224,10 @@ class OrderLogsView(View):
                 lena = len(states)
                 sta_dic = {1: "orderd", 2: "Payed", 3: "Delivering", 4: "Finished", 5: "Closed"}
 
-                if states != '':
+                if lena > 0:
                     for state in states:
                         status = sta_dic.get(state.status)
-                        if state.is_admin == False:
+                        if not state.is_admin:
                             try:
                                 username = User.objects.get(id=state.user_id).username
                             except Exception as e:

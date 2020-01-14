@@ -63,6 +63,8 @@ class GoodsView(View):
         for goods in goods_list:
             name = goods.name_en
             names.append(name)
+            category= goods.category.name,
+            super_category= goods.category.super_category.name,
         result = [{"id": goods.id, "name": goods.name_en, "description": goods.description_en, "price": goods.on_price,
                    "category": goods.category.name, "super_category": goods.category.super_category.name,
                    "sale": goods.actual_sale + goods.virtual_sale, "stock": goods.stock, "on_sale": goods.on_sale} for
@@ -338,10 +340,8 @@ class CategoryView(View):
                 category = Category.objects.get(id=category_id)
                 category.name = category_name
 
-                if parent_category_id is None:
-                    category.super_category_id = None
-                elif parent_category_id and category_id and parent_category_id != category_id:
-                    length = len(Category.objects.filter(super_category_id=category_id))
+                if parent_category_id and category_id and parent_category_id != category_id:
+                    length = len(Category.objects.filter(super_category_id=category_id).order_by('id'))
                     if length == 0:
                         parent_category = Category.objects.get(id=parent_category_id)
                         category.super_category = parent_category
@@ -349,7 +349,7 @@ class CategoryView(View):
                         return JsonResponse(
                             {"errcode": "114",
                              "errmsg": "can't set a parent category as child category which is not null"})
-                else:
+                elif parent_category_id and category_id and parent_category_id == category_id:
                     return JsonResponse({"errcode": "113", "errmsg": "can't set it self as a parent category"})
 
                 category.save()
