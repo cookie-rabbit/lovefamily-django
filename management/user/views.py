@@ -22,7 +22,7 @@ class LoginView(View):
         if not all([username, password]):
             return JsonResponse({"errcode": "101", "errmsg": 'params not all'})
         try:
-            user = Admin.objects.filter(username=username)
+            user = Admin.objects.extra(where=['binary username=%s'], params=[username])
             if not user:
                 return JsonResponse({"errcode": "102", "errmsg": "can not find user in db"})
             else:

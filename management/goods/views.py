@@ -100,7 +100,7 @@ class GoodsView(View):
 
         if name is None or on_sale is None or on_price is None or stock is None \
                 or is_hot is None or is_new is None or category_id is None or super_category_id is None:
-            return JsonResponse({"errcode": "101", "errmsg": "params error"})
+            return JsonResponse({"errcode": "101", "errmsg": "Params error"})
         try:
             goods = Goods.objects.create(name_en=name, detail_en=detail, description_en=description, on_sale=on_sale,
                                          origin_price=origin_price, on_price=on_price, category_id=category_id,
@@ -135,7 +135,7 @@ class GoodsDetailView(View):
             super_category_id = Category.objects.filter(id=goods.category_id)[0].super_category_id
         except Goods.DoesNotExist as e:
             management_logger.error(e)
-            return JsonResponse({"errcode": "102", "errmsg": "can not find goods in db"})
+            return JsonResponse({"errcode": "102", "errmsg": "Can not find goods in "})
         except Exception as e:
             management_logger.error(e)
             return JsonResponse({"errcode": "102", "errmsg": "Db error"})
@@ -162,7 +162,7 @@ class GoodsDetailView(View):
                 detail = data.get("detail", None)
                 images = data.get("image", None)
                 if not all([name]):
-                    return JsonResponse({"errcode": "101", "errmsg": "params error"})
+                    return JsonResponse({"errcode": "101", "errmsg": "Params error"})
                 try:
                     goods = Goods.objects.get(id=goods_id)
                     goods.name_en = name
@@ -238,7 +238,7 @@ class GoodsDetailView(View):
                 is_new = data.get("is_new", None)
                 if on_sale is None or stock is None or is_hot is None or is_new is None or on_price is None or \
                         category_id is None:
-                    return JsonResponse({"errcode": "101", "errmsg": "params error"})
+                    return JsonResponse({"errcode": "101", "errmsg": "Params error"})
                 try:
                     Goods.objects.filter(id=goods_id).update(on_sale=on_sale, added_time=added_time,
                                                              origin_price=origin_price,
@@ -254,7 +254,7 @@ class GoodsDetailView(View):
                 data = json.loads(request.body.decode())
                 status = data.get("status", None)
                 if status is None:
-                    return JsonResponse({"errcode": "101", "errmsg": "params error"})
+                    return JsonResponse({"errcode": "101", "errmsg": "Params error"})
                 try:
                     good = Goods.objects.get(id=goods_id)
                     if status == 1:
@@ -267,7 +267,7 @@ class GoodsDetailView(View):
                     return JsonResponse({"errcode": "102", "errmsg": "can not find good in db"})
                 return JsonResponse({"errcode": "0", "errmsg": "update success"})
         else:
-            return JsonResponse({"errcode": "101", "errmsg": "params error"})
+            return JsonResponse({"errcode": "101", "errmsg": "Params error"})
 
 
 class CategoriesView(View):
@@ -307,7 +307,7 @@ class CategoriesView(View):
             return JsonResponse({"errcode": "115", "errmsg": "the content is too long for category name"})
         parent_category_id = data.get("parent_category_id", None)
         if category_name is None:
-            return JsonResponse({"errcode": "101", "errmsg": "params error"})
+            return JsonResponse({"errcode": "101", "errmsg": "Params error"})
         try:
             if parent_category_id:
                 parent_category = Category.objects.get(id=parent_category_id)
@@ -333,7 +333,7 @@ class CategoryView(View):
             category_name = data.get("category_name", None)
             parent_category_id = data.get("parent_category_id", None)
             if category_name is None:
-                return JsonResponse({"errcode": "101", "errmsg": "params error"})
+                return JsonResponse({"errcode": "101", "errmsg": "Params error"})
             try:
                 category = Category.objects.get(id=category_id)
                 category.name = category_name
@@ -370,7 +370,7 @@ class CategoryView(View):
                 category_status = int(category_status)
             except Exception as e:
                 management_logger.error(e)
-                return JsonResponse({"errcode": "101", "errmsg": "params error"})
+                return JsonResponse({"errcode": "101", "errmsg": "Params error"})
             try:
                 Category.objects.filter(id=category_id).update(disabled=category_status)
 
@@ -388,7 +388,7 @@ class CategoryView(View):
             category_id = int(category_id)
         except Exception as e:
             management_logger.error(e)
-            return JsonResponse({"errcode": "101", "errmsg": "params error"})
+            return JsonResponse({"errcode": "101", "errmsg": "Params error"})
 
         try:
             category = Category.objects.get(id=category_id)

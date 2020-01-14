@@ -21,9 +21,7 @@ class LoginView(View):
     """用户登录"""
     def post(self, request):
         username = request.POST.get("name", None)
-        print(username)
         password = request.POST.get("password", None)
-        print(password)
         if not all([username, password]):
             return JsonResponse({"errcode": "101", "errmsg": "params not all"})
         try:

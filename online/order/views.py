@@ -141,7 +141,7 @@ class OrdersListView(View):
             status_query = int(status_query)
         except ValueError as e:
             online_logger.error(e)
-            return JsonResponse({'errcode': 101, 'errmsg': "params error"})
+            return JsonResponse({'errcode': 101, 'errmsg': "Params error"})
         try:
             if status_query == 0:
                 orders_total = orders.order_by('-order_date')
@@ -151,7 +151,7 @@ class OrdersListView(View):
 
         except Exception as e:
             online_logger.error(e)
-            return JsonResponse({'errcode': 101, 'errmsg': "params error"})
+            return JsonResponse({'errcode': 101, 'errmsg': "Params error"})
         order_count = orders_total.count()
 
         if order_count > PER_PAGE_GOODS_COUNT:
@@ -235,7 +235,7 @@ class OrderCreateView(View):
                                          address=order_address, user=User.objects.get(id=user_id))
         except Exception as e:
             online_logger.error(e)
-            return JsonResponse({"errcode": 101, "errmsg": "params error"})
+            return JsonResponse({"errcode": 101, "errmsg": "Params error"})
 
         for good in goods:
             goods_id = good['good_id']
@@ -288,7 +288,7 @@ class OrderCreateView(View):
             status_query = int(status_query)
         except ValueError as e:
             online_logger.error(e)
-            return JsonResponse({'errcode': 101, 'errmsg': "params error"})
+            return JsonResponse({'errcode': 101, 'errmsg': "Params error"})
         try:
             if status_query == 0:
                 orders_total = Order.objects.filter(user_id=user_id).order_by('-order_date')

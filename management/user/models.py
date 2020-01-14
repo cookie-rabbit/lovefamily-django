@@ -9,7 +9,7 @@ class User(models.Model):
     """用户表"""
     username = models.CharField(max_length=20, default='')
     email = models.EmailField()
-    phone = models.CharField(max_length=15)
+    phone = models.CharField(max_length=40)
     password = models.CharField(max_length=100)
     signup_date = models.DateField(null=True)
     status = models.BooleanField(default=True)

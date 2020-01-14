@@ -1,4 +1,3 @@
-import pytz
 from django.db import transaction
 from django.utils.decorators import method_decorator
 from django.http import JsonResponse
@@ -7,21 +6,20 @@ from django.views.decorators.csrf import csrf_exempt
 from django.utils import timezone
 
 from mobile.card.views import PaymentView
+from mobile.logger import mobile_logger
 from online.constants import PER_PAGE_GOODS_COUNT
 from online.order.models import Order, Order_Goods, OrderAddress, OrderStatusLog
 from online.goods.models import Goods, Image
 from management.user.models import User
-from online.logger import online_logger
+from mobile.logger import mobile_logger
 from utils.decorator import user_auth
 from online.cart.models import Cart
 from management.user.models import UserAddress
 import management.user
 from weigan_shopping import settings
 
-import ast
 import random
 import json
-from datetime import datetime
 
 
 # 获取订单信息及地址
@@ -57,7 +55,7 @@ class OrderAddressView(View):
                 postcode = ''
                 is_null = 1
             except Exception as e:
-                online_logger.error(e)
+                mobile_logger.error(e)
                 return JsonResponse({"errcode": "102", "errmsg": "Db error"})
 
             if carts_id is not None:
@@ -78,7 +76,7 @@ class OrderAddressView(View):
                              "description": good_description_en,
                              "image": settings.URL_PREFIX + good_image[0].image.url})
                     except Exception as e:
-                        online_logger.error(e)
+                        mobile_logger.error(e)
                         return JsonResponse({"errcode": "102", "errmsg": "Db error"})
 
             elif goods_id is not None:
@@ -98,7 +96,7 @@ class OrderAddressView(View):
                              "description": good_description_en,
                              "image": settings.URL_PREFIX + good_image[0].image.url})
                     except Exception as e:
-                        online_logger.error(e)
+                        mobile_logger.error(e)
                         return JsonResponse({"errcode": "102", "errmsg": "Db error"})
                 else:
                     return JsonResponse({"errcode": "101", "errmsg": "the num is lower than 1"})
@@ -107,14 +105,14 @@ class OrderAddressView(View):
                 try:
                     order = Order.objects.filter(order_no=order_no)
                 except Exception as e:
-                    online_logger.error(e)
+                    mobile_logger.error(e)
                     return JsonResponse({"errcode": "102", "errmsg": "can't find the order"})
 
                 if len(order) > 0:
                     try:
                         goods = Order_Goods.objects.filter(order_id=order[0].id)
                     except Exception as e:
-                        online_logger.error(e)
+                        mobile_logger.error(e)
                         return JsonResponse({"errcode": "102", "errmsg": "Db error"})
 
                     for good in goods:
@@ -140,7 +138,7 @@ class OrderAddressView(View):
                 try:
                     order = Order.objects.filter(order_no=order_no)
                 except Exception as e:
-                    online_logger.error(e)
+                    mobile_logger.error(e)
                     return JsonResponse({"errcode": "102", "errmsg": "can't find the order"})
 
                 if len(order) > 0:
@@ -166,7 +164,7 @@ class OrdersDetailView(View):
             try:
                 goods = Order_Goods.objects.filter(order_id=order.id)
             except Exception as e:
-                online_logger.error(e)
+                mobile_logger.error(e)
                 return JsonResponse({"errcode": 102, "errmsg": "Db error"})
 
             if goods != '':
@@ -205,8 +203,8 @@ class OrdersView(View):
         try:
             status_query = int(status_query)
         except ValueError as e:
-            online_logger.error(e)
-            return JsonResponse({'errcode': 101, 'errmsg': "params error"})
+            mobile_logger.error(e)
+            return JsonResponse({'errcode': 101, 'errmsg': "Params error"})
         try:
             if status_query == 0:
                 orders_total = orders.order_by('-order_date')
@@ -215,8 +213,8 @@ class OrdersView(View):
             orders = orders_total[offset: offset + PER_PAGE_GOODS_COUNT]
 
         except Exception as e:
-            online_logger.error(e)
-            return JsonResponse({'errcode': 101, 'errmsg': "params error"})
+            mobile_logger.error(e)
+            return JsonResponse({'errcode': 101, 'errmsg': "Params error"})
         order_count = orders_total.count()
 
         if order_count > PER_PAGE_GOODS_COUNT + offset:
@@ -260,95 +258,103 @@ class OrdersView(View):
             goods = data.get('goods')
             is_cart = data.get('is_cart', 0)
         except Exception as e:
-            online_logger.error(e)
+            mobile_logger.error(e)
             return JsonResponse({"errcode": 101, "errmsg": "params not all"})
-
-        user_id = user.id
-        time = timezone.now()
-        i = timezone.now()
-        month = str(i.month)
-        day = str(i.day)
-        hour = str(i.hour)
-        minute = str(i.minute)
-        second = str(i.second)
-        if len(month) <2:
-            month = '0' + month
-        if len(day) <2:
-            day = '0' + day
-        if len(hour) <2:
-            hour = '0' + hour
-        if len(minute) <2:
-            minute = '0' + minute
-        if len(second) <2:
-            second = '0' + second
-
-        order_no = "0000" + str(i.year) + month + day + hour + minute + second + str(random.randint(0000, 9999))
-        status = 1
-        total = 0
-        try:
-            order_address = OrderAddress.objects.create(name=name, province=province, road=road,
-                                                        city=city, district=district, postcode=postcode,
-                                                        phone_number=phone_number)
-
-            order = Order.objects.create(order_no=order_no, total=total, order_date=time, status=status,
-                                         address=order_address, user=User.objects.get(id=user_id))
-        except Exception as e:
-            online_logger.error(e)
-            return JsonResponse({"errcode": 101, "errmsg": "params error"})
-
-        goods_ids = []
-        for good in goods:
-            try:
+        if len(goods) > 0:
+            for good in goods:
                 goods_id = good['good_id']
-                goods_ids.append(goods_id)
                 good_count = good['good_count']
-                Goodgoods = Goods.objects.select_for_update().get(id=goods_id)
-            except Goods.DoesNotExist as e:
-                online_logger.error(e)
-                return JsonResponse({'errcode': 110, 'errmsg': "goods not exist"})
+                count = int(good_count)
+                good_list = Goods.objects.select_for_update().get(id=goods_id)
+                if good_list.stock < count:
+                    return JsonResponse({'errcode': 112, 'errmsg': "the {} stock is not enough".format(good_list.name_en)})
 
-            except Exception as e:
-                online_logger.error(e)
-                return JsonResponse({'errcode': 102, 'errmsg': 'Db error'})
-
-            count = int(good_count)
-            if Goodgoods.stock < count:
-                return JsonResponse({'errcode': 112, 'errmsg': "the {} stock is not enough".format(Goodgoods.name_en)})
-
-            try:
-                name_en = Goodgoods.name_en
-                on_price = Goodgoods.on_price
-                description_en = Goodgoods.description_en
-                good_img = Image.objects.filter(goods_id=goods_id)[0].image
-                Goodgoods.actual_sale += count
-                Goodgoods.stock -= count
-                Goodgoods.save()
-                total += int(good_count) * Goodgoods.on_price
-                Order_Goods.objects.create(goods_id=goods_id, order=order, quantity=count, name_en=name_en,
-                                           on_price=on_price,
-                                           description_en=description_en, img=good_img)
-                Order.objects.filter(id=order.id).update(total=total)
-            except Exception as e:
-                online_logger.error(e)
-                return JsonResponse({'errcode': 102, 'errmsg': 'Db error'})
-
-        try:
+            user_id = user.id
             time = timezone.now()
-            OrderStatusLog.objects.create(order_no=order_no, status=1, user_id=user_id, change_date=time)
-        except Exception as e:
-            online_logger.error(e)
-            return JsonResponse({'errcode': 102, 'errmsg': 'Db error'})
+            i = timezone.now()
+            month = str(i.month)
+            day = str(i.day)
+            hour = str(i.hour)
+            minute = str(i.minute)
+            second = str(i.second)
+            if len(month) < 2:
+                month = '0' + month
+            if len(day) < 2:
+                day = '0' + day
+            if len(hour) < 2:
+                hour = '0' + hour
+            if len(minute) < 2:
+                minute = '0' + minute
+            if len(second) < 2:
+                second = '0' + second
 
-        if is_cart == 1:
+            order_no = "0000" + str(i.year) + month + day + hour + minute + second + str(random.randint(0000, 9999))
+            status = 1
+            total = 0
             try:
-                Cart.objects.filter(goods_id__in=goods_ids).delete()
+                order_address = OrderAddress.objects.create(name=name, province=province, road=road,
+                                                            city=city, district=district, postcode=postcode,
+                                                            phone_number=phone_number)
+
+                order = Order.objects.create(order_no=order_no, total=total, order_date=time, status=status,
+                                             address=order_address, user=User.objects.get(id=user_id))
             except Exception as e:
-                online_logger.error(e)
+                mobile_logger.error(e)
+                return JsonResponse({"errcode": 101, "errmsg": "Params error"})
+
+            goods_ids = []
+            for good in goods:
+                try:
+                    goods_id = good['good_id']
+                    goods_ids.append(goods_id)
+                    good_count = good['good_count']
+                    good_list = Goods.objects.select_for_update().get(id=goods_id)
+                except Goods.DoesNotExist as e:
+                    mobile_logger.error(e)
+                    return JsonResponse({'errcode': 110, 'errmsg': "Goods not exist"})
+
+                except Exception as e:
+                    mobile_logger.error(e)
+                    return JsonResponse({'errcode': 102, 'errmsg': 'Db error'})
+
+                count = int(good_count)
+
+                try:
+                    name_en = good_list.name_en
+                    on_price = good_list.on_price
+                    description_en = good_list.description_en
+                    good_img = Image.objects.filter(goods_id=goods_id)[0].image
+                    good_list.actual_sale += count
+                    good_list.stock -= count
+                    good_list.save()
+                    total += int(good_count) * good_list.on_price
+                    Order_Goods.objects.create(goods_id=goods_id, order=order, quantity=count, name_en=name_en,
+                                               on_price=on_price,
+                                               description_en=description_en, img=good_img)
+                    Order.objects.filter(id=order.id).update(total=total)
+                except Exception as e:
+                    mobile_logger.error(e)
+                    return JsonResponse({'errcode': 102, 'errmsg': 'Db error'})
+
+            try:
+                time = timezone.now()
+                OrderStatusLog.objects.create(order_no=order_no, status=1, user_id=user_id, change_date=time)
+            except Exception as e:
+                mobile_logger.error(e)
                 return JsonResponse({'errcode': 102, 'errmsg': 'Db error'})
 
-        # href = "http://10.168.2.111:8000/orders/{order_id}/pay/".format(order_id=order.id)
-        data = {"order_no": order_no}
-        return JsonResponse({"errcode": 0, "errmsg": "ordered success", "data": data})
+            if is_cart == 1:
+                try:
+                    Cart.objects.filter(goods_id__in=goods_ids).delete()
+                except Exception as e:
+                    mobile_logger.error(e)
+                    return JsonResponse({'errcode': 102, 'errmsg': 'Db error'})
+
+            # href = "http://10.168.2.111:8000/orders/{order_id}/pay/".format(order_id=order.id)
+            data = {"order_no": order_no}
+            return JsonResponse({"errcode": 0, "errmsg": "ordered success", "data": data})
+        else:
+            return JsonResponse({"errcode": 101, "errmsg": "There's no goods"})
 
 
 # 下单页面用户地址修改
@@ -368,7 +374,7 @@ class UserAddressView(View):
             postcode = data.get('postcode')
             phone_number = data.get('phone_number')
         except Exception as e:
-            online_logger.error(e)
+            mobile_logger.error(e)
             return JsonResponse({"errcode": 101, "errmsg": "params not all"})
         try:
             UserAddress.objects.filter(user_id=user_id).update(name=name, province=province, road=road,
@@ -383,11 +389,11 @@ class UserAddressView(View):
                 return JsonResponse({"errcode": 0, "data": "created success"})
 
             except Exception as e:
-                online_logger.error(e)
+                mobile_logger.error(e)
                 return JsonResponse({"errcode": 102, "errmsg": "Db error"})
 
         except Exception as e:
-            online_logger.error(e)
+            mobile_logger.error(e)
             return JsonResponse({"errcode": 102, "errmsg": "Db error"})
 
 
@@ -397,7 +403,7 @@ class PayView(View):
         try:
             goods = Order.objects.filter(order_no=order_no)
         except Exception as e:
-            online_logger.error(e)
+            mobile_logger.error(e)
             return JsonResponse({"errcode": 102, "errmsg": "Db error"})
 
         if len(goods) > 0:
@@ -412,3 +418,15 @@ class PayView(View):
 
         data = {"total": total, "content": a}
         return JsonResponse({"errcode": 0, "data": data})
+
+
+# 定时，将超过24h未支付的订单关闭
+def order_closed():
+    orders = Order.objects.filter(status=1)
+    for order in orders:
+        order_time = order.order_date
+        time_now = timezone.now()
+        a = time_now - order_time
+        if a > 24:
+            Order.objects.get(id=order.id).update(status=5)
+    mobile_logger.info("At {} the orders which time outed has been closed".format(timezone.now()))

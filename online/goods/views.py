@@ -92,7 +92,7 @@ class GoodsTypeView(View):
                 more = False
         except TypeError as e:
             online_logger.error(e)
-            return JsonResponse({"errcode": "101", "errmsg": "params error"})
+            return JsonResponse({"errcode": "101", "errmsg": "Params error"})
         except Exception as e:
             online_logger.error(e)
             return JsonResponse({"errcode": "102", "errmsg": "Db error"})
@@ -138,7 +138,7 @@ class GoodsCategoryView(View):
                 more = False
         except TypeError as e:
             online_logger.error(e)
-            return JsonResponse({"errcode": "101", "errmsg": "params error"})
+            return JsonResponse({"errcode": "101", "errmsg": "Params error"})
         except Exception as e:
             online_logger.error(e)
             return JsonResponse({"errcode": "102", "errmsg": "Db error"})
@@ -197,7 +197,7 @@ class GoodsCategoryTemplateView(View):
                 more = False
         except TypeError as e:
             online_logger.error(e)
-            return JsonResponse({"errcode": "101", "errmsg": "params error"})
+            return JsonResponse({"errcode": "101", "errmsg": "Params error"})
         except Category.DoesNotExist as e:
             online_logger.error(e)
             return JsonResponse({"errcode": "102", "errmsg": "can not find category in db"})
@@ -232,7 +232,6 @@ class GoodsCategoryTemplateView(View):
         context.update({"current_category": {"super_category": super_category,
                                              "category": {"id": current_category.id, "name": current_category.name}},
                         "more": more})
-        print(context)
         return render(request, "goodsList.html", context=context)
 
 
@@ -259,7 +258,7 @@ class GoodsTemplateView(View):
             images = Image.objects.filter(goods__id=goods_id)
         except Goods.DoesNotExist as e:
             online_logger.error(e)
-            return JsonResponse({"errcode": "102", "errmsg": "can not find goods in db"})
+            return JsonResponse({"errcode": "102", "errmsg": "Can not find goods in "})
         except Exception as e:
             online_logger.error(e)
             return JsonResponse({"errcode": "102", "errmsg": "Db error"})
@@ -295,7 +294,7 @@ class GoodsSearchView(View):
         current = request.GET.get("current", 0)
         count = PER_PAGE_GOODS_COUNT
         if keyword is None:
-            return JsonResponse({"errcode": "101", "errmsg": "empty params"})
+            return JsonResponse({"errcode": "101", "errmsg": "Empty params"})
         try:
             current = int(current)
             total_goods = Goods.objects.filter(on_sale=True).filter(name_en__contains=keyword)
@@ -331,7 +330,7 @@ class GoodsSearchTemplateView(View):
         keyword = request.GET.get("keyword", None)
         count = PER_PAGE_GOODS_COUNT
         if keyword is None:
-            return JsonResponse({"errcode": "101", "errmsg": "empty params"})
+            return JsonResponse({"errcode": "101", "errmsg": "Empty params"})
         try:
             total_goods = Goods.objects.filter(on_sale=True).filter(name_en__contains=keyword)
             goods = total_goods[:count]
@@ -341,7 +340,7 @@ class GoodsSearchTemplateView(View):
                 more = False
         except TypeError as e:
             online_logger.error(e)
-            return JsonResponse({"errcode": "101", "errmsg": "params error"})
+            return JsonResponse({"errcode": "101", "errmsg": "Params error"})
         except Exception as e:
             online_logger.error(e)
             return JsonResponse({"errcode": "102", "errmsg": "Db error"})
