@@ -8,7 +8,7 @@ from django.views import View
 from management.user.models import User
 from online.cart.models import Cart
 from online.goods.models import Goods, Image, Category
-from online.logger import online_logger
+from mobile.logger import mobile_logger
 from utils.decorator import user_auth
 from weigan_shopping import settings
 
@@ -23,17 +23,17 @@ class CartsView(View):
             try:
                 user = User.objects.get(id=user_id)
             except User.DoesNotExist as e:
-                online_logger.error(e)
+                mobile_logger.error(e)
                 return JsonResponse({"errcode": "102", "errmsg": "can not find user in db"})
             except Exception as e:
-                online_logger.error(e)
+                mobile_logger.error(e)
                 return JsonResponse({"errcode": "102", "errmsg": "Db error"})
             cart_quantity = request.session.get("%s_cart" % user_id)
             if cart_quantity:
                 try:
                     carts = Cart.objects.filter(user__id=user_id)
                 except Exception as e:
-                    online_logger.error(e)
+                    mobile_logger.error(e)
                     return JsonResponse({"errcode": "102", "errmsg": "Db error"})
                 cart_list = []
                 sum = 0
@@ -44,6 +44,7 @@ class CartsView(View):
                                       "description": cart.goods.description_en, "price": cart.goods.origin_price,
                                       "on_price": cart.goods.on_price,
                                       "image": settings.URL_PREFIX + image[0].image.url, "quantity": cart.quantity})
+                    request.session['%s_cart' % user.id] += cart.quantity
                 data = {"carts_list": cart_list, "cart_quantity": cart_quantity, "sum": sum}
             else:
                 data = {"carts_list": [], "cart_quantity": 0, "sum": 0}
@@ -59,19 +60,19 @@ class CartsView(View):
         goods_id = data.get("goods_id", None)
         quantity = data.get("quantity", 1)
         if not goods_id:
-            return JsonResponse({"errcode": "101", "errmsg": "empty params"})
+            return JsonResponse({"errcode": "101", "errmsg": "Empty params"})
         try:
             goods_id = int(goods_id)
             quantity = int(quantity)
             single_goods = Goods.objects.get(id=goods_id)
         except ValueError as e:
-            online_logger.error(e)
-            return JsonResponse({"errcode": "101", "errmsg": "params error"})
+            mobile_logger.error(e)
+            return JsonResponse({"errcode": "101", "errmsg": "Params error"})
         except Goods.DoesNotExist as e:
-            online_logger.error(e)
-            return JsonResponse({"errcode": "102", "errmsg": "can not find goods in db"})
+            mobile_logger.error(e)
+            return JsonResponse({"errcode": "102", "errmsg": "Can not find goods in "})
         except Exception as e:
-            online_logger.error(e)
+            mobile_logger.error(e)
             return JsonResponse({"errcode": "102", "errmsg": "Db error"})
         try:
             carts = Cart.objects.filter(user=user, goods=single_goods)
@@ -82,9 +83,8 @@ class CartsView(View):
             else:
                 cart = Cart.objects.create(user=user, quantity=quantity, goods=single_goods)
         except Exception as e:
-            online_logger.error(e)
+            mobile_logger.error(e)
             return JsonResponse({"errcode": "102", "errmsg": "Db error"})
-        print(request.session["%s_cart" % user.id])
         request.session["%s_cart" % user.id] += quantity
         total_quantity = request.session["%s_cart" % user.id]
         return JsonResponse(
@@ -107,13 +107,13 @@ class CartView(View):
             cart.quantity = quantity
             cart.save()
         except Cart.DoesNotExist as e:
-            online_logger.error(e)
-            return JsonResponse({"errcode": "102", "errmsg": "can not find goods in db"})
+            mobile_logger.error(e)
+            return JsonResponse({"errcode": "102", "errmsg": "Can not find goods in "})
         except ValueError as e:
-            online_logger.error(e)
-            return JsonResponse({"errcode": "101", "errmsg": "params error"})
+            mobile_logger.error(e)
+            return JsonResponse({"errcode": "101", "errmsg": "Params error"})
         except Exception as e:
-            online_logger.error(e)
+            mobile_logger.error(e)
             return JsonResponse({"errcode": "102", "errmsg": "Db error"})
         sub_quantity = quantity - before_quantity
         request.session['%s_cart' % user.id] += sub_quantity
@@ -129,10 +129,10 @@ class CartView(View):
             cart = Cart.objects.get(id=cart_id)
             cart.delete()
         except ValueError as e:
-            online_logger.error(e)
-            return JsonResponse({"errcode": "101", "errmsg": "params error"})
+            mobile_logger.error(e)
+            return JsonResponse({"errcode": "101", "errmsg": "Params error"})
         except Exception as e:
-            online_logger.error(e)
+            mobile_logger.error(e)
             return JsonResponse({"errcode": "102", "errmsg": "Db error"})
         request.session["%s_cart" % user.id] -= cart.quantity
         total_quantity = request.session["%s_cart" % user.id]

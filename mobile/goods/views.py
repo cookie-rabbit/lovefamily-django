@@ -1,14 +1,9 @@
 from django.db.models import F
 from django.http import JsonResponse
-from django.shortcuts import render
-from django.utils.decorators import method_decorator
 from django.views import View
 
-from management.user.models import User
 from online.goods.models import Category, Goods, Image
-from online.logger import online_logger
-from online.order.models import Order
-from utils.decorator import user_auth
+from mobile.logger import mobile_logger
 from weigan_shopping import settings
 from online.constants import PER_PAGE_GOODS_COUNT, INDEX_GOODS_COUNT
 
@@ -45,10 +40,10 @@ class GoodsTypeView(View):
                 else:
                     more = False
             except TypeError as e:
-                online_logger.error(e)
-                return JsonResponse({"errcode": "101", "errmsg": "params error"})
+                mobile_logger.error(e)
+                return JsonResponse({"errcode": "101", "errmsg": "Params error"})
             except Exception as e:
-                online_logger.error(e)
+                mobile_logger.error(e)
                 return JsonResponse({"errcode": "102", "errmsg": "Db error"})
             goods_list = []
             if goods is None:
@@ -100,10 +95,10 @@ class GoodsTypeView(View):
                 else:
                     more = False
             except TypeError as e:
-                online_logger.error(e)
-                return JsonResponse({"errcode": "101", "errmsg": "params error"})
+                mobile_logger.error(e)
+                return JsonResponse({"errcode": "101", "errmsg": "Params error"})
             except Exception as e:
-                online_logger.error(e)
+                mobile_logger.error(e)
                 return JsonResponse({"errcode": "102", "errmsg": "Db error"})
             goods_list = []
             if goods is None:
@@ -141,10 +136,10 @@ class GoodsTemplateView(View):
             single_goods = Goods.objects.get(id=goods_id)
             images = Image.objects.filter(goods__id=goods_id)
         except Goods.DoesNotExist as e:
-            online_logger.error(e)
-            return JsonResponse({"errcode": "102", "errmsg": "can not find goods in db"})
+            mobile_logger.error(e)
+            return JsonResponse({"errcode": "102", "errmsg": "Can not find goods in "})
         except Exception as e:
-            online_logger.error(e)
+            mobile_logger.error(e)
             return JsonResponse({"errcode": "102", "errmsg": "Db error"})
         goods_detail = {"id": single_goods.id,
                         "name": single_goods.name_en,
@@ -171,7 +166,7 @@ class CategoriesView(View):
             cates = Category.objects.filter(super_category__isnull=True).filter(disabled=0)
             quantity = 0
         except Exception as e:
-            online_logger.error(e)
+            mobile_logger.error(e)
             return JsonResponse({"errcode": "102", "errmsg": "Db error"})
         for cate in cates:
             try:
@@ -184,7 +179,7 @@ class CategoriesView(View):
                         sub_cate_info.append({'id': sub_cate.id, 'name': sub_cate.name, "quantity": sub_quantity})
                 quantity += len(Goods.objects.filter(category=cate))
             except Exception as e:
-                online_logger.error(e)
+                mobile_logger.error(e)
                 return JsonResponse({"errcode": "102", "errmsg": "Db error"})
             if len(sub_cates) > 0:
                 category.append({"id": cate.id, "name": cate.name, "quantity": quantity,
@@ -203,7 +198,7 @@ class GoodsSearchView(View):
         type = request.GET.get("type", "hot")
         count = PER_PAGE_GOODS_COUNT
         if keyword is None:
-            return JsonResponse({"errcode": "101", "errmsg": "empty params"})
+            return JsonResponse({"errcode": "101", "errmsg": "Empty params"})
         try:
             current = int(current)
             if type == 'new':
@@ -218,10 +213,10 @@ class GoodsSearchView(View):
             else:
                 more = False
         except TypeError as e:
-            online_logger.error(e)
-            return JsonResponse({"errcode": "101", "errmsg": "params error"})
+            mobile_logger.error(e)
+            return JsonResponse({"errcode": "101", "errmsg": "Params error"})
         except Exception as e:
-            online_logger.error(e)
+            mobile_logger.error(e)
             return JsonResponse({"errcode": "102", "errmsg": "Db error"})
         goods_list = []
         if goods is None:

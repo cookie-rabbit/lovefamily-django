@@ -11,20 +11,18 @@ from management.user.models import User, UserAddress
 from mobile.logger import mobile_logger
 from online.cart.models import Cart
 from utils.decorator import user_auth
-from weigan_shopping import settings
 
 
 class LoginView(View):
     """用户登录，注册"""
+
 
     def post(self, request):
         data = json.loads(request.body.decode())
         type = data.get("type")
         if type == 'login':
             username = data.get("username")
-            print(username)
             password = data.get("password")
-            print(password)
             if not all([username, password]):
                 return JsonResponse({"errcode": "101", "errmsg": "params not all"})
             try:
@@ -57,17 +55,20 @@ class LoginView(View):
                                                                                                     timezone.now(),
                                                                                                     ip_address)
             mobile_logger.info(text)
-            print(text)
             return JsonResponse({"errcode": "0", "errmsg": "login success"})
 
         elif type == 'signup':
             data = json.loads(request.body.decode())
             username = data.get("username", None)
+            if len(username) > 20:
+                return JsonResponse({"errcode": "115", "errmsg": "the content is too long for username"})
             email = data.get("email", None)
             if email:
                 if not re.match(r'^[0-9a-zA-Z_]{0,19}@[0-9a-zA-Z]{1,13}\.(com|cn|net){1,3}$', email):
                     return JsonResponse({"errcode": "106", "errmsg": "email format error"})
             phone = data.get("phone", None)
+            if len(phone) > 40:
+                return JsonResponse({"errcode": "115", "errmsg": "the content is too long for phone"})
             # if phone:
             #     if not re.match(
             #             r'^(((\\+\\d{2}-)?0\\d{2,3}-\\d{7,8})|((\\+\\d{2}-)?(\\d{2,3}-)?([1][3,4,5,7,8][0-9]\\d{8})))$',
@@ -81,6 +82,11 @@ class LoginView(View):
                 mobile_logger.error(e)
                 return JsonResponse({"errcode": "102", "errmsg": "Db error"})
             password = data.get("password", None)
+            if len(password) > 100:
+                return JsonResponse({"errcode": "115", "errmsg": "the content is too long for password"})
+            # if password:
+            #     if not re.match(r'^(?=.*[0-9])(?=.*[!@#$%^&*])[0-9a-zA-Z!@#$%^&*0-9]{10,}$', password):
+            #         return JsonResponse({"errcode": "106", "errmsg": "password"})
             repassword = data.get("re_password", None)
             if password != repassword:
                 return JsonResponse({"errcode": "107", "errmsg": "Passwords must be matched"})
@@ -170,6 +176,8 @@ class UserView(View):
                 if not re.match(r'^[0-9a-zA-Z_]{0,19}@[0-9a-zA-Z]{1,13}\.(com|cn|net){1,3}$', email):
                     return JsonResponse({"errcode": "106", "errmsg": "email format error"})
             phone = data.get("phone", None)
+            if len(phone) > 15:
+                return JsonResponse({"errcode": "115", "errmsg": "the content is too long for road"})
             # if phone:
             #     if not re.match(
             #             r'^(((\\+\\d{2}-)?0\\d{2,3}-\\d{7,8})|((\\+\\d{2}-)?(\\d{2,3}-)?([1][3,4,5,7,8][0-9]\\d{8})))$',
@@ -189,7 +197,6 @@ class UserView(View):
             judge_email = User.objects.filter(phone=email).exclude(id=user.id)
             if len(judge_email) > 0:
                 return JsonResponse({"errcode": "115", "errmsg": "email number has been exist"})
-
             try:
                 user.email = email
                 user.password = password
@@ -203,12 +210,26 @@ class UserView(View):
         elif type == "address":
             """修改用户地址"""
             name = data.get("name", None)
+            if len(name) > 40:
+                return JsonResponse({"errcode": "115", "errmsg": "the content is too long for name"})
             road = data.get("road", None)
+            if len(road) > 100:
+                return JsonResponse({"errcode": "115", "errmsg": "the content is too long for road"})
             district = data.get("district", None)
+            if len(district) > 100:
+                return JsonResponse({"errcode": "115", "errmsg": "the content is too long for district"})
             city = data.get("city", None)
+            if len(city) > 100:
+                return JsonResponse({"errcode": "115", "errmsg": "the content is too long for city"})
             province = data.get("province", None)
+            if len(province) > 100:
+                return JsonResponse({"errcode": "115", "errmsg": "the content is too long for province"})
             postcode = data.get("postcode", None)
+            if len(postcode) > 40:
+                return JsonResponse({"errcode": "115", "errmsg": "the content is too long for postcode"})
             phone_number = data.get("phone_number", None)
+            if len(phone_number) > 40:
+                return JsonResponse({"errcode": "115", "errmsg": "the content is too long for phone_number"})
             if not (name or road or district or city or province or phone_number or postcode):
                 try:
                     user.address.delete()

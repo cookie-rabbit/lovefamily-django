@@ -8,7 +8,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 from management.constants import PER_PAGE_ORDER_COUNT
 from management.logger import management_logger
-from management.user.models import User
+from management.user.models import User, Admin
 from online.logger import online_logger
 from online.order.models import Order, Order_Goods, OrderAddress, OrderStatusLog
 
@@ -60,7 +60,7 @@ class OrdersView(View):
                 status = int(status)
             except Exception as e:
                 management_logger.error(e)
-                return JsonResponse({"errcode": "101", "errmsg": "params error"})
+                return JsonResponse({"errcode": "101", "errmsg": "Params error"})
             for user in users:
                 user_id.append(user.id)
             try:
@@ -71,7 +71,7 @@ class OrdersView(View):
                     orders = Order.objects.filter(user_id__in=user_id).filter(order_no__contains=order_no).filter(
                         order_date__range=(start_date, end_date)).order_by('-id')
                 else:
-                    return JsonResponse({"errcode": "101", "errmsg": "params error"})
+                    return JsonResponse({"errcode": "101", "errmsg": "Params error"})
                 total = len(orders)
                 paginator = Paginator(orders, PER_PAGE_ORDER_COUNT)
                 order_list = paginator.page(page)
@@ -201,7 +201,7 @@ class OrderDetailView(View):
                     time = timezone.localtime(timezone.now()).strftime("%Y-%m-%d %H:%M:%S")
                     user_id = request.session.get('admin_id')
                     OrderStatusLog.objects.create(order_no=order_no, status=status, user_id=user_id,
-                                                  change_date=time)
+                                                  change_date=time, is_admin=True)
                     return JsonResponse({"errcode": 0, "errmsg": "update success"})
                 else:
                     return JsonResponse({"errcode": "101", "errmsg": "params errror"})
@@ -227,11 +227,18 @@ class OrderLogsView(View):
                 if states != '':
                     for state in states:
                         status = sta_dic.get(state.status)
-                        try:
-                            username = User.objects.get(id=state.user_id).username
-                        except Exception as e:
-                            management_logger.error(e)
-                            return JsonResponse({"errcode": "102", "errmsg": "Db error"})
+                        if state.is_admin == False:
+                            try:
+                                username = User.objects.get(id=state.user_id).username
+                            except Exception as e:
+                                management_logger.error(e)
+                                return JsonResponse({"errcode": "102", "errmsg": "Db error"})
+                        else:
+                            try:
+                                username = Admin.objects.get(id=state.user_id).username
+                            except Exception as e:
+                                management_logger.error(e)
+                                return JsonResponse({"errcode": "102", "errmsg": "Db error"})
                         date = state.change_date
                         state_log = {"status": status, "user": username, "date": date}
                         states_log.append(state_log)

@@ -10,7 +10,7 @@ class Order(models.Model):
     """订单表"""
     order_no = models.CharField(max_length=40)  # 订单编号
     total = models.CharField(max_length=10)  # 总价
-    order_date = models.DateField()  # 订单日期
+    order_date = models.DateTimeField()  # 订单日期
     choices = (  # 订单状态列表
         (0, "ALL"),
         (1, "Ordered"),
@@ -34,13 +34,13 @@ class Order(models.Model):
 
 class OrderAddress(models.Model):
     """订单地址表"""
-    name = models.CharField(max_length=40)
-    province = models.CharField(max_length=80, default='')
-    city = models.CharField(max_length=40, default='')
-    district = models.CharField(max_length=80, default='')
-    road = models.CharField(max_length=80, default='')
-    postcode = models.CharField(max_length=20)
-    phone_number = models.CharField(max_length=20)
+    name = models.CharField(max_length=40, null=True)
+    province = models.CharField(max_length=100, null=True)
+    city = models.CharField(max_length=100, null=True)
+    district = models.CharField(max_length=100, null=True)
+    road = models.CharField(max_length=100, null=True)
+    phone_number = models.CharField(max_length=40, null=True)
+    postcode = models.CharField(max_length=40, null=True)
 
     class Meta:
         db_table = "OrderAddress"
@@ -69,6 +69,7 @@ class OrderStatusLog(models.Model):
     status = models.IntegerField()
     user_id = models.CharField(max_length=40)
     change_date = models.DateTimeField()
+    is_admin = models.BooleanField(default=False)
 
     class Meta:
         db_table = "OrderStatusLog"

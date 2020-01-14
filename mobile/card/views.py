@@ -23,6 +23,8 @@ class PaymentView(View):
             "return": settings.PAYMENT_RETURN_URL,
             "cancel_return": settings.PAYMENT_CANCEL_URL + self.order_no,
             "custom": "premium_plan",  # Custom command to correlate to some function later (optional)
+            "option_selectn_tm": "D",
+            "p3": "1"
         }
 
         # Create the instance.

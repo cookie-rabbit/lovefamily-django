@@ -65,7 +65,6 @@ class CartsView(View):
                     cart_list.append({"id": cart.id, "goods_id": cart.goods.id, "name": cart.goods.name_en,
                                       "description": cart.goods.description_en, "price": cart.goods.on_price,
                                       "image": settings.URL_PREFIX + image[0].image.url, "quantity": cart.quantity})
-                print(sum)
                 context = {"user": user, "carts_list": cart_list, "cart_quantity": cart_quantity,
                            "order_quantity": order_quantity, "sum": sum, "category": category}
             else:
@@ -74,7 +73,6 @@ class CartsView(View):
         else:
             context = {"sum": 0, "category": category}
         aaa = request.META['REMOTE_ADDR']
-        print(aaa)
         # return JsonResponse(context,safe=False)
         return render(request, "myCart.html", context=context)
 
@@ -84,17 +82,17 @@ class CartsView(View):
         goods_id = request.POST.get("goods_id", None)
         quantity = request.POST.get("quantity", 1)
         if not goods_id:
-            return JsonResponse({"errcode": "101", "errmsg": "empty params"})
+            return JsonResponse({"errcode": "101", "errmsg": "Empty params"})
         try:
             goods_id = int(goods_id)
             quantity = int(quantity)
             single_goods = Goods.objects.get(id=goods_id)
         except ValueError as e:
             online_logger.error(e)
-            return JsonResponse({"errcode": "101", "errmsg": "params error"})
+            return JsonResponse({"errcode": "101", "errmsg": "Params error"})
         except Goods.DoesNotExist as e:
             online_logger.error(e)
-            return JsonResponse({"errcode": "102", "errmsg": "can not find goods in db"})
+            return JsonResponse({"errcode": "102", "errmsg": "Can not find goods in "})
         except Exception as e:
             online_logger.error(e)
             return JsonResponse({"errcode": "102", "errmsg": "Db error"})
@@ -109,7 +107,6 @@ class CartsView(View):
         except Exception as e:
             online_logger.error(e)
             return JsonResponse({"errcode": "102", "errmsg": "Db error"})
-        print(request.session["%s_cart" % user.id])
         request.session["%s_cart" % user.id] += quantity
         total_quantity = request.session["%s_cart" % user.id]
         return JsonResponse(
@@ -130,10 +127,10 @@ class CartView(View):
             cart.save()
         except Cart.DoesNotExist as e:
             online_logger.error(e)
-            return JsonResponse({"errcode": "102", "errmsg": "can not find goods in db"})
+            return JsonResponse({"errcode": "102", "errmsg": "Can not find goods in "})
         except ValueError as e:
             online_logger.error(e)
-            return JsonResponse({"errcode": "101", "errmsg": "params error"})
+            return JsonResponse({"errcode": "101", "errmsg": "Params error"})
         except Exception as e:
             online_logger.error(e)
             return JsonResponse({"errcode": "102", "errmsg": "Db error"})
@@ -150,7 +147,7 @@ class CartView(View):
             cart.delete()
         except ValueError as e:
             online_logger.error(e)
-            return JsonResponse({"errcode": "101", "errmsg": "params error"})
+            return JsonResponse({"errcode": "101", "errmsg": "Params error"})
         except Exception as e:
             online_logger.error(e)
             return JsonResponse({"errcode": "102", "errmsg": "Db error"})
