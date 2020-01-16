@@ -54,7 +54,6 @@ function toSearch() {
 					}
 				};
 				doAjax(req); */
-		alert(keyword);
 		location.href = ($(".toSearch").data("href") + "keyword=" + keyword);
 
 	} else {

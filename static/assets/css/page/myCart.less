@@ -55,6 +55,7 @@
 	}
 
 	.content {
+		padding-bottom: 99px;
 		.cartGoods {
 			height: 186px;
 			padding: 40px 30px 30px 0;
@@ -176,10 +177,18 @@
 		}
 	}
 
-	.total {
-		width: 1000px;
-		margin: 0 auto;
 
+
+	.total {
+		width: 1190px;
+		margin: 0 auto;
+		height: 100px;
+		position: fixed;
+		bottom:0;
+		background: #fff;
+		z-index: 9;
+		margin-left: -90px;
+		
 		.totalPrice {
 			text-align: right;
 			width: 95px;
@@ -189,10 +198,11 @@
 			margin-top: 26px;
 			margin-bottom: 50px;
 			width:100%;
+			position: relative;
+			right: 200px;
 			span {
 				color: #fe7074;
 				font-size: 28px;
-
 			}
 		}
 
@@ -208,6 +218,26 @@
 			color: rgba(255, 255, 255, 1);
 			text-align: center;
 			margin-bottom: 100px;
+			position: absolute;
+			right: 20px;
+			top: 25px;
+		}
+		.notBuy{
+			width: 136px;
+			height: 34px;
+			line-height: 34px;
+			background: #d8d8d8;
+			border-radius: 5px;
+			float: right;
+			font-size: 18px;
+			font-family: HelveticaNeue;
+			color: darkgrey;
+			text-align: center;
+			margin-bottom: 100px;
+			position: absolute;
+			right: 20px;
+			top: 25px;
+			color: rgba(255, 255, 255, 1);
 		}
 		.goBuy{
 			background: rgba(254, 112, 116, 1);

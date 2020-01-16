@@ -5,7 +5,7 @@
 	min-width: 1200px;
 }
 .contentContainer{
-	width: 1160px;
+	width: 1196px;
 	margin: 0 auto;
 	.kinds{
 		a{
@@ -75,24 +75,24 @@
 	.content{
 		.goods{
 			display: inline-block;
-			width: 344px;
+			width: 260px;
 			height: 320px;
 			background:rgba(255,255,255,1);
 			box-shadow:0px 2px 5px 0px rgba(0,0,0,0.2);
 			border-radius:10px;
-			margin: 15px 20px;
+			margin: 15px 18px;
 			position: relative;
 			img{
-				width: 344px;
-				height: 252px;
+				width: 260px;
+				height: 260px;
 				display: block;
 				border-top-left-radius: 10px;
 				border-top-right-radius: 10px;
 			}
 			.infor{
-				padding: 15px 20px;
+				padding: 8px 5px;
 				position: absolute;
-				width: 304px;
+				width: 250px;
 				.name{
 					height:18px;
 					font-size:14px;
@@ -100,6 +100,14 @@
 					color:rgba(0,0,0,1);
 					line-height:18px;
 					margin-bottom: 6px;
+					.realName .nameSpan{
+						max-width: 130px;
+						overflow: hidden;
+						text-overflow: ellipsis;
+						white-space: nowrap;
+						word-break: break-all;
+						display: inline-block;
+					}
 					.toCart{
 						display: inline-block;
 						width:72px;
@@ -152,4 +160,21 @@
 		}
 		
 	}
+}
+.searchHead{
+	height:28px;
+	font-size:18px;
+	font-family:HelveticaNeue-Medium,HelveticaNeue;
+	font-weight:bold;
+	color:rgba(0,0,0,1);
+	margin-top: 20px;
+	.left{}
+	.key{
+		background: url();
+		font-weight: 500;
+		font-style: normal;
+		margin-left: 5px;
+	}
+	
+	
 }

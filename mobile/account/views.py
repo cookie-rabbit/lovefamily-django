@@ -16,7 +16,6 @@ from utils.decorator import user_auth
 class LoginView(View):
     """用户登录，注册"""
 
-
     def post(self, request):
         data = json.loads(request.body.decode())
         type = data.get("type")
@@ -32,7 +31,7 @@ class LoginView(View):
                 else:
                     return JsonResponse({"errcode": "105", "errmsg": "The user has not registered yet"})
                 if user.status != 1:
-                    return JsonResponse({"errcode": "116", "errmsg": "The user has been baned"})
+                    return JsonResponse({"errcode": "116", "errmsg": "The user has been forbidden"})
             except Exception as e:
                 mobile_logger.error(e)
                 return JsonResponse({"errcode": "102", "errmsg": "Db error"})
@@ -64,7 +63,7 @@ class LoginView(View):
                 return JsonResponse({"errcode": "115", "errmsg": "the content is too long for username"})
             email = data.get("email", None)
             if email:
-                if not re.match(r'^[0-9a-zA-Z_]{0,19}@[0-9a-zA-Z]{1,13}\.(com|cn|net){1,3}$', email):
+                if not re.match(r'^([A-Za-z0-9_\-.])+@([A-Za-z0-9_\-.])+\.([A-Za-z]{2,7})$', email):
                     return JsonResponse({"errcode": "106", "errmsg": "email format error"})
             phone = data.get("phone", None)
             if len(phone) > 40:

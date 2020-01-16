@@ -8,7 +8,7 @@ $(".myOrdersContainer")
 		} else {
 			/* ajax请求 */
 			var req = {
-				url: baseUrl + 'orders/',
+				url: baseUrl + 'order_detail/',
 				data: {
 					order_no: me.find(".order span").html()
 				},
@@ -28,7 +28,7 @@ $(".myOrdersContainer")
 	})
 	.on("click", ".more", function() {
 		var req = {
-			url: baseUrl + 'orders/',
+			url: baseUrl + 'orders/more',
 			data: {
 				status: $(".myOrdersContainer .content .current").data("type"),
 				offset: $(".orderList").length

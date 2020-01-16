@@ -24,43 +24,67 @@
                 {% ifequal status 0 %}
                     <a href="http://10.168.2.111:8000/orders/" class="all current" data-type="0">All</a>
                     <a href="http://10.168.2.111:8000/orders/?status=1" class="ordered" data-type="1">Ordered</a>
-                    <a href="http://10.168.2.111:8000/orders/?status=2" class="delivering" data-type="2">Delivering</a>
-                    <a href="http://10.168.2.111:8000/orders/?status=3" class="finished" data-type="3">Finished</a>
-                    <a href="http://10.168.2.111:8000/orders/?status=4" class="closed" data-type="4">Closed</a>
+                    <a href="http://10.168.2.111:8000/orders/?status=2" class="Payed" data-type="2">Payed</a>
+                    <a href="http://10.168.2.111:8000/orders/?status=3" class="delivering" data-type="3">Delivering</a>
+                    <a href="http://10.168.2.111:8000/orders/?status=4" class="finished" data-type="4">Finished</a>
+                    <a href="http://10.168.2.111:8000/orders/?status=5" class="closed" data-type="5">Closed</a>
                 {% endifequal %}
                 {% ifequal status 1 %}
                     <a href="http://10.168.2.111:8000/orders/" class="all" data-type="0">All</a>
                     <a href="http://10.168.2.111:8000/orders/?status=1" class="ordered current"
                        data-type="1">Ordered</a>
-                    <a href="http://10.168.2.111:8000/orders/?status=2" class="delivering" data-type="2">Delivering</a>
-                    <a href="http://10.168.2.111:8000/orders/?status=3" class="finished" data-type="3">Finished</a>
-                    <a href="http://10.168.2.111:8000/orders/?status=4" class="closed" data-type="4">Closed</a>
+                    <a href="http://10.168.2.111:8000/orders/?status=2" class="Payed" data-type="2">Payed</a>
+                    <a href="http://10.168.2.111:8000/orders/?status=3" class="delivering" data-type="3">Delivering</a>
+                    <a href="http://10.168.2.111:8000/orders/?status=4" class="finished" data-type="4">Finished</a>
+                    <a href="http://10.168.2.111:8000/orders/?status=5" class="closed" data-type="5">Closed</a>
                 {% endifequal %}
                 {% ifequal status 2 %}
                     <a href="http://10.168.2.111:8000/orders/" class="all" data-type="0">All</a>
                     <a href="http://10.168.2.111:8000/orders/?status=1" class="ordered" data-type="1">Ordered</a>
-                    <a href="http://10.168.2.111:8000/orders/?status=2" class="delivering current" data-type="2">Delivering</a>
-                    <a href="http://10.168.2.111:8000/orders/?status=3" class="finished" data-type="3">Finished</a>
-                    <a href="http://10.168.2.111:8000/orders/?status=4" class="closed" data-type="4">Closed</a>
+                    <a href="http://10.168.2.111:8000/orders/?status=2" class="Payed current" data-type="2">Payed</a>
+                    <a href="http://10.168.2.111:8000/orders/?status=3" class="delivering" data-type="3">Delivering</a>
+                    <a href="http://10.168.2.111:8000/orders/?status=4" class="finished" data-type="4">Finished</a>
+                    <a href="http://10.168.2.111:8000/orders/?status=5" class="closed" data-type="5">Closed</a>
                 {% endifequal %}
                 {% ifequal status 3 %}
                     <a href="http://10.168.2.111:8000/orders/" class="all" data-type="0">All</a>
                     <a href="http://10.168.2.111:8000/orders/?status=1" class="ordered" data-type="1">Ordered</a>
-                    <a href="http://10.168.2.111:8000/orders/?status=2" class="delivering" data-type="2">Delivering</a>
-                    <a href="http://10.168.2.111:8000/orders/?status=3" class="finished current"
-                       data-type="3">Finished</a>
-                    <a href="http://10.168.2.111:8000/orders/?status=4" class="closed" data-type="4">Closed</a>
+                    <a href="http://10.168.2.111:8000/orders/?status=2" class="Payed" data-type="2">Payed</a>
+                    <a href="http://10.168.2.111:8000/orders/?status=3" class="delivering current" data-type="3">Delivering</a>
+                    <a href="http://10.168.2.111:8000/orders/?status=4" class="finished"
+                       data-type="4">Finished</a>
+                    <a href="http://10.168.2.111:8000/orders/?status=5" class="closed" data-type="5">Closed</a>
                 {% endifequal %}
                 {% ifequal status 4 %}
                     <a href="http://10.168.2.111:8000/orders/" class="all" data-type="0">All</a>
                     <a href="http://10.168.2.111:8000/orders/?status=1" class="ordered" data-type="1">Ordered</a>
-                    <a href="http://10.168.2.111:8000/orders/?status=2" class="delivering" data-type="2">Delivering</a>
-                    <a href="http://10.168.2.111:8000/orders/?status=3" class="finished" data-type="3">Finished</a>
-                    <a href="http://10.168.2.111:8000/orders/?status=4" class="closed current" data-type="4">Closed</a>
+                    <a href="http://10.168.2.111:8000/orders/?status=2" class="Payed" data-type="2">Payed</a>
+                    <a href="http://10.168.2.111:8000/orders/?status=3" class="delivering" data-type="3">Delivering</a>
+                    <a href="http://10.168.2.111:8000/orders/?status=4" class="finished current"
+                       data-type="4">Finished</a>
+                    <a href="http://10.168.2.111:8000/orders/?status=5" class="closed" data-type="5">Closed</a>
+                {% endifequal %}
+                {% ifequal status 5 %}
+                    <a href="http://10.168.2.111:8000/orders/" class="all" data-type="0">All</a>
+                    <a href="http://10.168.2.111:8000/orders/?status=1" class="ordered" data-type="1">Ordered</a>
+                    <a href="http://10.168.2.111:8000/orders/?status=2" class="Payed" data-type="2">Payed</a>
+                    <a href="http://10.168.2.111:8000/orders/?status=3" class="delivering" data-type="3">Delivering</a>
+                    <a href="http://10.168.2.111:8000/orders/?status=4" class="finished" data-type="4">Finished</a>
+                    <a href="http://10.168.2.111:8000/orders/?status=5" class="closed current" data-type="5">Closed</a>
                 {% endifequal %}
             </div>
-            {% include 'orderBlock.html' %}
-            <div class="more">MORE</div>
+            {% ifnotequal order_quantity 0 %}
+                {% include 'orderBlock.html' %}
+                {% if res.more %}
+                    <div class="more">MORE</div>
+                {% endif %}
+            {% endifnotequal %}
+            {% ifequal order_quantity 0 %}
+                <div class="noContent">
+                    <img src="{% static 'assets/images/noOrder.jpg' %}" alt="">
+                    <p>Did not find the relevant goods oh~</p>
+                </div>
+            {% endifequal %}
         </div>
     </div>
 {% endblock %}

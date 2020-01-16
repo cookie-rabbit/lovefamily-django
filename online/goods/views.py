@@ -28,9 +28,10 @@ def index(request):
         except Exception as e:
             online_logger.error(e)
             return JsonResponse({"errcode": "102", "errmsg": "Db error"})
-        category.append({"id": cate.id, "name": cate.name,
-                         "sub_cates": [{'id': sub_cate.id, 'name': sub_cate.name} for sub_cate in sub_cates if
-                                       sub_cates] if sub_cates else []})
+        if len(sub_cates) > 0:
+            category.append({'id': cate.id, 'name': cate.name,
+                             'sub_cates': [{'id': sub_cate.id, 'name': sub_cate.name} for sub_cate in sub_cates if
+                                           sub_cates] if sub_cates else []})
 
     count = INDEX_GOODS_COUNT
     try:
@@ -72,6 +73,7 @@ def index(request):
 
 class GoodsTypeView(View):
     """获取热销、新品"""
+
     def get(self, request, type):
         current = request.GET.get("current", 0)
         count = PER_PAGE_GOODS_COUNT if current != 0 else INDEX_GOODS_COUNT
@@ -113,6 +115,7 @@ class GoodsTypeView(View):
 
 class GoodsCategoryView(View):
     """按分类获取商品"""
+
     def get(self, request, category_id):
         current = request.GET.get("current", 0)
         if current == 0:
@@ -159,6 +162,7 @@ class GoodsCategoryView(View):
 
 class GoodsCategoryTemplateView(View):
     """商品类型模板"""
+
     def get(self, request, category_id):
         category = []
         try:
@@ -172,7 +176,8 @@ class GoodsCategoryTemplateView(View):
             except Exception as e:
                 online_logger.error(e)
                 return JsonResponse({"errcode": "102", "errmsg": "Db error"})
-            category.append({"id": cate.id, "name": cate.name,
+            if len(sub_cates) > 0:
+                category.append({"id": cate.id, "name": cate.name,
                              "sub_cates": [{'id': sub_cate.id, 'name': sub_cate.name} for sub_cate in sub_cates if
                                            sub_cates] if sub_cates else []})
 
@@ -188,7 +193,8 @@ class GoodsCategoryTemplateView(View):
                                   "name": current_category.super_category.name}
             else:
                 categories = Category.objects.filter(super_category=current_category)
-                total_goods = Goods.objects.filter(on_sale=True).filter(category__in=categories).order_by(F('actual_sale') + F('virtual_sale'))
+                total_goods = Goods.objects.filter(on_sale=True).filter(category__in=categories).order_by(
+                    F('actual_sale') + F('virtual_sale'))
                 goods = total_goods[:count]
                 super_category = ""
             if len(total_goods) > count:
@@ -237,6 +243,7 @@ class GoodsCategoryTemplateView(View):
 
 class GoodsTemplateView(View):
     """商品详情模板"""
+
     def get(self, request, goods_id):
         category = []
         try:
@@ -250,7 +257,8 @@ class GoodsTemplateView(View):
             except Exception as e:
                 online_logger.error(e)
                 return JsonResponse({"errcode": "102", "errmsg": "Db error"})
-            category.append({"id": cate.id, "name": cate.name,
+            if len(sub_cates) > 0:
+                category.append({"id": cate.id, "name": cate.name,
                              "sub_cates": [{'id': sub_cate.id, 'name': sub_cate.name} for sub_cate in sub_cates if
                                            sub_cates] if sub_cates else []})
         try:
@@ -289,6 +297,7 @@ class GoodsTemplateView(View):
 
 
 class GoodsSearchView(View):
+    """商品搜索"""
     def get(self, request):
         keyword = request.GET.get("keyword", None)
         current = request.GET.get("current", 0)
@@ -325,7 +334,7 @@ class GoodsSearchView(View):
 
 
 class GoodsSearchTemplateView(View):
-
+    """商品搜索模板"""
     def get(self, request):
         keyword = request.GET.get("keyword", None)
         count = PER_PAGE_GOODS_COUNT
@@ -365,9 +374,10 @@ class GoodsSearchTemplateView(View):
             except Exception as e:
                 online_logger.error(e)
                 return JsonResponse({"errcode": "102", "errmsg": "Db error"})
-            category.append({"id": cate.id, "name": cate.name,
-                             "sub_cates": [{'id': sub_cate.id, 'name': sub_cate.name} for sub_cate in sub_cates if
-                                           sub_cates] if sub_cates else []})
+            if len(sub_cates) > 0:
+                category.append({"id": cate.id, "name": cate.name,
+                                 "sub_cates": [{'id': sub_cate.id, 'name': sub_cate.name} for sub_cate in sub_cates if
+                                               sub_cates] if sub_cates else []})
         user_id = request.session.get("user_id", None)
         if user_id:
             try:

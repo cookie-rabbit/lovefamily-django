@@ -71,19 +71,21 @@ input[type="password"]:focus {
 .header .top {
   width: 1200px;
   margin: 0 auto;
-  height: 150px;
+  height: 120px;
 }
 .header .top .icon {
-  width: 110px;
-  height: 110px;
+  width: 80px;
+  height: 80px;
   float: left;
   margin-top: 20px;
 }
 .header .top h1 {
-  line-height: 150px;
-  height: 150px;
+  line-height: 120px;
+  height: 120px;
   float: left;
   margin-left: 10px;
+  font-weight: normal;
+  font-size: 24px;
 }
 .header .top .icon:hover,
 .header .top h1:hover {
@@ -91,9 +93,9 @@ input[type="password"]:focus {
 }
 .header .top .top-right {
   float: right;
-  height: 150px;
-  line-height: 150px;
-  width: 270px;
+  height: 120px;
+  line-height: 120px;
+  width: 300px;
   font-size: 16px;
   position: relative;
 }
@@ -156,11 +158,12 @@ input[type="password"]:focus {
   text-align: center;
   width: 98px;
   position: relative;
+  bottom: 3px;
 }
 .header .top .top-right .language a,
 .header .top .top-right .user a {
-  line-height: 30px;
-  height: 30px;
+  line-height: 24px;
+  height: 24px;
   display: block;
 }
 .header .top .top-right .language a span,
@@ -181,18 +184,20 @@ input[type="password"]:focus {
 .header .top .top-right .language .ul,
 .header .top .top-right .user .ul {
   position: absolute;
-  width: 86px;
+  width: 100px;
   text-align: left;
   padding-left: 10px;
   border: 1px solid #f4f1f1;
   border-top: none;
   display: none;
   z-index: 10;
+  background: white;
 }
 .header .top .top-right .language .ul .li,
 .header .top .top-right .user .ul .li {
-  height: 30px;
-  line-height: 30px;
+  height: 25px;
+  line-height: 25px;
+  font-size: 14px;
 }
 .header .top .top-right .language .ul .li:hover,
 .header .top .top-right .user .ul .li:hover {
@@ -215,12 +220,31 @@ input[type="password"]:focus {
   right: 10px;
 }
 .header .top .top-right .user {
-  margin-right: 0;
-  width: 84px;
+  margin-right: 2px;
+  width: 100px;
   margin-left: 12px;
+  float: right;
+  margin-top: 48px;
 }
 .header .top .top-right .user a {
-  width: 84px;
+  width: 100px;
+}
+.header .top .top-right .user a span {
+  display: inline-block;
+  background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAGCAYAAAD68A/GAAAAdUlEQVQYV23OoQrCYBQF4G/VuGD0XWRot5isi5pMewDjgtjMgm1dZGGPsmgwmseFfzCGt51zvnAzdDig9/9WeGRYo0aB78zmaHEOGLfHCVv8UrfACzc8RxjbERvsEmzwxjXyFEa+YJngB9X4yhxGf09jOf13AKK1EA77zs6FAAAAAElFTkSuQmCC") no-repeat;
+  background-size: 100%;
+  width: 10px;
+  height: 7px;
+  margin-left: 5px;
+}
+.header .top .top-right .user a span.userImg {
+  background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAWCAYAAADEtGw7AAACeklEQVRIS63VS8hXVRQF8J+PpBIHCqY5SXKQoRDhQAQhKUgKSSrwo0ACRbAoH6lET8IowUJNxSAoBKVSKAgiSCgKBAmsEJQvB4ZNsgfYINLQMlmwr9z/n3u/kXt0Oefsdc9ee619xhk7ZuIeLMCtdfQcvsPX+K0vfVzPxh3YiodwI/7CH3V2OqbgIj7Fqzg9jNMFvA7bcAnv4wOM4kIl34w78ThWYRKex+42+DDwG3UoN3kSKTsxGwvr+1ucre/Q8w6WI7kvNuBt4Gfqr2/jWVzB5FpbiRsq6TIOIJX9jfHYgfW1tifnGuBw+gOO4JECzd7HWIa3ipLkhILN+AyP4v8C/wT34+5w3gB/iAeKu6b8e/Fl3WSAv7pZKrsPX7VoSS++wEiAZxRn4SoUNLELT2BWKaDdm5vwC/ZjY2sjlDyF2wI8go9Kq9+3Dr1XN0rjuiINTEWrW5vR+3E8FuDtWFs3jzabSDPCbTg7OYQ8v3qyaUhmkeKvUUqAD2IR5gwl34If8VM1MAmJuDGNux1z8ftQ3hkcGws45x/EIfzXalKaOqEo/LyDo2vAfVREn1vwMlLi+QKZVi58DW+WNBv8ASr6mhehP43DZfFTlT2v3LkCexFjNTHQvMjtZ+xrye1hRPCp5rkeVWQvRsmgCueJAbllITwubRnkKKbiLvzbAzwRJ/AnFtdYjUHi3hVdlo5l477c6PUe0Gb5JURyMVHcG0uHjtGuIRTHvVtubOu66x9pVgy0Bhu6hlCT1Dc2+y7eHpuZ4S80B6/XoA8lO9t/H+tpypOTAZ6B0/U0/VNqeKVemIGq+oCbQ5HikmpIGpTIVMtj+k3NhU6argKKS5lPka4PDAAAAABJRU5ErkJggg==") no-repeat;
+  background-size: 100%;
+  width: 20px;
+  height: 20px;
+  margin-right: 15px;
+  position: relative;
+  top: 3px;
 }
 .header .top .top-right .user .ul {
   padding-left: 0;
@@ -260,23 +284,40 @@ input[type="password"]:focus {
   width: 14px;
   background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAQCAYAAAAmlE46AAABI0lEQVQ4T5XTvytHURjH8ddXWRAJk2SzIYvIovwBZDD6EcqklEFZRAYZDBaLASP/gSxkMCmTWFiU/EokUejRpevmFp/tnnvez+c5z+ecgp8qxio6Muv7GMbr13oBVVhCCSqwi7kMOI1O3OMJEwFOYQ9RNRyXUZ0BrzGOF3ShJcABbOMisznvsxk9AbbjGHcoRVsOcYBHfIP1uMRz0mIfomBa79jEVRqcxxpO/ttqTHAjAeswm1NgBudpxzQYTMTymyKG0PcZ02ARKnPAGN5bHliLCDuruDELSWSN6I3pZVvNQtHBIsqTHzXY+Qs4hAdsoSFxHvsC13Gac7ZRnOEGMdlB3AY4icOwzwFHEDE1oT9x/7wh8SJW0JoDluEI3cnL+Nz2Aak2RCNNtc4AAAAAAElFTkSuQmCC") no-repeat;
   background-size: 100%;
-  margin-right: 10px;
+  margin-right: 20px;
 }
 .header .bottom {
-  height: 68px;
-  line-height: 68px;
   width: 1200px;
   margin: 0 auto;
-  font-size: 18px;
+  position: relative;
+  left: -10px;
 }
 .header .bottom .left {
-  display: inline-block;
   font-family: HelveticaNeue;
+  width: 1000px;
+  height: 48px;
+}
+.header .bottom .left .hasHover > a {
+  display: block;
+  height: 24px;
+  line-height: 24px;
+  text-align: center;
+  margin: 12px 0;
+  width: 132px;
+  font-size: 16px;
+  border-right: 1px solid #d9d9d9;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-break: break-all;
+  padding: 0 5px;
+}
+.header .bottom .left .hasHover:last-of-type > a {
+  border-right: none;
 }
 .header .bottom .left .hasHover {
   display: inline-block;
-  position: relative;
-  margin-right: 90px;
+  margin-left: -4px;
 }
 .header .bottom .left .hasHover .ul {
   position: absolute;
@@ -286,32 +327,32 @@ input[type="password"]:focus {
   opacity: 1;
   line-height: 39px;
   padding: 5px;
-  top: 71px;
+  top: 48px;
   display: none;
-  z-index: 10;
+  z-index: 1000;
   box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.5);
 }
 .header .bottom .left .hasHover .ul .li {
-  font-size: 14px;
+  font-size: 13px;
   font-family: HelveticaNeue;
   color: #000000;
   display: inline-block;
   padding: 0 20px;
-  height: 25px;
-  line-height: 25px;
+  height: 22px;
+  line-height: 22px;
 }
 .header .bottom .left .hasHover .ul .li:hover {
   color: #A23700;
 }
 .header .bottom .left .current {
-  border-bottom: 3px solid #A23700;
   position: relative;
-  bottom: 3px;
+  background: #e8e8e8;
 }
 .header .bottom .right {
-  float: right;
-  height: 68px;
-  position: relative;
+  height: 48px;
+  position: absolute;
+  right: 0;
+  top: 11px;
 }
 .header .bottom .right .toSearch {
   width: 143px;
@@ -327,7 +368,7 @@ input[type="password"]:focus {
   background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAB6klEQVQ4T53SzWsTQRjH8e/MJLFphSKCoGgRQbxIaE2T6kGloKB/gJ5str5REFEUVKqiuXnx4EGUICFJDx4FIbSeRD0I3SQGtYIX8VIUFIWqkdok80jWrLYpMeKeZuflw/ObeRQt3wEw+wfYEgiywVq+/RBmxkrMte7z/5U/SILeFOOoKE4oxTsssyhWAv0CBV1nfKTE+1bIA1JRgl2GnMCcrXLlSJmP/sbG2grNQa24KJZDTpHyYsQDcjGuocGZZrxdqbltRFSAuwsVdh17xeffEXJR+jDc6+tm+/Ajau2Axnw2zhkNqxMul/8Acc6KoEcLXP/b4WbU3rDh6YjLVgXSmFO5OFkFEwmXh50AL26c59UKw34MlR0igyUzWuDJPwLPvn5h78nXfPpVwSDnUFScArc6Aako3V0G961LJAnWAzL9bDYh0gmX3TRztYOygyS0IZqY5vSSRpqIkRLhpVPkZrvDd4ZYHxIeLMyz7/gLZpcCEXoIk5c6k/PCjbES1cVQJkbMaNIiKCznnSJTy1q5mS+pYI8VHivFG4RVSrMTocfWOGUNHwKavAiXHJe8dwetJaei9IY0O4xio4XvUqd8uMSMfz/pAdYFg0yK5apT5P4yoNNLNBtqbdgwVYML/wU0kNsR1ohQ/Qk4faQA5vHKoAAAAABJRU5ErkJggg==") no-repeat;
   width: 16px;
   height: 16px;
-  bottom: 22px;
+  bottom: 24px;
   right: 8px;
 }
 .hidden {
@@ -416,7 +457,8 @@ input[type="number"] {
 .goods .name .realName .hot,
 .goods .name .realName .new {
   display: inline-block;
-  margin-left: 10px;
+  margin-left: 5px;
+  margin-bottom: 2px;
 }
 .goods .name .realName .hot {
   width: 9px;
@@ -518,6 +560,22 @@ input[type="number"] {
   margin-right: 70px;
   background: #fe7074;
   color: white;
+}
+.noContent {
+  padding-top: 80px;
+  text-align: center;
+}
+.noContent img {
+  margin: 0 auto;
+  width: 178px;
+}
+.noContent p {
+  margin-top: 35px;
+  height: 21px;
+  font-size: 18px;
+  color: #999999;
+  line-height: 24px;
+  text-align: center;
 }
 .myOrdersContainer {
   width: 1200px;

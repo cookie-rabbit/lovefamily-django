@@ -46,11 +46,25 @@
             {% endfor %}
 
         </div>
+        {% ifequal cart_quantity 0 %}
+            <!-- 购物车没有商品的时候--v2.00 -->
+            <div class="noContent">
+                <img src="{% static '/assets/images/noCart.jpg' %}" alt="">
+                <p>There are no items in your shopping cart oh~</p>
+            </div>
+        {% endifequal %}
+
+        <!-- v2.00新增 -->
+        <div class="hr" style="position: fixed;bottom: 100px;left: 0;"></div>
+
         <div class="total">
             <p class="totalPrice">Sum:&nbsp;$&nbsp;<span>{{ sum }}</span></p>
-            <div class="buyNow">Buy Now</div>
-            <script src="https://www.paypal.com/sdk/js?client-id=sb"></script>
-            <script>paypal.Buttons().render('body');</script>
+            {% ifequal cart_quantity 0 %}
+                <!-- v2.00 购物车为空的时候-->
+                <div class="notBuy">Buy Now</div>
+            {% else %}
+                <div class="buyNow">Buy Now</div>
+            {% endifequal %}
         </div>
     </div>
 {% endblock %}

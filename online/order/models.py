@@ -24,7 +24,6 @@ class Order(models.Model):
     user = models.ForeignKey('user.User', on_delete=models.CASCADE, related_name='order')  # 订单用户
     paid_date = models.DateTimeField(null=True)
 
-
     class Meta:
         db_table = "Order"
 

@@ -20,8 +20,8 @@ class PaymentView(View):
             "item_name": settings.PAYMENT_ITEM,
             "invoice": self.order_no,
             "notify_url": settings.PAYMENT_NOTIFY_URL,
-            "return": settings.PAYMENT_RETURN_URL,
-            "cancel_return": settings.PAYMENT_CANCEL_URL + self.order_no,
+            "return": settings.MOBILE_PAYMENT_RETURN_URL,
+            "cancel_return": settings.MOBILE_PAYMENT_CANCEL_URL + self.order_no,
             "custom": "premium_plan",  # Custom command to correlate to some function later (optional)
             "option_selectn_tm": "D",
             "p3": "1"

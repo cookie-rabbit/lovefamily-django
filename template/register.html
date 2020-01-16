@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block css %}
-    <link rel="stylesheet/less" type="text/css" href="{% static 'assets/css/page/register.less' %}" />
+    <link rel="stylesheet/less" type="text/css" href="{% static 'assets/css/page/register.less' %}"/>
     <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/3.10.0-beta/less.min.js"></script>
 {% endblock %}
 
@@ -22,6 +22,12 @@
         </ul>
         <div class="baseInfor">
             <p class="name">
+                <span>Username</span>
+                <input type="text">
+                <span class="star"></span>
+                <span class="tips"></span>
+            </p>
+            <p class="email">
                 <span>Email</span>
                 <input type="text">
                 <span class="star"></span>

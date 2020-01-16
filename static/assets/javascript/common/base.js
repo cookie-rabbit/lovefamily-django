@@ -1,7 +1,6 @@
 /* mock测试接口 */
 //var baseUrl = "http://10.168.2.93:3000/mock/21/api/";
-//var baseUrl = "http://10.168.2.108:5000/api/"; //亚彤测试地址;
-var baseUrl = "/api/";
+var baseUrl = "http://10.168.2.111:8000/api/"; //亚彤测试地址;
 
 function doAjax(req) {
 	$.ajax({
@@ -67,7 +66,7 @@ function getConfimDiv(content) {
 	return sb;
 }
 
-function getToast01(content,time=1500,href) {
+function getToast01(content,time=2000,href) {
 	var sb = '	    <div class="fixedDiv">';
 	sb += '				<div class="confirmDiv">';
 	sb += '					<div class="toast01">';

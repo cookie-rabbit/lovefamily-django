@@ -116,7 +116,7 @@ class UserView(View):
         data = json.loads(request.body.decode())
         password = data.get("pass", None)
         status = data.get("status", True)
-        password = make_password(password)
+
         try:
             user = User.objects.get(id=user_id)
         except User.DoesNotExist as e:
@@ -126,11 +126,12 @@ class UserView(View):
             management_logger.error(e)
             return JsonResponse({"errcode": "102", "errmsg": "Db error"})
         try:
-            if password:
+            if password is not None:
+                password = make_password(password)
                 user.password = password
             if str(status) == "True":
                 user.status = 1
-            else:
+            elif str(status) == "False":
                 user.status = 0
             user.save()
         except Exception as e:
