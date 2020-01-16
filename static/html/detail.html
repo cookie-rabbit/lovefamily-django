@@ -13,14 +13,14 @@
 	</head>
 	<body>
 		<div class="container">
-			<div class="header">
+			<div class="header" data-href="首页地址"> 
 				<div class="top">
-					<img src="../assets/images/icon.png" alt="" class="icon">
-					<h1>Love Family Online Shop</h1>
+					<img src="../assets/images/icon.png" alt="" class="icon toIndex">
+					<h1 class="toIndex">Love Family Online Shop</h1>
 					<div class="top-right">
 						<div class="language hasHover">
 							<!-- class:spread -->
-							<a href="javascript:(0)" class="name">Language<span></span></a>
+							<a href="javascript:(0)" class="notJump name">Language<span></span></a>
 							<div class="ul">
 								<a href="" class="li">简体中文</a>
 								<a href="" class="li current">English</a>
@@ -35,10 +35,13 @@
 						<a href="javascript:(0)" class="toNotice"><span>1</span></a>
 						<a href="http://127.0.0.1:8848/shopping/src/html/myCart.html" class="toShoppingCart"><span>11</span></a>
 						<div class="user hasHover">
-							<a href="javascript:(0)" class="name">Frank<span></span></a>
+							<!-- 修改头像--v4.00 -->
+							<a href="javascript:(0)" class="name"><span class="userImg"></span><span></span></a>
 							<div class="ul">
+								<!-- 新增My Address--v2.00 -->
 								<a href="" class="li">My Setting</a>
-								<a href="" class="li">Logout</a>
+								<a href="" class="li">My Address</a>
+								<a href="" class="li" class="logout">Logout</a>
 							</div>
 						</div>
 						<!-- 登录后显示------------ end -->
@@ -50,13 +53,12 @@
 							<p>The email or phone number you’ve entered doesn’t match any account. Sign up for an account</p>
 							<div class="submit">Log In</div>
 						</div>
-
 					</div>
 				</div>
 				<div class="hr"></div>
 				<div class="bottom">
 					<div class="left">
-						<div class="Foods hasHover">
+						<div class="hasHover">
 							<a href="javascript:(0)">Foods</a>
 							<div class="ul">
 								<a class="li" href="javascript:(0)">Drink</a>
@@ -74,7 +76,7 @@
 							</div>
 						</div>
 
-						<div class="DailyUse hasHover">
+						<div class="hasHover">
 							<a href="javascript:(0)">Daily Use</a>
 							<div class="ul">
 								<a class="li" href="javascript:(0)">Drink</a>
@@ -92,7 +94,7 @@
 							</div>
 						</div>
 
-						<div class="Cosmetics hasHover">
+						<div class="hasHover">
 							<a href="javascript:(0)">Cosmetics</a>
 							<div class="ul">
 								<a class="li" href="javascript:(0)">Drink</a>
@@ -109,12 +111,26 @@
 								<a class="li" href="javascript:(0)">Snacks</a>
 							</div>
 						</div>
+						<div class="hasHover">
+							<a href="javascript:(0)">smetics</a>
+						</div>
+						<div class="hasHover">
+							<a href="javascript:(0)">Cosmeticstestestestest</a>
+						</div>
+						<div class="hasHover">
+							<a href="javascript:(0)">Daily</a>
+						</div>
+						<div class="hasHover">
+							<a href="javascript:(0)">Cosmetics</a>
+						</div>
+						
 					</div>
 					<div class="right">
-						<input type="text" placeholder="Search" class="toSearch"><span class="search"></span>
+						<input type="text" placeholder="Search" class="toSearch" data-href="goods/search/?"><span class="search"></span>
 					</div>
 				</div>
 			</div>
+
 			<div class="hr"></div>
 
 			<div class="detailContainer">

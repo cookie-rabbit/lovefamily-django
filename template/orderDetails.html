@@ -110,11 +110,7 @@
             <div>
                 <p class="totalPrice">Sum:&nbsp;$&nbsp;<span>{{ total }}</span></p>
                 <!-- 已经有默认地址的时候class="continue goBuy",没有默认地址的时候显示class="continue" -->
-                {% ifequal user_info.is_null 1 %}
-                    <div class="continue">Continue</div>
-                {% else %}
-                    <div class="continue goBuy">Continue</div>
-                {% endifequal %}
+                <div class="continue goBuy">Continue</div>
             </div>
         </div>
     </div>

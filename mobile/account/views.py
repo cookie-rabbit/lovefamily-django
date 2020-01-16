@@ -63,7 +63,7 @@ class LoginView(View):
                 return JsonResponse({"errcode": "115", "errmsg": "the content is too long for username"})
             email = data.get("email", None)
             if email:
-                if not re.match(r'^[0-9a-zA-Z_]{0,19}@[0-9a-zA-Z]{1,13}\.(com|cn|net){1,3}$', email):
+                if not re.match(r'^([A-Za-z0-9_\-.])+@([A-Za-z0-9_\-.])+\.([A-Za-z]{2,7})$', email):
                     return JsonResponse({"errcode": "106", "errmsg": "email format error"})
             phone = data.get("phone", None)
             if len(phone) > 40:

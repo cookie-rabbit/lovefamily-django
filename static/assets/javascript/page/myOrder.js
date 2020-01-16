@@ -71,7 +71,7 @@ $(".container")
 		for (var i = 0; i < $(".orderLines .cartGoods").length; i++) {
 			var obj = {};
 			var me = $(".orderLines .cartGoods")[i];
-			obj.id = $(me).data("id");
+			obj.good_id = $(me).data("id");
 			obj.good_count = $(me).data("count");
 			arrs[i] = obj;
 		}
@@ -94,7 +94,7 @@ $(".container")
 				if (parseInt(res.errcode) === 0) {
 					location.href = res.data.href;
 				} else {
-					getToast01(res.data.errmsg);
+					getToast01(res.errmsg);
 				}
 			},
 			errFun: function(err) {

@@ -283,21 +283,16 @@ class CategoriesView(View):
             management_logger.error(e)
             return JsonResponse({"errcode": "102", "errmsg": "Db error"})
         for cate in cates:
-            quantity = 0
             try:
                 sub_cates = Category.objects.filter(super_category__id=cate.id)
                 sub_cate_info = []
                 if len(sub_cates) > 0:
                     for sub_cate in sub_cates:
-                        sub_quantity = len(Goods.objects.filter(category=sub_cate))
-                        quantity += sub_quantity
-                        sub_cate_info.append({'id': sub_cate.id, 'name': sub_cate.name, "quantity": sub_quantity})
-                quantity += len(Goods.objects.filter(category=cate))
+                        sub_cate_info.append({'id': sub_cate.id, 'name': sub_cate.name})
             except Exception as e:
                 management_logger.error(e)
                 return JsonResponse({"errcode": "102", "errmsg": "Db error"})
-            category.append({"id": cate.id, "name": cate.name, "quantity": quantity,
-                             "sub_cates": sub_cate_info})
+            category.append({"id": cate.id, "name": cate.name, "sub_cates": sub_cate_info})
         return JsonResponse({"errcode": 0, "data": category})
 
     @method_decorator(admin_auth)
@@ -313,9 +308,9 @@ class CategoriesView(View):
         try:
             if parent_category_id:
                 parent_category = Category.objects.get(id=parent_category_id)
-                category = Category.objects.create(name=category_name, super_category=parent_category)
+                Category.objects.create(name=category_name, super_category=parent_category)
             else:
-                category = Category.objects.create(name=category_name)
+                Category.objects.create(name=category_name)
         except Category.DoesNotExist as e:
             management_logger.error(e)
             return JsonResponse({"errcode": "102", "errmsg": "can not find category in db"})
@@ -333,6 +328,8 @@ class CategoryView(View):
             data = json.loads(request.body.decode())
             category_id = int(category_id)
             category_name = data.get("category_name", None)
+            if len(category_name) > 30:
+                return JsonResponse({"errcode": "115", "errmsg": "the content is too long for category name"})
             parent_category_id = data.get("parent_category_id", None)
             if category_name is None:
                 return JsonResponse({"errcode": "101", "errmsg": "Params error"})

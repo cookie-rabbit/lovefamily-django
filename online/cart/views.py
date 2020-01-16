@@ -34,9 +34,10 @@ class CartsView(View):
             except Exception as e:
                 online_logger.error(e)
                 return JsonResponse({"errcode": "102", "errmsg": "Db error"})
-            category.append({"id": cate.id, "name": cate.name,
-                             "sub_cates": [{'id': sub_cate.id, 'name': sub_cate.name} for sub_cate in sub_cates if
-                                           sub_cates] if sub_cates else []})
+            if len(sub_cates) > 0:
+                category.append({"id": cate.id, "name": cate.name,
+                                 "sub_cates": [{'id': sub_cate.id, 'name': sub_cate.name} for sub_cate in sub_cates if
+                                               sub_cates] if sub_cates else []})
 
         user_id = request.session.get("user_id", None)
         if user_id:
@@ -68,7 +69,7 @@ class CartsView(View):
                 context = {"user": user, "carts_list": cart_list, "cart_quantity": cart_quantity,
                            "order_quantity": order_quantity, "sum": sum, "category": category}
             else:
-                context = {"user": user, "cart_quantity": "", "order_quantity": order_quantity, "sum": 0,
+                context = {"user": user, "cart_quantity": 0, "order_quantity": order_quantity, "sum": 0,
                            "category": category}
         else:
             context = {"sum": 0, "category": category}
@@ -103,7 +104,7 @@ class CartsView(View):
                 cart.quantity = cart.quantity + quantity
                 cart.save()
             else:
-                cart = Cart.objects.create(user=user, quantity=quantity, goods=single_goods)
+                Cart.objects.create(user=user, quantity=quantity, goods=single_goods)
         except Exception as e:
             online_logger.error(e)
             return JsonResponse({"errcode": "102", "errmsg": "Db error"})

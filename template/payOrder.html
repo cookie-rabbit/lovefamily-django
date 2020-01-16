@@ -6,43 +6,19 @@
 {% endblock %}
 
 {% block css %}
-    <link rel="stylesheet" type="text/css" href="/static/assets/css/page/payOrder.css"/>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/page/payOrder.css' %}"/>
 {% endblock %}
 
 {% block content %}
     <div class="payOrderContainer">
         <div class="back"><span class="goBack"></span>Pay for your order</div>
         <div class="cartContent">
-            <h3>Credit or Debit Cards</h3>
-            <p class="name">
-                <span>Name on card</span>
-                <input type="text">
-            </p>
-            <p class="card">
-                <span>Card Number</span>
-                <input type="text">
-            </p>
-            <p class="data">
-                <span>Expiration date</span>
-                <span class="dOrY day">
-						<input type="number" class="count" value="1">
-						<span class="changeCount">
-							<span class="add"></span>
-							<span class="sub"></span>
-						</span>
-					</span>
-                <span class="dOrY year">
-						<input type="number" class="count" value="2019">
-						<span class="changeCount">
-							<span class="add"></span>
-							<span class="sub"></span>
-						</span>
-					</span>
-            </p>
             <h1>Show me the money!</h1>
-            {{ form.render }}
-            <p class="checkToAdd"><span class="check checked"></span>Add a card</p>
-            <div class="continue">Continue</div>
+            <div>
+                {{ content|safe }}
+            </div>
+
         </div>
     </div>
 {% endblock %}
