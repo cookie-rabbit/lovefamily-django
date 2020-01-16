@@ -1,4 +1,5 @@
 $(".contentContainer")
+	/* 切换hot/new */
 	.on("click", ".type li", function() {
 		$(".type li").removeClass("current");
 		$(this).addClass("current");
@@ -8,16 +9,17 @@ $(".contentContainer")
 			sucFun: function(res) {
 				if (parseInt(res.errcode) === 0) {
 					$(".goods").remove();
+					$(".content").html(res.data.result);
 					if (res.data.more == true) {
-						$(".content").html('<div class="more">MORE</div>');
+						$(".content").append('<div class="more">MORE</div>');
 					}
-					$(".more").before(res.data.result);
+					
 				} else {
 					getToast01(res.errmsg);
 				}
 			},
 			errFun: function(err) {
-				getToast01("Network anomaly!!!");
+				getToast01("Network anomaly!");
 			}
 		};
 		doAjax(req);
@@ -40,7 +42,7 @@ $(".contentContainer")
 				}
 			},
 			errFun: function(err) {
-				getToast01("Network anomaly!!!");
+				getToast01("Network anomaly!");
 			}
 		};
 		doAjax(req);
@@ -62,14 +64,34 @@ $(".contentContainer")
 				}
 			},
 			errFun: function(err) {
-				getToast01("Network anomaly!!!");
+				getToast01("Network anomaly!");
 			}
 		};
 		doAjax(req);
 		return false;
 	})
 	.on("click", ".toBuy", function() {
-		location.href = $(this).data("href");
+		var req = {
+			url: baseUrl + 'carts/confirm/',
+			method: "post",
+			
+			data: {
+				goods_id: $(this).data("id"),
+				goods_num:1
+			},
+			sucFun: function(res) {
+				if (parseInt(res.errcode) === 0) {
+					location.href = res.data.href;
+				} else {
+					getToast01(res.errmsg);
+				}
+			},
+			errFun: function(err) {
+				getToast01("Network anomaly!");
+			}
+		};
+		doAjax(req);
+		
 		return false;
 	})
 	/* 列多分类数据 */
@@ -91,7 +113,7 @@ $(".contentContainer")
 				}
 			},
 			errFun: function(err) {
-				getToast01("Network anomaly!!!");
+				getToast01("Network anomaly!");
 			}
 		};
 		doAjax(req);
@@ -116,7 +138,7 @@ $(".contentContainer")
 				}
 			},
 			errFun: function(err) {
-				getToast01("Network anomaly!!!");
+				getToast01("Network anomaly!");
 			}
 		};
 		doAjax(req);

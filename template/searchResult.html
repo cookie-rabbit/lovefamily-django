@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block css %}
-    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/page/index.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/page/index.css' %}"/>
 {% endblock %}
 
 {% block hr %}
@@ -15,12 +15,22 @@
 
 {% block content %}
     <div class="contentContainer">
-        <div class="content">
-            {% include 'goods_block.html' %}
-            {% if more %}
-                <div class="moreResult" data-keyword="{{ keyword }}">MORE</div>
-            {% endif %}
+        <div class="kinds searchHead"><span class="left"></span>The search results: <i class="key">{{ keyword }}</i>
         </div>
+        {% ifequal is_null 0 %}
+            <div class="content">
+                {% include 'goods_block.html' %}
+                {% if more %}
+                    <div class="moreResult" data-keyword="{{ keyword }}">MORE</div>
+                {% endif %}
+            </div>
+        {% endifequal %}
+        {% ifequal is_null 1 %}
+            <div class="noContent">
+                <img src="{% static 'assets/images/noSearch.jpg' %}" alt="">
+                <p>You have no relevant order oh~</p>
+            </div>
+        {% endifequal %}
     </div>
 {% endblock %}
 

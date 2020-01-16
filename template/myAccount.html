@@ -20,7 +20,14 @@
         <!-- <li class="current">My Account</li> -->
     </ul>
     <div class="baseInfor">
-        <p class="name">
+
+        <p class="user">
+            <span>Username</span>
+            <input type="text" value="{{ user.username }}" readonly="readonly">
+            <span class="star"></span>
+            <span class="tips"></span>
+        </p>
+        <p class="email">
             <span>Email</span>
             <input type="text" value="{{ user.email }}" readonly="readonly">
             <span class="star"></span>
@@ -34,13 +41,13 @@
         </p>
         <p class="pass">
             <span>Password</span>
-            <input type="password" value="{% if user.password %}******{% endif %}" readonly="readonly">
+            <input type="password" value="{% if user.password %}111111{% endif %}" readonly="readonly">
             <span class="star"></span>
             <span class="tips"></span>
         </p>
         <p class="repass">
             <span>Re-Password</span>
-            <input type="password" value="{% if user.password %}******{% endif %}" readonly="readonly">
+            <input type="password" value="{% if user.password %}111111{% endif %}" readonly="readonly">
             <span class="star"></span>
             <span class="tips"></span>
         </p>

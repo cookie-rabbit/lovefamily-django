@@ -48,7 +48,7 @@ $(".payOrderContainer")
 				}
 			},
 			errFun: function(err) {
-				getToast01("Network anomaly!!!");
+				getToast01("Network anomaly!");
 			}
 		};
 		doAjax(req);

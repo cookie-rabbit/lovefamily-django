@@ -57,7 +57,7 @@ function toSearch() {
 		location.href = ($(".toSearch").data("href") + "keyword=" + keyword);
 
 	} else {
-		console.log("请输入关键词!!!");
+		console.log("请输入关键词");
 	}
 
 }
@@ -111,4 +111,12 @@ $(".loginDiv")
 	});
 	$(".toIndex").on("click",function(){
 		location.href=$(".header").data("href");
+	});
+	$("body").on("click",function(e){
+		if($(e.target).hasClass("loginDiv")||$(e.target).parents().hasClass("loginDiv")){
+		}
+		else{
+			$(".loginDiv").slideUp("fast");
+		}
+		
 	});

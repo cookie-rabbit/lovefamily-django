@@ -2,12 +2,13 @@
 {% load static %}
 
 {% block title %}
-    My Account
+    My Address
 {% endblock %}
 
 {% block css %}
-    <link rel="stylesheet" type="text/css" href="/static/assets/css/page/register.css"/>
-{#    <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/3.10.0-beta/less.min.js"></script>#}
+
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/page/register.css' %}"/>
+    {#    <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/3.10.0-beta/less.min.js"></script>#}
 {% endblock %}
 
 {% block menu %}
@@ -16,10 +17,47 @@
 {% block content %}
     <div class="registerContainer myAccountContainer">
         <ul class="type">
-            <li class="current">My Account</li>
+            <li class="current">My Address</li>
             <!-- <li class="current">My Account</li> -->
         </ul>
-        <div class="addressContent">
+        {% ifequal is_null 1 %}
+        <div class="addressContent noAddress">
+            <p class="fullName">
+                <span>Full name</span>
+                <input type="text">
+            </p>
+            <p class="addressLine1">
+                <span>Address Line1</span>
+                <input type="text">
+            </p>
+            <p class="addressLine2">
+                <span>Address Line2</span>
+                <input type="text">
+            </p>
+            <p class="city">
+                <span>City</span>
+                <input type="text">
+            </p>
+            <p class="province">
+                <span class="state">State/Province/<br>Region</span>
+                <input type="text">
+            </p>
+            <p class="zip">
+                <span>ZIP</span>
+                <input type="text">
+            </p>
+            <p class="phoneNum">
+                <span>Phone number</span>
+                <input type="text">
+            </p>
+            <p class="signUp">
+                <span></span>
+                <span class="submit toSubmit">Add</span>
+            </p>
+        </div>
+        {% endifequal %}
+    {% ifequal is_null 0 %}
+        <div class="addressContent haveAddress">
             <p class="fullName">
                 <span>Full name</span>
                 <input type="text" value="{{ useraddress.name }}" readonly="readonly">
@@ -50,9 +88,10 @@
             </p>
             <p class="signUp">
                 <span></span>
-                <span class="submit toSubmit">Edit</span>
+                <span class="submit toEdit">Edit</span>
             </p>
         </div>
+    {% endifequal %}
 
     </div>
 {% endblock %}

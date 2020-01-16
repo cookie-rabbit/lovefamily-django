@@ -1,3 +1,4 @@
+var deleteObj = undefined;
 /* 初始默认全选择 */
 $(function() {
 	setTotalCount();
@@ -46,21 +47,50 @@ $(".myCartContainer")
 		editCart(me.parents(".cartGoods").data("id"), count);
 	})
 	.on("click", ".remove", function() {
-		var me = $(this);
-		me.parents(".cartGoods").remove();
+		deleteObj = $(this);
+		$(".content").after(getConfimDiv("Are you sure to delete?"));
+	})
+	.on("click", ".fixedDiv .confirm", function() {
+		deleteObj.parents(".cartGoods").remove();
 		setTotalCount();
 		var req = {
-			url: baseUrl + 'cart/' + me.parents(".cartGoods").data("id") + "/",
+			url: baseUrl + 'cart/' + deleteObj.parents(".cartGoods").data("id") + "/",
 			method: "delete",
 			sucFun: function(res) {
 				if (parseInt(res.errcode) === 0) {
+					$(".fixedDiv").remove();
 					$(".toShoppingCart span").html(res.data.quantity);
 				} else {
 					getToast01(res.errmsg);
 				}
 			},
 			errFun: function(err) {
-				getToast01("Network anomaly!!!");
+				getToast01("Network anomaly!");
+			}
+		};
+		doAjax(req);
+	}).on("click", ".goBuy", function() {
+		var params = "";
+		for (var i = 0; i < $(".toBuyIt").length; i++) {
+			params = params + $($(".toBuyIt")[i]).data("id") + ","
+		}
+		params = params.substr(0, params.length - 1)
+
+		var req = {
+			url: baseUrl + 'carts/confirm/',
+			method: "post",
+			data: {
+				carts_id: params
+			},
+			sucFun: function(res) {
+				if (parseInt(res.errcode) === 0) {
+					location.href = res.data.href;
+				} else {
+					getToast01(res.errmsg);
+				}
+			},
+			errFun: function(err) {
+				getToast01("Network anomaly!");
 			}
 		};
 		doAjax(req);
@@ -82,9 +112,8 @@ function editCart(cart_id, quantity) {
 			}
 		},
 		errFun: function(err) {
-			getToast01("Network anomaly!!!");
+			getToast01("Network anomaly!");
 		}
 	};
 	doAjax(req);
 }
-

@@ -23,27 +23,48 @@ import ast
 import random
 from datetime import datetime
 
-from weigan_shopping import settings
+from weigan_shopping import settings, env
 
 
 # 【渲染】订单页面（地址）
 class OrderAddressView(View):
     @method_decorator(user_auth)
-    def get(self, request, user):
-        user_id = user.id
+    def get(self, request, user, res):
+        carts_id = None
+        goods_id = None
+        goods_num = None
+        order_no = None
 
+        try:
+            res = res.split(':')
+            if res:
+                if res[0] == "carts_id":
+                    carts_id = res[1]
+                elif res[0] == "goods_id":
+                    goods_id = res[1].split("goods_num")[0]
+                    goods_num = res[2]
+                elif res[0] == "order_no":
+                    order_no = res[1]
+                else:
+                    return JsonResponse({"errcode": "101", "errmsg": "Params error"})
+            else:
+                return JsonResponse({"errcode": "101", "errmsg": "Params error"})
+        except Exception as e:
+            online_logger.error(e)
+            return JsonResponse({"errcode": "101", "errmsg": "Params error"})
+        user_id = user.id
         good_dict = []
         total = 0
         if user_id:
             try:
-                user_add = UserAddress.objects.get(user_id=user_id)
-                name = user_add.name
-                province = user_add.province
-                city = user_add.city
-                district = user_add.district
-                road = user_add.road
-                phone_number = user_add.phone_number
-                postcode = user_add.postcode
+                user = UserAddress.objects.get(user_id=user_id)
+                name = user.name
+                province = user.province
+                city = user.city
+                district = user.district
+                road = user.road
+                phone_number = user.phone_number
+                postcode = user.postcode
                 is_null = 0
             except management.user.models.UserAddress.DoesNotExist:
                 name = ''
@@ -58,39 +79,102 @@ class OrderAddressView(View):
                 online_logger.error(e)
                 return JsonResponse({"errcode": "102", "errmsg": "Db error"})
 
+            if carts_id is not None:
+                carts_id = carts_id.split(",")
+                carts = Cart.objects.filter(id__in=carts_id).filter(user_id=user_id)
+                for cart in carts:
+                    good_id = cart.goods_id
+                    quantity = cart.quantity
+                    try:
+                        good_detail = Goods.objects.get(id=good_id)
+                        good_name_en = good_detail.name_en
+                        good_price = good_detail.on_price
+                        good_description_en = good_detail.description_en
+                        good_image = Image.objects.filter(goods_id=good_id)
+                        total = total + quantity * good_price
+                        good_dict.append(
+                            {"id": good_id, "quantity": quantity, "name": good_name_en, "on_price": good_price,
+                             "description": good_description_en,
+                             "image": settings.URL_PREFIX + good_image[0].image.url})
+                    except Exception as e:
+                        online_logger.error(e)
+                        return JsonResponse({"errcode": "102", "errmsg": "Db error"})
+
+            elif goods_id is not None:
+                if int(goods_num) > 0:
+                    good_id = goods_id
+                    quantity = int(goods_num)
+                    try:
+                        good_detail = Goods.objects.get(id=good_id)
+                        good_name_en = good_detail.name_en
+                        good_price = good_detail.on_price
+                        good_description_en = good_detail.description_en
+                        good_image = Image.objects.filter(goods_id=good_id)
+
+                        total = total + quantity * good_price
+                        good_dict.append(
+                            {"id": good_id, "quantity": quantity, "name": good_name_en, "on_price": good_price,
+                             "description": good_description_en,
+                             "image": settings.URL_PREFIX + good_image[0].image.url})
+                    except Exception as e:
+                        online_logger.error(e)
+                        return JsonResponse({"errcode": "102", "errmsg": "Db error"})
+                else:
+                    return JsonResponse({"errcode": "101", "errmsg": "the num is lower than 1"})
+
+            elif order_no is not None:
+                try:
+                    order = Order.objects.filter(order_no=order_no)
+                except Exception as e:
+                    online_logger.error(e)
+                    return JsonResponse({"errcode": "102", "errmsg": "can't find the order"})
+
+                if len(order) > 0:
+                    try:
+                        goods = Order_Goods.objects.filter(order_id=order[0].id)
+                    except Exception as e:
+                        online_logger.error(e)
+                        return JsonResponse({"errcode": "102", "errmsg": "Db error"})
+
+                    for good in goods:
+                        good_id = good.goods_id
+                        quantity = good.quantity
+                        good_name_en = good.name_en
+                        good_price = good.on_price
+                        good_description_en = good.description_en
+                        good_image = str(good.img)
+                        total = total + quantity * good_price
+                        good_dict.append(
+                            {"id": good_id, "quantity": quantity, "name": good_name_en, "on_price": good_price,
+                             "description": good_description_en,
+                             "image": settings.URL_PREFIX + '/media/' + good_image})
+            else:
+                good_dict = []
+                total = 0
+
+            user_info = {"name": name, "province": province, "city": city, "district": district,
+                         "road": road, "phone_number": phone_number, "postcode": postcode, "is_null": is_null}
+            res = {"user_info": user_info, "good_dict": good_dict, "total": total}
+            if order_no:
+                try:
+                    order = Order.objects.filter(order_no=order_no)
+                except Exception as e:
+                    online_logger.error(e)
+                    return JsonResponse({"errcode": "102", "errmsg": "can't find the order"})
+
+                if len(order) > 0:
+                    order_status = order[0].status
+                    res.update({"order_status": order_status})
+
             user = User.objects.get(id=user_id)
             orders = Order.objects.filter(user_id=user_id)
             order_quantity = len(orders)
             cart_quantity = request.session.get("%s_cart" % user_id, 0)
-            carts = Cart.objects.filter(user_id=user_id)
 
-            for cart in carts:
-                good_id = cart.goods_id
-                quantity = cart.quantity
-                try:
-                    good_detail = Goods.objects.get(id=good_id)
-
-                    good_name_en = good_detail.name_en
-                    good_price = good_detail.on_price
-                    good_description_en = good_detail.description_en
-                    good_image = Image.objects.filter(goods_id=good_id)
-
-                    total = total + quantity * good_price
-                    good_dict.append({"id": good_id, "quantity": quantity, "name_en": good_name_en, "price": good_price,
-                                      "description_en": good_description_en,
-                                      "image": settings.URL_PREFIX + good_image[0].image.url})
-                except Exception as e:
-                    online_logger.error(e)
-                    return JsonResponse({"errcode": "102", "errmsg": "Db error"})
-
-            user_info = {"name": name, "province": province, "city": city, "district": district,
-                         "road": road, "phone_number": phone_number, "postcode": postcode, "is_null": is_null}
             res = {"user_info": user_info, "good_dict": good_dict, "total": total, "user": user,
                    "cart_quantity": cart_quantity, "order_quantity": order_quantity}
 
-            return render(request, "myOrder.html", context=res)
-        else:
-            JsonResponse({"errcode": 101, "errmsg": "user_id is None"})
+        return render(request, "myOrder.html", context=res)
 
 
 # 订单列表详情
@@ -111,18 +195,20 @@ class OrdersDetailView(View):
                 if goods != '':
                     good_dic = []
                     for good in goods:
+                        good_id = good.id
                         quantity = good.quantity
                         good_name_en = good.name_en
                         good_price = good.on_price
                         good_description_en = good.description_en
                         good_image = Image.objects.filter(goods_id=good.id)
-                        good_dic.append({"quantity": quantity, "name_en": good_name_en, "price": good_price,
-                                         "description_en": good_description_en,
-                                         "image": settings.URL_PREFIX + good_image[0].image.url})
-                    res = {"good_dic": good_dic}
+                        good_dic.append(
+                            {"good_id": good_id, "quantity": quantity, "name_en": good_name_en, "price": good_price,
+                             "description_en": good_description_en,
+                             "image": settings.URL_PREFIX + good_image[0].image.url})
+                    res = {"good_dic": good_dic, "order_no": order_no}
                     tpl = get_template("orderDetail.html")
-                    data = tpl.render(res)
-                    return JsonResponse({'errcode': 0, 'data': data})
+                    result = tpl.render(res)
+                    return JsonResponse({'errcode': 0, 'data': {"result": result}})
                 else:
                     return JsonResponse({"errcode": 110, "errmsg": "goods not exist"})
             else:
@@ -130,10 +216,10 @@ class OrdersDetailView(View):
         return JsonResponse({'errcode': 111, 'errmsg': "order not exist"})
 
 
-#【渲染】订单详情
+# 【渲染】订单详情
 class OrdersDetailsView(View):
     @method_decorator(user_auth)
-    def get(self, request, user):
+    def get(self, request, user, order_no):
         user_id = user.id
         orders = Order.objects.filter(user_id=user_id)
         order_quantity = len(orders)
@@ -152,7 +238,7 @@ class OrdersDetailsView(View):
             return JsonResponse({"errcode": 102, "errmsg": "Db error"})
 
         user = User.objects.get(id=user_id)
-        order_no = request.GET.get('order_no')
+        order_no = order_no
         orders = Order.objects.filter(user_id=user_id).filter(order_no=order_no)
         if len(orders) > 0:
             order = orders[0]
@@ -173,9 +259,9 @@ class OrdersDetailsView(View):
                     good_price = good.on_price
                     good_description_en = good.description_en
                     good_image = Image.objects.filter(goods_id=good.id)
-                    good_dict.append({"quantity": quantity, "name_en": good_name_en, "price": good_price,
-                                     "description_en": good_description_en,
-                                     "image": settings.URL_PREFIX + good_image[0].image.url})
+                    good_dict.append({"id": good.id, "quantity": quantity, "name_en": good_name_en, "price": good_price,
+                                      "description_en": good_description_en,
+                                      "image": settings.URL_PREFIX + good_image[0].image.url})
                 user_info = {"name": name, "province": province, "city": city, "district": district,
                              "road": road, "phone_number": phone_number, "postcode": postcode}
                 res = {"user_info": user_info, "good_dict": good_dict, "total": total, "user": user,
@@ -205,8 +291,11 @@ class OrdersListView(View):
         try:
             if status_query == 0:
                 orders_total = orders.order_by('-order_date')
+                order_no_first = orders_total[0].order_no
             else:
                 orders_total = orders.filter(status=status_query).order_by('-order_date')
+                order_no_first = orders_total[0].order_no
+
             orders = orders_total[: PER_PAGE_GOODS_COUNT]
 
         except Exception as e:
@@ -223,6 +312,8 @@ class OrdersListView(View):
         if orders.count() > 0:
             order_dic = []
             good_dic = []
+            is_null = 0
+            i = 1
 
             for order in orders:
                 order_no = order.order_no
@@ -244,18 +335,21 @@ class OrdersListView(View):
                     good_name_en = good.name_en
                     good_price = good.on_price
                     good_description_en = good.description_en
-                    good_image = str(good.img)
+                    good_image = Image.objects.filter(goods_id=good.id)
                     good_dic.append({"quantity": quantity, "name_en": good_name_en, "price": good_price,
-                                     "description_en": good_description_en, "image": good_image})
+                                     "description_en": good_description_en,
+                                     "image": settings.URL_PREFIX + good_image[0].image.url})
             else:
                 return JsonResponse({'errcode': 110, 'errmsg': "goods not exist"})
         else:
             order_dic = []
             good_dic = []
+            is_null = 1
 
         cart_quantity = request.session.get("%s_cart" % user_id)
         res = {"order_dic": order_dic, "good_dic": good_dic, "status": status_query, "more": more,
-               "cart_quantity": cart_quantity, "order_quantity": order_quantity, "user": user}
+               "order_no": order_no_first,
+               "cart_quantity": cart_quantity, "order_quantity": order_quantity, "user": user, "is_null": is_null}
         return render(request, "myOrders.html", context=res)
 
 
@@ -274,6 +368,7 @@ class OrderCreateView(View):
             postcode = request.POST.get('postcode')
             phone_number = request.POST.get('phone_number')
             goods = ast.literal_eval(request.POST.get('goods'))
+            is_cart = request.POST.get('is_cart', 0)
         except Exception as e:
             online_logger.error(e)
             return JsonResponse({"errcode": 101, "errmsg": "params not all"})
@@ -322,8 +417,10 @@ class OrderCreateView(View):
             online_logger.error(e)
             return JsonResponse({"errcode": 101, "errmsg": "Params error"})
 
+        goods_ids = []
         for good in goods:
             goods_id = good['good_id']
+            goods_ids.append(goods_id)
             good_count = good['good_count']
             try:
                 Goodgoods = Goods.objects.select_for_update().get(id=goods_id)
@@ -357,6 +454,13 @@ class OrderCreateView(View):
 
         time = timezone.localtime(timezone.now()).strftime("%Y-%m-%d %H:%M:%S")
         OrderStatusLog.objects.create(order_no=order_no, status=1, user_id=user_id, change_date=time)
+
+        if is_cart == 1:
+            try:
+                Cart.objects.filter(goods_id__in=goods_ids).delete()
+            except Exception as e:
+                online_logger.error(e)
+                return JsonResponse({'errcode': 102, 'errmsg': 'Db error'})
 
         href = "http://10.168.2.111:8000/orders/{order_no}/pay/".format(order_no=order.order_no)
         return JsonResponse({"errcode": 0, "data": {"result": "ordered success", "href": href}})
@@ -420,13 +524,21 @@ class UserAddressView(View):
             road = request.POST.get('road')
             postcode = request.POST.get('postcode')
             phone_number = request.POST.get('phone_number')
+            if not (name or road or district or city or province or phone_number or postcode):
+                return JsonResponse({"errcode": 101, "errmsg": "Please full fill the content"})
         except Exception as e:
             online_logger.error(e)
             return JsonResponse({"errcode": 101, "errmsg": "params not all"})
         try:
-            UserAddress.objects.filter(user_id=user_id).update(name=name, province=province, road=road,
-                                                               city=city, district=district, postcode=postcode,
-                                                               phone_number=phone_number)
+            useraddress = UserAddress.objects.get(user_id=user_id)
+            useraddress.name = name
+            useraddress.province = province
+            useraddress.city = city
+            useraddress.district = district
+            useraddress.road = road
+            useraddress.phone_number = phone_number
+            useraddress.postcode = postcode
+            useraddress.save()
             return JsonResponse({"errcode": 0, "errmsg": "updated success"})
         except management.user.models.UserAddress.DoesNotExist:
             try:
@@ -439,6 +551,7 @@ class UserAddressView(View):
         except Exception as e:
             online_logger.error(e)
             return JsonResponse({"errcode": 102, "errmsg": "Db error"})
+
 
 # paypal支付按钮渲染
 class PayView(View):
@@ -502,3 +615,21 @@ class OrderPayView(View):
         context = {"total": total, "content": a, "order_quantity": order_quantity, "user": user,
                    "cart_quantity": cart_quantity}
         return render(request, "payOrder.html", context=context)
+
+
+# 【渲染】支付成功
+class PaySuccessView(View):
+    @method_decorator(user_auth)
+    def get(self, request, user):
+        try:
+            user_id = user.id
+            orders = Order.objects.filter(user_id=user_id).order_by('-order_date')
+            order_quantity = len(orders)
+            user = User.objects.get(id=user.id)
+        except Exception as e:
+            online_logger.error(e)
+            return JsonResponse({"errcode": 102, "errmsg": "Db error"})
+        cart_quantity = request.session.get("%s_cart" % user_id)
+        context = {"order_quantity": order_quantity, "user": user, "cart_quantity": cart_quantity,
+                   "index": env.ONLINE_URL, "order_href": env.ONLINE_URL + 'orders/'}
+        return render(request, "paySucess.html", context=context)

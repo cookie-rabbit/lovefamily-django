@@ -1,7 +1,7 @@
 {% ifnotequal good_dic '' %}
     {% for good in good_dic %}
         <div class="details">
-            <a href="/goods/{{ good.id }}/" class="listDetail">
+            <a href="/orders/{{ order_no }}/" class="listDetail">
                 <img src={{ good.image }} alt="">
                 <div class="infors">
                     <h4>{{ good.name_en }}</h4>

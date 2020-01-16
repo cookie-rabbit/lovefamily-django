@@ -108,8 +108,8 @@ input[type="password"]:focus {
   border: 1px solid #d8d8d8;
   padding: 10px 20px;
   line-height: normal;
-  top: 95px;
-  left: -65px;
+  top: 75px;
+  left: -35px;
   display: none;
 }
 .header .top .top-right .loginDiv input {
@@ -576,6 +576,9 @@ input[type="number"] {
   color: #999999;
   line-height: 24px;
   text-align: center;
+}
+body {
+  padding-bottom: 20px;
 }
 .myOrdersContainer {
   width: 1200px;

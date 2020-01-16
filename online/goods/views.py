@@ -178,8 +178,8 @@ class GoodsCategoryTemplateView(View):
                 return JsonResponse({"errcode": "102", "errmsg": "Db error"})
             if len(sub_cates) > 0:
                 category.append({"id": cate.id, "name": cate.name,
-                             "sub_cates": [{'id': sub_cate.id, 'name': sub_cate.name} for sub_cate in sub_cates if
-                                           sub_cates] if sub_cates else []})
+                                 "sub_cates": [{'id': sub_cate.id, 'name': sub_cate.name} for sub_cate in sub_cates if
+                                               sub_cates] if sub_cates else []})
 
         count = PER_PAGE_GOODS_COUNT
         try:
@@ -197,6 +197,12 @@ class GoodsCategoryTemplateView(View):
                     F('actual_sale') + F('virtual_sale'))
                 goods = total_goods[:count]
                 super_category = ""
+
+            if len(total_goods) > 0:
+                is_null = 0
+            else:
+                is_null = 1
+
             if len(total_goods) > count:
                 more = True
             else:
@@ -231,9 +237,10 @@ class GoodsCategoryTemplateView(View):
                 return JsonResponse({"errcode": "102", "errmsg": "Db error"})
             cart_quantity = request.session.get("%s_cart" % user_id, 0)
             context = {"category": category, "goods": goods_list, "user": user, "cart_quantity": cart_quantity,
-                       "order_quantity": order_quantity}
+                       "order_quantity": order_quantity, "is_null": is_null}
         else:
-            context = {"category": category, "goods": goods_list, "user": "", "cart_quantity": 0, "order_quantity": 0}
+            context = {"category": category, "goods": goods_list, "user": "", "is_null": is_null, "cart_quantity": 0,
+                       "order_quantity": 0}
 
         context.update({"current_category": {"super_category": super_category,
                                              "category": {"id": current_category.id, "name": current_category.name}},
@@ -259,8 +266,8 @@ class GoodsTemplateView(View):
                 return JsonResponse({"errcode": "102", "errmsg": "Db error"})
             if len(sub_cates) > 0:
                 category.append({"id": cate.id, "name": cate.name,
-                             "sub_cates": [{'id': sub_cate.id, 'name': sub_cate.name} for sub_cate in sub_cates if
-                                           sub_cates] if sub_cates else []})
+                                 "sub_cates": [{'id': sub_cate.id, 'name': sub_cate.name} for sub_cate in sub_cates if
+                                               sub_cates] if sub_cates else []})
         try:
             single_goods = Goods.objects.get(id=goods_id)
             images = Image.objects.filter(goods__id=goods_id)
@@ -298,6 +305,7 @@ class GoodsTemplateView(View):
 
 class GoodsSearchView(View):
     """商品搜索"""
+
     def get(self, request):
         keyword = request.GET.get("keyword", None)
         current = request.GET.get("current", 0)
@@ -335,6 +343,7 @@ class GoodsSearchView(View):
 
 class GoodsSearchTemplateView(View):
     """商品搜索模板"""
+
     def get(self, request):
         keyword = request.GET.get("keyword", None)
         count = PER_PAGE_GOODS_COUNT
@@ -342,6 +351,10 @@ class GoodsSearchTemplateView(View):
             return JsonResponse({"errcode": "101", "errmsg": "Empty params"})
         try:
             total_goods = Goods.objects.filter(on_sale=True).filter(name_en__contains=keyword)
+            if len(total_goods) > 0:
+                is_null = 0
+            else:
+                is_null = 1
             goods = total_goods[:count]
             if len(total_goods) > count:
                 more = True
@@ -389,8 +402,8 @@ class GoodsSearchTemplateView(View):
                 return JsonResponse({"errcode": "102", "errmsg": "Db error"})
             cart_quantity = request.session.get("%s_cart" % user_id, 0)
             context = {"category": category, "goods": goods_list, "user": user, "cart_quantity": cart_quantity,
-                       "order_quantity": order_quantity, "keyword": keyword, "more": more}
+                       "order_quantity": order_quantity, "keyword": keyword, "more": more, "is_null": is_null}
         else:
             context = {"category": category, "goods": goods_list, "user": "", "cart_quantity": 0, "order_quantity": 0,
-                       "keyword": keyword, "more": more}
+                       "keyword": keyword, "more": more, "is_null": is_null}
         return render(request, "searchResult.html", context=context)

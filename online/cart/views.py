@@ -1,20 +1,21 @@
 import json
 
-from django.http import JsonResponse
-from django.shortcuts import render
+from django.http import JsonResponse, HttpResponseRedirect
+from django.shortcuts import render, redirect
 
 # Create your views here.
 from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.decorators.csrf import csrf_exempt
 
-from management.user.models import User
+import management
+from management.user.models import User, UserAddress
 from online.cart.models import Cart
 from online.goods.models import Goods, Image, Category
 from online.logger import online_logger
-from online.order.models import Order
+from online.order.models import Order, Order_Goods
 from utils.decorator import user_auth
-from weigan_shopping import settings
+from weigan_shopping import settings, env
 
 
 class CartsView(View):
@@ -77,6 +78,8 @@ class CartsView(View):
         # return JsonResponse(context,safe=False)
         return render(request, "myCart.html", context=context)
 
+    """新增到购物车"""
+
     @method_decorator(user_auth)
     @method_decorator(csrf_exempt)
     def post(self, request, user):
@@ -115,6 +118,8 @@ class CartsView(View):
 
 
 class CartView(View):
+    """修改购物车数量"""
+
     @method_decorator(user_auth)
     def post(self, request, user, cart_id):
         quantity = request.POST.get("quantity", None)
@@ -140,6 +145,8 @@ class CartView(View):
         total_quantity = request.session["%s_cart" % user.id]
         return JsonResponse({"errcode": "0", "errmsg": "update success", "data": {"quantity": total_quantity}})
 
+    """从购物车中删除"""
+
     @method_decorator(user_auth)
     def delete(self, request, user, cart_id):
         try:
@@ -155,3 +162,29 @@ class CartView(View):
         request.session["%s_cart" % user.id] -= cart.quantity
         total_quantity = request.session["%s_cart" % user.id]
         return JsonResponse({"errcode": "0", "errmsg": "delete success", "data": {"quantity": total_quantity}})
+
+
+class CartsConfirm(View):
+    """提交购物车信息"""
+
+    @method_decorator(user_auth)
+    def post(self, request, user):
+        carts_id = request.POST.get('carts_id', None)
+        goods_id = request.POST.get("goods_id", None)
+        goods_num = request.POST.get('goods_num', None)
+        order_no = request.POST.get('order_no', None)
+
+        # res = {"carts_id": carts_id, "goods_id": goods_id, "goods_num": goods_num, "order_no": order_no}
+        res = ''
+        if carts_id:
+            res = "carts_id:" + carts_id
+        if goods_id:
+            res = "goods_id:" + goods_id + "goods_num:" + goods_num
+        if order_no:
+            res = "order_no:" + order_no
+        href = env.ONLINE_URL + "orders/address/" + res
+        data = {"href": href}
+
+        return JsonResponse({'errcode': 0, 'errmsg': "success", "data": data})
+
+        # return JsonResponse({"errcode": "0", "data": res})

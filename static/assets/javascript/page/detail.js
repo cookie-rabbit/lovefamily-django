@@ -96,15 +96,33 @@ $(".todo")
 				}
 			},
 			errFun: function(err) {
-				getToast01("Network anomaly!!!");
+				getToast01("Network anomaly!");
 			}
 		};
 		doAjax(req);
 		return false;
 	})
 	.on("click", ".buyNow", function() {
-		var quantity = $(".quantity .count").val();
-		/* 跳转需要携带数量 */
-		location.href = $(this).data("href");
+		var req = {
+			url: baseUrl + 'carts/confirm/',
+			method: "post",
+			
+			data: {
+				goods_id: $(".detailContainer").data("id"),
+				goods_num:$(".quantity .count").val()
+			},
+			sucFun: function(res) {
+				if (parseInt(res.errcode) === 0) {
+					location.href = res.data.href;
+				} else {
+					getToast01(res.errmsg);
+				}
+			},
+			errFun: function(err) {
+				getToast01("Network anomaly!");
+			}
+		};
+		doAjax(req);
+		
 		return false;
 	});;

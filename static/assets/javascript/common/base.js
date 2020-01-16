@@ -89,3 +89,4 @@ function getToast01(content,time=2000,href) {
 $(".container").on("click", ".fixedDiv .cancel", function() {
 	$(".fixedDiv").remove();
 });
+
