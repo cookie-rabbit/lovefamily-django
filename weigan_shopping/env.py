@@ -14,13 +14,15 @@ API_PORT = os.getenv("API_PORT", "8000")  # PC端接口
 ADMIN_API_HOST = os.getenv("ADMIN_API_HOST", "10.168.2.107")  # 后台地址
 ADMIN_API_PORT = os.getenv("ADMIN_API_PORT", "9526")  # 后台端口
 
-PAYMENT_NOTIFY_URL = "https://81c55584.ngrok.io" + "/paypal/"
+PAYMENT_NOTIFY_URL = os.getenv("PAYMENT_NOTIFY_URL", "https://81c55584.ngrok.io" + "/paypal/")  # 后台端口
 
-MOBILE_URL = "http://10.168.2.107:8080/#/"
+
+MOBILE_URL = os.getenv("MOBILE_URL", "http://10.168.2.107:8080/#/")  # 后台端口
+
 MOBILE_PAYMENT_RETURN_URL = MOBILE_URL + "paySuccess"
 MOBILE_PAYMENT_CANCEL_URL = MOBILE_URL + "cashier?order_no="
 
-ONLINE_URL = "http://10.168.2.111:8000/"
+ONLINE_URL = os.getenv("ONLINE_URL", "/")  # 后台端口
 ONLINE_PAYMENT_RETURN_URL = ONLINE_URL + "orders/pay/success/"
 ONLINE_PAYMENT_CANCEL_URL = ONLINE_URL + "orders/"
 
