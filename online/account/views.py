@@ -64,22 +64,6 @@ class UserView(View):
     @method_decorator(user_auth)
     def get(self, request, user):
         """获取用户信息"""
-        # category = []
-        # try:
-        #     cates = Category.objects.filter(super_category__isnull=True)
-        # except Exception as e:
-        #     online_logger.error(e)
-        #     return JsonResponse({"errcode": "102", "errmsg": "Db error"})
-        # for cate in cates:
-        #     try:
-        #         sub_cates = Category.objects.filter(super_category__id=cate.id)
-        #     except Exception as e:
-        #         online_logger.error(e)
-        #         return JsonResponse({"errcode": "102", "errmsg": "Db error"})
-        #     category.append({"id": cate.id, "name": cate.name,
-        #                      "sub_cates": [{'id': sub_cate.id, 'name': sub_cate.name} for sub_cate in sub_cates if
-        #                                    sub_cates] if sub_cates else []})
-        # context = {"category":category,"user": user}
         context = {"user": user}
         try:
             orders = Order.objects.filter(user=user)
@@ -100,6 +84,12 @@ class UserView(View):
                 return JsonResponse({"errcode": "106", "errmsg": "email format error"})
         phone = request.POST.get("phone", None)
         password = request.POST.get("password", None)
+        if password:
+            if not re.match(r'^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,50}$', password):
+                return JsonResponse(
+                    {"errcode": "106",
+                     "errmsg": "The password must have both number and letters, not allowed the others."
+                               " The length of password must longer than six "})
         repassword = request.POST.get("repassword", None)
         if password != repassword:
             return JsonResponse({"errcode": "106", "errmsg": "password differently"})
@@ -198,6 +188,10 @@ class SignUpView(View):
             online_logger.error(e)
             return JsonResponse({"errcode": "102", "errmsg": "Db error"})
         password = request.POST.get("password", None)
+        if password:
+            if not re.match(r'^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,50}$', password):
+                return JsonResponse(
+                    {"errcode": "106", "errmsg": "The password must have number and letter and longer than six"})
         repassword = request.POST.get("repassword", None)
         if password != repassword:
             return JsonResponse({"errcode": "107", "errmsg": "Passwords must be matched"})
@@ -236,5 +230,4 @@ class SignUpTemplateView(View):
                              "sub_cates": [{'id': sub_cate.id, 'name': sub_cate.name} for sub_cate in sub_cates if
                                            sub_cates] if sub_cates else []})
         context = {"category": category, "user": ""}
-        # context = {"user":""}
         return render(request, 'register.html', context=context)

@@ -1,6 +1,6 @@
 {% ifnotequal good_dic '' %}
-    {% for good in good_dic %}
-        <div class="details">
+    <div class="details">
+        {% for good in good_dic %}
             <a href="/orders/{{ order_no }}/" class="listDetail">
                 <img src={{ good.image }} alt="">
                 <div class="infors">
@@ -14,7 +14,8 @@
                     </p>
                 </div>
             </a>
-        </div>
-    {% endfor %}
+
+        {% endfor %}
+    </div>
 {% else %}
 {% endifnotequal %}

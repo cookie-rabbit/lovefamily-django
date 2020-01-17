@@ -47,7 +47,7 @@
                 <p class="dec">{{ goods.description }}</p>
             </div>
         </div>
-        <div class="customDiv"></div>
+        <div class="customDiv">{{ goods.detail|safe }}</div>
     </div>
 {% endblock %}
 

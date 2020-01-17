@@ -83,9 +83,12 @@ class LoginView(View):
             password = data.get("password", None)
             if len(password) > 100:
                 return JsonResponse({"errcode": "115", "errmsg": "the content is too long for password"})
-            # if password:
-            #     if not re.match(r'^(?=.*[0-9])(?=.*[!@#$%^&*])[0-9a-zA-Z!@#$%^&*0-9]{10,}$', password):
-            #         return JsonResponse({"errcode": "106", "errmsg": "password"})
+            if password:
+                if not re.match(r'^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,50}$', password):
+                    return JsonResponse(
+                        {"errcode": "106",
+                         "errmsg": "The password must have both number and letters, not allowed the others."
+                                   " The length of password must longer than six "})
             repassword = data.get("re_password", None)
             if password != repassword:
                 return JsonResponse({"errcode": "107", "errmsg": "Passwords must be matched"})

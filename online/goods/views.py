@@ -350,7 +350,7 @@ class GoodsSearchTemplateView(View):
         if keyword is None:
             return JsonResponse({"errcode": "101", "errmsg": "Empty params"})
         try:
-            total_goods = Goods.objects.filter(on_sale=True).filter(name_en__contains=keyword)
+            total_goods = Goods.objects.filter(on_sale=True).filter(name_en__icontains=keyword)
             if len(total_goods) > 0:
                 is_null = 0
             else:

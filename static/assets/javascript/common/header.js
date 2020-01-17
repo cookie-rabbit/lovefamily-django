@@ -57,7 +57,7 @@ function toSearch() {
 		location.href = ($(".toSearch").data("href") + "keyword=" + keyword);
 
 	} else {
-		console.log("请输入关键词");
+		getToast01("please enter the keyword");
 	}
 
 }

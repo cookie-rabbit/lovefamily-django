@@ -20,11 +20,13 @@ legend {
   margin: 0;
   padding: 0;
   color: black;
+  font-family: "times new roman" !important;
 }
 ul,
 li,
 ol {
   list-style: none;
+  font-family: "times new roman" !important;
 }
 img,
 fieldset {
@@ -44,18 +46,21 @@ h4,
 h5,
 h6 {
   font-weight: 100;
+  font-family: "times new roman" !important;
 }
 body {
   font-size: 12px;
-  font-family: "微软雅黑";
+  font-family: "times new roman" !important;
 }
 a {
   outline: none;
+  font-family: "times new roman" !important;
 }
 input {
   background: none;
   outline: none;
   border: 0px;
+  font-family: "times new roman" !important;
 }
 input[type="text"]:focus,
 input[type="password"]:focus {
@@ -67,6 +72,9 @@ input[type="password"]:focus {
   max-width: 1920px;
   min-width: 1200px;
   margin: 0 auto;
+}
+span {
+  font-family: "times new roman" !important;
 }
 .header .top {
   width: 1200px;
@@ -95,7 +103,7 @@ input[type="password"]:focus {
   float: right;
   height: 120px;
   line-height: 120px;
-  width: 300px;
+  width: 320px;
   font-size: 16px;
   position: relative;
 }
@@ -154,9 +162,10 @@ input[type="password"]:focus {
 .header .top .top-right .language,
 .header .top .top-right .user {
   display: inline-block;
+  width: 98px;
   margin-right: 20px;
   text-align: center;
-  width: 98px;
+  width: 112px;
   position: relative;
   bottom: 3px;
 }
@@ -200,6 +209,7 @@ input[type="password"]:focus {
   height: 25px;
   line-height: 25px;
   font-size: 14px;
+  padding-left: 5px;
 }
 .header .top .top-right .language .ul .li:hover,
 .header .top .top-right .user .ul .li:hover {
@@ -580,7 +590,10 @@ input[type="number"] {
   text-align: center;
 }
 body {
-  padding-bottom: 20px;
+  padding-bottom: 50px;
+}
+.detailContainer {
+  padding-bottom: 100px;
 }
 .detailContainer .information {
   width: 948px;
@@ -589,7 +602,7 @@ body {
 }
 .detailContainer .information .pics {
   width: 442px;
-  height: 412px;
+  height: 442px;
   position: relative;
   overflow: hidden;
   display: inline-block;
@@ -597,7 +610,7 @@ body {
 }
 .detailContainer .information .pics .roll {
   width: 99999px;
-  height: 412px;
+  height: 442px;
   position: absolute;
   border-radius: 10px;
   left: 0px;
@@ -606,7 +619,7 @@ body {
 .detailContainer .information .pics .roll .rollPic {
   float: left;
   width: 442px;
-  height: 412px;
+  height: 442px;
   border-radius: 10px;
 }
 .detailContainer .information .pics .prev,
@@ -746,9 +759,18 @@ body {
 .detailContainer .customDiv {
   width: 948px;
   margin: 0 auto;
-  height: 300px;
   margin-top: 50px;
-  background: aliceblue;
+  background: #f8f8f8;
+  padding: 20px;
+}
+.detailContainer .customDiv img {
+  margin: 0 auto;
+}
+.detailContainer .customDiv p,
+.detailContainer .customDiv li {
+  font-size: 14px;
+  color: #333;
+  line-height: 20px;
 }
 .todo {
   width: 100%;
@@ -794,7 +816,7 @@ body {
   color: white;
 }
 .todo .mainContent .buyNow span {
-  width: 14xp;
+  width: 14px;
   height: 14px;
   background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAABIElEQVQ4T5XRv0qcURCG8d8YEfzThWgWtFAUGyGSC9DUQUQbKwsRImxjGVIIlqmsFBGLCLZaCF5A8AbEVgUtDEYEW7eSI2c5C6IfqNOdM/PMO+9MqIiU0hKWS2od2xGRnpbGcy6ltIA5/Cq539iPiJ0XYEqpE4voxwyOcVUKB/AVB/iHPxHRaCqmlDZRrxq74m8rIuot8AKDbwQvI2IoUkrtuMHHLI4zjD5rkv9GkIXu8DmD3bhFFxoYwznaCvyAYZyiA/fozeAn/MeHUjiL7/hR3hs4wt6TRrUMZm/ZYyuy+nwZKY/eh11kgVY0PX7BScVirounWkVuPIMTZZQ3LrVZNpnBKRy+h8J0Br/h7zvBpmK+zQp+oueVBvlca1h9BGE/WDNMay6JAAAAAElFTkSuQmCC") no-repeat;
   background-size: 100%;

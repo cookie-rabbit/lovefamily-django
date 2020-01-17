@@ -1,6 +1,7 @@
 @import "../common/base.less";
 
 .detailContainer {
+	padding-bottom:100px;
 	.information {
 		width: 948px;
 		margin: 0 auto;
@@ -8,7 +9,7 @@
 
 		.pics {
 			width: 442px;
-			height: 412px;
+			height: 442px;
 			position: relative;
 			overflow: hidden;
 			display: inline-block;
@@ -16,7 +17,7 @@
 
 			.roll {
 				width: 99999px;
-				height: 412px;
+				height: 442px;
 				position: absolute;
 				border-radius: 10px;
 				left: 0px;
@@ -25,7 +26,7 @@
 				.rollPic {
 					float: left;
 					width: 442px;
-					height: 412px;
+					height: 442px;
 					border-radius: 10px;
 				}
 			}
@@ -118,8 +119,8 @@
 					.changeCount {
 						height: 20px;
 						position: absolute;
-						left: 100px;
-						top:0px;
+						bottom: -1px;
+						right: 0;
 
 						.add,
 						.sub {
@@ -194,9 +195,17 @@
 	.customDiv {
 		width: 948px;
 		margin: 0 auto;
-		height: 300px;
 		margin-top: 50px;
-		background: aliceblue;
+		background: #f8f8f8;
+		padding: 20px;
+		img{
+			margin: 0 auto;
+		}
+		p,li{
+			font-size: 14px;
+			color: #333;
+			line-height: 20px;
+		}
 	}
 }
 
@@ -246,7 +255,7 @@
 			color: white;
 
 			span {
-				width: 14xp;
+				width: 14px;
 				height: 14px;
 				background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAABIElEQVQ4T5XRv0qcURCG8d8YEfzThWgWtFAUGyGSC9DUQUQbKwsRImxjGVIIlqmsFBGLCLZaCF5A8AbEVgUtDEYEW7eSI2c5C6IfqNOdM/PMO+9MqIiU0hKWS2od2xGRnpbGcy6ltIA5/Cq539iPiJ0XYEqpE4voxwyOcVUKB/AVB/iHPxHRaCqmlDZRrxq74m8rIuot8AKDbwQvI2IoUkrtuMHHLI4zjD5rkv9GkIXu8DmD3bhFFxoYwznaCvyAYZyiA/fozeAn/MeHUjiL7/hR3hs4wt6TRrUMZm/ZYyuy+nwZKY/eh11kgVY0PX7BScVirounWkVuPIMTZZQ3LrVZNpnBKRy+h8J0Br/h7zvBpmK+zQp+oueVBvlca1h9BGE/WDNMay6JAAAAAElFTkSuQmCC") no-repeat;
 				background-size: 100%;

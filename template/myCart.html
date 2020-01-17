@@ -6,8 +6,8 @@
 {% endblock %}
 
 {% block css %}
-    <link rel="stylesheet/less" type="text/css" href="{% static 'assets/css/page/myCart.css' %}"/>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/3.10.0-beta/less.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/page/myCart.css' %}"/>
+{#    <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/3.10.0-beta/less.min.js"></script>#}
 {% endblock %}
 
 {% block hr %}
@@ -61,9 +61,9 @@
             <p class="totalPrice">Sum:&nbsp;$&nbsp;<span>{{ sum }}</span></p>
             {% ifequal cart_quantity 0 %}
                 <!-- v2.00 购物车为空的时候-->
-                <div class="notBuy">Buy Now</div>
+                <div class="notBuy"><span></span>Buy Now</div>
             {% else %}
-                <div class="buyNow">Buy Now</div>
+                <div class="buyNow"><span></span>Buy Now</div>
             {% endifequal %}
         </div>
     </div>
