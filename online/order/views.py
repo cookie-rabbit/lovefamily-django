@@ -480,7 +480,7 @@ class OrderCreateView(View):
                 online_logger.error(e)
                 return JsonResponse({'errcode': 102, 'errmsg': 'Db error'})
 
-        href = "http://10.168.2.111:8000/orders/{order_no}/pay/".format(order_no=order.order_no)
+        href = "/orders/{order_no}/pay/".format(order_no=order.order_no)
         return JsonResponse({"errcode": 0, "data": {"result": "ordered success", "href": href}})
 
     # 翻页
