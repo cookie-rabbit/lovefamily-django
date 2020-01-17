@@ -221,7 +221,7 @@ class OrderLogsView(View):
                 states_log = []
                 states = OrderStatusLog.objects.filter(order_no=order_no)
                 lena = len(states)
-                sta_dic = {1: "orderd", 2: "Payed", 3: "Delivering", 4: "Finished", 5: "Closed"}
+                sta_dic = {1: "Orderd", 2: "Payed", 3: "Delivering", 4: "Finished", 5: "Closed"}
 
                 if lena > 0:
                     for state in states:

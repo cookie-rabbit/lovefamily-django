@@ -17,8 +17,10 @@
                 <i></i>
             </h3>
         {% endif %}
+
         {% if forloop.first and good_dic != '' %}
             {% include 'orderDetail.html' %}
         {% endif %}
+
     </div>
 {% endfor %}

@@ -7,19 +7,24 @@
 {% block css %}
     <link rel="stylesheet" type="text/css" href="{% static 'assets/css/page/paySucess.css' %}"/>
 {% endblock %}
-
-<!-- v3.00新增页面 -->
+{% block menu %}
+{% endblock %}
 {% block content %}
     <div class="contentContainer">
-
         <div class="noContent">
-            <img src="{% static 'assets/images/success.png' %}" alt="">
-            <div class="succ">Pay for success</div>
+            {% static 'assets/images/forbidPay.png' %}"
             <p>We will arrange the delivery for you as soon as possible ~</p>
             <div class="buttons">
-                <a href={{ order_href }} class="toOrders">View order</a>
-                <a href={{ index }}>Continue shopping</a>
+                <a href="">Back order</a>
             </div>
         </div>
     </div>
 {% endblock %}
+
+
+<style type="text/css">
+    .noContent p {
+        color: #333;
+        margin-bottom: 100px;
+    }
+</style>

@@ -7,18 +7,18 @@
 
 {% block css %}
 
-    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/page/payOrder.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/page/paySucess.css' %}"/>
 {% endblock %}
 
 {% block content %}
-    <div class="payOrderContainer">
-        <div class="back"><span class="goBack"></span>Pay for your order</div>
-        <div class="cartContent">
-            <h1>Show me the money!</h1>
+    <div class="contentContainer payContainer">
+        <div class="noContent">
+            <img src="{% static 'assets//images/pay.png' %}" alt="">
+            <div class="price">$&nbsp;{{ total }}</div>
+            <p>You need to pay</p>
             <div>
                 {{ content|safe }}
             </div>
-
         </div>
     </div>
 {% endblock %}

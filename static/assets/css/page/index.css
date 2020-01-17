@@ -20,11 +20,13 @@ legend {
   margin: 0;
   padding: 0;
   color: black;
+  font-family: "times new roman" !important;
 }
 ul,
 li,
 ol {
   list-style: none;
+  font-family: "times new roman" !important;
 }
 img,
 fieldset {
@@ -44,18 +46,21 @@ h4,
 h5,
 h6 {
   font-weight: 100;
+  font-family: "times new roman" !important;
 }
 body {
   font-size: 12px;
-  font-family: "微软雅黑";
+  font-family: "times new roman" !important;
 }
 a {
   outline: none;
+  font-family: "times new roman" !important;
 }
 input {
   background: none;
   outline: none;
   border: 0px;
+  font-family: "times new roman" !important;
 }
 input[type="text"]:focus,
 input[type="password"]:focus {
@@ -67,6 +72,9 @@ input[type="password"]:focus {
   max-width: 1920px;
   min-width: 1200px;
   margin: 0 auto;
+}
+span {
+  font-family: "times new roman" !important;
 }
 .header .top {
   width: 1200px;
@@ -95,7 +103,7 @@ input[type="password"]:focus {
   float: right;
   height: 120px;
   line-height: 120px;
-  width: 300px;
+  width: 320px;
   font-size: 16px;
   position: relative;
 }
@@ -154,9 +162,10 @@ input[type="password"]:focus {
 .header .top .top-right .language,
 .header .top .top-right .user {
   display: inline-block;
+  width: 98px;
   margin-right: 20px;
   text-align: center;
-  width: 98px;
+  width: 112px;
   position: relative;
   bottom: 3px;
 }
@@ -581,7 +590,7 @@ input[type="number"] {
   text-align: center;
 }
 body {
-  padding-bottom: 20px;
+  padding-bottom: 50px;
 }
 .banner {
   width: 100%;
@@ -678,7 +687,7 @@ body {
   border-top-right-radius: 10px;
 }
 .contentContainer .content .goods .infor {
-  padding: 8px 5px;
+  padding: 8px 0px 8px 8px;
   position: absolute;
   width: 250px;
 }
@@ -710,6 +719,7 @@ body {
   line-height: 17px;
   float: right;
   text-align: center;
+  margin-right: 6px;
 }
 .contentContainer .content .goods .infor .price {
   font-size: 16px;
@@ -725,7 +735,7 @@ body {
   font-weight: normal;
   font-weight: bold;
   position: relative;
-  bottom: 2px;
+  bottom: 0px;
 }
 .contentContainer .content .goods .infor .price .toBuy {
   display: inline-block;
@@ -740,6 +750,7 @@ body {
   float: right;
   text-align: center;
   font-weight: normal;
+  margin-right: 6px;
 }
 .searchHead {
   height: 28px;

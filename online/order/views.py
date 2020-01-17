@@ -11,7 +11,7 @@ from paypal.standard.forms import PayPalPaymentsForm
 
 from online.constants import PER_PAGE_GOODS_COUNT
 from online.order.models import Order, Order_Goods, OrderAddress, OrderStatusLog
-from online.goods.models import Goods, Image
+from online.goods.models import Goods, Image, Category
 from management.user.models import User
 from online.logger import online_logger
 from utils.decorator import user_auth
@@ -182,6 +182,7 @@ class OrdersDetailView(View):
     @method_decorator(user_auth)
     def get(self, request, user):
         user_id = user.id
+
         order_no = request.GET.get('order_no')
         orders = Order.objects.filter(user_id=user_id)
         if len(orders) > 0:
@@ -195,12 +196,12 @@ class OrdersDetailView(View):
                 if goods != '':
                     good_dic = []
                     for good in goods:
-                        good_id = good.id
+                        good_id = good.good
                         quantity = good.quantity
                         good_name_en = good.name_en
                         good_price = good.on_price
                         good_description_en = good.description_en
-                        good_image = Image.objects.filter(goods_id=good.id)
+                        good_image = Image.objects.filter(goods_id=good.good)
                         good_dic.append(
                             {"good_id": good_id, "quantity": quantity, "name_en": good_name_en, "price": good_price,
                              "description_en": good_description_en,
@@ -258,8 +259,8 @@ class OrdersDetailsView(View):
                     good_name_en = good.name_en
                     good_price = good.on_price
                     good_description_en = good.description_en
-                    good_image = Image.objects.filter(goods_id=good.id)
-                    good_dict.append({"id": good.id, "quantity": quantity, "name_en": good_name_en, "price": good_price,
+                    good_image = Image.objects.filter(goods_id=good.good)
+                    good_dict.append({"id": good.good, "quantity": quantity, "name_en": good_name_en, "price": good_price,
                                       "description_en": good_description_en,
                                       "image": settings.URL_PREFIX + good_image[0].image.url})
                 user_info = {"name": name, "province": province, "city": city, "district": district,
@@ -289,12 +290,11 @@ class OrdersListView(View):
             online_logger.error(e)
             return JsonResponse({'errcode': 101, 'errmsg': "Params error"})
         try:
+            order_no_first = ''
             if status_query == 0:
                 orders_total = orders.order_by('-order_date')
-                order_no_first = orders_total[0].order_no
             else:
                 orders_total = orders.filter(status=status_query).order_by('-order_date')
-                order_no_first = orders_total[0].order_no
 
             orders = orders_total[: PER_PAGE_GOODS_COUNT]
 
@@ -302,18 +302,19 @@ class OrdersListView(View):
             online_logger.error(e)
             return JsonResponse({'errcode': 101, 'errmsg': "Params error"})
         order_count = orders_total.count()
-
         user = User.objects.get(id=user.id)
 
         if order_count > PER_PAGE_GOODS_COUNT:
             more = 'true'
         else:
             more = 'false'
-        if orders.count() > 0:
+        if len(orders) > 0:
+            orders.count()
+            if len(orders_total) > 0:
+                order_no_first = orders_total[0].order_no
             order_dic = []
             good_dic = []
             is_null = 0
-            i = 1
 
             for order in orders:
                 order_no = order.order_no
@@ -335,7 +336,7 @@ class OrdersListView(View):
                     good_name_en = good.name_en
                     good_price = good.on_price
                     good_description_en = good.description_en
-                    good_image = Image.objects.filter(goods_id=good.id)
+                    good_image = Image.objects.filter(goods_id=good.good)
                     good_dic.append({"quantity": quantity, "name_en": good_name_en, "price": good_price,
                                      "description_en": good_description_en,
                                      "image": settings.URL_PREFIX + good_image[0].image.url})
@@ -346,8 +347,25 @@ class OrdersListView(View):
             good_dic = []
             is_null = 1
 
+        category = []
+        try:
+            cates = Category.objects.filter(super_category__isnull=True)
+        except Exception as e:
+            online_logger.error(e)
+            return JsonResponse({"errcode": "102", "errmsg": "Db error"})
+        for cate in cates:
+            try:
+                sub_cates = Category.objects.filter(super_category__id=cate.id)
+            except Exception as e:
+                online_logger.error(e)
+                return JsonResponse({"errcode": "102", "errmsg": "Db error"})
+            if len(sub_cates) > 0:
+                category.append({"id": cate.id, "name": cate.name,
+                                 "sub_cates": [{'id': sub_cate.id, 'name': sub_cate.name} for sub_cate in sub_cates if
+                                               sub_cates] if sub_cates else []})
+
         cart_quantity = request.session.get("%s_cart" % user_id)
-        res = {"order_dic": order_dic, "good_dic": good_dic, "status": status_query, "more": more,
+        res = {"category": category, "order_dic": order_dic, "good_dic": good_dic, "status": status_query, "more": more,
                "order_no": order_no_first,
                "cart_quantity": cart_quantity, "order_quantity": order_quantity, "user": user, "is_null": is_null}
         return render(request, "myOrders.html", context=res)
@@ -448,7 +466,7 @@ class OrderCreateView(View):
             Goodgoods.save()
             total += good_count * Goodgoods.on_price
 
-            Order_Goods.objects.create(order=order, quantity=count, name_en=name_en, on_price=on_price,
+            Order_Goods.objects.create(order=order, good=goods_id, quantity=count, name_en=name_en, on_price=on_price,
                                        description_en=description_en, img=good_img)
             Order.objects.filter(id=order.id).update(total=total)
 

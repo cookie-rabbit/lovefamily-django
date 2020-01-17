@@ -20,11 +20,13 @@ legend {
   margin: 0;
   padding: 0;
   color: black;
+  font-family: "times new roman" !important;
 }
 ul,
 li,
 ol {
   list-style: none;
+  font-family: "times new roman" !important;
 }
 img,
 fieldset {
@@ -44,18 +46,21 @@ h4,
 h5,
 h6 {
   font-weight: 100;
+  font-family: "times new roman" !important;
 }
 body {
   font-size: 12px;
-  font-family: "微软雅黑";
+  font-family: "times new roman" !important;
 }
 a {
   outline: none;
+  font-family: "times new roman" !important;
 }
 input {
   background: none;
   outline: none;
   border: 0px;
+  font-family: "times new roman" !important;
 }
 input[type="text"]:focus,
 input[type="password"]:focus {
@@ -67,6 +72,9 @@ input[type="password"]:focus {
   max-width: 1920px;
   min-width: 1200px;
   margin: 0 auto;
+}
+span {
+  font-family: "times new roman" !important;
 }
 .header .top {
   width: 1200px;
@@ -95,7 +103,7 @@ input[type="password"]:focus {
   float: right;
   height: 120px;
   line-height: 120px;
-  width: 300px;
+  width: 320px;
   font-size: 16px;
   position: relative;
 }
@@ -154,9 +162,10 @@ input[type="password"]:focus {
 .header .top .top-right .language,
 .header .top .top-right .user {
   display: inline-block;
+  width: 98px;
   margin-right: 20px;
   text-align: center;
-  width: 98px;
+  width: 112px;
   position: relative;
   bottom: 3px;
 }
@@ -200,6 +209,7 @@ input[type="password"]:focus {
   height: 25px;
   line-height: 25px;
   font-size: 14px;
+  padding-left: 5px;
 }
 .header .top .top-right .language .ul .li:hover,
 .header .top .top-right .user .ul .li:hover {
@@ -580,7 +590,7 @@ input[type="number"] {
   text-align: center;
 }
 body {
-  padding-bottom: 20px;
+  padding-bottom: 50px;
 }
 .myCartContainer {
   width: 1160px;
@@ -635,7 +645,7 @@ body {
 }
 .myCartContainer .content .cartGoods {
   height: 186px;
-  padding: 40px 30px 30px 0;
+  padding: 25px 10px 25px 0;
   width: 1000px;
   margin: 0 auto;
   border-bottom: 1px solid #d8d8d8;
@@ -646,12 +656,12 @@ body {
   display: inline-block;
   background: #d8d8d8;
   border-radius: 10px;
-  width: 200px;
+  width: 186px;
   height: 186px;
 }
 .myCartContainer .content .cartGoods .linkImg img {
   display: inline-block;
-  width: 200px;
+  width: 186px;
   height: 186px;
   box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
@@ -762,7 +772,7 @@ body {
   font-size: 28px;
 }
 .myCartContainer .total .buyNow {
-  width: 136px;
+  width: 152px;
   height: 34px;
   line-height: 34px;
   background: #d8d8d8;
@@ -776,6 +786,14 @@ body {
   position: absolute;
   right: 20px;
   top: 25px;
+}
+.myCartContainer .total .buyNow span {
+  display: inline-block;
+  margin-right: 10px;
+  width: 14px;
+  height: 14px;
+  background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAABIElEQVQ4T5XRv0qcURCG8d8YEfzThWgWtFAUGyGSC9DUQUQbKwsRImxjGVIIlqmsFBGLCLZaCF5A8AbEVgUtDEYEW7eSI2c5C6IfqNOdM/PMO+9MqIiU0hKWS2od2xGRnpbGcy6ltIA5/Cq539iPiJ0XYEqpE4voxwyOcVUKB/AVB/iHPxHRaCqmlDZRrxq74m8rIuot8AKDbwQvI2IoUkrtuMHHLI4zjD5rkv9GkIXu8DmD3bhFFxoYwznaCvyAYZyiA/fozeAn/MeHUjiL7/hR3hs4wt6TRrUMZm/ZYyuy+nwZKY/eh11kgVY0PX7BScVirounWkVuPIMTZZQ3LrVZNpnBKRy+h8J0Br/h7zvBpmK+zQp+oueVBvlca1h9BGE/WDNMay6JAAAAAElFTkSuQmCC") no-repeat;
+  background-size: 100%;
 }
 .myCartContainer .total .notBuy {
   width: 136px;
