@@ -17,7 +17,7 @@
     {% ifequal user_info.is_null 1 %}
         <!-- 有地址时直接显示地址（此模块一直存在）,不显示时添加“hidden”------------begin -->
         <div class="readAddress hidden">
-            <h4><S></S>hipping Address</h4>
+            <h4><S></S>Shopping Address</h4>
             <div class="addressContent">
                 <p class="fullName">{{ user_info.name }}</p>
                 <p class="addressLine1">{{ user_info.road }}</p>
@@ -34,7 +34,7 @@
 
         <!-- 没地址时新增地址（此模块一直存在）,不显示时添加“hidden”------------begin -->
         <div class="editAddress">
-            <h4>Shipping Address</h4>
+            <h4>Shopping Address</h4>
             <div class="addressContent">
                 <p class="fullName"><span>Full name</span><input type="text"></p>
                 <p class="addressLine1"><span>Address Line1</span><input type="text"></p>
@@ -50,7 +50,7 @@
     {% else %}
         <!-- 有地址时直接显示地址（此模块一直存在）,不显示时添加“hidden”------------begin -->
         <div class="readAddress">
-            <h4>Shipping Address</h4>
+            <h4>Shopping Address</h4>
             <div class="addressContent">
                 <p class="fullName">{{ user_info.name }}</p>
                 <p class="addressLine1">{{ user_info.road }}</p>
@@ -67,7 +67,7 @@
 
         <!-- 没地址时新增地址（此模块一直存在）,不显示时添加“hidden”------------begin -->
         <div class="editAddress hidden">
-            <h4>Shipping Address</h4>
+            <h4>Shopping Address</h4>
             <div class="addressContent">
                 <p class="fullName"><span>Full name</span><input type="text"></p>
                 <p class="addressLine1"><span>Address Line1</span><input type="text"></p>
@@ -88,15 +88,15 @@
             {% for good in good_dict %}
                 <div class="cartGoods toBuyIt" data-id={{ good.id }} data-count={{ good.quantity }}>
                     <a href="/goods/{{ good.id }}" class="linkImg">
-                        <img src="/static/assets/images/thing.png" alt="">
+                        <img src={{ good.image }} alt="">
                     </a>
                     <div class="infors">
-                        <p class="name">{{ good.name_en }}</p>
-                        <p class="price">Price:&nbsp;$&nbsp;<span>{{ good.price }}</span></p>
+                        <p class="name">{{ good.name }}</p>
+                        <p class="price">Price:&nbsp;$&nbsp;<span>{{ good.on_price }}</span></p>
                         <p class="quantity">
                             Quantity:<span>{{ good.quantity }}</span>
                         </p>
-                        <p class="dec">{{ good.description_en }}</p>
+                        <p class="dec">{{ good.description }}</p>
                     </div>
                 </div>
             {% endfor %}

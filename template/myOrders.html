@@ -6,7 +6,8 @@
 {% endblock %}
 
 {% block css %}
-    <link rel="stylesheet" type="text/css" href="/static/assets/css/page/myOrders.css"/>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/page/myOrders.css' %}"/>
     {#    <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/3.10.0-beta/less.min.js"></script>#}
 {% endblock %}
 
@@ -73,13 +74,13 @@
                     <a href="http://10.168.2.111:8000/orders/?status=5" class="closed current" data-type="5">Closed</a>
                 {% endifequal %}
             </div>
-            {% ifnotequal order_quantity 0 %}
+            {% ifnotequal is_null 1 %}
                 {% include 'orderBlock.html' %}
                 {% if res.more %}
                     <div class="more">MORE</div>
                 {% endif %}
             {% endifnotequal %}
-            {% ifequal order_quantity 0 %}
+            {% ifequal is_null 1 %}
                 <div class="noContent">
                     <img src="{% static 'assets/images/noOrder.jpg' %}" alt="">
                     <p>Did not find the relevant goods oh~</p>

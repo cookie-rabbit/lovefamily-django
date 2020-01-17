@@ -19,6 +19,7 @@ from weigan_shopping import settings
 
 class LoginView(View):
     """用户登录"""
+
     def post(self, request):
         username = request.POST.get("name", None)
         password = request.POST.get("password", None)
@@ -49,6 +50,7 @@ class LoginView(View):
 
 class LogoutView(View):
     """用户退出登录"""
+
     @method_decorator(user_auth)
     def get(self, request, user):
         del request.session['user_id']
@@ -92,21 +94,19 @@ class UserView(View):
     @method_decorator(user_auth)
     def post(self, request, user):
         """修改用户信息"""
-        username = request.POST.get("username", '')
         email = request.POST.get("email", None)
         if email:
-            if not re.match(r'^[0-9a-zA-Z_]{0,19}@[0-9a-zA-Z]{1,13}\.(com|cn|net){1,3}$', email):
+            if not re.match(r'^([A-Za-z0-9_\-.])+@([A-Za-z0-9_\-.])+\.([A-Za-z]{2,7})$', email):
                 return JsonResponse({"errcode": "106", "errmsg": "email format error"})
         phone = request.POST.get("phone", None)
         password = request.POST.get("password", None)
         repassword = request.POST.get("repassword", None)
         if password != repassword:
             return JsonResponse({"errcode": "106", "errmsg": "password differently"})
-        if not all([username, email, phone, password, repassword]):
+        if not all([email, phone, password, repassword]):
             return JsonResponse({"errcode": "101", "errmsg": "params not all"})
         password = make_password(password)
         try:
-            user.username = username
             user.email = email
             user.password = password
             user.phone = phone
@@ -114,7 +114,7 @@ class UserView(View):
         except Exception as e:
             online_logger.error(e)
             return JsonResponse({"errcode": "102", "errmsg": "Db error"})
-        return JsonResponse({"errcode": "0", "result": "save success"})
+        return JsonResponse({"errcode": "0", "errmsg": "save success"})
 
 
 class MyAddressView(View):
@@ -125,7 +125,9 @@ class MyAddressView(View):
         useraddress = list(
             user.address.all().values('name', 'province', 'city', 'district', 'road', 'phone_number', 'postcode'))
         if useraddress:
-            context.update({"useraddress": useraddress[0]})
+            context.update({"useraddress": useraddress[0], "is_null": 0})
+        else:
+            context.update({"useraddress": '', "is_null": 1})
         try:
             orders = Order.objects.filter(user=user)
             order_quantity = len(orders)
@@ -163,7 +165,8 @@ class MyAddressView(View):
                     useraddress.city = city
                     useraddress.district = district
                     useraddress.road = road
-                    useraddress.phone = phone_number
+                    useraddress.phone_number = phone_number
+                    useraddress.postcode = postcode
                     useraddress.save()
                 else:
                     UserAddress.objects.create(name=name, province=province, city=city, district=district, road=road,
@@ -176,6 +179,7 @@ class MyAddressView(View):
 
 class SignUpView(View):
     """注册"""
+
     def post(self, request):
         username = request.POST.get("username", None)
         email = request.POST.get("email", None)
@@ -202,7 +206,8 @@ class SignUpView(View):
         password = make_password(password)
         try:
             signup_date = timezone.localtime(timezone.now()).strftime("%Y-%m-%d")
-            user = User.objects.create(username=username, email=email, phone=phone, password=password, signup_date=signup_date)
+            user = User.objects.create(username=username, email=email, phone=phone, password=password,
+                                       signup_date=signup_date)
         except Exception as e:
             online_logger.error(e)
             return JsonResponse({"errcode": "102", "errmsg": "Db error"})

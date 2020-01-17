@@ -88,7 +88,7 @@
             {% for good in good_dict %}
                 <div class="cartGoods toBuyIt" data-id={{ good.id }} data-count={{ good.quantity }}>
                     <a href="/goods/{{ good.id }}" class="linkImg">
-                        <img src="/static/assets/images/thing.png" alt="">
+                        <img src={{ good.image }} alt="">
                     </a>
                     <div class="infors">
                         <p class="name">{{ good.name_en }}</p>
@@ -110,7 +110,7 @@
             <div>
                 <p class="totalPrice">Sum:&nbsp;$&nbsp;<span>{{ total }}</span></p>
                 <!-- 已经有默认地址的时候class="continue goBuy",没有默认地址的时候显示class="continue" -->
-                <div class="continue goBuy">Continue</div>
+                <div class="continue goBuy">Pay</div>
             </div>
         </div>
     </div>

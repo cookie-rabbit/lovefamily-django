@@ -8,19 +8,16 @@ $(".myOrdersContainer")
 		} else {
 			/* ajax请求 */
 			var req = {
-				url: baseUrl + 'order_detail/',
-				data: {
-					order_no: me.find(".order span").html()
-				},
+				url: baseUrl + 'order/?order_no='+me.find(".order span").html(),
 				sucFun: function(res) {
 					if (parseInt(res.errcode) === 0) {
-						me.after(res.data);
+						me.after(res.data.result);
 					} else {
 						getToast01(res.errmsg);
 					}
 				},
 				errFun: function(err) {
-					getToast01("Network anomaly!!!");
+					getToast01("Network anomaly!");
 				}
 			};
 			doAjax(req);
@@ -44,7 +41,7 @@ $(".myOrdersContainer")
 				}
 			},
 			errFun: function(err) {
-				getToast01("Network anomaly!!!");
+				getToast01("Network anomaly!");
 			}
 		};
 		doAjax(req);

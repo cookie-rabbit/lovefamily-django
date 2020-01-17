@@ -117,7 +117,6 @@ class OrderDetailView(View):
     def get(self, request, user, order_no):
         try:
             if order_no is not None:
-                request = request
                 orders = Order.objects.filter(order_no=order_no)
                 if orders != '':
 
@@ -145,7 +144,7 @@ class OrderDetailView(View):
                         '''还需要地址，并将数据进行拼接'''
                         good_res = {"good_name": good_name, "good_description": good_description,
                                     "good_count": good_count, "good_price": good_price,
-                                    "good_img": settings.URL_PREFIX + '/media/' +good_img}
+                                    "good_img": settings.URL_PREFIX + '/media/' + good_img}
                         goods.append(good_res)
                     order_add = OrderAddress.objects.get(id=order.address_id)
                     name = order_add.name
@@ -173,9 +172,9 @@ class OrderDetailView(View):
 
     """修改订单状态"""
 
+    @method_decorator(admin_auth)
     @method_decorator(transaction.atomic)
     @method_decorator(csrf_exempt)
-    @method_decorator(admin_auth)
     def put(self, request, user, order_no):
         type = request.GET.get('type', 'status')
         if type == "status":
@@ -213,8 +212,8 @@ class OrderDetailView(View):
 
 class OrderLogsView(View):
 
-    @method_decorator(csrf_exempt)
     @method_decorator(admin_auth)
+    @method_decorator(csrf_exempt)
     def get(self, request, user, order_no):
         """获取订单日志"""
         try:
