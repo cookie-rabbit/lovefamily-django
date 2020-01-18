@@ -7,10 +7,10 @@
                     <h4>{{ good.name_en }}</h4>
                     <p class="num">
                         <span class="price">Price:&nbsp;$&nbsp;<span>{{ good.price }}</span></span>
-                        <span class="quantity">quantity:<span>{{ good.quantity }}</span></span>
+                        <span class="quantity">Quantity:<span>{{ good.quantity }}</span></span>
                     </p>
                     <p class="desc">
-                        {{ good.description_en }}
+                        {{ good.description_en|safe }}
                     </p>
                 </div>
             </a>

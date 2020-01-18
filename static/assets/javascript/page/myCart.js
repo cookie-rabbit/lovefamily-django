@@ -39,12 +39,14 @@ $(".myCartContainer")
 	.on("click", ".sub", function() {
 		var me = $(this);
 		var count = me.parents(".quantity").find(".count").val();
+		
 		if (count > 1) {
 			count = parseInt(count) - 1;
 			me.parents(".quantity").find(".count").val(count);
 		}
 		setTotalCount();
-		count > 1 && editCart(me.parents(".cartGoods").data("id"), count);
+		count > 0 && editCart(me.parents(".cartGoods").data("id"), count);
+		
 	})
 	.on("click", ".remove", function() {
 		deleteObj = $(this);

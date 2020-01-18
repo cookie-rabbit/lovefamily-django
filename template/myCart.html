@@ -7,7 +7,6 @@
 
 {% block css %}
     <link rel="stylesheet" type="text/css" href="{% static 'assets/css/page/myCart.css' %}"/>
-{#    <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/3.10.0-beta/less.min.js"></script>#}
 {% endblock %}
 
 {% block hr %}
@@ -26,12 +25,12 @@
                         <img src="{{ cart.image }}" alt="">
                     </a>
                     <div class="infors">
-                        <p class="name">{{ cart.name }}</p>
-                        <p class="dec">{{ cart.description }}</p>
+                        <p class="name">{{ cart.name|safe }}</p>
+                        <p class="dec">{{ cart.description|safe }}</p>
                         <p class="price">Price:&nbsp;$&nbsp;<span>{{ cart.price }}</span></p>
                         <p class="quantity">
                             Quantity:
-                            <input type="number" class="count" value="{{ cart.quantity }}">
+                            <input type="number" readonly="readonly" class="count" value="{{ cart.quantity }}">
                             <span class="changeCount">
                                 <span class="add"></span>
                                 <span class="sub"></span>

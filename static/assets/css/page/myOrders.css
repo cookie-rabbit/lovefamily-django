@@ -73,7 +73,8 @@ input[type="password"]:focus {
   min-width: 1200px;
   margin: 0 auto;
 }
-span {
+span,
+div {
   font-family: "times new roman" !important;
 }
 .header .top {
@@ -349,7 +350,7 @@ span {
   font-family: HelveticaNeue;
   color: #000000;
   display: inline-block;
-  padding: 0 20px;
+  padding: 0 13px;
   height: 22px;
   line-height: 22px;
 }
@@ -614,7 +615,6 @@ body {
   height: 20px;
   line-height: 20px;
   font-size: 16px;
-  font-family: HelveticaNeue-Light, HelveticaNeue;
   font-weight: 500;
   color: #000000;
   border-left: 1px solid #979797;
@@ -655,7 +655,6 @@ body {
   height: 58px;
   line-height: 58px;
   font-size: 16px;
-  font-family: HelveticaNeue;
   color: #000000;
   line-height: 60px;
   font-weight: bold;
@@ -743,18 +742,20 @@ body {
   position: absolute;
   left: 145px;
   font-size: 14px;
-  font-family: HelveticaNeue;
   color: #666666;
   top: 22px;
 }
 .myOrdersContainer .content .orderList .details .listDetail .infors h4 {
   font-size: 14px;
-  font-family: HelveticaNeue-Medium, HelveticaNeue;
   font-weight: bold;
   color: #000000;
 }
 .myOrdersContainer .content .orderList .details .listDetail .infors .num {
   margin: 8px 0;
+  color: #666;
+}
+.myOrdersContainer .content .orderList .details .listDetail .infors .num .quantity {
+  margin-left: 20px;
 }
 .myOrdersContainer .content .orderList .details .listDetail .infors .desc {
   width: 480px;
@@ -762,6 +763,7 @@ body {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
+  color: #666;
 }
 .myOrdersContainer .content .orderList .details .listDetail:last-of-type {
   border: none;

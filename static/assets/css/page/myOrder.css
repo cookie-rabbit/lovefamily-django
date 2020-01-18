@@ -73,7 +73,8 @@ input[type="password"]:focus {
   min-width: 1200px;
   margin: 0 auto;
 }
-span {
+span,
+div {
   font-family: "times new roman" !important;
 }
 .header .top {
@@ -349,7 +350,7 @@ span {
   font-family: HelveticaNeue;
   color: #000000;
   display: inline-block;
-  padding: 0 20px;
+  padding: 0 13px;
   height: 22px;
   line-height: 22px;
 }
@@ -608,7 +609,6 @@ body {
 .myOrderContainer .readAddress h4 {
   height: 18px;
   font-size: 16px;
-  font-family: HelveticaNeue;
   color: #000000;
   line-height: 18px;
   font-weight: bold;
@@ -623,7 +623,6 @@ body {
   border-radius: 5px;
   border: 1px solid #a23700;
   font-size: 16px;
-  font-family: PingFangSC-Regular, PingFang SC;
   font-weight: 500;
   color: #a23700;
   background: #fff;
@@ -655,7 +654,6 @@ body {
   width: 112px;
   height: 18px;
   font-size: 16px;
-  font-family: HelveticaNeue;
   color: #000000;
   line-height: 18px;
   margin-right: 24px;
@@ -681,18 +679,17 @@ body {
   min-width: 200px;
   display: inline-block;
   margin: 20px 0;
+  max-width: 800px;
 }
 .myOrderContainer .readAddress .addressContent p {
-  height: 17px;
   font-size: 14px;
-  font-family: HelveticaNeue-Light, HelveticaNeue;
   font-weight: 500;
   color: #000000;
   line-height: 17px;
   padding: 5px 0;
+  margin-top: 4px;
 }
 .myOrderContainer .readAddress .addressContent .fullName {
-  font-family: HelveticaNeue-Medium, HelveticaNeue;
   font-weight: bold;
 }
 .myOrderContainer .orderLines {
@@ -702,7 +699,6 @@ body {
   width: 94px;
   height: 21px;
   font-size: 18px;
-  font-family: HelveticaNeue;
   color: #000000;
   line-height: 22px;
   font-weight: bold;
@@ -811,7 +807,6 @@ body {
   text-align: right;
   width: 95px;
   font-size: 18px;
-  font-family: HelveticaNeue;
   color: #000000;
   margin-top: 26px;
   margin-bottom: 50px;
@@ -829,7 +824,6 @@ body {
   border-radius: 5px;
   float: right;
   font-size: 18px;
-  font-family: HelveticaNeue;
   color: #ffffff;
   text-align: center;
   margin-top: 30px;

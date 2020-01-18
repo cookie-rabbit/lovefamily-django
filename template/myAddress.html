@@ -60,31 +60,31 @@
         <div class="addressContent haveAddress">
             <p class="fullName">
                 <span>Full name</span>
-                <input type="text" value="{{ useraddress.name }}" readonly="readonly">
+                <input type="text" value="{{ useraddress.name|safe }}" readonly="readonly">
             </p>
             <p class="addressLine1">
                 <span>Address Line1</span>
-                <input type="text" value="{{ useraddress.road }}" readonly="readonly">
+                <input type="text" value="{{ useraddress.road|safe }}" readonly="readonly">
             </p>
             <p class="addressLine2">
                 <span>Address Line2</span>
-                <input type="text" value="{{ useraddress.district }}" readonly="readonly">
+                <input type="text" value="{{ useraddress.district|safe }}" readonly="readonly">
             </p>
             <p class="city">
                 <span>City</span>
-                <input type="text" value="{{ useraddress.city }}" readonly="readonly">
+                <input type="text" value="{{ useraddress.city|safe }}" readonly="readonly">
             </p>
             <p class="province">
                 <span class="state">State/Province/<br>Region</span>
-                <input type="text" value="{{ useraddress.province }}" readonly="readonly">
+                <input type="text" value="{{ useraddress.province|safe }}" readonly="readonly">
             </p>
             <p class="zip">
                 <span>ZIP</span>
-                <input type="text" value="{{ useraddress.postcode }}" readonly="readonly">
+                <input type="text" value="{{ useraddress.postcode|safe }}" readonly="readonly">
             </p>
             <p class="phoneNum">
                 <span>Phone number</span>
-                <input type="text" value="{{ useraddress.phone_number }}" readonly="readonly">
+                <input type="text" value="{{ useraddress.phone_number|safe }}" readonly="readonly">
             </p>
             <p class="signUp">
                 <span></span>

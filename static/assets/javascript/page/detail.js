@@ -4,7 +4,7 @@ $(function() {
 	if ($(".rollPic").length > 1) {
 		var obj = $($(".rollPic")[0]).clone();
 		$(".roll").append(obj);
-		timer = setInterval(picLoop, 3000);
+		timer = setInterval(picLoop, 2000);
 
 	} else {
 		$(".prev,.next").addClass("hidden");
@@ -26,14 +26,14 @@ $(function() {
 			timer = setInterval(picLoop, 0);
 		} else {
 			clearInterval(timer);
-			timer = setInterval(picLoop, 3000)
+			timer = setInterval(picLoop, 2000)
 		}
 	}
 
 	$(".pics").hover(function() {
 		clearInterval(timer);
 	}, function() {
-		timer = setInterval(picLoop, 3000);
+		timer = setInterval(picLoop, 2000);
 	})
 
 	$(".prev").click(function() {

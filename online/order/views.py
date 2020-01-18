@@ -36,6 +36,7 @@ class OrderAddressView(View):
         order_no = None
 
         try:
+            is_cart = 0
             res = res.split(':')
             if res:
                 if res[0] == "carts_id":
@@ -80,6 +81,7 @@ class OrderAddressView(View):
                 return JsonResponse({"errcode": "102", "errmsg": "Db error"})
 
             if carts_id is not None:
+                is_cart = 1
                 carts_id = carts_id.split(",")
                 carts = Cart.objects.filter(id__in=carts_id).filter(user_id=user_id)
                 for cart in carts:
@@ -172,7 +174,7 @@ class OrderAddressView(View):
             cart_quantity = request.session.get("%s_cart" % user_id, 0)
 
             res = {"user_info": user_info, "good_dict": good_dict, "total": total, "user": user,
-                   "cart_quantity": cart_quantity, "order_quantity": order_quantity}
+                   "cart_quantity": cart_quantity, "order_quantity": order_quantity, "is_cart": is_cart}
 
         return render(request, "myOrder.html", context=res)
 
@@ -222,6 +224,7 @@ class OrdersDetailsView(View):
     @method_decorator(user_auth)
     def get(self, request, user, order_no):
         user_id = user.id
+        is_cart = 0
         orders = Order.objects.filter(user_id=user_id)
         order_quantity = len(orders)
         cart_quantity = request.session.get("%s_cart" % user_id, 0)
@@ -248,6 +251,7 @@ class OrdersDetailsView(View):
         if order is not None:
             try:
                 total = order.total
+                status = order.status
                 goods = Order_Goods.objects.filter(order_id=order.id)
             except Exception as e:
                 online_logger.error(e)
@@ -260,13 +264,15 @@ class OrdersDetailsView(View):
                     good_price = good.on_price
                     good_description_en = good.description_en
                     good_image = Image.objects.filter(goods_id=good.good)
-                    good_dict.append({"id": good.good, "quantity": quantity, "name_en": good_name_en, "price": good_price,
-                                      "description_en": good_description_en,
-                                      "image": settings.URL_PREFIX + good_image[0].image.url})
+                    good_dict.append(
+                        {"id": good.good, "quantity": quantity, "name_en": good_name_en, "price": good_price,
+                         "description_en": good_description_en,
+                         "image": settings.URL_PREFIX + good_image[0].image.url})
                 user_info = {"name": name, "province": province, "city": city, "district": district,
                              "road": road, "phone_number": phone_number, "postcode": postcode}
                 res = {"user_info": user_info, "good_dict": good_dict, "total": total, "user": user,
-                       "cart_quantity": cart_quantity, "order_quantity": order_quantity}
+                       "cart_quantity": cart_quantity, "order_quantity": order_quantity, "status": status,
+                       "is_cart": is_cart}
 
                 return render(request, "orderDetails.html", context=res)
             else:
@@ -305,9 +311,9 @@ class OrdersListView(View):
         user = User.objects.get(id=user.id)
 
         if order_count > PER_PAGE_GOODS_COUNT:
-            more = 'true'
+            more = 1
         else:
-            more = 'false'
+            more = 0
         if len(orders) > 0:
             orders.count()
             if len(orders_total) > 0:
@@ -318,7 +324,7 @@ class OrdersListView(View):
 
             for order in orders:
                 order_no = order.order_no
-                order_date = order.order_date
+                order_date = order.order_date.strftime("%Y-%m-%d %H:%M:%S")
                 total = order.total
                 status = order.get_status_display()
                 order_dic.append({"order_no": order_no, "order_date": order_date, "total": total, "status": status})
@@ -378,13 +384,14 @@ class OrderCreateView(View):
     @method_decorator(user_auth)
     def post(self, request, user):
         try:
-            name = request.POST.get('name')
-            province = request.POST.get('province')
-            city = request.POST.get('city')
-            district = request.POST.get('district')
-            road = request.POST.get('road')
-            postcode = request.POST.get('postcode')
-            phone_number = request.POST.get('phone_number')
+            user_add = UserAddress.objects.get(user_id=user.id)
+            name = user_add.name
+            province = user_add.province
+            city = user_add.city
+            district = user_add.district
+            road = user_add.road
+            postcode = user_add.postcode
+            phone_number = user_add.phone_number
             goods = ast.literal_eval(request.POST.get('goods'))
             is_cart = request.POST.get('is_cart', 0)
         except Exception as e:
@@ -435,6 +442,7 @@ class OrderCreateView(View):
             online_logger.error(e)
             return JsonResponse({"errcode": 101, "errmsg": "Params error"})
 
+        total_count = 0
         goods_ids = []
         for good in goods:
             goods_id = good['good_id']
@@ -464,6 +472,7 @@ class OrderCreateView(View):
             Goodgoods.actual_sale += count
             Goodgoods.stock -= count
             Goodgoods.save()
+            total_count += good_count
             total += good_count * Goodgoods.on_price
 
             Order_Goods.objects.create(order=order, good=goods_id, quantity=count, name_en=name_en, on_price=on_price,
@@ -473,9 +482,12 @@ class OrderCreateView(View):
         time = timezone.localtime(timezone.now()).strftime("%Y-%m-%d %H:%M:%S")
         OrderStatusLog.objects.create(order_no=order_no, status=1, user_id=user_id, change_date=time)
 
-        if is_cart == 1:
+        if is_cart == '1':
             try:
                 Cart.objects.filter(goods_id__in=goods_ids).delete()
+                cart_quantity = request.session.get("%s_cart" % user_id, 0)
+                request.session['%s_cart' % user.id] = cart_quantity - total_count
+
             except Exception as e:
                 online_logger.error(e)
                 return JsonResponse({'errcode': 102, 'errmsg': 'Db error'})

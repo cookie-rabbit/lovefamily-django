@@ -44,7 +44,7 @@
                         </span>
                     </span>
                 </p>
-                <p class="dec">{{ goods.description }}</p>
+                <p class="dec">{{ goods.description|safe }}</p>
             </div>
         </div>
         <div class="customDiv">{{ goods.detail|safe }}</div>

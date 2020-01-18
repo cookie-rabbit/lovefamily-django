@@ -22,19 +22,19 @@
 
         <p class="user">
             <span>Username</span>
-            <input type="text" value="{{ user.username }}" readonly="readonly">
+            <input type="text" value="{{ user.username|safe }}" readonly="readonly">
             <span class="star"></span>
             <span class="tips"></span>
         </p>
         <p class="email">
             <span>Email</span>
-            <input type="text" value="{{ user.email }}" readonly="readonly">
+            <input type="text" value="{{ user.email|safe }}" readonly="readonly">
             <span class="star"></span>
             <span class="tips"></span>
         </p>
         <p class="phone">
             <span>Phone</span>
-            <input type="text" value="{{ user.phone }}" readonly="readonly">
+            <input type="text" value="{{ user.phone|safe }}" readonly="readonly">
             <span class="star"></span>
             <span class="tips"></span>
         </p>

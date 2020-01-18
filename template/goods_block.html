@@ -3,7 +3,7 @@
         <img src={{ single_goods.image }} alt="">
         <div class="infor">
             <p class="name">
-                <span class="realName"><span class="nameSpan">{{ single_goods.name }}</span>{% if single_goods.is_new %}
+                <span class="realName"><span class="nameSpan">{{ single_goods.name|safe }}</span>{% if single_goods.is_new %}
                     <i class="new"></i>{% endif %}{% if single_goods.is_hot %}
                     <i class="hot"></i>{% endif %}</span></span>
                 <span class="toCart" data-id="{{ single_goods.id }}">Add to cart</span>

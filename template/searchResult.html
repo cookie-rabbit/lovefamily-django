@@ -15,20 +15,20 @@
 
 {% block content %}
     <div class="contentContainer">
-        <div class="kinds searchHead"><span class="left"></span>The search results: <i class="key">{{ keyword }}</i>
+        <div class="kinds searchHead"><span class="left"></span>The search results: <i class="key">{{ keyword|safe }}</i>
         </div>
         {% ifequal is_null 0 %}
             <div class="content">
                 {% include 'goods_block.html' %}
                 {% if more %}
-                    <div class="moreResult" data-keyword="{{ keyword }}">MORE</div>
+                    <div class="moreResult" data-keyword="{{ keyword|safe }}">MORE</div>
                 {% endif %}
             </div>
         {% endifequal %}
         {% ifequal is_null 1 %}
             <div class="noContent">
                 <img src="{% static 'assets/images/noSearch.jpg' %}" alt="">
-                <p>You have no relevant order oh~</p>
+                <p>Did not find the relevant goods oh~</p>
             </div>
         {% endifequal %}
     </div>

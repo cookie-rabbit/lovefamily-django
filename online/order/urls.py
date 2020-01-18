@@ -10,7 +10,6 @@ urlpatterns = [
     url(r'^orders/address/(.+)$', views.OrderAddressView.as_view()),  # 【渲染】订单页面（地址）
     url(r'^api/orders/address$', views.UserAddressView.as_view()),  # 订单地址保存
 
-
     url(r'^orders/(.+)/pay', views.OrderPayView.as_view()),  # 【渲染】支付页面
     url(r'^orders/pay/success/', views.PaySuccessView.as_view()),  # 【渲染】支付成功
 

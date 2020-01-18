@@ -73,7 +73,8 @@ input[type="password"]:focus {
   min-width: 1200px;
   margin: 0 auto;
 }
-span {
+span,
+div {
   font-family: "times new roman" !important;
 }
 .header .top {
@@ -349,7 +350,7 @@ span {
   font-family: HelveticaNeue;
   color: #000000;
   display: inline-block;
-  padding: 0 20px;
+  padding: 0 13px;
   height: 22px;
   line-height: 22px;
 }
@@ -599,7 +600,6 @@ body {
 .registerContainer .type li {
   display: inline-block;
   font-size: 18px;
-  font-family: HelveticaNeue-LightItalic, HelveticaNeue;
   font-weight: normal;
   color: #000000;
   line-height: 22px;
@@ -613,7 +613,6 @@ body {
 }
 .registerContainer .type .current {
   font-size: 18px;
-  font-family: HelveticaNeue-MediumItalic, HelveticaNeue;
   font-weight: bold;
   position: relative;
 }
@@ -657,7 +656,6 @@ body {
   width: 115px;
   height: 18px;
   font-size: 16px;
-  font-family: HelveticaNeue;
   color: #000000;
   line-height: 18px;
   margin-right: 24px;
@@ -690,7 +688,6 @@ body {
   background: #d8d8d8;
   border-radius: 5px;
   font-size: 18px;
-  font-family: HelveticaNeue;
   color: #ffffff;
   text-align: center;
   margin-top: 20px;

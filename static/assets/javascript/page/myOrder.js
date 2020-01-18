@@ -14,13 +14,13 @@ $(".myOrderContainer")
 		$(".editAddress .phoneNum input").val($(".readAddress .phoneNum span").html());
 	})
 	.on("click", ".confirm", function() {
-		var name = $(".editAddress .fullName input").val().trim();
+		var name = $(".editAddress .fullName input").val();
 		var road = $(".editAddress .addressLine1 input").val();
-		var district = $(".editAddress .addressLine2 input").val().trim();
-		var city = $(".editAddress .city input").val().trim();
-		var province = $(".editAddress .province input").val().trim();
-		var postcode = $(".editAddress .zip input").val().trim();
-		var phoneNum = $(".editAddress .phoneNum input").val().trim();
+		var district = $(".editAddress .addressLine2 input").val();
+		var city = $(".editAddress .city input").val();
+		var province = $(".editAddress .province input").val();
+		var postcode = $(".editAddress .zip input").val();
+		var phoneNum = $(".editAddress .phoneNum input").val();
 		if (name.length == 0 || district.length == 0 || city.length == 0 || city.length == 0 || province.length ==
 			0 || postcode.length == 0 || phoneNum.length == 0) {
 			getToast01("Please enter the complete receiving information!");
@@ -79,15 +79,9 @@ $(".container")
 		var req = {
 			url: baseUrl + 'orders/',
 			data: {
-				name: $(".readAddress .fullName").html().trim(),
-				road: $(".readAddress .addressLine1").html().trim(),
-				district: $(".readAddress .addressLine2").html().trim(),
-				city: $(".readAddress .city").html().trim(),
-				province: $(".readAddress .province").html().trim(),
-				postcode: $(".readAddress .zip").html().trim(),
-				phone_number: $(".readAddress .phoneNum span").html().trim(),
 				goods: JSON.stringify(arrs),
-				tital:$(".totalPrice").data("price")
+				/* tital:$(".totalPrice").data("price"), */
+				is_cart:$(".myOrderContainer").data("cart")
 			},
 			method: "post",
 			sucFun: function(res) {

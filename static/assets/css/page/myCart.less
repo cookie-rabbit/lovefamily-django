@@ -10,7 +10,6 @@
 		li {
 			display: inline-block;
 			font-size: 18px;
-			font-family: HelveticaNeue-LightItalic, HelveticaNeue;
 			font-weight: normal;
 			color: rgba(0, 0, 0, 1);
 			line-height: 22px;
@@ -26,7 +25,6 @@
 
 		.current {
 			font-size: 18px;
-			font-family: HelveticaNeue-MediumItalic, HelveticaNeue;
 			font-weight: bold;
 			position: relative;
 		}
@@ -109,11 +107,12 @@
 
 				.quantity {
 					position: relative;
+					display: inline-block;
 
 					.changeCount {
 						height: 20px;
 						position: absolute;
-						left: 100px;
+						right: 0;
 
 						.add,
 						.sub {
@@ -170,6 +169,12 @@
 					background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAACh0lEQVRIS7VWPWhTURg93+2fSasOlgq1IG5OTiI4WHQRf7DVpVMdHAyad59YcBKE4uTW0rykEAcHnSxoFauIDg7irAWxIipiFIwW/OlLmra5R17oCzE/L4maO7773XO+e77vnu8JAlbGtgdozDBEjsJwl4j0euEkv0HJPMg5UepOOBZL1YKRahuu1v0KMk7yFIH2oCQEWBORawYc73acz+WxFQSu1kM0vCEiG4OAy/dI/hIlo92Oc7d07w+CjNY2iUkAqhnwklgjgvNhx4n534oEXuYgbv8DuI9pIDjh36RA4GlOw4VmZSm75YyIfCGp1+Xa6dWkQJDVdtKQp/9SFleBZ1NK3RwwmDXgIQ9HiVwNObGIeK0Iw/f1uqUG+VsDDvek0wvZvq23CAyVaL8GJTvEtSwLEKfZ7AXyNARzXOLxRTeqpyE4U4lBLa7W90EcboZAgHuhzo4RmZjILutzdp5mqup5wQNxo1YKItvKAtYAPAewu+LhiMyGVnIjkkyuZixrL0Q9IdlZlYD8JBlLLxPoKgn4QcpId9+Wx9mvi1cAXiDgt/PDcLp3SGbGVxiJbM52dL4gsD3AJnLVCHJt4LEN8fgj7+CSZZ0UIimiXi4xv78vkVjyvmei+joFo3VsJFdLIleoDoYTU88KYLa9h2TK9xrXso4AMle3bp5EAUX+TrYf6ElMerUoLo6NhTIrq68QIE0xuFDk4DZN501+cNP09Gv/UDaqLxnB5brZFwKoG3loHxW4LxSPf/gZifS2d3S9I1jXaT0bLzy0RqxCBG+MMYMibTbAi41kX7SKRs1OIPME+gEWplrQqjC7dZLW2bWfTUsHjk/S0pFZQtK6oV9avP/x2/IbQBJeWBrWxoMAAAAASUVORK5CYII=") no-repeat;
 					background-size: 100%;
 				}
+				.remove{
+					height: 15px;
+					    position: absolute;
+					    bottom: 0px;
+					    right: 0px;
+				}
 				.remove:hover {
 					cursor: default;
 				}
@@ -193,7 +198,6 @@
 			text-align: right;
 			width: 95px;
 			font-size: 18px;
-			font-family: HelveticaNeue;
 			color: rgba(0, 0, 0, 1);
 			margin-top: 26px;
 			margin-bottom: 50px;
@@ -214,7 +218,6 @@
 			border-radius: 5px;
 			float: right;
 			font-size: 18px;
-			font-family: HelveticaNeue;
 			color: rgba(255, 255, 255, 1);
 			text-align: center;
 			margin-bottom: 100px;
@@ -241,7 +244,6 @@
 			border-radius: 5px;
 			float: right;
 			font-size: 18px;
-			font-family: HelveticaNeue;
 			color: darkgrey;
 			text-align: center;
 			margin-bottom: 100px;

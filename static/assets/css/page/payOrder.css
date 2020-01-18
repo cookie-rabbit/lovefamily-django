@@ -73,7 +73,8 @@ input[type="password"]:focus {
   min-width: 1200px;
   margin: 0 auto;
 }
-span {
+span,
+div {
   font-family: "times new roman" !important;
 }
 .header .top {
@@ -349,7 +350,7 @@ span {
   font-family: HelveticaNeue;
   color: #000000;
   display: inline-block;
-  padding: 0 20px;
+  padding: 0 13px;
   height: 22px;
   line-height: 22px;
 }
@@ -602,7 +603,6 @@ body {
 .payOrderContainer .cartContent h3 {
   height: 18px;
   font-size: 16px;
-  font-family: HelveticaNeue;
   color: #000000;
   line-height: 18px;
   font-weight: normal;
@@ -616,7 +616,6 @@ body {
   width: 128px;
   height: 18px;
   font-size: 16px;
-  font-family: HelveticaNeue;
   color: #000000;
   line-height: 18px;
   margin-right: 24px;
@@ -684,7 +683,6 @@ body {
 .payOrderContainer .cartContent .checkToAdd {
   height: 18px;
   font-size: 16px;
-  font-family: HelveticaNeue;
   color: #000000;
   line-height: 18px;
   margin-top: 24px;
@@ -708,7 +706,6 @@ body {
   border-radius: 5px;
   line-height: 34px;
   font-size: 16px;
-  font-family: PingFangSC-Regular, PingFang SC;
   font-weight: normal;
   color: #ffffff;
   text-align: center;

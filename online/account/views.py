@@ -14,7 +14,7 @@ from online.goods.models import Category
 from online.logger import online_logger
 from online.order.models import Order
 from utils.decorator import user_auth
-from weigan_shopping import settings
+from weigan_shopping import settings, env
 
 
 class LoginView(View):
@@ -23,6 +23,11 @@ class LoginView(View):
     def post(self, request):
         username = request.POST.get("name", None)
         password = request.POST.get("password", None)
+        if request.is_secure():
+            protocol = 'https://'
+        else:
+            protocol = 'http://'
+        url = protocol + request.get_host()
         if not all([username, password]):
             return JsonResponse({"errcode": "101", "errmsg": "params not all"})
         try:
@@ -45,7 +50,8 @@ class LoginView(View):
             return JsonResponse({"errcode": "102", "errmsg": "Db error"})
         request.session['user_id'] = user.id
         request.session['%s_cart' % user.id] = quantity
-        return JsonResponse({"errcode": "0", "errmsg": "login success"})
+        data = {"url": url}
+        return JsonResponse({"errcode": "0", "errmsg": "login success", "data": data})
 
 
 class LogoutView(View):
@@ -172,14 +178,18 @@ class SignUpView(View):
 
     def post(self, request):
         username = request.POST.get("username", None)
+        if len(username) > 20:
+            return JsonResponse({"errcode": "101", "errmsg": "username should not longer than 20"})
         email = request.POST.get("email", None)
         if email:
             if not re.match(r'^[0-9a-zA-Z_]{0,19}@[0-9a-zA-Z]{1,13}\.(com|cn|net){1,3}$', email):
                 return JsonResponse({"errcode": "106", "errmsg": "email format error"})
         phone = request.POST.get("phone", None)
-        if phone:
-            if not re.match(r'^[0-9a-zA-Z_]{0,19}[0-9a-zA-Z]{1,13}$', phone):
-                return JsonResponse({"errcode": "103", "errmsg": "phone format error"})
+        if len(phone) > 40:
+            return JsonResponse({"errcode": "101", "errmsg": "phone should not longer than 40"})
+        # if phone:
+        #     if not re.match(r'^[0-9a-zA-Z_]{0,19}[0-9a-zA-Z]{1,13}$', phone):
+        #         return JsonResponse({"errcode": "103", "errmsg": "phone format error"})
         try:
             users = User.objects.filter(Q(email=email) | Q(phone=phone))
             if len(users) > 0:
@@ -188,8 +198,10 @@ class SignUpView(View):
             online_logger.error(e)
             return JsonResponse({"errcode": "102", "errmsg": "Db error"})
         password = request.POST.get("password", None)
+        if len(password) > 100:
+            return JsonResponse({"errcode": "101", "errmsg": "password should not longer than 100"})
         if password:
-            if not re.match(r'^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,50}$', password):
+            if not re.match(r'^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,100}$', password):
                 return JsonResponse(
                     {"errcode": "106", "errmsg": "The password must have number and letter and longer than six"})
         repassword = request.POST.get("repassword", None)

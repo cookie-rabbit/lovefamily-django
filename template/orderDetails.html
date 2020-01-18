@@ -11,76 +11,24 @@
 
 
 {% block content %}
-    <div class="myOrderContainer">
+    <div class="myOrderContainer" data-cart={{ is_cart }}>
     <div class="back"><span class="goBack"></span>My Order</div>
 
-    {% ifequal user_info.is_null 1 %}
-        <!-- 有地址时直接显示地址（此模块一直存在）,不显示时添加“hidden”------------begin -->
-        <div class="readAddress hidden">
-            <h4><S></S>hipping Address</h4>
-            <div class="addressContent">
-                <p class="fullName">{{ user_info.name }}</p>
-                <p class="addressLine1">{{ user_info.road }}</p>
-                <p class="addressLine2">{{ user_info.district }}</p>
-                <p class="state">
-                    <span class="city">{{ user_info.city }}</span>,
-                    <span class="province">{{ user_info.province }}</span>&nbsp;&nbsp;
-                    <span class="zip">{{ user_info.postcode }}</span></p>
-                <p class="phoneNum">Phone:<span>{{ user_info.phone_number }}</span></p>
-            </div>
-            <div><span class="edit">Edit</span></div>
-        </div>
-        <!-- 有地址时直接显示地址------------end -->
 
-        <!-- 没地址时新增地址（此模块一直存在）,不显示时添加“hidden”------------begin -->
-        <div class="editAddress">
-            <h4>Shipping Address</h4>
-            <div class="addressContent">
-                <p class="fullName"><span>Full name</span><input type="text"></p>
-                <p class="addressLine1"><span>Address Line1</span><input type="text"></p>
-                <p class="addressLine2"><span>Address Line2</span><input type="text"></p>
-                <p class="city"><span>City</span><input type="text"></p>
-                <p class="province"><span class="state">State/Province/<br>Region</span><input type="text"></p>
-                <p class="zip"><span>ZIP</span><input type="text"></p>
-                <p class="phoneNum"><span>Phone number</span><input type="text"></p>
-            </div>
-            <div><span class="confirm">Confirm</span></div>
+    <!-- 有地址时直接显示地址（此模块一直存在）,不显示时添加“hidden”------------begin -->
+    <div class="readAddress">
+        <h4>Shipping Address</h4>
+        <div class="addressContent">
+            <p class="fullName">{{ user_info.name|safe }}</p>
+            <p class="addressLine1">{{ user_info.road|safe }}</p>
+            <p class="addressLine2">{{ user_info.district|safe }}</p>
+            <p class="state">
+                <span class="city">{{ user_info.city|safe }}</span>,
+                <span class="province">{{ user_info.province|safe }}</span>&nbsp;&nbsp;
+                <span class="zip">{{ user_info.postcode|safe }}</span></p>
+            <p class="phoneNum">Phone:<span>{{ user_info.phone_number|safe }}</span></p>
         </div>
-        <!-- 没地址时新增地址------------end -->
-    {% else %}
-        <!-- 有地址时直接显示地址（此模块一直存在）,不显示时添加“hidden”------------begin -->
-        <div class="readAddress">
-            <h4>Shipping Address</h4>
-            <div class="addressContent">
-                <p class="fullName">{{ user_info.name }}</p>
-                <p class="addressLine1">{{ user_info.road }}</p>
-                <p class="addressLine2">{{ user_info.district }}</p>
-                <p class="state">
-                    <span class="city">{{ user_info.city }}</span>,
-                    <span class="province">{{ user_info.province }}</span>&nbsp;&nbsp;
-                    <span class="zip">{{ user_info.postcode }}</span></p>
-                <p class="phoneNum">Phone:<span>{{ user_info.phone_number }}</span></p>
-            </div>
-            <div><span class="edit">Edit</span></div>
-        </div>
-        <!-- 有地址时直接显示地址------------end -->
-
-        <!-- 没地址时新增地址（此模块一直存在）,不显示时添加“hidden”------------begin -->
-        <div class="editAddress hidden">
-            <h4>Shipping Address</h4>
-            <div class="addressContent">
-                <p class="fullName"><span>Full name</span><input type="text"></p>
-                <p class="addressLine1"><span>Address Line1</span><input type="text"></p>
-                <p class="addressLine2"><span>Address Line2</span><input type="text"></p>
-                <p class="city"><span>City</span><input type="text"></p>
-                <p class="province"><span class="state">State/Province/<br>Region</span><input type="text"></p>
-                <p class="zip"><span>ZIP</span><input type="text"></p>
-                <p class="phoneNum"><span>Phone number</span><input type="text"></p>
-            </div>
-            <div><span class="confirm">Confirm</span></div>
-        </div>
-        <!-- 没地址时新增地址------------end -->
-    {% endifequal %}
+    </div>
 
     <div class="orderLines">
         <h3>OrderLine</h3>
@@ -91,12 +39,12 @@
                         <img src={{ good.image }} alt="">
                     </a>
                     <div class="infors">
-                        <p class="name">{{ good.name_en }}</p>
+                        <p class="name">{{ good.name_en|safe }}</p>
                         <p class="price">Price:&nbsp;$&nbsp;<span>{{ good.price }}</span></p>
                         <p class="quantity">
                             Quantity:<span>{{ good.quantity }}</span>
                         </p>
-                        <p class="dec">{{ good.description_en }}</p>
+                        <p class="dec">{{ good.description_en|safe }}</p>
                     </div>
                 </div>
             {% endfor %}
@@ -110,7 +58,9 @@
             <div>
                 <p class="totalPrice">Sum:&nbsp;$&nbsp;<span>{{ total }}</span></p>
                 <!-- 已经有默认地址的时候class="continue goBuy",没有默认地址的时候显示class="continue" -->
+                {% ifequal status 1 %}
                 <div class="continue goBuy">Pay</div>
+                {% endifequal %}
             </div>
         </div>
     </div>

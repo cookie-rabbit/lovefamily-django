@@ -25,7 +25,7 @@ $(".myOrdersContainer")
 	})
 	.on("click", ".more", function() {
 		var req = {
-			url: baseUrl + 'orders/more',
+			url: baseUrl + 'orders/',
 			data: {
 				status: $(".myOrdersContainer .content .current").data("type"),
 				offset: $(".orderList").length
@@ -33,7 +33,7 @@ $(".myOrdersContainer")
 			sucFun: function(res) {
 				if (parseInt(res.errcode) === 0) {
 					$(".more").before(res.data.result);
-					if (res.data.more == false) {
+					if (res.data.more == "false") {
 						$(".more").remove();
 					}
 				} else {

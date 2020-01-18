@@ -75,14 +75,14 @@
             </div>
             {% ifnotequal is_null 1 %}
                 {% include 'orderBlock.html' %}
-                {% if res.more %}
+                {% ifequal more 1%}
                     <div class="more">MORE</div>
-                {% endif %}
+                {% endifequal %}
             {% endifnotequal %}
             {% ifequal is_null 1 %}
                 <div class="noContent">
                     <img src="{% static 'assets/images/noOrder.jpg' %}" alt="">
-                    <p>Did not find the relevant goods oh~</p>
+                    <p>You have no relevant order oh~</p>
                 </div>
             {% endifequal %}
         </div>

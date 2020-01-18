@@ -1,6 +1,8 @@
 /* mock测试接口 */
 //var baseUrl = "http://10.168.2.93:3000/mock/21/api/";
-var baseUrl = "/api/";
+//var baseUrl = "http://10.168.2.111:8000/api/"; //亚彤测试地址;
+var baseUrl = "/api/"; //亚彤测试地址;
+
 
 function doAjax(req) {
 	$.ajax({
@@ -66,7 +68,8 @@ function getConfimDiv(content) {
 	return sb;
 }
 
-function getToast01(content,time=2000,href) {
+function getToast01(content, time, href) {
+	var time=time||2000;
 	var sb = '	    <div class="fixedDiv">';
 	sb += '				<div class="confirmDiv">';
 	sb += '					<div class="toast01">';
@@ -79,16 +82,16 @@ function getToast01(content,time=2000,href) {
 	var height = $(".confirmDiv .toast01").height() / 2;
 
 	$(".confirmDiv .toast01").css("margin-top", "-" + height + "px");
-	setTimeout(function(){
+	setTimeout(function() {
 		$(".fixedDiv").remove();
-		if(href){
-			location.href=href;
+		if (href) {
+			location.href = href;
 		}
 	}, time)
 }
 $(".container").on("click", ".fixedDiv .cancel", function() {
 	$(".fixedDiv").remove();
 });
-$(".goBack,.searchHead").on("click",function(){
+$(".goBack,.searchHead").on("click", function() {
 	history.go(-1)
 })

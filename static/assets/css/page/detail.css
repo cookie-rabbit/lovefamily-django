@@ -73,7 +73,8 @@ input[type="password"]:focus {
   min-width: 1200px;
   margin: 0 auto;
 }
-span {
+span,
+div {
   font-family: "times new roman" !important;
 }
 .header .top {
@@ -349,7 +350,7 @@ span {
   font-family: HelveticaNeue;
   color: #000000;
   display: inline-block;
-  padding: 0 20px;
+  padding: 0 13px;
   height: 22px;
   line-height: 22px;
 }
@@ -651,7 +652,6 @@ body {
 .detailContainer .information .infors h2 {
   height: 30px;
   font-size: 24px;
-  font-family: HelveticaNeue-Medium, HelveticaNeue;
   font-weight: 500;
   color: #000000;
   line-height: 30px;
@@ -661,7 +661,6 @@ body {
 .detailContainer .information .infors .oriPrice {
   height: 18px;
   font-size: 16px;
-  font-family: HelveticaNeue;
   color: #666666;
   line-height: 18px;
   padding: 0 10px;
@@ -681,7 +680,6 @@ body {
 .detailContainer .information .infors .realPrice {
   height: 33px;
   font-size: 14px;
-  font-family: HelveticaNeue;
   color: #000000;
   line-height: 33px;
   margin-bottom: 20px;
@@ -731,7 +729,6 @@ body {
   width: 357px;
   height: 140px;
   font-size: 14px;
-  font-family: HelveticaNeue;
   color: #333333;
   line-height: 20px;
   overflow: hidden;
@@ -760,11 +757,11 @@ body {
   width: 948px;
   margin: 0 auto;
   margin-top: 50px;
-  background: #f8f8f8;
   padding: 20px;
 }
 .detailContainer .customDiv img {
-  margin: 0 auto;
+  margin: 20px auto;
+  max-width: 948px;
 }
 .detailContainer .customDiv p,
 .detailContainer .customDiv li {
