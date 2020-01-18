@@ -11,8 +11,8 @@ REDIS_HOST = os.getenv("REDIS_HOST", "127.0.0.1")
 REDIS_PORT = os.getenv("REDIS_PORT", "6379")
 API_HOST = os.getenv("API_HOST", "10.168.2.100")  # PC端地址
 API_PORT = os.getenv("API_PORT", "8000")  # PC端接口
-MOBILE_HOST = os.getenv("API_HOST", "10.168.2.100")  # 手机端地址
-MOBILE_PORT = os.getenv("API_PORT", "8000")  # 手机端接口
+MOBILE_HOST = os.getenv("MOBILE_HOST", "10.168.2.100")  # 手机端地址
+MOBILE_PORT = os.getenv("MOBILE_PORT", "8000")  # 手机端接口
 
 PAYMENT_NOTIFY_URL = os.getenv("PAYMENT_NOTIFY_URL", "https://81c55584.ngrok.io" + "/paypal/")  # 后台端口
 
