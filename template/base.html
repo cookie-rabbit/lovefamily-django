@@ -13,8 +13,7 @@
     <link rel="icon" href="{% static 'assets/images/icon/loveFamily.ico' %}" type="image/x-icon">
     {% block css %}
     {% endblock %}
-    <!-- <link rel="stylesheet/less" type="text/css" href="../assets/css/page/index.less" />
-    <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/3.10.0-beta/less.min.js"></script> -->
+
 </head>
 <body>
 <div class="container">
@@ -27,11 +26,9 @@
                     <!-- class:spread -->
                     <a href="javascript:(0)" class="notJump name">Language<span></span></a>
                     <div class="ul">
-                        <a href="" class="li">简体中文</a>
                         <a href="" class="li current">English</a>
                     </div>
                 </div>
-
 
                 {% if user %}
                     <a href="/orders/" class="toNotice"><span>{{ order_quantity }}</span></a>

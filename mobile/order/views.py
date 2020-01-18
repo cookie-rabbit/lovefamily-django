@@ -266,8 +266,8 @@ class OrdersView(View):
                 good_count = good['good_count']
                 count = int(good_count)
                 good_list = Goods.objects.select_for_update().get(id=goods_id)
-                if good_list.stock < count:
-                    return JsonResponse({'errcode': 112, 'errmsg': "the {} stock is not enough".format(good_list.name_en)})
+                # if good_list.stock < count:
+                #     return JsonResponse({'errcode': 112, 'errmsg': "the {} stock is not enough".format(good_list.name_en)})
 
             user_id = user.id
             time = timezone.now()

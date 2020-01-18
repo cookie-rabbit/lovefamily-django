@@ -403,9 +403,9 @@ class OrderCreateView(View):
                 good_count = good['good_count']
                 count = int(good_count)
                 good_list = Goods.objects.select_for_update().get(id=goods_id)
-                if good_list.stock < count:
-                    return JsonResponse(
-                        {'errcode': 112, 'errmsg': "the {} stock is not enough".format(good_list.name_en)})
+                # if good_list.stock < count:
+                #     return JsonResponse({'errcode': 112, 'errmsg': "the {}
+                #     stock is not enough".format(good_list.name_en)})
 
         user_id = user.id
         time = timezone.now()
@@ -459,9 +459,9 @@ class OrderCreateView(View):
                 return JsonResponse({'errcode': 102, 'errmsg': 'Db error'})
             count = int(good_count)
 
-            if Goodgoods.stock < count:
-                transaction.savepoint_rollback(save_id)
-                return JsonResponse({'errcode': 112, 'errmsg': "stock not enough"})
+            # if Goodgoods.stock < count:
+            #     transaction.savepoint_rollback(save_id)
+            #     return JsonResponse({'errcode': 112, 'errmsg': "stock not enough"})
 
             name_en = Goodgoods.name_en
             on_price = Goodgoods.on_price

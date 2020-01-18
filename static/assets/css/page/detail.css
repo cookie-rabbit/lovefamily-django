@@ -525,7 +525,7 @@ input[type="number"] {
   background-size: 100%;
 }
 .fixedDiv .confirmDiv .toast01 {
-  font-size: 14px;
+  font-size: 16px;
   font-family: HelveticaNeue;
   color: #000000;
   text-align: center;
@@ -536,6 +536,7 @@ input[type="number"] {
 }
 .fixedDiv .confirmDiv .toast01 p {
   width: 350px;
+  line-height: 20px;
 }
 .fixedDiv .confirmDiv .descConfirm {
   text-align: center;

@@ -189,6 +189,7 @@ class CartsConfirm(View):
             res = "goods_id:" + goods_id + "goods_num:" + goods_num
         if order_no:
             res = "order_no:" + order_no
+
         href = env.ONLINE_URL + "orders/address/" + res
         data = {"href": href}
 

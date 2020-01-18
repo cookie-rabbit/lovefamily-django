@@ -19,14 +19,14 @@
     <div class="readAddress">
         <h4>Shipping Address</h4>
         <div class="addressContent">
-            <p class="fullName">{{ user_info.name|safe }}</p>
-            <p class="addressLine1">{{ user_info.road|safe }}</p>
-            <p class="addressLine2">{{ user_info.district|safe }}</p>
+            <p class="fullName">{{ user_info.name }}</p>
+            <p class="addressLine1">{{ user_info.road }}</p>
+            <p class="addressLine2">{{ user_info.district }}</p>
             <p class="state">
-                <span class="city">{{ user_info.city|safe }}</span>,
-                <span class="province">{{ user_info.province|safe }}</span>&nbsp;&nbsp;
-                <span class="zip">{{ user_info.postcode|safe }}</span></p>
-            <p class="phoneNum">Phone:<span>{{ user_info.phone_number|safe }}</span></p>
+                <span class="city">{{ user_info.city }}</span>,
+                <span class="province">{{ user_info.province }}</span>&nbsp;&nbsp;
+                <span class="zip">{{ user_info.postcode }}</span></p>
+            <p class="phoneNum">Phone:<span>{{ user_info.phone_number }}</span></p>
         </div>
     </div>
 
@@ -39,7 +39,7 @@
                         <img src={{ good.image }} alt="">
                     </a>
                     <div class="infors">
-                        <p class="name">{{ good.name_en|safe }}</p>
+                        <p class="name">{{ good.name_en }}</p>
                         <p class="price">Price:&nbsp;$&nbsp;<span>{{ good.price }}</span></p>
                         <p class="quantity">
                             Quantity:<span>{{ good.quantity }}</span>
