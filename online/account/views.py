@@ -203,7 +203,8 @@ class SignUpView(View):
         if password:
             if not re.match(r'^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,100}$', password):
                 return JsonResponse(
-                    {"errcode": "106", "errmsg": "The password must have number and letter and longer than six"})
+                    {"errcode": "106", "errmsg": "The password must have number and letter and longer than "
+                                                 "six without any additional characters"})
         repassword = request.POST.get("repassword", None)
         if password != repassword:
             return JsonResponse({"errcode": "107", "errmsg": "Passwords must be matched"})
