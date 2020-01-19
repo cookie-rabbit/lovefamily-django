@@ -1,6 +1,6 @@
 $(".myOrdersContainer")
 	.on("click", ".content .orderList h3", function() {
-		var me=$(this);
+		var me = $(this);
 		me.toggleClass("spread");
 		var detailObj = $(this).parents(".orderList").find(".details");
 		if (detailObj.length > 0) {
@@ -8,7 +8,7 @@ $(".myOrdersContainer")
 		} else {
 			/* ajax请求 */
 			var req = {
-				url: baseUrl + 'order/?order_no='+me.find(".order span").html(),
+				url: baseUrl + 'order/?order_no=' + me.find(".order span").html(),
 				sucFun: function(res) {
 					if (parseInt(res.errcode) === 0) {
 						me.after(res.data.result);
@@ -46,6 +46,3 @@ $(".myOrdersContainer")
 		};
 		doAjax(req);
 	})
-	.on("click", ".searchPic", function() {
-
-	});

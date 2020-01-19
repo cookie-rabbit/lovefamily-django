@@ -116,7 +116,7 @@ class OrderAddressView(View):
                         return JsonResponse({"errcode": "102", "errmsg": "Db error"})
 
                     for good in goods:
-                        good_id = good.goods_id
+                        good_id = good.good
                         quantity = good.quantity
                         good_name_en = good.name_en
                         good_price = good.on_price
@@ -328,7 +328,7 @@ class OrdersView(View):
                     good_list.stock -= count
                     good_list.save()
                     total += int(good_count) * good_list.on_price
-                    Order_Goods.objects.create(goods_id=goods_id, order=order, quantity=count, name_en=name_en,
+                    Order_Goods.objects.create(good=goods_id, order=order, quantity=count, name_en=name_en,
                                                on_price=on_price,
                                                description_en=description_en, img=good_img)
                     Order.objects.filter(id=order.id).update(total=total)

@@ -1,14 +1,11 @@
 $(".registerContainer")
 	.on("click", ".toSubmit", function() {
-		
-		$(".baseInfor .tips").html("");
-			
+		$(".baseInfor .tips").html("");	
 		var name = $(".baseInfor .name input").val().trim();
 		var email = $(".baseInfor .email input").val().trim();
 		var phone = $(".baseInfor .phone input").val().trim();
 		var password = $(".baseInfor .pass input").val().trim();
 		var repassword = $(".baseInfor .repass input").val().trim();
-
 		if (name.length == 0) {
 			$(".baseInfor .name .tips").html("Please enter the username");
 		}  else if (phone.length == 0) {

@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block css %}
-   <link rel="stylesheet" type="text/css" href="{% static 'assets/css/page/index.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/page/index.css' %}"/>
 {% endblock %}
 
 
@@ -29,6 +29,20 @@
         </div>
     </div>
 {% endblock %}
+
+{% block footer %}
+    <div class="footer">
+    	<p class="line1">
+    		<span class="span"><span class="sh"></span>Service Hotline&nbsp:&nbsp;&nbsp;05914-24556465</span>
+    		<span class="span"><span class="pb"></span>Powered By : LOVE FAMILY TRADING PTY LTD</span>
+    	</p>
+    	<p class="line2">
+    		<span class="span"></span>
+    		<span class="span"><span class="sby"></span>Supported By: Weigan Technology LTD</span>	
+    	</p>
+    </div>
+{% endblock %}
+
 
 {% block js %}
     <script src="{% static 'assets/javascript/page/index.js' %}"></script>

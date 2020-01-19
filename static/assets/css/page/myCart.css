@@ -697,6 +697,7 @@ body {
   height: 20px;
   position: absolute;
   right: 0;
+  bottom: 3px;
 }
 .myCartContainer .content .cartGoods .infors .quantity .changeCount .add,
 .myCartContainer .content .cartGoods .infors .quantity .changeCount .sub {

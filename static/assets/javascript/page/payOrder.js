@@ -28,7 +28,6 @@ $(".payOrderContainer")
 		var year = $(".year .count").val();
 		var checked = $(".checkToAdd").hasClass("checked");
 		var order_id = $(this).data("orderid");
-
 		var req = {
 			url: baseUrl + 'carts/'+order_id+'/pay',
 			data: {
@@ -41,11 +40,7 @@ $(".payOrderContainer")
 			},
 			method: "post",
 			sucFun: function(res) {
-				if (parseInt(res.errcode) === 0) {
-					getToast01(res.errmsg);
-				} else {
-					getToast01(res.errmsg);
-				}
+				getToast01(res.errmsg);	
 			},
 			errFun: function(err) {
 				getToast01("Network anomaly!");

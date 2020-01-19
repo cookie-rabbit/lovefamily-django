@@ -190,7 +190,7 @@ class CartsConfirm(View):
         if order_no:
             res = "order_no:" + order_no
 
-        href = env.ONLINE_URL + "orders/address/" + res
+        href = "/orders/address/" + res
         data = {"href": href}
 
         return JsonResponse({'errcode': 0, 'errmsg': "success", "data": data})

@@ -35,6 +35,8 @@ $(".myAccountContainer")
 					if (parseInt(res.errcode) === 0) {
 						$(".myAccountContainer input").css("opcity", "0.7").attr("readonly", "true");
 						$(".toSubmit").html("Edit").removeClass("toSave");
+					}
+					else{
 						getToast01(res.errmsg);
 					}
 				},

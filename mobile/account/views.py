@@ -50,7 +50,7 @@ class LoginView(View):
                 ip_address = request.META['HTTP_X_FORWARDED_FOR']
             else:
                 ip_address = request.META['REMOTE_ADDR']
-            text = "The user who's user_id {} has been logged in at {},the ip address is {}".format(user.id,
+            text = "The user who's user_id {} has been logged in at {}, the ip address is {}".format(user.id,
                                                                                                     timezone.now(),
                                                                                                     ip_address)
             mobile_logger.info(text)

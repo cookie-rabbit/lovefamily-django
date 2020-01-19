@@ -11,13 +11,13 @@
 
 
 {% block content %}
-    <div class="myOrderContainer" data-cart={{ is_cart }}>
+    <div class="myOrderContainer" data-cart={{ is_cart }} data-order={{ is_order }} data-orderno={{ order_no }}>
     <div class="back"><span class="goBack"></span>My Order</div>
 
 
     <!-- 有地址时直接显示地址（此模块一直存在）,不显示时添加“hidden”------------begin -->
     <div class="readAddress">
-        <h4>Shipping Address</h4>
+        <h4>Shopping Address</h4>
         <div class="addressContent">
             <p class="fullName">{{ user_info.name }}</p>
             <p class="addressLine1">{{ user_info.road }}</p>

@@ -63,8 +63,6 @@ class GoodsView(View):
         for goods in goods_list:
             name = goods.name_en
             names.append(name)
-            category= goods.category.name,
-            super_category= goods.category.super_category.name,
         result = [{"id": goods.id, "name": goods.name_en, "description": goods.description_en, "price": goods.on_price,
                    "category": goods.category.name, "super_category": goods.category.super_category.name,
                    "sale": goods.actual_sale + goods.virtual_sale, "stock": goods.stock, "on_sale": goods.on_sale} for

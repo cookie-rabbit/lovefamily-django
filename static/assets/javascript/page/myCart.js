@@ -46,7 +46,6 @@ $(".myCartContainer")
 		}
 		setTotalCount();
 		count > 0 && editCart(me.parents(".cartGoods").data("id"), count);
-		
 	})
 	.on("click", ".remove", function() {
 		deleteObj = $(this);

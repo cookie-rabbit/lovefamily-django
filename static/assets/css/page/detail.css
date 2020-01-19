@@ -521,11 +521,12 @@ input[type="number"] {
   top: 50%;
   margin-left: -240px;
   margin-top: -89px;
+  line-height: 20px;
+  font-size: 16px;
   background: url("../../images/popBg.png") no-repeat;
   background-size: 100%;
 }
 .fixedDiv .confirmDiv .toast01 {
-  font-size: 16px;
   font-family: HelveticaNeue;
   color: #000000;
   text-align: center;
@@ -536,7 +537,6 @@ input[type="number"] {
 }
 .fixedDiv .confirmDiv .toast01 p {
   width: 350px;
-  line-height: 20px;
 }
 .fixedDiv .confirmDiv .descConfirm {
   text-align: center;
@@ -658,6 +658,10 @@ body {
   line-height: 30px;
   font-weight: bold;
   margin-bottom: 25px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-break: break-all;
 }
 .detailContainer .information .infors .oriPrice {
   height: 18px;
@@ -697,7 +701,7 @@ body {
 .detailContainer .information .infors .realPrice .quantity .changeCount {
   height: 20px;
   position: absolute;
-  bottom: -1px;
+  bottom: -2px;
   right: 0;
 }
 .detailContainer .information .infors .realPrice .quantity .changeCount .add,
@@ -754,11 +758,23 @@ body {
   top: -60px;
   left: -26px;
 }
+.detailContainer .ProDetail {
+  width: 948px;
+  text-align: center;
+  border-bottom: 2px dashed #A23700;
+  margin: 0 auto;
+  font-size: 24px;
+  color: #666;
+  line-height: 30px;
+  font-style: italic;
+  margin-top: 35px;
+  padding-bottom: 20px;
+}
 .detailContainer .customDiv {
   width: 948px;
   margin: 0 auto;
-  margin-top: 50px;
   padding: 20px;
+  margin-top: 10px;
 }
 .detailContainer .customDiv img {
   margin: 20px auto;

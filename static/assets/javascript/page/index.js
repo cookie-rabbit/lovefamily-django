@@ -12,8 +12,7 @@ $(".contentContainer")
 					$(".content").html(res.data.result);
 					if (res.data.more == true) {
 						$(".content").append('<div class="more">MORE</div>');
-					}
-					
+					}	
 				} else {
 					getToast01(res.errmsg);
 				}

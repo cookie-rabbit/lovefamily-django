@@ -75,13 +75,14 @@ $(".container")
 			obj.good_count = $(me).data("count");
 			arrs[i] = obj;
 		}
-		console.log(JSON.stringify(arrs));
+		
 		var req = {
 			url: baseUrl + 'orders/',
 			data: {
 				goods: JSON.stringify(arrs),
-				/* tital:$(".totalPrice").data("price"), */
-				is_cart:$(".myOrderContainer").data("cart")
+				is_cart:$(".myOrderContainer").data("cart"),
+				is_order:$(".myOrderContainer").data("order"),
+				order_no:$(".myOrderContainer").data("orderno")	
 			},
 			method: "post",
 			sucFun: function(res) {

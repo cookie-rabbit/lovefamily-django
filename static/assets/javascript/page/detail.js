@@ -93,6 +93,8 @@ $(".todo")
 					/* 修改购物车数量 */
 					$(".toShoppingCart span").html(res.data.quantity);
 					getToast01("Successfully joined the shopping cart");
+				} else {
+					getToast01(res.errmsg);
 				}
 			},
 			errFun: function(err) {
@@ -106,10 +108,10 @@ $(".todo")
 		var req = {
 			url: baseUrl + 'carts/confirm/',
 			method: "post",
-			
+
 			data: {
 				goods_id: $(".detailContainer").data("id"),
-				goods_num:$(".quantity .count").val()
+				goods_num: $(".quantity .count").val()
 			},
 			sucFun: function(res) {
 				if (parseInt(res.errcode) === 0) {
@@ -123,6 +125,6 @@ $(".todo")
 			}
 		};
 		doAjax(req);
-		
+
 		return false;
 	});;

@@ -21,7 +21,7 @@ import management.user
 
 import ast
 import random
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from weigan_shopping import settings, env
 
@@ -172,9 +172,11 @@ class OrderAddressView(View):
             orders = Order.objects.filter(user_id=user_id)
             order_quantity = len(orders)
             cart_quantity = request.session.get("%s_cart" % user_id, 0)
+            is_order = 0
 
             res = {"user_info": user_info, "good_dict": good_dict, "total": total, "user": user,
-                   "cart_quantity": cart_quantity, "order_quantity": order_quantity, "is_cart": is_cart}
+                   "cart_quantity": cart_quantity, "order_quantity": order_quantity, "is_cart": is_cart,
+                   "is_order": is_order, "order_no": order_no}
 
         return render(request, "myOrder.html", context=res)
 
@@ -244,6 +246,7 @@ class OrdersDetailsView(View):
         user = User.objects.get(id=user_id)
         order_no = order_no
         orders = Order.objects.filter(user_id=user_id).filter(order_no=order_no)
+        is_order = 1
         if len(orders) > 0:
             order = orders[0]
         else:
@@ -272,7 +275,7 @@ class OrdersDetailsView(View):
                              "road": road, "phone_number": phone_number, "postcode": postcode}
                 res = {"user_info": user_info, "good_dict": good_dict, "total": total, "user": user,
                        "cart_quantity": cart_quantity, "order_quantity": order_quantity, "status": status,
-                       "is_cart": is_cart}
+                       "is_cart": is_cart, "is_order": is_order, "order_no": order_no}
 
                 return render(request, "orderDetails.html", context=res)
             else:
@@ -325,6 +328,14 @@ class OrdersListView(View):
             for order in orders:
                 order_no = order.order_no
                 order_date = order.order_date.strftime("%Y-%m-%d %H:%M:%S")
+                exc = timezone.now() - order.order_date
+                set_hour = timedelta(hours=3)
+                exc = (exc - set_hour).total_seconds()
+                if exc > 0:
+                    order_chg = Order.objects.filter(order_no=order_no)
+                    if len(order_chg) > 0:
+                        order.status = 5
+                        order.save()
                 total = order.total
                 status = order.get_status_display()
                 order_dic.append({"order_no": order_no, "order_date": order_date, "total": total, "status": status})
@@ -383,117 +394,124 @@ class OrderCreateView(View):
     @method_decorator(csrf_exempt)
     @method_decorator(user_auth)
     def post(self, request, user):
-        try:
-            user_add = UserAddress.objects.get(user_id=user.id)
-            name = user_add.name
-            province = user_add.province
-            city = user_add.city
-            district = user_add.district
-            road = user_add.road
-            postcode = user_add.postcode
-            phone_number = user_add.phone_number
-            goods = ast.literal_eval(request.POST.get('goods'))
-            is_cart = request.POST.get('is_cart', 0)
-        except Exception as e:
-            online_logger.error(e)
-            return JsonResponse({"errcode": 101, "errmsg": "params not all"})
-        if len(goods) > 0:
+        is_order = request.POST.get('is_order', 0)
+        if int(is_order) == 0:
+            try:
+                user_add = UserAddress.objects.get(user_id=user.id)
+                name = user_add.name
+                province = user_add.province
+                city = user_add.city
+                district = user_add.district
+                road = user_add.road
+                postcode = user_add.postcode
+                phone_number = user_add.phone_number
+                goods = ast.literal_eval(request.POST.get('goods'))
+                is_cart = request.POST.get('is_cart', 0)
+            except Exception as e:
+                online_logger.error(e)
+                return JsonResponse({"errcode": 101, "errmsg": "params not all"})
+            if len(goods) > 0:
+                for good in goods:
+                    goods_id = good['good_id']
+                    good_count = good['good_count']
+                    count = int(good_count)
+                    good_list = Goods.objects.select_for_update().get(id=goods_id)
+                    # if good_list.stock < count:
+                    #     return JsonResponse({'errcode': 112, 'errmsg': "the {}
+                    #     stock is not enough".format(good_list.name_en)})
+
+            user_id = user.id
+            time = timezone.now()
+            i = timezone.now()
+            month = str(i.month)
+            day = str(i.day)
+            hour = str(i.hour)
+            minute = str(i.minute)
+            second = str(i.second)
+            if len(month) < 2:
+                month = '0' + month
+            if len(day) < 2:
+                day = '0' + day
+            if len(hour) < 2:
+                hour = '0' + hour
+            if len(minute) < 2:
+                minute = '0' + minute
+            if len(second) < 2:
+                second = '0' + second
+
+            order_no = "0000" + str(i.year) + month + day + hour + minute + second + str(random.randint(0000, 9999))
+            status = 1
+            total = 0
+
+            save_id = transaction.savepoint()
+            try:
+                order_address = OrderAddress.objects.create(name=name, province=province, road=road,
+                                                            city=city, district=district, postcode=postcode,
+                                                            phone_number=phone_number)
+
+                order = Order.objects.create(order_no=order_no, total=total, order_date=time, status=status,
+                                             address=order_address, user=User.objects.get(id=user_id))
+            except Exception as e:
+                online_logger.error(e)
+                return JsonResponse({"errcode": 101, "errmsg": "Params error"})
+
+            total_count = 0
+            goods_ids = []
             for good in goods:
                 goods_id = good['good_id']
+                goods_ids.append(goods_id)
                 good_count = good['good_count']
+                try:
+                    Goodgoods = Goods.objects.select_for_update().get(id=goods_id)
+                except Goods.DoesNotExist as e:
+                    transaction.savepoint_rollback(save_id)
+                    online_logger.error(e)
+                    return JsonResponse({'errcode': 110, 'errmsg': "goods not exist"})
+                except Exception as e:
+                    online_logger.error(e)
+                    return JsonResponse({'errcode': 102, 'errmsg': 'Db error'})
                 count = int(good_count)
-                good_list = Goods.objects.select_for_update().get(id=goods_id)
-                # if good_list.stock < count:
-                #     return JsonResponse({'errcode': 112, 'errmsg': "the {}
-                #     stock is not enough".format(good_list.name_en)})
 
-        user_id = user.id
-        time = timezone.now()
-        i = timezone.now()
-        month = str(i.month)
-        day = str(i.day)
-        hour = str(i.hour)
-        minute = str(i.minute)
-        second = str(i.second)
-        if len(month) < 2:
-            month = '0' + month
-        if len(day) < 2:
-            day = '0' + day
-        if len(hour) < 2:
-            hour = '0' + hour
-        if len(minute) < 2:
-            minute = '0' + minute
-        if len(second) < 2:
-            second = '0' + second
+                # if Goodgoods.stock < count:
+                #     transaction.savepoint_rollback(save_id)
+                #     return JsonResponse({'errcode': 112, 'errmsg': "stock not enough"})
 
-        order_no = "0000" + str(i.year) + month + day + hour + minute + second + str(random.randint(0000, 9999))
-        status = 1
-        total = 0
+                name_en = Goodgoods.name_en
+                on_price = Goodgoods.on_price
+                description_en = Goodgoods.description_en
 
-        save_id = transaction.savepoint()
-        try:
-            order_address = OrderAddress.objects.create(name=name, province=province, road=road,
-                                                        city=city, district=district, postcode=postcode,
-                                                        phone_number=phone_number)
+                good_img = Image.objects.filter(goods_id=goods_id)[0].image
 
-            order = Order.objects.create(order_no=order_no, total=total, order_date=time, status=status,
-                                         address=order_address, user=User.objects.get(id=user_id))
-        except Exception as e:
-            online_logger.error(e)
-            return JsonResponse({"errcode": 101, "errmsg": "Params error"})
+                Goodgoods.actual_sale += count
+                Goodgoods.stock -= count
+                Goodgoods.save()
+                total_count += good_count
+                total += good_count * Goodgoods.on_price
 
-        total_count = 0
-        goods_ids = []
-        for good in goods:
-            goods_id = good['good_id']
-            goods_ids.append(goods_id)
-            good_count = good['good_count']
-            try:
-                Goodgoods = Goods.objects.select_for_update().get(id=goods_id)
-            except Goods.DoesNotExist as e:
-                transaction.savepoint_rollback(save_id)
-                online_logger.error(e)
-                return JsonResponse({'errcode': 110, 'errmsg': "goods not exist"})
-            except Exception as e:
-                online_logger.error(e)
-                return JsonResponse({'errcode': 102, 'errmsg': 'Db error'})
-            count = int(good_count)
+                Order_Goods.objects.create(order=order, good=goods_id, quantity=count, name_en=name_en,
+                                           on_price=on_price,
+                                           description_en=description_en, img=good_img)
+                Order.objects.filter(id=order.id).update(total=total)
 
-            # if Goodgoods.stock < count:
-            #     transaction.savepoint_rollback(save_id)
-            #     return JsonResponse({'errcode': 112, 'errmsg': "stock not enough"})
+            time = timezone.localtime(timezone.now()).strftime("%Y-%m-%d %H:%M:%S")
+            OrderStatusLog.objects.create(order_no=order_no, status=1, user_id=user_id, change_date=time)
 
-            name_en = Goodgoods.name_en
-            on_price = Goodgoods.on_price
-            description_en = Goodgoods.description_en
+            if is_cart == '1':
+                try:
+                    Cart.objects.filter(goods_id__in=goods_ids).delete()
+                    cart_quantity = request.session.get("%s_cart" % user_id, 0)
+                    request.session['%s_cart' % user.id] = cart_quantity - total_count
 
-            good_img = Image.objects.filter(goods_id=goods_id)[0].image
+                except Exception as e:
+                    online_logger.error(e)
+                    return JsonResponse({'errcode': 102, 'errmsg': 'Db error'})
 
-            Goodgoods.actual_sale += count
-            Goodgoods.stock -= count
-            Goodgoods.save()
-            total_count += good_count
-            total += good_count * Goodgoods.on_price
-
-            Order_Goods.objects.create(order=order, good=goods_id, quantity=count, name_en=name_en, on_price=on_price,
-                                       description_en=description_en, img=good_img)
-            Order.objects.filter(id=order.id).update(total=total)
-
-        time = timezone.localtime(timezone.now()).strftime("%Y-%m-%d %H:%M:%S")
-        OrderStatusLog.objects.create(order_no=order_no, status=1, user_id=user_id, change_date=time)
-
-        if is_cart == '1':
-            try:
-                Cart.objects.filter(goods_id__in=goods_ids).delete()
-                cart_quantity = request.session.get("%s_cart" % user_id, 0)
-                request.session['%s_cart' % user.id] = cart_quantity - total_count
-
-            except Exception as e:
-                online_logger.error(e)
-                return JsonResponse({'errcode': 102, 'errmsg': 'Db error'})
-
-        href = "/orders/{order_no}/pay/".format(order_no=order.order_no)
-        return JsonResponse({"errcode": 0, "data": {"result": "ordered success", "href": href}})
+            href = "/orders/{order_no}/pay/".format(order_no=order.order_no)
+            return JsonResponse({"errcode": 0, "data": {"result": "ordered success", "href": href}})
+        elif int(is_order) == 1:
+            order_no = request.POST.get('order_no')
+            href = "/orders/{order_no}/pay/".format(order_no=order_no)
+            return JsonResponse({"errcode": 0, "data": {"result": "ordered success", "href": href}})
 
     # 翻页
     @method_decorator(user_auth)
@@ -608,14 +626,12 @@ class PayView(View):
         return render(self.request, "testPay.html", context=context)
 
 
-# 【渲染】订单页面（地址）
+# 【渲染】支付页面
 class OrderPayView(View):
     @method_decorator(user_auth)
     def get(self, request, user, order_no):
-
         try:
             user_id = user.id
-
             orders = Order.objects.filter(user_id=user_id).order_by('-order_date')
             order_quantity = len(orders)
             orders = Order.objects.filter(order_no=order_no)

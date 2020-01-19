@@ -14,7 +14,7 @@
 
 
 {% block content %}
-    <div class="myOrderContainer" data-cart={{ is_cart }}>
+    <div class="myOrderContainer" data-cart={{ is_cart }} data-order={{ is_order }} data-orderno={{ order_no }}>
     <div class="back"><span class="goBack"></span>My Order</div>
 
     {% ifequal user_info.is_null 1 %}
