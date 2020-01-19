@@ -761,7 +761,7 @@ body {
 .detailContainer .ProDetail {
   width: 948px;
   text-align: center;
-  border-bottom: 2px dashed #A23700;
+  border-bottom: 2px dashed rgba(162, 55, 0, 0.3);
   margin: 0 auto;
   font-size: 24px;
   color: #666;

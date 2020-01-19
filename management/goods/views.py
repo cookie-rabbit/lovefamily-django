@@ -75,7 +75,7 @@ class GoodsView(View):
         """新增商品"""
         data = json.loads(request.body.decode())
         name = data.get("name", None)
-        if len(name) > 30:
+        if len(name) > 100:
             return JsonResponse({"errcode": "115", "errmsg": "the content is too long for name"})
         description = data.get("description", None)
         if len(description) > 500:
@@ -158,7 +158,11 @@ class GoodsDetailView(View):
             if type == "info":
                 data = json.loads(request.body.decode())
                 name = data.get("name", None)
+                if len(name) > 100:
+                    return JsonResponse({"errcode": "115", "errmsg": "the content is too long for name"})
                 description = data.get("description", None)
+                if len(description) > 500:
+                    return JsonResponse({"errcode": "115", "errmsg": "the content is too long for description"})
                 detail = data.get("detail", None)
                 images = data.get("image", None)
                 if not all([name]):

@@ -12,7 +12,7 @@ $(".contentContainer")
 					$(".content").html(res.data.result);
 					if (res.data.more == true) {
 						$(".content").append('<div class="more">MORE</div>');
-					}	
+					}
 				} else {
 					getToast01(res.errmsg);
 				}
@@ -73,10 +73,10 @@ $(".contentContainer")
 		var req = {
 			url: baseUrl + 'carts/confirm/',
 			method: "post",
-			
+
 			data: {
 				goods_id: $(this).data("id"),
-				goods_num:1
+				goods_num: 1
 			},
 			sucFun: function(res) {
 				if (parseInt(res.errcode) === 0) {
@@ -90,7 +90,7 @@ $(".contentContainer")
 			}
 		};
 		doAjax(req);
-		
+
 		return false;
 	})
 	/* 列多分类数据 */
@@ -142,3 +142,18 @@ $(".contentContainer")
 		};
 		doAjax(req);
 	});
+
+$(document).ready(function() {
+	var p = 0,
+		t = 0;
+	$(window).scroll(function(e) {
+		p = $(this).scrollTop();
+		if (t < p) {
+			$(".footer").css("display", "block")
+		} else if (t > p) {
+			$(".footer").css("display", "none")
+		}
+		t = p;;
+	});
+
+});

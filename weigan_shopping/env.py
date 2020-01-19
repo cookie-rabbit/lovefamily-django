@@ -16,9 +16,9 @@ MOBILE_PORT = os.getenv("MOBILE_PORT", "8000")  # 手机端接口
 
 PAYMENT_NOTIFY_URL = os.getenv("PAYMENT_NOTIFY_URL", "https://81c55584.ngrok.io" + "/paypal/")  # 后台端口
 
-ONLINE_URL = API_HOST + API_HOST  # 前端地址
-ONLINE_PAYMENT_RETURN_URL = ONLINE_URL + "orders/pay/success/"
-ONLINE_PAYMENT_CANCEL_URL = ONLINE_URL + "orders/"
+ONLINE_URL = "http://" + API_HOST + ':' + API_PORT  # 前端地址
+ONLINE_PAYMENT_RETURN_URL = ONLINE_URL + "/orders/pay/success/"
+ONLINE_PAYMENT_CANCEL_URL = ONLINE_URL + "/orders/"
 
 PAYMENT_ITEM = "love-family"
 PAYMENT_BUSSINESS = "sb-jc6dl844717@business.example.com"

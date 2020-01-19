@@ -94,6 +94,8 @@ class OrderAddressView(View):
                         good_description_en = good_detail.description_en
                         good_image = Image.objects.filter(goods_id=good_id)
                         total = total + quantity * good_price
+                        total = ("%.2f" % total)
+                        total = float(total)
                         good_dict.append(
                             {"id": good_id, "quantity": quantity, "name": good_name_en, "on_price": good_price,
                              "description": good_description_en,
@@ -114,6 +116,8 @@ class OrderAddressView(View):
                         good_image = Image.objects.filter(goods_id=good_id)
 
                         total = total + quantity * good_price
+                        total = ("%.2f" % total)
+                        total = float(total)
                         good_dict.append(
                             {"id": good_id, "quantity": quantity, "name": good_name_en, "on_price": good_price,
                              "description": good_description_en,
@@ -146,6 +150,8 @@ class OrderAddressView(View):
                         good_description_en = good.description_en
                         good_image = str(good.img)
                         total = total + quantity * good_price
+                        total = ("%.2f" % total)
+                        total = float(total)
                         good_dict.append(
                             {"id": good_id, "quantity": quantity, "name": good_name_en, "on_price": good_price,
                              "description": good_description_en,
@@ -334,8 +340,9 @@ class OrdersListView(View):
                 if exc > 0:
                     order_chg = Order.objects.filter(order_no=order_no)
                     if len(order_chg) > 0:
-                        order.status = 5
-                        order.save()
+                        if int(order.status) == 1:
+                            order.status = 5
+                            order.save()
                 total = order.total
                 status = order.get_status_display()
                 order_dic.append({"order_no": order_no, "order_date": order_date, "total": total, "status": status})
@@ -390,7 +397,6 @@ class OrdersListView(View):
 
 class OrderCreateView(View):
     # 创建订单
-    @method_decorator(transaction.atomic)
     @method_decorator(csrf_exempt)
     @method_decorator(user_auth)
     def post(self, request, user):
@@ -410,47 +416,48 @@ class OrderCreateView(View):
             except Exception as e:
                 online_logger.error(e)
                 return JsonResponse({"errcode": 101, "errmsg": "params not all"})
-            if len(goods) > 0:
-                for good in goods:
-                    goods_id = good['good_id']
-                    good_count = good['good_count']
-                    count = int(good_count)
-                    good_list = Goods.objects.select_for_update().get(id=goods_id)
-                    # if good_list.stock < count:
-                    #     return JsonResponse({'errcode': 112, 'errmsg': "the {}
-                    #     stock is not enough".format(good_list.name_en)})
-
-            user_id = user.id
-            time = timezone.now()
-            i = timezone.now()
-            month = str(i.month)
-            day = str(i.day)
-            hour = str(i.hour)
-            minute = str(i.minute)
-            second = str(i.second)
-            if len(month) < 2:
-                month = '0' + month
-            if len(day) < 2:
-                day = '0' + day
-            if len(hour) < 2:
-                hour = '0' + hour
-            if len(minute) < 2:
-                minute = '0' + minute
-            if len(second) < 2:
-                second = '0' + second
-
-            order_no = "0000" + str(i.year) + month + day + hour + minute + second + str(random.randint(0000, 9999))
-            status = 1
-            total = 0
-
-            save_id = transaction.savepoint()
             try:
-                order_address = OrderAddress.objects.create(name=name, province=province, road=road,
-                                                            city=city, district=district, postcode=postcode,
-                                                            phone_number=phone_number)
+                with transaction.atomic():
+                    if len(goods) > 0:
+                        for good in goods:
+                            goods_id = good['good_id']
+                            good_count = good['good_count']
+                            # count = int(good_count)
+                            #
+                            # good_list = Goods.objects.select_for_update().get(id=goods_id)
+                        # if good_list.stock < count:
+                            #     return JsonResponse({'errcode': 112, 'errmsg': "the {}
+                            #     stock is not enough".format(good_list.name_en)})
 
-                order = Order.objects.create(order_no=order_no, total=total, order_date=time, status=status,
-                                             address=order_address, user=User.objects.get(id=user_id))
+                    user_id = user.id
+                    time = timezone.now()
+                    i = timezone.now()
+                    month = str(i.month)
+                    day = str(i.day)
+                    hour = str(i.hour)
+                    minute = str(i.minute)
+                    second = str(i.second)
+                    if len(month) < 2:
+                        month = '0' + month
+                    if len(day) < 2:
+                        day = '0' + day
+                    if len(hour) < 2:
+                        hour = '0' + hour
+                    if len(minute) < 2:
+                        minute = '0' + minute
+                    if len(second) < 2:
+                        second = '0' + second
+
+                    order_no = "0000" + str(i.year) + month + day + hour + minute + second + str(random.randint(0000, 9999))
+                    status = 1
+                    total = 0
+
+                    order_address = OrderAddress.objects.create(name=name, province=province, road=road,
+                                                                city=city, district=district, postcode=postcode,
+                                                                phone_number=phone_number)
+
+                    order = Order.objects.create(order_no=order_no, total=total, order_date=time, status=status,
+                                                     address=order_address, user=User.objects.get(id=user_id))
             except Exception as e:
                 online_logger.error(e)
                 return JsonResponse({"errcode": 101, "errmsg": "Params error"})
@@ -462,9 +469,9 @@ class OrderCreateView(View):
                 goods_ids.append(goods_id)
                 good_count = good['good_count']
                 try:
-                    Goodgoods = Goods.objects.select_for_update().get(id=goods_id)
+                    with transaction.atomic():
+                        Goodgoods = Goods.objects.select_for_update().get(id=goods_id)
                 except Goods.DoesNotExist as e:
-                    transaction.savepoint_rollback(save_id)
                     online_logger.error(e)
                     return JsonResponse({'errcode': 110, 'errmsg': "goods not exist"})
                 except Exception as e:
@@ -487,6 +494,8 @@ class OrderCreateView(View):
                 Goodgoods.save()
                 total_count += good_count
                 total += good_count * Goodgoods.on_price
+                total = ("%.2f" % total)
+                total = float(total)
 
                 Order_Goods.objects.create(order=order, good=goods_id, quantity=count, name_en=name_en,
                                            on_price=on_price,
@@ -641,7 +650,9 @@ class OrderPayView(View):
 
         if len(orders) > 0:
             order = orders[0]
-            total = order.total
+            total = float(order.total)
+            total = ("%.2f" % total)
+            total = float(total)
             if order.status in [2, 3, 4]:
                 return JsonResponse({"errcode": 101, "errmsg": "The order has been payed"})
             if order.status == 5:
@@ -677,5 +688,5 @@ class PaySuccessView(View):
             return JsonResponse({"errcode": 102, "errmsg": "Db error"})
         cart_quantity = request.session.get("%s_cart" % user_id)
         context = {"order_quantity": order_quantity, "user": user, "cart_quantity": cart_quantity,
-                   "index": env.ONLINE_URL, "order_href": env.ONLINE_URL + 'orders/'}
+                   "index": env.ONLINE_URL, "order_href": env.ONLINE_URL + '/orders/'}
         return render(request, "paySucess.html", context=context)
