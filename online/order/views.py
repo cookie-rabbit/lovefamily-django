@@ -524,8 +524,9 @@ class OrderCreateView(View):
             if is_cart == '1':
                 try:
                     Cart.objects.filter(goods_id__in=goods_ids).delete()
-                    cart_quantity = request.session.get("%s_cart" % user_id, 0)
-                    request.session['%s_cart' % user.id] = cart_quantity - total_count
+                    cart = Cart.objects.filter(user__id=user_id)
+                    cart_quantity = len(cart)
+                    request.session['%s_cart' % user.id] = cart_quantity
 
                 except Exception as e:
                     online_logger.error(e)
