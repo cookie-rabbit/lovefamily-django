@@ -293,11 +293,14 @@ class GoodsTemplateView(View):
         good_price = single_goods.origin_price
         good_price = ("%.2f" % good_price)
         good_price = float(good_price)
+        on_price = single_goods.on_price
+        on_price = ("%.2f" % on_price)
+        on_price = float(on_price)
         goods_detail = {"id": single_goods.id,
                         "name": single_goods.name_en,
                         "images": [settings.URL_PREFIX + goods_image.image.url for goods_image in images],
                         "origin_price": good_price,
-                        "on_price": single_goods.on_price,
+                        "on_price": on_price,
                         "sale": single_goods.actual_sale + single_goods.virtual_sale,
                         "detail": single_goods.detail_en,
                         "description": single_goods.description_en}
