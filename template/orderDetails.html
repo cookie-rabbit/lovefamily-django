@@ -35,7 +35,7 @@
         <div class="content">
             {% for good in good_dict %}
                 <div class="cartGoods toBuyIt" data-id={{ good.id }} data-count={{ good.quantity }}>
-                    <a href="/goods/{{ good.id }}" class="linkImg">
+                    <a href="javascript:(0)" class="notJump linkImg">
                         <img src={{ good.image }} alt="">
                     </a>
                     <div class="infors">
