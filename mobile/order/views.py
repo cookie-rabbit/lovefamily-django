@@ -68,7 +68,9 @@ class OrderAddressView(View):
                     try:
                         good_detail = Goods.objects.get(id=good_id)
                         good_name_en = good_detail.name_en
-                        good_price = good_detail.on_price
+                        good_price = float(good_detail.on_price)
+                        good_price = ("%.2f" % good_price)
+                        good_price = float(good_price)
                         good_description_en = good_detail.description_en
                         good_image = Image.objects.filter(goods_id=good_id)
                         total = total + quantity * good_price
@@ -89,7 +91,9 @@ class OrderAddressView(View):
                     try:
                         good_detail = Goods.objects.get(id=good_id)
                         good_name_en = good_detail.name_en
-                        good_price = good_detail.on_price
+                        good_price = float(good_detail.on_price)
+                        good_price = ("%.2f" % good_price)
+                        good_price = float(good_price)
                         good_description_en = good_detail.description_en
                         good_image = Image.objects.filter(goods_id=good_id)
 
@@ -124,7 +128,9 @@ class OrderAddressView(View):
                         good_id = good.good
                         quantity = good.quantity
                         good_name_en = good.name_en
-                        good_price = good.on_price
+                        good_price = float(good.on_price)
+                        good_price = ("%.2f" % good_price)
+                        good_price = float(good_price)
                         good_description_en = good.description_en
                         good_image = str(good.img)
                         total = total + quantity * good_price
@@ -179,7 +185,9 @@ class OrdersDetailView(View):
                 for good in goods:
                     quantity = good.quantity
                     good_name_en = good.name_en
-                    good_price = good.on_price
+                    good_price = float(good.on_price)
+                    good_price = ("%.2f" % good_price)
+                    good_price = float(good_price)
                     good_description_en = good.description_en
                     good_image = str(good.img)
                     total += good_price * quantity
@@ -188,7 +196,6 @@ class OrdersDetailView(View):
                     good_dic.append({"quantity": quantity, "name": good_name_en, "price": good_price,
                                      "description": good_description_en,
                                      "image": settings.URL_PREFIX + '/media/' + good_image})
-
                 item = good_dic
                 data = {"item": item, "total": total}
                 return JsonResponse({'errcode': "0", 'data': data})
@@ -232,7 +239,6 @@ class OrdersView(View):
             more = 'false'
         if orders.count() > 0:
             order_dic = []
-            good_dic = []
 
             for order in orders:
                 order_no = order.order_no
@@ -251,10 +257,8 @@ class OrdersView(View):
                 order_dic.append({"order_no": order_no, "order_date": order_date, "total": total, "status": status})
         else:
             order_dic = []
-            # good_dic = []
 
         data = {"order_dic": order_dic, "status": status_query, "more": more}
-        # data = {"order_dic": order_dic, "good_dic": good_dic, "status": status_query, "more": more}
         return JsonResponse({'errcode': "0", 'data': data})
 
     '''创建订单'''
@@ -370,7 +374,6 @@ class OrdersView(View):
                     mobile_logger.error(e)
                     return JsonResponse({'errcode': 102, 'errmsg': 'Db error'})
 
-            # href = "http://10.168.2.111:8000/orders/{order_id}/pay/".format(order_id=order.id)
             data = {"order_no": order_no}
             return JsonResponse({"errcode": 0, "errmsg": "ordered success", "data": data})
         else:

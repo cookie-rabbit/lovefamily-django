@@ -136,7 +136,6 @@ class CartView(View):
         try:
             quantity = int(quantity)
             cart = Cart.objects.get(id=cart_id)
-            before_quantity = cart.quantity
             cart.quantity = quantity
             cart.save()
         except Cart.DoesNotExist as e:

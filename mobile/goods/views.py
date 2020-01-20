@@ -10,7 +10,7 @@ from online.constants import PER_PAGE_GOODS_COUNT, INDEX_GOODS_COUNT
 
 def index(request):
     """首页"""
-    img = settings.URL_PREFIX + "/media/index.jpg"
+    img = settings.URL_PREFIX + "/static/assets/images/mobile_banner.png"
     data = {"url": img}
     return JsonResponse({"errcode": "0", "data": data})
 
@@ -51,33 +51,38 @@ class GoodsTypeView(View):
             else:
                 for single_goods in goods:
                     image = Image.objects.filter(goods=single_goods)
-
+                    good_price = float(single_goods.origin_price)
+                    good_price = ("%.2f" % good_price)
+                    good_price = float(good_price)
+                    on_price = float(single_goods.on_price)
+                    on_price = ("%.2f" % on_price)
+                    on_price = float(on_price)
                     if type == 'hot':
                         if single_goods.is_hot is True:
                             goods_list.append(
                                 {"id": single_goods.id, "name": single_goods.name_en,
-                                 "description": single_goods.description_en, "price": single_goods.origin_price,
-                                 "on_price": single_goods.on_price,
+                                 "description": single_goods.description_en, "price": good_price,
+                                 "on_price": on_price,
                                  "is_hot": single_goods.is_hot, "image": settings.URL_PREFIX + image[0].image.url})
                         else:
                             goods_list.append(
                                 {"id": single_goods.id, "name": single_goods.name_en,
-                                 "description": single_goods.description_en, "price": single_goods.origin_price,
-                                 "on_price": single_goods.on_price,
+                                 "description": single_goods.description_en, "price": good_price,
+                                 "on_price": on_price,
                                  "image": settings.URL_PREFIX + image[0].image.url})
 
                     elif type == 'new':
                         if single_goods.is_new is True:
                             goods_list.append(
                                 {"id": single_goods.id, "name": single_goods.name_en,
-                                 "description": single_goods.description_en, "price": single_goods.origin_price,
-                                 "on_price": single_goods.on_price,
+                                 "description": single_goods.description_en, "price": good_price,
+                                 "on_price": on_price,
                                  "is_new": single_goods.is_new, "image": settings.URL_PREFIX + image[0].image.url})
                         else:
                             goods_list.append(
                                 {"id": single_goods.id, "name": single_goods.name_en,
-                                 "description": single_goods.description_en, "price": single_goods.origin_price,
-                                 "on_price": single_goods.on_price,
+                                 "description": single_goods.description_en, "price": good_price,
+                                 "on_price": on_price,
                                  "image": settings.URL_PREFIX + image[0].image.url})
 
             return JsonResponse({"errcode": "0", "data": {"item": goods_list, "more": more}})
@@ -86,7 +91,6 @@ class GoodsTypeView(View):
             try:
                 current = int(current)
                 category_id = int(category_id)
-
                 total_goods = Goods.objects.filter(on_sale=True).filter(category_id=category_id).order_by(
                     F('actual_sale') + F('virtual_sale'))
                 goods = total_goods[current:current + count]
@@ -141,11 +145,17 @@ class GoodsTemplateView(View):
         except Exception as e:
             mobile_logger.error(e)
             return JsonResponse({"errcode": "102", "errmsg": "Db error"})
+        good_price = float(single_goods.origin_price)
+        good_price = ("%.2f" % good_price)
+        good_price = float(good_price)
+        on_price = float(single_goods.on_price)
+        on_price = ("%.2f" % on_price)
+        on_price = float(on_price)
         goods_detail = {"id": single_goods.id,
                         "name": single_goods.name_en,
                         "images": [settings.URL_PREFIX + goods_image.image.url for goods_image in images],
-                        "origin_price": single_goods.origin_price,
-                        "on_price": single_goods.on_price,
+                        "origin_price": good_price,
+                        "on_price": on_price,
                         "sale": single_goods.actual_sale + single_goods.virtual_sale,
                         "detail": single_goods.detail_en,
                         "description": single_goods.description_en}
@@ -224,15 +234,21 @@ class GoodsSearchView(View):
         else:
             for single_goods in goods:
                 image = Image.objects.filter(goods=single_goods)
+                good_price = float(single_goods.origin_price)
+                good_price = ("%.2f" % good_price)
+                good_price = float(good_price)
+                on_price = float(single_goods.on_price)
+                on_price = ("%.2f" % on_price)
+                on_price = float(on_price)
                 if type == "new":
                     goods_list.append(
-                        {"id": single_goods.id, "name": single_goods.name_en, "price": single_goods.origin_price,
-                         "on_price": single_goods.on_price, "is_new": single_goods.is_new,
+                        {"id": single_goods.id, "name": single_goods.name_en, "price": good_price,
+                         "on_price": on_price, "is_new": single_goods.is_new,
                          "image": settings.URL_PREFIX + image[0].image.url})
                 else:
                     goods_list.append(
-                        {"id": single_goods.id, "name": single_goods.name_en, "price": single_goods.origin_price,
-                         "on_price": single_goods.on_price, "is_hot": single_goods.is_hot,
+                        {"id": single_goods.id, "name": single_goods.name_en, "price": good_price,
+                         "on_price": on_price, "is_hot": single_goods.is_hot,
                          "image": settings.URL_PREFIX + image[0].image.url})
         user_id = request.session.get("user_id", None)
         if user_id:

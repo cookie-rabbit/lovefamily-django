@@ -290,10 +290,10 @@ class GoodsTemplateView(View):
         except Exception as e:
             online_logger.error(e)
             return JsonResponse({"errcode": "102", "errmsg": "Db error"})
-        good_price = single_goods.origin_price
+        good_price = float(single_goods.origin_price)
         good_price = ("%.2f" % good_price)
         good_price = float(good_price)
-        on_price = single_goods.on_price
+        on_price = float(single_goods.on_price)
         on_price = ("%.2f" % on_price)
         on_price = float(on_price)
         goods_detail = {"id": single_goods.id,
@@ -394,7 +394,7 @@ class GoodsSearchTemplateView(View):
         else:
             for single_goods in goods:
                 image = Image.objects.filter(goods=single_goods)
-                good_price = single_goods.on_price
+                good_price = float(single_goods.on_price)
                 good_price = ("%.2f" % good_price)
                 good_price = float(good_price)
                 goods_list.append({"id": single_goods.id, "name": single_goods.name_en, "price": good_price,

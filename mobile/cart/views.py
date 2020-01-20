@@ -40,9 +40,15 @@ class CartsView(View):
                 for cart in carts:
                     sum += cart.quantity * cart.goods.on_price
                     image = Image.objects.filter(goods=cart.goods)
+                    origin_price = float(cart.goods.origin_price)
+                    origin_price = ("%.2f" % origin_price)
+                    origin_price = float(origin_price)
+                    on_price = float(cart.goods.on_price)
+                    on_price = ("%.2f" % on_price)
+                    on_price = float(on_price)
                     cart_list.append({"id": cart.id, "goods_id": cart.goods.id, "name": cart.goods.name_en,
-                                      "description": cart.goods.description_en, "price": cart.goods.origin_price,
-                                      "on_price": cart.goods.on_price,
+                                      "description": cart.goods.description_en, "price": origin_price,
+                                      "on_price": on_price,
                                       "image": settings.URL_PREFIX + image[0].image.url, "quantity": cart.quantity})
                     request.session['%s_cart' % user.id] += cart.quantity
                 data = {"carts_list": cart_list, "cart_quantity": cart_quantity, "sum": sum}
@@ -115,8 +121,11 @@ class CartView(View):
         except Exception as e:
             mobile_logger.error(e)
             return JsonResponse({"errcode": "102", "errmsg": "Db error"})
-        sub_quantity = quantity - before_quantity
-        request.session['%s_cart' % user.id] += sub_quantity
+        carts = Cart.objects.filter(user_id=user)
+        num = 0
+        for cart in carts:
+            num += cart.quantity
+        request.session['%s_cart' % user.id] = num
         total_quantity = request.session["%s_cart" % user.id]
         return JsonResponse({"errcode": "0", "errmsg": "update success", "data": {"quantity": total_quantity}})
 
