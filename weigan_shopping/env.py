@@ -1,7 +1,7 @@
 import os
 
 BASE_DIR = os.getenv("BASE_DIR", os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-CORS_WHITE = os.getenv("CORS_WHITELIST", 'http://10.168.2.108:9527')
+CORS_WHITE = os.getenv("CORS_WHITELIST", '*')
 DB_NAME = os.getenv("DB_NAME", "wg_online")
 DB_USER = os.getenv("DB_USER", "root")
 DB_PASSWORD = os.getenv("DB_PASSWORD", "password")
