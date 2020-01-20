@@ -267,7 +267,7 @@ class OrdersDetailsView(View):
             order = None
         if order is not None:
             try:
-                total = order.total
+                total = float(order.total)
                 total = ("%.2f" % total)
                 total = float(total)
                 status = order.status
@@ -571,7 +571,7 @@ class OrderCreateView(View):
             for order in orders:
                 order_no = order.order_no
                 order_date = order.order_date
-                total = order.total
+                total = float(order.total)
                 total = ("%.2f" % total)
                 total = float(total)
                 status = order.get_status_display()
