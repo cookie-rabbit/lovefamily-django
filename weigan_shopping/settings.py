@@ -299,8 +299,8 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 STATIC_ROOT = ''
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-URL_PREFIX = "http://" + env.API_HOST + ":" + env.API_PORT
-MOBILE_PREFIX = "http://" + env.MOBILE_HOST + ":" + env.MOBILE_PORT
+URL_PREFIX = + env.API_URL
+MOBILE_PREFIX = env.MOBILE_URL
 MOBILE_PAYMENT_RETURN_URL = MOBILE_PREFIX + "paySuccess"
 MOBILE_PAYMENT_CANCEL_URL = MOBILE_PREFIX + "cashier?order_no="
 
