@@ -18,13 +18,13 @@ def index(request):
     category = []
 
     try:
-        cates = Category.objects.filter(super_category__isnull=True)
+        cates = Category.objects.filter(super_category__isnull=True).filter(disabled=0)
     except Exception as e:
         online_logger.error(e)
         return JsonResponse({"errcode": "102", "errmsg": "Db error"})
     for cate in cates:
         try:
-            sub_cates = Category.objects.filter(super_category__id=cate.id)
+            sub_cates = Category.objects.filter(super_category__id=cate.id).filter(disabled=0)
         except Exception as e:
             online_logger.error(e)
             return JsonResponse({"errcode": "102", "errmsg": "Db error"})
@@ -49,8 +49,12 @@ def index(request):
         goods_list = []
     else:
         for single_goods in goods:
+
             image = Image.objects.filter(goods=single_goods)
-            goods_list.append({"id": single_goods.id, "name": single_goods.name_en, "price": single_goods.on_price,
+            good_price = single_goods.on_price
+            good_price = ("%.2f" % good_price)
+            good_price = float(good_price)
+            goods_list.append({"id": single_goods.id, "name": single_goods.name_en, "price": good_price,
                                "is_hot": single_goods.is_hot, "is_new": single_goods.is_new,
                                "image": settings.URL_PREFIX + image[0].image.url})
     user_id = request.session.get("user_id", None)
@@ -103,8 +107,11 @@ class GoodsTypeView(View):
             goods_list = []
         else:
             for single_goods in goods:
+                good_price = single_goods.on_price
+                good_price = ("%.2f" % good_price)
+                good_price = float(good_price)
                 image = Image.objects.filter(goods=single_goods)
-                goods_list.append({"id": single_goods.id, "name": single_goods.name_en, "price": single_goods.on_price,
+                goods_list.append({"id": single_goods.id, "name": single_goods.name_en, "price": good_price,
                                    "is_hot": single_goods.is_hot, "is_new": single_goods.is_new,
                                    "image": settings.URL_PREFIX + image[0].image.url})
         result = {"goods": goods_list}
@@ -151,7 +158,10 @@ class GoodsCategoryView(View):
         else:
             for single_goods in goods:
                 image = Image.objects.filter(goods=single_goods)
-                goods_list.append({"id": single_goods.id, "name": single_goods.name_en, "price": single_goods.on_price,
+                good_price = single_goods.on_price
+                good_price = ("%.2f" % good_price)
+                good_price = float(good_price)
+                goods_list.append({"id": single_goods.id, "name": single_goods.name_en, "price": good_price,
                                    "is_hot": single_goods.is_hot, "is_new": single_goods.is_new,
                                    "image": settings.URL_PREFIX + image[0].image.url})
         result = {"goods": goods_list}
@@ -166,13 +176,13 @@ class GoodsCategoryTemplateView(View):
     def get(self, request, category_id):
         category = []
         try:
-            cates = Category.objects.filter(super_category__isnull=True)
+            cates = Category.objects.filter(super_category__isnull=True).filter(disabled=0)
         except Exception as e:
             online_logger.error(e)
             return JsonResponse({"errcode": "102", "errmsg": "Db error"})
         for cate in cates:
             try:
-                sub_cates = Category.objects.filter(super_category__id=cate.id)
+                sub_cates = Category.objects.filter(super_category__id=cate.id).filter(disabled=0)
             except Exception as e:
                 online_logger.error(e)
                 return JsonResponse({"errcode": "102", "errmsg": "Db error"})
@@ -223,7 +233,10 @@ class GoodsCategoryTemplateView(View):
         else:
             for single_goods in goods:
                 image = Image.objects.filter(goods=single_goods)
-                goods_list.append({"id": single_goods.id, "name": single_goods.name_en, "price": single_goods.on_price,
+                good_price = single_goods.on_price
+                good_price = ("%.2f" % good_price)
+                good_price = float(good_price)
+                goods_list.append({"id": single_goods.id, "name": single_goods.name_en, "price": good_price,
                                    "is_hot": single_goods.is_hot, "is_new": single_goods.is_new,
                                    "image": settings.URL_PREFIX + image[0].image.url})
         user_id = request.session.get("user_id", None)
@@ -254,13 +267,13 @@ class GoodsTemplateView(View):
     def get(self, request, goods_id):
         category = []
         try:
-            cates = Category.objects.filter(super_category__isnull=True)
+            cates = Category.objects.filter(super_category__isnull=True).filter(disabled=0)
         except Exception as e:
             online_logger.error(e)
             return JsonResponse({"errcode": "102", "errmsg": "Db error"})
         for cate in cates:
             try:
-                sub_cates = Category.objects.filter(super_category__id=cate.id)
+                sub_cates = Category.objects.filter(super_category__id=cate.id).filter(disabled=0)
             except Exception as e:
                 online_logger.error(e)
                 return JsonResponse({"errcode": "102", "errmsg": "Db error"})
@@ -277,10 +290,13 @@ class GoodsTemplateView(View):
         except Exception as e:
             online_logger.error(e)
             return JsonResponse({"errcode": "102", "errmsg": "Db error"})
+        good_price = single_goods.origin_price
+        good_price = ("%.2f" % good_price)
+        good_price = float(good_price)
         goods_detail = {"id": single_goods.id,
                         "name": single_goods.name_en,
                         "images": [settings.URL_PREFIX + goods_image.image.url for goods_image in images],
-                        "origin_price": single_goods.origin_price,
+                        "origin_price": good_price,
                         "on_price": single_goods.on_price,
                         "sale": single_goods.actual_sale + single_goods.virtual_sale,
                         "detail": single_goods.detail_en,
@@ -332,7 +348,10 @@ class GoodsSearchView(View):
         else:
             for single_goods in goods:
                 image = Image.objects.filter(goods=single_goods)
-                goods_list.append({"id": single_goods.id, "name": single_goods.name_en, "price": single_goods.on_price,
+                good_price = single_goods.on_price
+                good_price = ("%.2f" % good_price)
+                good_price = float(good_price)
+                goods_list.append({"id": single_goods.id, "name": single_goods.name_en, "price": good_price,
                                    "is_hot": single_goods.is_hot, "is_new": single_goods.is_new,
                                    "image": settings.URL_PREFIX + image[0].image.url})
         result = {"goods": goods_list}
@@ -372,18 +391,21 @@ class GoodsSearchTemplateView(View):
         else:
             for single_goods in goods:
                 image = Image.objects.filter(goods=single_goods)
-                goods_list.append({"id": single_goods.id, "name": single_goods.name_en, "price": single_goods.on_price,
+                good_price = single_goods.on_price
+                good_price = ("%.2f" % good_price)
+                good_price = float(good_price)
+                goods_list.append({"id": single_goods.id, "name": single_goods.name_en, "price": good_price,
                                    "is_hot": single_goods.is_hot, "is_new": single_goods.is_new,
                                    "image": settings.URL_PREFIX + image[0].image.url})
         category = []
         try:
-            cates = Category.objects.filter(super_category__isnull=True)
+            cates = Category.objects.filter(super_category__isnull=True).filter(disabled=0)
         except Exception as e:
             online_logger.error(e)
             return JsonResponse({"errcode": "102", "errmsg": "Db error"})
         for cate in cates:
             try:
-                sub_cates = Category.objects.filter(super_category__id=cate.id)
+                sub_cates = Category.objects.filter(super_category__id=cate.id).filter(disabled=0)
             except Exception as e:
                 online_logger.error(e)
                 return JsonResponse({"errcode": "102", "errmsg": "Db error"})

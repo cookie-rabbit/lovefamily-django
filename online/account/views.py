@@ -34,6 +34,10 @@ class LoginView(View):
             user = User.objects.filter(Q(email=username) | Q(phone=username))
             if user:
                 user = user[0]
+                status = user.status
+                if status is False:
+                    return JsonResponse({"errcode": "116",
+                                         "errmsg": "The user has been forbidden!"})
             else:
                 return JsonResponse({"errcode": "105", "errmsg": "please login after sign up"})
         except Exception as e:
@@ -138,12 +142,26 @@ class MyAddressView(View):
     def post(self, request, user):
         """修改用户地址"""
         name = request.POST.get("name", None)
+        if len(name) > 40:
+            return JsonResponse({"errcode": "115", "errmsg": "the content is too long for name"})
         road = request.POST.get("road", None)
+        if len(road) > 100:
+            return JsonResponse({"errcode": "115", "errmsg": "the content is too long for Address Line1"})
         district = request.POST.get("district", None)
+        if len(district) > 100:
+            return JsonResponse({"errcode": "115", "errmsg": "the content is too long for Address Line2"})
         city = request.POST.get("city", None)
+        if len(city) > 100:
+            return JsonResponse({"errcode": "115", "errmsg": "the content is too long for city"})
         province = request.POST.get("province", None)
+        if len(province) > 100:
+            return JsonResponse({"errcode": "115", "errmsg": "the content is too long for province"})
         postcode = request.POST.get("postcode")
+        if len(postcode) > 40:
+            return JsonResponse({"errcode": "115", "errmsg": "the content is too long for ZIP"})
         phone_number = request.POST.get("phone_number", None)
+        if len(phone_number) > 40:
+            return JsonResponse({"errcode": "115", "errmsg": "the content is too long for Phone number"})
         if not (name or road or district or city or province or phone_number or postcode):
             try:
                 user.address.delete()
@@ -229,13 +247,13 @@ class SignUpTemplateView(View):
     def get(self, request):
         category = []
         try:
-            cates = Category.objects.filter(super_category__isnull=True)
+            cates = Category.objects.filter(super_category__isnull=True).filter(disabled=0)
         except Exception as e:
             online_logger.error(e)
             return JsonResponse({"errcode": "102", "errmsg": "Db error"})
         for cate in cates:
             try:
-                sub_cates = Category.objects.filter(super_category__id=cate.id)
+                sub_cates = Category.objects.filter(super_category__id=cate.id).filter(disabled=0)
             except Exception as e:
                 online_logger.error(e)
                 return JsonResponse({"errcode": "102", "errmsg": "Db error"})

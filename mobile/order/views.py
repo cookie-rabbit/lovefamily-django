@@ -1,3 +1,5 @@
+from datetime import timedelta
+
 from django.db import transaction
 from django.utils.decorators import method_decorator
 from django.http import JsonResponse
@@ -6,7 +8,6 @@ from django.views.decorators.csrf import csrf_exempt
 from django.utils import timezone
 
 from mobile.card.views import PaymentView
-from mobile.logger import mobile_logger
 from online.constants import PER_PAGE_GOODS_COUNT
 from online.order.models import Order, Order_Goods, OrderAddress, OrderStatusLog
 from online.goods.models import Goods, Image
@@ -71,6 +72,8 @@ class OrderAddressView(View):
                         good_description_en = good_detail.description_en
                         good_image = Image.objects.filter(goods_id=good_id)
                         total = total + quantity * good_price
+                        total = ("%.2f" % total)
+                        total = float(total)
                         good_dict.append(
                             {"id": good_id, "quantity": quantity, "name": good_name_en, "on_price": good_price,
                              "description": good_description_en,
@@ -91,6 +94,8 @@ class OrderAddressView(View):
                         good_image = Image.objects.filter(goods_id=good_id)
 
                         total = total + quantity * good_price
+                        total = ("%.2f" % total)
+                        total = float(total)
                         good_dict.append(
                             {"id": good_id, "quantity": quantity, "name": good_name_en, "on_price": good_price,
                              "description": good_description_en,
@@ -123,6 +128,8 @@ class OrderAddressView(View):
                         good_description_en = good.description_en
                         good_image = str(good.img)
                         total = total + quantity * good_price
+                        total = ("%.2f" % total)
+                        total = float(total)
                         good_dict.append(
                             {"id": good_id, "quantity": quantity, "name": good_name_en, "on_price": good_price,
                              "description": good_description_en,
@@ -176,6 +183,8 @@ class OrdersDetailView(View):
                     good_description_en = good.description_en
                     good_image = str(good.img)
                     total += good_price * quantity
+                    total = ("%.2f" % total)
+                    total = float(total)
                     good_dic.append({"quantity": quantity, "name": good_name_en, "price": good_price,
                                      "description": good_description_en,
                                      "image": settings.URL_PREFIX + '/media/' + good_image})
@@ -227,7 +236,16 @@ class OrdersView(View):
 
             for order in orders:
                 order_no = order.order_no
-                order_date = order.order_date
+                order_date = order.order_date.strftime("%Y-%m-%d %H:%M:%S")
+                exc = timezone.now() - order.order_date
+                set_hour = timedelta(hours=3)
+                exc = (exc - set_hour).total_seconds()
+                if exc > 0:
+                    order_chg = Order.objects.filter(order_no=order_no)
+                    if len(order_chg) > 0:
+                        if int(order.status) == 1:
+                            order.status = 5
+                            order.save()
                 total = order.total
                 status = order.get_status_display()
                 order_dic.append({"order_no": order_no, "order_date": order_date, "total": total, "status": status})
@@ -328,6 +346,8 @@ class OrdersView(View):
                     good_list.stock -= count
                     good_list.save()
                     total += int(good_count) * good_list.on_price
+                    total = ("%.2f" % total)
+                    total = float(total)
                     Order_Goods.objects.create(good=goods_id, order=order, quantity=count, name_en=name_en,
                                                on_price=on_price,
                                                description_en=description_en, img=good_img)

@@ -216,10 +216,10 @@ class UserView(View):
                 return JsonResponse({"errcode": "115", "errmsg": "the content is too long for name"})
             road = data.get("road", None)
             if len(road) > 100:
-                return JsonResponse({"errcode": "115", "errmsg": "the content is too long for road"})
+                return JsonResponse({"errcode": "115", "errmsg": "the content is too long for Address Line1"})
             district = data.get("district", None)
             if len(district) > 100:
-                return JsonResponse({"errcode": "115", "errmsg": "the content is too long for district"})
+                return JsonResponse({"errcode": "115", "errmsg": "the content is too long for Address Line2"})
             city = data.get("city", None)
             if len(city) > 100:
                 return JsonResponse({"errcode": "115", "errmsg": "the content is too long for city"})
@@ -228,10 +228,10 @@ class UserView(View):
                 return JsonResponse({"errcode": "115", "errmsg": "the content is too long for province"})
             postcode = data.get("postcode", None)
             if len(postcode) > 40:
-                return JsonResponse({"errcode": "115", "errmsg": "the content is too long for postcode"})
+                return JsonResponse({"errcode": "115", "errmsg": "the content is too long for ZIP"})
             phone_number = data.get("phone_number", None)
             if len(phone_number) > 40:
-                return JsonResponse({"errcode": "115", "errmsg": "the content is too long for phone_number"})
+                return JsonResponse({"errcode": "115", "errmsg": "the content is too long for Phone number"})
             if not (name or road or district or city or province or phone_number or postcode):
                 try:
                     user.address.delete()

@@ -17,6 +17,7 @@ def user_auth(func):
                                            "If you are not a member, please sign-up first! "})
         try:
             user = User.objects.get(id=user_id)
+
         except User.DoesNotExist as e:
             online_logger.error(e)
             return JsonResponse({"errcode": "105",

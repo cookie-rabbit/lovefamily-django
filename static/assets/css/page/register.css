@@ -668,10 +668,9 @@ body {
 }
 .registerContainer .baseInfor p input,
 .registerContainer .addressContent p input {
-  width: 400px;
+  width: 540px;
   height: 30px;
   background: #ffffff;
-  border-radius: 5px;
   border: 1px solid #979797;
   padding: 0 10px;
   display: inline-block;
@@ -713,7 +712,7 @@ body {
   width: auto;
 }
 .registerContainer .baseInfor p input {
-  width: 200px;
+  width: 300px;
 }
 .registerContainer .baseInfor p .star {
   background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAHCAYAAAA1WQxeAAAAkUlEQVQYV2NkQAL/C0qtQVzGCd1HYcKMqApKdkIU9LjDFfwvLORk+M8y9z/DfxMGBgZVqMRtRgbGMwyMf5LBJvwvLDP5/+/fLgZGBkGwgv8M7xmZmNwY+7vOwK34V1Cyg4GBAWw043+GHYwTezzBbJhd/wtLLjD8Z1gE5jMyxDD29xihKsjK4mGcNu0L2AYkNgB2li7yja5sCQAAAABJRU5ErkJggg==") no-repeat;

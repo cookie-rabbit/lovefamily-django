@@ -13,7 +13,6 @@ from online.logger import online_logger
 from online.order.models import Order, Order_Goods, OrderAddress, OrderStatusLog
 
 from utils.decorator import admin_auth
-from itertools import chain
 import json
 
 from weigan_shopping import settings
@@ -84,7 +83,7 @@ class OrdersView(View):
                         user_phone = user.phone
                         order_no = order.order_no
                         order_total = order.total
-                        order_date = order.order_date
+                        order_date = order.order_date.strftime("%Y-%m-%d %H:%M:%S")
                         order_status = order.get_status_display()
                         order_details = Order_Goods.objects.filter(order_id=order.id)
 
@@ -128,7 +127,7 @@ class OrderDetailView(View):
 
                     order_no = order.order_no
                     order_total = order.total
-                    order_date = order.order_date
+                    order_date = order.order_date.strftime("%Y-%m-%d %H:%M:%S")
                     order_status = order.status
                     order_details = Order_Goods.objects.filter(order_id=order.id)
                     goods = []
@@ -197,7 +196,7 @@ class OrderDetailView(View):
                     order.status = status
                     order.save()
 
-                    time = timezone.localtime(timezone.now()).strftime("%Y-%m-%d %H:%M:%S")
+                    time = timezone.localtime(timezone.now())
                     user_id = request.session.get('admin_id')
                     OrderStatusLog.objects.create(order_no=order_no, status=status, user_id=user_id,
                                                   change_date=time, is_admin=True)
@@ -238,7 +237,7 @@ class OrderLogsView(View):
                             except Exception as e:
                                 management_logger.error(e)
                                 return JsonResponse({"errcode": "102", "errmsg": "Db error"})
-                        date = state.change_date
+                        date = state.change_date.strftime("%Y-%m-%d %H:%M:%S")
                         state_log = {"status": status, "user": username, "date": date}
                         states_log.append(state_log)
                 res = states_log

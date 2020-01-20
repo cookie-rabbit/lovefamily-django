@@ -16,20 +16,20 @@ from weigan_shopping import settings, env
 
 
 class CartsView(View):
-    """获取购物车列表"""
+    """【渲染】获取购物车列表"""
 
     @method_decorator(user_auth)
     @method_decorator(csrf_exempt)
     def get(self, request, user):
         category = []
         try:
-            cates = Category.objects.filter(super_category__isnull=True)
+            cates = Category.objects.filter(super_category__isnull=True).filter(disabled=0)
         except Exception as e:
             online_logger.error(e)
             return JsonResponse({"errcode": "102", "errmsg": "Db error"})
         for cate in cates:
             try:
-                sub_cates = Category.objects.filter(super_category__id=cate.id)
+                sub_cates = Category.objects.filter(super_category__id=cate.id).filter(disabled=0)
             except Exception as e:
                 online_logger.error(e)
                 return JsonResponse({"errcode": "102", "errmsg": "Db error"})
@@ -67,9 +67,13 @@ class CartsView(View):
                     sum += cart.quantity * cart.goods.on_price
                     cart_num += cart.quantity
 
+                    price = cart.goods.on_price
+                    price = ("%.2f" % price)
+                    price = float(price)
+
                     image = Image.objects.filter(goods=cart.goods)
                     cart_list.append({"id": cart.id, "goods_id": cart.goods.id, "name": cart.goods.name_en,
-                                      "description": cart.goods.description_en, "price": cart.goods.on_price,
+                                      "description": cart.goods.description_en, "price": price,
                                       "image": settings.URL_PREFIX + image[0].image.url, "quantity": cart.quantity})
                 context = {"user": user, "carts_list": cart_list, "cart_quantity": cart_quantity,
                            "order_quantity": order_quantity, "sum": sum, "category": category}

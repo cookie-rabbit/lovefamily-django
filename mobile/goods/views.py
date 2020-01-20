@@ -170,7 +170,7 @@ class CategoriesView(View):
             return JsonResponse({"errcode": "102", "errmsg": "Db error"})
         for cate in cates:
             try:
-                sub_cates = Category.objects.filter(super_category__id=cate.id)
+                sub_cates = Category.objects.filter(super_category__id=cate.id).filter(disabled=0)
                 sub_cate_info = []
                 if len(sub_cates) > 0:
                     for sub_cate in sub_cates:

@@ -21,7 +21,7 @@ import management.user
 
 import ast
 import random
-from datetime import datetime, timedelta
+from datetime import timedelta
 
 from weigan_shopping import settings, env
 
@@ -91,6 +91,8 @@ class OrderAddressView(View):
                         good_detail = Goods.objects.get(id=good_id)
                         good_name_en = good_detail.name_en
                         good_price = good_detail.on_price
+                        good_price = ("%.2f" % good_price)
+                        good_price = float(good_price)
                         good_description_en = good_detail.description_en
                         good_image = Image.objects.filter(goods_id=good_id)
                         total = total + quantity * good_price
@@ -112,6 +114,8 @@ class OrderAddressView(View):
                         good_detail = Goods.objects.get(id=good_id)
                         good_name_en = good_detail.name_en
                         good_price = good_detail.on_price
+                        good_price = ("%.2f" % good_price)
+                        good_price = float(good_price)
                         good_description_en = good_detail.description_en
                         good_image = Image.objects.filter(goods_id=good_id)
 
@@ -147,6 +151,8 @@ class OrderAddressView(View):
                         quantity = good.quantity
                         good_name_en = good.name_en
                         good_price = good.on_price
+                        good_price = ("%.2f" % good_price)
+                        good_price = float(good_price)
                         good_description_en = good.description_en
                         good_image = str(good.img)
                         total = total + quantity * good_price
@@ -210,6 +216,8 @@ class OrdersDetailView(View):
                         quantity = good.quantity
                         good_name_en = good.name_en
                         good_price = good.on_price
+                        good_price = ("%.2f" % good_price)
+                        good_price = float(good_price)
                         good_description_en = good.description_en
                         good_image = Image.objects.filter(goods_id=good.good)
                         good_dic.append(
@@ -260,6 +268,8 @@ class OrdersDetailsView(View):
         if order is not None:
             try:
                 total = order.total
+                total = ("%.2f" % total)
+                total = float(total)
                 status = order.status
                 goods = Order_Goods.objects.filter(order_id=order.id)
             except Exception as e:
@@ -271,6 +281,8 @@ class OrdersDetailsView(View):
                     quantity = good.quantity
                     good_name_en = good.name_en
                     good_price = good.on_price
+                    good_price = ("%.2f" % good_price)
+                    good_price = float(good_price)
                     good_description_en = good.description_en
                     good_image = Image.objects.filter(goods_id=good.good)
                     good_dict.append(
@@ -359,6 +371,8 @@ class OrdersListView(View):
 
                     good_name_en = good.name_en
                     good_price = good.on_price
+                    good_price = ("%.2f" % good_price)
+                    good_price = float(good_price)
                     good_description_en = good.description_en
                     good_image = Image.objects.filter(goods_id=good.good)
                     good_dic.append({"quantity": quantity, "name_en": good_name_en, "price": good_price,
@@ -373,13 +387,13 @@ class OrdersListView(View):
 
         category = []
         try:
-            cates = Category.objects.filter(super_category__isnull=True)
+            cates = Category.objects.filter(super_category__isnull=True).filter(disabled=0)
         except Exception as e:
             online_logger.error(e)
             return JsonResponse({"errcode": "102", "errmsg": "Db error"})
         for cate in cates:
             try:
-                sub_cates = Category.objects.filter(super_category__id=cate.id)
+                sub_cates = Category.objects.filter(super_category__id=cate.id).filter(disabled=0)
             except Exception as e:
                 online_logger.error(e)
                 return JsonResponse({"errcode": "102", "errmsg": "Db error"})
@@ -485,6 +499,8 @@ class OrderCreateView(View):
 
                 name_en = Goodgoods.name_en
                 on_price = Goodgoods.on_price
+                on_price = ("%.2f" % on_price)
+                on_price = float(on_price)
                 description_en = Goodgoods.description_en
 
                 good_img = Image.objects.filter(goods_id=goods_id)[0].image
@@ -556,6 +572,8 @@ class OrderCreateView(View):
                 order_no = order.order_no
                 order_date = order.order_date
                 total = order.total
+                total = ("%.2f" % total)
+                total = float(total)
                 status = order.get_status_display()
                 order_dic.append({"order_no": order_no, "order_date": order_date, "total": total, "status": status})
         else:
