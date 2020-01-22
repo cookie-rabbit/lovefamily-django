@@ -77,7 +77,7 @@ $(".loginDiv")
 				method: "post",
 				sucFun: function(res) {
 					if (parseInt(res.errcode) === 0) {
-						location.href=res.data.url;
+						location.href = res.data.url;
 					} else {
 						$(".loginDiv p").html(res.errmsg).show();
 					}
@@ -93,30 +93,35 @@ $(".loginDiv")
 		}
 
 	});
-	$(".logout").on("click", function() {
-		var req = {
-			url: baseUrl + 'account/logout/',
-			sucFun: function(res) {
-				if (parseInt(res.errcode) === 0) {
-					location.href=res.data.url;
-				} else {
-					$(".loginDiv p").html(res.errmsg).show();
-				}
-			},
-			errFun: function(err) {
-
+$(".logout").on("click", function() {
+	var req = {
+		url: baseUrl + 'account/logout/',
+		sucFun: function(res) {
+			if (parseInt(res.errcode) === 0) {
+				location.href = res.data.url;
+			} else {
+				$(".loginDiv p").html(res.errmsg).show();
 			}
-		};
-		doAjax(req);
-	});
-	$(".toIndex").on("click",function(){
-		location.href=$(".header").data("href");
-	});
-	$("body").on("click",function(e){
-		if($(e.target).hasClass("loginDiv")||$(e.target).parents().hasClass("loginDiv")){
+		},
+		errFun: function(err) {
+
 		}
-		else{
-			$(".loginDiv").slideUp("fast");
-		}
-		
-	});
+	};
+	doAjax(req);
+});
+$(".toIndex").on("click", function() {
+	location.href = $(".header").data("href");
+});
+$("body").on("click", function(e) {
+	if ($(e.target).hasClass("loginDiv") || $(e.target).parents().hasClass("loginDiv")) {} else {
+		$(".loginDiv").slideUp("fast");
+	}
+
+});
+
+$(function() {
+	var ua = window.navigator.userAgent.toLowerCase();
+	if (ua.indexOf('android') > -1 || (ua.indexOf('iphone') > -1) || (ua.indexOf('ipad') > -1)) {
+		window.location.href = "http://mobile.lovefamily.com.au/#/";
+	}
+});

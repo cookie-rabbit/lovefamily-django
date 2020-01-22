@@ -411,6 +411,8 @@ class OrdersListView(View):
 
 class OrderCreateView(View):
     # 创建订单
+    """订单创建时注意，对已生成的订单进行再支付时不能创建新订单"""
+
     @method_decorator(csrf_exempt)
     @method_decorator(user_auth)
     def post(self, request, user):
@@ -440,12 +442,14 @@ class OrderCreateView(View):
                             #
                             # good_list = Goods.objects.select_for_update().get(id=goods_id)
                         # if good_list.stock < count:
-                            #     return JsonResponse({'errcode': 112, 'errmsg': "the {}
-                            #     stock is not enough".format(good_list.name_en)})
+                        #     return JsonResponse({'errcode': 112, 'errmsg': "the {}
+                        #     stock is not enough".format(good_list.name_en)})
 
                     user_id = user.id
                     time = timezone.now()
                     i = timezone.now()
+
+                    """订单号创建规则：0000+时间（年月日时分秒）+4位随机数"""
                     month = str(i.month)
                     day = str(i.day)
                     hour = str(i.hour)
@@ -462,7 +466,8 @@ class OrderCreateView(View):
                     if len(second) < 2:
                         second = '0' + second
 
-                    order_no = "0000" + str(i.year) + month + day + hour + minute + second + str(random.randint(0000, 9999))
+                    order_no = "0000" + str(i.year) + month + day + hour + minute + second + str(
+                        random.randint(0000, 9999))
                     status = 1
                     total = 0
 
@@ -471,7 +476,7 @@ class OrderCreateView(View):
                                                                 phone_number=phone_number)
 
                     order = Order.objects.create(order_no=order_no, total=total, order_date=time, status=status,
-                                                     address=order_address, user=User.objects.get(id=user_id))
+                                                 address=order_address, user=User.objects.get(id=user_id))
             except Exception as e:
                 online_logger.error(e)
                 return JsonResponse({"errcode": 101, "errmsg": "Params error"})
