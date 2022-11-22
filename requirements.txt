@@ -12,7 +12,7 @@ idna==2.8
 paypal==1.2.5
 paypal-checkout-serversdk==1.0.1
 paypalhttp==1.0.0
-Pillow==6.2.1
+Pillow==9.3.0
 pycparser==2.19
 PyMySQL==0.9.3
 pyOpenSSL==19.1.0
